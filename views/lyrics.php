@@ -9,6 +9,7 @@
 	<title>Lyrics</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet/less" type="text/css" href="css/style.less">
 	<script src="js/libs/modernizr-2.5.3.min.js"></script>
 	<script src="js/libs/less-1.3.0.min.js"></script>
