@@ -1,6 +1,7 @@
 {
 	"require": {
  		"slim/slim": "2.*",
- 		"j4mie/paris": "v1.2.0"
+ 		"j4mie/paris": "v1.2.0",
+ 		"phpunit/phpunit": "3.7.x"
 	}
 }
