@@ -1,6 +1,124 @@
 {
-    "hash": "676b6e313a8ff7f050d9d45cf5cab80a",
+    "hash": "40ea820073c34ff45437cb4c99ceb0f4",
     "packages": [
+        {
+            "name": "j4mie/idiorm",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j4mie/idiorm",
+                "reference": "v1.2.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/j4mie/idiorm/archive/v1.2.2.zip",
+                "reference": "v1.2.2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "time": "2012-11-15 16:52:47",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "idiorm.php"
+                ]
+            },
+            "license": [
+                "BSD-2-Clause",
+                "BSD-3-Clause",
+                "BSD-4-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Holywell",
+                    "email": "treffynnon@php.net",
+                    "homepage": "http://simonholywell.com",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Jamie Matthews",
+                    "email": "jamie.matthews@gmail.com",
+                    "homepage": "http://j4mie.org",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Durham Hale",
+                    "email": "me@durhamhale.com",
+                    "homepage": "http://durhamhale.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A lightweight nearly-zero-configuration object-relational mapper and fluent query builder for PHP5",
+            "homepage": "http://j4mie.github.com/idiormandparis",
+            "keywords": [
+                "orm",
+                "query builder",
+                "idiorm"
+            ]
+        },
+        {
+            "name": "j4mie/paris",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j4mie/paris",
+                "reference": "v1.2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/j4mie/paris/archive/v1.2.0.zip",
+                "reference": "v1.2.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0",
+                "j4mie/idiorm": "1.2.*"
+            },
+            "time": "2012-11-14 16:58:08",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "paris.php"
+                ]
+            },
+            "license": [
+                "BSD-2-Clause",
+                "BSD-3-Clause",
+                "BSD-4-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Holywell",
+                    "email": "treffynnon@php.net",
+                    "homepage": "http://simonholywell.com",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Jamie Matthews",
+                    "email": "jamie.matthews@gmail.com",
+                    "homepage": "http://j4mie.org",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Durham Hale",
+                    "email": "me@durhamhale.com",
+                    "homepage": "http://durhamhale.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A lightweight Active Record implementation for PHP5, built on top of Idiorm",
+            "homepage": "http://j4mie.github.com/idiormandparis",
+            "keywords": [
+                "orm",
+                "Active Record",
+                "model",
+                "paris"
+            ]
+        },
         {
             "name": "slim/slim",
             "version": "2.1.0",
