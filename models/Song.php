@@ -1,6 +1,2 @@
 <?php
-	class Song extends Model {
-		public function hi() {
-			echo 'HI';
-		}
-	}
+class Song extends Model {}
