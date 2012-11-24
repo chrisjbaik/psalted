@@ -36,11 +36,11 @@
 	}
 
 	function generateSlug($title) {
-		$slug = URLify::filter($title);
-		$found = Model::factory('Song')->where('url', $slug)->find_one();
+		$url = URLify::filter($title);
+		$found = Model::factory('Song')->where('url', $url)->find_one();
 
 		while ($found) {
-			$slug = preg_replace_callback('/[-]?([0-9]+)?$/', function ($matches) {
+			$url = preg_replace_callback('/[-]?([0-9]+)?$/', function ($matches) {
 				if (isset($matches[1])) {
 					return '-' . ($matches[1] + 1);
 				} else if (empty($matches[0])) {
@@ -48,12 +48,16 @@
 				} else {
 					return;
 				}
-			}, $slug, 1);
+			}, $url, 1);
 
-			$found = Model::factory('Song')->where('url', $slug)->find_one();
+			$found = Model::factory('Song')->where('url', $url)->find_one();
 		}
 
-		return $slug;
+		return $url;
+	}
+
+	function removeChords($text) {
+		return preg_replace('/\[[^\]]*\]/', '', $text);
 	}
 
 	$app->post('/new', function () use ($app) {
@@ -61,9 +65,29 @@
 
 		$song = Model::factory('Song')->create();
 		$song->title = $req->post('title');
-		$song->slug = generateSlug($song->title);
+		$song->url = generateSlug($song->title);
 		$song->chords = $req->post('chords');
+		$song->lyrics = removeChords($song->chords);
 		print_array($song);
+		$song->save();
+	});
+
+	$app->get('/song/:url.json', function ($url) use ($app) {
+		$res = $app->response();
+
+		$song = Model::factory('Song')->where('url', $url)->find_one();
+		if ($song) {
+			$res->write(
+				json_encode(array(
+					'id' => $song->id,
+					'title' => $song->title,
+					'chords' => $song->chords,
+				));
+			);
+		} else {
+			$res->write('foo');
+		}
+		$res->finalize();
 	});
 
 	$app->run();
