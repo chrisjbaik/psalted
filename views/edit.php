@@ -1,10 +1,9 @@
 <div class="row-fluid">
-	<h2 class='song-title'>Add New Song</h2>
+	<h2 class='song-title'>Edit Song</h2>
 	<div class="span5 well">
 	  <h4>Chords</h4>
-	  <form id="input" method="post" action="/new">
-			<label for='title'>Song Title</label>
-			<input type='text' name='title'>
+	  <form id="input" method="post" action="/edit/<?php echo $id; ?>">
+			<input type='text' name='title' value='<?php echo $title; ?>'>
 			<label for="original_key">Original Key:</label>
       <select name="original_key" id="original_key">
         <option value="0">C
@@ -21,9 +20,9 @@
         <option value="11">B
       </select>
 			<label for='chords'>Chords</label>
-			<textarea name='chords'></textarea>
+			<textarea name='chords'><?php echo $chords; ?></textarea>
 			<button class="preview-button btn">Preview</button>
-			<input type='submit' value='Add Song' class='btn btn-primary'>
+			<input type='submit' value='Edit' class='btn btn-primary'>
 	  </form>
 	</div>
 	<div class="span5 well">

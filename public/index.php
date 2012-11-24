@@ -17,6 +17,9 @@
 		'templates.path' => '../views'
 	));
 
+	session_cache_limiter(false);
+	session_start();
+
 	/*
 	 * Routes
 	 */
@@ -68,8 +71,32 @@
 		$song->url = generateSlug($song->title);
 		$song->chords = $req->post('chords');
 		$song->lyrics = removeChords($song->chords);
-		print_array($song);
 		$song->save();
+		$app->flash('success', 'Song was successfully added!');
+		$app->redirect('/');
+	});
+
+	$app->post('/edit/:id', function ($id) use ($app) {
+		$req = $app->request();
+
+		$song = Model::factory('Song')->find_one($id);
+		if ($song) {
+			$song->title = $req->post('title');
+			$song->url = generateSlug($song->title);
+			$song->chords = $req->post('chords');
+			$song->lyrics = removeChords($song->chords);
+			$song->save();
+		} else {
+			$res->write('{}');
+		}
+		$app->flash('success', 'Song was successfully edited!');
+		$app->redirect('/');
+	});
+
+	$app->get('/songs.json', function () use ($app) {
+		$res = $app->response();
+		$songs = Model::factory('Song')->select_many('id','url','title')->find_array();
+		$res->write(json_encode($songs));
 	});
 
 	$app->get('/song/:url.json', function ($url) use ($app) {
@@ -77,18 +104,38 @@
 
 		$song = Model::factory('Song')->where('url', $url)->find_one();
 		if ($song) {
+			$res['Content-Type'] = 'application/json';
 			$res->write(
 				json_encode(array(
 					'id' => $song->id,
 					'title' => $song->title,
 					'chords' => $song->chords,
-				));
+				))
 			);
 		} else {
-			$res->write('foo');
+			$res->write('{}');
 		}
-		$res->finalize();
 	});
+
+	$app->get('/song/:url', function ($url) use ($app) {
+		$res = $app->response();
+
+		$song = Model::factory('Song')->where('url', $url)->find_one();
+
+		if ($song) {
+			$app->render('edit.php',
+				array(
+					'id' => $song->id,
+					'title' => $song->title,
+					'chords' => $song->chords,
+				)
+			);
+		} else {
+			// No song
+			$res->write('Song not found');
+		}
+	});
+
 
 	$app->run();
 ?>

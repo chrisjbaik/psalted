@@ -1,10 +1,21 @@
-/* Author: Varoot Phasuthadol */
-function convertLyrics(txt) {
+/* Author: Varoot Phasuthadol, Chris Baik */
+function convertLyrics() {
 	var key = parseInt($('#original_key').val());
 	var txt = $('#input textarea').val();
 	var output = $('#output');
 	
-	var outText = $('<div>'+txt.replace(/\[([^\]]+)\]([^\[]*)(?=(\s|\[|$))/g, '<span class="phrase"><span class="chord"><b>$1</b></span><span class="lyrics">$2</span></span>').replace(/\n/g, '&nbsp;</div><div>')+'</div>');
+	var outText = txt.replace(/^([^\[]*)/gm,
+		'<span class="phrase">\
+			<span class="chord"></span>\
+			<span class="lyrics">$1</span>\
+		</span>');
+	outText = $('<div>'+outText.replace(/\[([^\]]+)\]([^\[]*)(?=(\s|\[|$))/g,
+		'<span class="phrase">\
+			<span class="chord">\
+				<b>$1</b>\
+			</span>\
+			<span class="lyrics">$2</span>\
+		</span>').replace(/\n/g, '&nbsp;</div><div>')+'</div>');
 
 	var chordNumber = function(match, p1) {
 		var chordTranslate = { 67:0, 68:2, 69:4, 70:5, 71:7, 65:9, 66:11 };
@@ -74,12 +85,39 @@ function transpose() {
 	});
 }
 
-$(function() {
+function loadAllSongs() {
+	$.get('/songs.json', function (data) {
+		var songs = JSON.parse(data);
+		songs.forEach(function (song) {
+			$('.songs-list').append('<li><a href="#" class="load-song" data-url="/song/'+song.url+'">'+song.title+'</a></li>')
+		})
+	})
+}
+
+function loadSong(url) {
+	$.get(url, function (data) {
+		$('div[role="main"]').html(data);
+	});
+}
+
+$(function () {
+	loadAllSongs();
+
+	$('.load-song').live('click', function (e) {
+		loadSong($(this).attr('data-url'));
+	});
+
+	$('#add-new-song').click(function (e) {
+		$.get('/new', function (data) {
+			$('div[role="main"]').html(data);
+		});
+	});
+
 	$('#transpose').hide();
 	$('#transposed_key').live('change', function() {
 		transpose();
 	});
-	$('#convertBtn').click(function(e) {
+	$('#convertBtn, .preview-button').live('click', function(e) {
 		e.preventDefault();
 		convertLyrics();
 	});
