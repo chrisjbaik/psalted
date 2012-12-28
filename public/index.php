@@ -28,7 +28,9 @@
 	});
 	
 	$app->get('/new', function () use ($app) {
-		$app->render('new.php');
+		$app->render('song.php', array(
+			'page_title' => 'New Song'
+		));
 	});
 
 	function print_array($aArray) {
@@ -71,26 +73,57 @@
 		$song->url = generateSlug($song->title);
 		$song->chords = $req->post('chords');
 		$song->lyrics = removeChords($song->chords);
-		$song->save();
-		$app->flash('success', 'Song was successfully added!');
-		$app->redirect('/');
+		$song->key = $req->post('original_key');
+		$song->artist = $req->post('artist');
+		$song->copyright = $req->post('copyright');
+		if ($song->save()) {
+			$app->flash('success', 'Song was successfully added!');
+			$app->redirect('/song/'.$song->url);
+		} else {
+			$app->flash('error', 'Song save failed.');
+			$app->redirect('/new');
+		}
 	});
 
-	$app->post('/edit/:id', function ($id) use ($app) {
+	$app->put('/song/:id', function ($id) use ($app) {
 		$req = $app->request();
 
 		$song = Model::factory('Song')->find_one($id);
 		if ($song) {
-			$song->title = $req->post('title');
-			$song->url = generateSlug($song->title);
-			$song->chords = $req->post('chords');
+			$song->title = $req->params('title');
+			if (empty($song->url)) {
+				$song->url = generateSlug($song->title);
+			}
+			$song->chords = $req->params('chords');
 			$song->lyrics = removeChords($song->chords);
-			$song->save();
+			$song->key = $req->params('original_key');
+			$song->copyright = $req->params('copyright');
+			$song->artist = $req->params('artist');
+			if ($song->save()) {
+				$app->flash('success', 'Song was successfully edited!');
+				$app->redirect('/song/'.$song->url);
+			} else {
+				$app->flash('error', 'Song save failed.');
+				$app->redirect('/song/'.$song->url);
+			}
 		} else {
-			$res->write('{}');
+			$app->flash('error', 'Song does not exist.');
+			$app->redirect('/new');
 		}
-		$app->flash('success', 'Song was successfully edited!');
-		$app->redirect('/');
+	});
+
+	$app->delete('/song/:id', function ($id) use ($app) {
+		$req = $app->request();
+
+		$song = Model::factory('Song')->find_one($id);
+		if ($song) {
+			$song->delete();
+			$app->flash('success', 'Song was successfully deleted!');
+			$app->redirect('/');
+		} else {
+			$app->flash('error', 'Song does not exist.');
+			$app->redirect('/');
+		}
 	});
 
 	$app->get('/songs.json', function () use ($app) {
@@ -106,11 +139,7 @@
 		if ($song) {
 			$res['Content-Type'] = 'application/json';
 			$res->write(
-				json_encode(array(
-					'id' => $song->id,
-					'title' => $song->title,
-					'chords' => $song->chords,
-				))
+				json_encode($song)
 			);
 		} else {
 			$res->write('{}');
@@ -123,16 +152,13 @@
 		$song = Model::factory('Song')->where('url', $url)->find_one();
 
 		if ($song) {
-			$app->render('edit.php',
-				array(
-					'id' => $song->id,
-					'title' => $song->title,
-					'chords' => $song->chords,
-				)
-			);
+			$app->render('song.php', array(
+				'page_title' => 'Edit Song', 
+				'song' => $song
+			));
 		} else {
-			// No song
-			$res->write('Song not found');
+			$app->flash('error', 'Song was not found!');
+			$res->redirect('/');
 		}
 	});
 
