@@ -24,7 +24,15 @@
       $(function () {
         var lyrics = convertLyrics(parseInt($('#original_key').val()), $('#to-print').html())
         $('#to-print').html(lyrics);
+        window.checkWindowState = function () {           
+          if(document.readyState == "complete") {
+            window.close(); 
+          } else {           
+            setTimeout("checkWindowState()", 10)
+          }
+        }
         window.print();
+        window.checkWindowState();
       });
     </script>
   </body>
