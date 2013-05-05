@@ -1,10 +1,8 @@
 /* Author: Varoot Phasuthadol, Chris Baik */
-function convertLyrics() {
-	var key = parseInt($('#original_key').val());
-	var txt = $('#input textarea').val();
+function convertLyrics(key, input) {
 	var output = $('#output');
 	
-	var outText = txt.replace(/^([^\[\n]*)\[/gm,
+	var outText = input.replace(/^([^\[\n]*)\[/gm,
 		'<span class="phrase">\
 			<span class="chord"></span>\
 			<span class="lyrics">$1</span>\
@@ -51,10 +49,7 @@ function convertLyrics() {
 		}
 		$(this).data('mustache', chord);
 	});
-	output.html(outText);
-	
-	$('#preview-area').show();
-	$('#transposed_key').val(key);
+	return outText;
 }
 
 function transpose() {
@@ -96,8 +91,18 @@ function loadAllSongs() {
 	})
 }
 
+function loadPreview() {
+	var key = parseInt($('#original_key').val());
+	var lyrics = convertLyrics(key, $('#input textarea').val());
+	$('#output').html(lyrics);
+	$('#preview-area').show();
+	$('#transposed_key').val(key);
+}
+
 $(function () {
-	loadAllSongs();
+	if ($('.songs-list').length > 0) {
+		loadAllSongs();
+	}
 	$('#preview-area').hide();
 
 	$('#transposed_key').live('change', function() {
@@ -105,6 +110,6 @@ $(function () {
 	});
 	$('.preview-button').live('click', function(e) {
 		e.preventDefault();
-		convertLyrics();
+		loadPreview();
 	});
 });

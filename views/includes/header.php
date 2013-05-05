@@ -13,7 +13,7 @@
     <link rel="stylesheet/less" type="text/css" href="/css/style.less">
 
     <script src="/js/libs/modernizr-2.5.3.min.js"></script>
-    <script src="/js/libs/less-1.3.0.min.js"></script>
+    <script src="/js/libs/less-1.3.3.min.js"></script>
 
   </head>
 

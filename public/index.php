@@ -162,6 +162,38 @@
 		}
 	});
 
+	$app->get('/song/:url/chords', function ($url) use ($app) {
+		$res = $app->response();
+
+		$song = Model::factory('Song')->where('url', $url)->find_one();
+
+		if ($song) {
+			$app->render('print.php', array(
+				'song' => $song,
+				'type' => 'chords'
+			));
+		} else {
+			$app->flash('error', 'Song was not found!');
+			$res->redirect('/');
+		}
+	});
+
+	$app->get('/song/:url/lyrics', function ($url) use ($app) {
+		$res = $app->response();
+
+		$song = Model::factory('Song')->where('url', $url)->find_one();
+
+		if ($song) {
+			$app->render('print.php', array(
+				'song' => $song,
+				'type' => 'lyrics'
+			));
+		} else {
+			$app->flash('error', 'Song was not found!');
+			$res->redirect('/');
+		}
+	});
+
 
 	$app->run();
 ?>

@@ -1,5 +1,12 @@
 <?php include_once('../views/includes/header.php'); ?>
 <h2 class='song-title'><?php echo $page_title; ?></h2>
+<form class="form-inline">
+  <label><i class='icon-print'></i> Print:</label>
+  <?php
+    echo '<a class="btn" target="_blank" href="/song/' . $song->url . '/chords">Chords</a>';
+    echo '<a class="btn" target="_blank" href="/song/' . $song->url . '/lyrics">Lyrics</a>';
+  ?>
+</form>
 <div class="row-fluid">
   <div class="span6 well">
     <?php
@@ -90,7 +97,7 @@
 <?php
   include_once('../views/includes/footer.php');
   if (!empty($song)) {
-    echo "<script>$(function(){convertLyrics();})</script>";
+    echo "<script>$(function(){loadPreview();})</script>";
   }
   if (!empty($song->key)) {
     echo "<script>$('select[name=original_key] option[value=".$song->key."]').attr('selected', 'selected')</script>";
