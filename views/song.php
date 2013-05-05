@@ -1,5 +1,6 @@
 <?php include_once('../views/includes/header.php'); ?>
 <h2 class='song-title'><?php echo $page_title; ?></h2>
+<?php if (!empty($song)): ?>
 <form class="form-inline">
   <label><i class='icon-print'></i> Print:</label>
   <?php
@@ -7,6 +8,7 @@
     echo '<a class="btn" target="_blank" href="/song/' . $song->url . '/lyrics">Lyrics</a>';
   ?>
 </form>
+<?php endif; ?>
 <div class="row-fluid">
   <div class="span6 well">
     <?php
