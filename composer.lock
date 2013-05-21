@@ -1,24 +1,24 @@
 {
-    "hash": "17bd748a10b3a617a25ea0b4ce548862",
+    "hash": "ec4c82d21a942312144fbc70140d86ca",
     "packages": [
         {
             "name": "j4mie/idiorm",
-            "version": "v1.2.2",
+            "version": "v1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j4mie/idiorm",
-                "reference": "v1.2.2"
+                "reference": "v1.2.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/j4mie/idiorm/archive/v1.2.2.zip",
-                "reference": "v1.2.2",
+                "url": "https://github.com/j4mie/idiorm/archive/v1.2.3.zip",
+                "reference": "v1.2.3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.0"
             },
-            "time": "2012-11-15 16:52:47",
+            "time": "2012-11-28 10:44:18",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -26,6 +26,7 @@
                     "idiorm.php"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-2-Clause",
                 "BSD-3-Clause",
@@ -170,22 +171,22 @@
         },
         {
             "name": "slim/slim",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeguy/Slim",
-                "reference": "2.1.0"
+                "reference": "2.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/codeguy/Slim/zipball/2.1.0",
-                "reference": "2.1.0",
+                "url": "https://github.com/codeguy/Slim/archive/2.2.0.zip",
+                "reference": "2.2.0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2012-09-12 09:07:46",
+            "time": "2012-12-13 02:15:50",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -193,6 +194,7 @@
                     "Slim": "."
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],

@@ -1,2 +1,4 @@
 vendor
 *Thumbs.db
+db/*.db
+config.php
