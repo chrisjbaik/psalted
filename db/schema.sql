@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS song (
   artist TEXT,
   key TEXT,
   copyright TEXT,
+  spotify_id TEXT,
   PRIMARY KEY (id),
   UNIQUE (url)
 );
