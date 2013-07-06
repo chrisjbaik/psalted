@@ -20,6 +20,8 @@
 	session_cache_limiter(false);
 	session_start();
 
+	$app->view()->setData('base_url', dirname($_SERVER['SCRIPT_NAME']) === DIRECTORY_SEPARATOR ? '' : dirname($_SERVER['SCRIPT_NAME']));
+
 	/*
 	 * Routes
 	 */

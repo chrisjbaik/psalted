@@ -7,13 +7,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="<?= $base_url ?>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= $base_url ?>/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet/less" type="text/css" href="/css/style.less">
+    <link rel="stylesheet/less" type="text/css" href="<?= $base_url ?>/css/style.less">
 
-    <script src="/js/libs/modernizr-2.5.3.min.js"></script>
-    <script src="/js/libs/less-1.3.3.min.js"></script>
+    <script src="<?= $base_url ?>/js/libs/modernizr-2.5.3.min.js"></script>
+    <script src="<?= $base_url ?>/js/libs/less-1.3.3.min.js"></script>
 
   </head>
 
