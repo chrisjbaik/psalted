@@ -2,6 +2,7 @@
 	"require": {
  		"slim/slim": "2.*",
  		"j4mie/paris": "v1.2.0",
- 		"jbroadway/urlify": "dev-master"
+ 		"jbroadway/urlify": "dev-master",
+    "hybridauth/hybridauth": "dev-master"
 	}
 }
