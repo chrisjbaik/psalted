@@ -4,8 +4,8 @@
 <form class="form-inline">
   <label><i class='icon-print'></i> Print:</label>
   <?php
-    echo '<a class="btn" target="_blank" href="/song/' . $song->url . '/chords">Chords</a>';
-    echo '<a class="btn" target="_blank" href="/song/' . $song->url . '/lyrics">Lyrics</a>';
+    echo '<a class="btn" target="_blank" href="'.$base_url.'/song/' . $song->url . '/chords">Chords</a>';
+    echo '<a class="btn" target="_blank" href="'.$base_url.'/song/' . $song->url . '/lyrics">Lyrics</a>';
   ?>
 </form>
 <?php endif; ?>
@@ -13,10 +13,10 @@
   <div class="span6 well">
     <?php
       if (!empty($song)) {
-        echo '<form id="input" method="post" action="/song/' . $song->id . '">';
+        echo '<form id="input" method="post" action="'.$base_url.'/song/' . $song->id . '">';
         echo '<input type="hidden" name="_METHOD" value="PUT" />';
       } else {
-        echo '<form id="input" method="post" action="/new">';
+        echo '<form id="input" method="post" action="'.$base_url.'/new">';
       }
     ?>
       <label for='title'>Title</label>
