@@ -4,8 +4,8 @@
 <form class="form-inline">
   <label><i class='icon-print'></i> Print:</label>
   <?php
-    echo '<a class="btn" target="_blank" href="/song/' . $song->url . '/chords">Chords</a>';
-    echo '<a class="btn" target="_blank" href="/song/' . $song->url . '/lyrics">Lyrics</a>';
+    echo '<a class="btn" target="_blank" href="'.$base_url.'/song/' . $song->url . '/chords">Chords</a>';
+    echo '<a class="btn" target="_blank" href="'.$base_url.'/song/' . $song->url . '/lyrics">Lyrics</a>';
   ?>
 </form>
 <?php endif; ?>
@@ -13,16 +13,16 @@
   <div class="span6 well">
     <?php
       if (!empty($song)) {
-        echo '<form id="input" method="post" action="/song/' . $song->id . '">';
+        echo '<form id="input" method="post" action="'.$base_url.'/song/' . $song->id . '">';
         echo '<input type="hidden" name="_METHOD" value="PUT" />';
       } else {
-        echo '<form id="input" method="post" action="/new">';
+        echo '<form id="input" method="post" action="'.$base_url.'/new">';
       }
     ?>
       <label for='title'>Title</label>
-      <input type='text' name='title' class='input-block-level' value='<?php if(!empty($song)) { echo $song->title; }?>'>
+      <input id='title' type='text' name='title' class='input-block-level' value='<?php if(!empty($song)) { echo $song->title; }?>'>
       <label for='artist'>Artist</label>
-      <input type='text' name='artist' class='input-block-level' value='<?php if(!empty($song)) { echo $song->artist; }?>'>
+      <input id = 'artist' type='text' name='artist' class='input-block-level' value='<?php if(!empty($song)) { echo $song->artist; }?>'>
       <label for="original_key">Original Key</label>
       <select name="original_key" id="original_key" class='input-block-level'>
         <!-- TODO: set key -->
@@ -43,6 +43,9 @@
       <textarea name='chords' class='input-block-level' rows='10'><?php if(!empty($song)) { echo $song->chords; } ?></textarea>
       <label for='copyright'>Copyright</label>
       <input type='text' name='copyright' class='input-block-level' value='<?php if(!empty($song)) { echo $song->copyright; }?>'>
+      <label for='spotify_id'>Spotify</label>
+      <select name="spotify_id" id="spotify_id" class='input-block-level'></select>
+      <div id="play"></div>
       <div class="row-fluid">
         <?php
           if (!empty($song)) {

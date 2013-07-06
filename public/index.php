@@ -154,6 +154,7 @@
 		$song->key = $req->post('original_key');
 		$song->artist = $req->post('artist');
 		$song->copyright = $req->post('copyright');
+		$song->spotify_id = $req ->post('spotify_id');
 		if ($song->save()) {
 			$app->flash('success', 'Song was successfully added!');
 			$app->redirect('/song/'.$song->url);
@@ -177,6 +178,7 @@
 			$song->key = $req->params('original_key');
 			$song->copyright = $req->params('copyright');
 			$song->artist = $req->params('artist');
+			$song->spotify_id = $req->params('spotify_id');
 			if ($song->save()) {
 				$app->flash('success', 'Song was successfully edited!');
 				$app->redirect('/song/'.$song->url);

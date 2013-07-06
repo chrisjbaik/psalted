@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS song (
   artist TEXT,
   key TEXT,
   copyright TEXT,
+  spotify_id TEXT,
   PRIMARY KEY (id),
   UNIQUE (url)
 );
@@ -29,7 +30,7 @@ CREATE TABLE IF NOT EXISTS hybridauth (
   user_id INTEGER NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS playlists (
+CREATE TABLE IF NOT EXISTS playlist (
   id INTEGER NOT NULL,
   title TEXT,
   created_by INTEGER NOT NULL,
@@ -39,13 +40,13 @@ CREATE TABLE IF NOT EXISTS playlists (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS playlists_users (
+CREATE TABLE IF NOT EXISTS playlist_user (
   playlist_id INTEGER NOT NULL,
   user_id INTEGER NOT NULL,
   PRIMARY KEY (playlist_id, user_id)
 );
 
-CREATE TABLE IF NOT EXISTS playlists_songs (
+CREATE TABLE IF NOT EXISTS playlist_song (
   playlist_id INTEGER NOT NULL,
   song_id INTEGER NOT NULL,
   PRIMARY KEY (playlist_id, song_id)
