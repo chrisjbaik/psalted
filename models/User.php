@@ -15,4 +15,8 @@ class User extends Model {
     parent::save();
     return true;
   }
+
+  public function setlists() {
+    return $this->has_many_through('Setlist');
+  }
 }
