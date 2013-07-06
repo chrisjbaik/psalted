@@ -20,4 +20,30 @@ CREATE TABLE IF NOT EXISTS user (
   created_at INTEGER NOT NULL,
   PRIMARY KEY (id),
   UNIQUE (email)
+<<<<<<< HEAD
 )
+=======
+);
+
+CREATE TABLE IF NOT EXISTS playlists (
+  id INTEGER NOT NULL,
+  title TEXT,
+  created_by INTEGER NOT NULL,
+  created_at INTEGER NOT NULL,
+  updated_by INTEGER NOT NULL,
+  updated_at INTEGER NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS playlists_users (
+  playlist_id INTEGER NOT NULL,
+  user_id INTEGER NOT NULL,
+  PRIMARY KEY (playlist_id, user_id)
+);
+
+CREATE TABLE IF NOT EXISTS playlists_songs (
+  playlist_id INTEGER NOT NULL,
+  song_id INTEGER NOT NULL,
+  PRIMARY KEY (playlist_id, song_id)
+);
+>>>>>>> 64a87bcf0600cca09a1990cb098facb5e7ee0501
