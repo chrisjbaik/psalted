@@ -97,6 +97,32 @@ function loadPreview() {
 	$('#output').html(lyrics);
 	$('#preview-area').show();
 	$('#transposed_key').val(key);
+	getMeta();
+}
+
+function getMeta(){
+	var track = $('#title').val();
+	var artist = $('#artist').val();
+	var searchURL = 'http://ws.spotify.com/search/1/track.json?q=' + track + '+'+ artist;
+    jQuery.get(searchURL, function(data, textStatus, jqXHR) {
+    	var options = '';
+    	for (var i=0; i < Math.min(4, data.tracks.length); i++) {
+    		options += '<option value="'+data.tracks[i].href+'">'+data.tracks[i].name +'-' +data.tracks[i].artists[0].name;
+    	}
+    	options += '<option value="">(None of the above)';
+    	$('#spotify_id').html(options);
+    	updatePlayButton();
+
+    }, 'json' )
+}
+
+function updatePlayButton(){
+	var songUrl = $('#spotify_id').val();
+	console.log(songUrl);
+	if (songUrl == null || songUrl == "")
+		$('#play').html('')
+	else
+   		$('#play').html('<iframe src="https://embed.spotify.com/?uri=' +songUrl + '" width="'+$('#play').width()+'" height="80" frameborder="0" allowtransparency="true"></iframe>');
 }
 
 $(function () {
@@ -112,4 +138,6 @@ $(function () {
 		e.preventDefault();
 		loadPreview();
 	});
+	$('#title, #artist').change(getMeta);
+	$('#spotify_id').change(updatePlayButton);
 });
