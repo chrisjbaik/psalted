@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS hybridauth (
   user_id INTEGER NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS playlist (
+CREATE TABLE IF NOT EXISTS setlist (
   id INTEGER NOT NULL,
   title TEXT,
   created_by INTEGER NOT NULL,
@@ -40,14 +40,14 @@ CREATE TABLE IF NOT EXISTS playlist (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS playlist_user (
-  playlist_id INTEGER NOT NULL,
+CREATE TABLE IF NOT EXISTS setlist_user (
+  setlist_id INTEGER NOT NULL,
   user_id INTEGER NOT NULL,
-  PRIMARY KEY (playlist_id, user_id)
+  PRIMARY KEY (setlist_id, user_id)
 );
 
-CREATE TABLE IF NOT EXISTS playlist_song (
-  playlist_id INTEGER NOT NULL,
+CREATE TABLE IF NOT EXISTS setlist_song (
+  setlist_id INTEGER NOT NULL,
   song_id INTEGER NOT NULL,
-  PRIMARY KEY (playlist_id, song_id)
+  PRIMARY KEY (setlist_id, song_id)
 );
