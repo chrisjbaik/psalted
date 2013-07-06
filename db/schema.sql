@@ -22,6 +22,13 @@ CREATE TABLE IF NOT EXISTS user (
   UNIQUE (email)
 );
 
+CREATE TABLE IF NOT EXISTS hybridauth (
+  id INTEGER NOT NULL,
+  provider TEXT NOT NULL,
+  uid INTEGER NOT NULL,
+  user_id INTEGER NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS playlists (
   id INTEGER NOT NULL,
   title TEXT,

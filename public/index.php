@@ -11,10 +11,23 @@
 	});
 
 	/*
+	 * Views Setup
+	 */
+
+	class SawadicopView extends \Slim\View {
+		public function render($template) {
+			$this->data['session'] = $_SESSION;
+			return parent::render($template);
+		}
+	};
+
+
+	/*
 	 * App Configuration
 	 */
 	$app = new \Slim\Slim(array(
-		'templates.path' => '../views'
+		'templates.path' => '../views',
+		'view' => new SawadicopView()
 	));
 
 	session_cache_limiter(false);
@@ -73,10 +86,23 @@
 		} else {
 			$app->flashNow('error', 'No user was found with that email and password. Please try again.');
 			$app->render('login.php', array(
-				'email' => $email,
-				'password' => $password
+				'email' => $email
 			));
 		}
+	});
+
+	$app->get('/logout', function () use ($app) {
+		$_SESSION = array();
+
+		if (ini_get("session.use_cookies")) {
+		    $params = session_get_cookie_params();
+		    setcookie(session_name(), '', time() - 42000,
+		        $params["path"], $params["domain"],
+		        $params["secure"], $params["httponly"]
+		    );
+		}
+		session_destroy();
+		$app->redirect('/');
 	});
 
 	$app->get('/new', function () use ($app) {

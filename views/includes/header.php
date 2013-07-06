@@ -33,6 +33,16 @@
               <!--<li><a href="#about">About</a></li>
               <li><a href="#contact">Contact</a></li>-->
             </ul>
+            <?php
+              if (!empty($session['user'])) {
+                echo '<span class="pull-right" id="navbar-welcome">Welcome, Chris!</span>';
+              } else {
+                echo '<div class="pull-right">
+                  <a href="/register" class="btn btn-primary">Sign Up</a>
+                  <a href="/login" class="btn">Login</a>
+                </div>';
+              }
+            ?>
           </div>
         </div>
       </div>
