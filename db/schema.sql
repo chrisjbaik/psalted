@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS song (
   UNIQUE (url)
 );
 
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS user (
   id INTEGER NOT NULL,
   email TEXT NOT NULL,
   password TEXT NOT NULL,
@@ -20,4 +20,4 @@ CREATE TABLE IF NOT EXISTS users (
   created_at INTEGER NOT NULL,
   PRIMARY KEY (id),
   UNIQUE (email)
-) 
+)

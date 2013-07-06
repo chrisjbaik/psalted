@@ -22,6 +22,11 @@
 
 	$app->view()->setData('base_url', dirname($_SERVER['SCRIPT_NAME']) === DIRECTORY_SEPARATOR ? '' : dirname($_SERVER['SCRIPT_NAME']));
 
+	$app->error(function (\Exception $e) use ($app) {
+		$app->flash('error', $e->getMessage());
+		$app->render('index.php');
+	});
+
 	/*
 	 * Routes
 	 */
@@ -29,6 +34,51 @@
 		$app->render('index.php');
 	});
 	
+	$app->get('/register', function () use ($app) {
+		$app->render('register.php');
+	});
+
+	$app->post('/register', function () use ($app) {
+		$req = $app->request();
+
+		$user = Model::factory('User')->create();
+		$user->first_name = $req->post('first_name');
+		$user->last_name = $req->post('last_name');
+		$user->email = $req->post('email');
+		$user->password = password_hash($req->post('password'), PASSWORD_BCRYPT);
+		if ($user->save()) {
+			$app->flash('success', 'Thanks for signing up!');
+			$app->redirect('/');
+		} else {
+			$app->flashNow('error', 'Registration failed. Please check all fields and try again.');
+			$app->render('/register.php', array(
+				'user' => $user
+			));
+		}
+	});
+
+	$app->get('/login', function () use ($app) {
+		$app->render('login.php');
+	});
+
+	$app->post('/login', function () use ($app) {
+		$req = $app->request();
+
+		$email = $req->post('email');
+		$user = Model::factory('User')->where('email', $email)->find_one();
+		if ($user && password_verify($req->post('password'), $user->password)) {
+			$_SESSION['user'] = $user;
+			$app->flash('success', 'Welcome, ' . $user->first_name . '!');
+			$app->redirect('/');
+		} else {
+			$app->flashNow('error', 'No user was found with that email and password. Please try again.');
+			$app->render('login.php', array(
+				'email' => $email,
+				'password' => $password
+			));
+		}
+	});
+
 	$app->get('/new', function () use ($app) {
 		$app->render('song.php', array(
 			'page_title' => 'New Song'
