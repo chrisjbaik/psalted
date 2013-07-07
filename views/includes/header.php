@@ -57,7 +57,7 @@
             </ul>
             <section class="setlists span2">
               <div class="setlist-header">
-                <div class="btn-group">
+                <div class="btn-group dropup">
                   <button class="btn dropdown-toggle" data-toggle="dropdown">
                     Untitled Setlist
                     <span class="caret"></span>
@@ -71,6 +71,9 @@
               <div class="setlist-songs">
                 <ul class="nav nav-list setlist-songs-list">
                 </ul>
+              </div>
+              <div class="setlist-buttons">
+                <button class="btn btn-primary">Save</button>
               </div>
             </section>
           </div>
