@@ -1,6 +1,6 @@
 <?php
 	require_once __DIR__ . '/../vendor/autoload.php';
-	require_once __DIR__ . '/../config.php';
+	require_once __DIR__ . '/../config/database.php';
 
 	/*
 	 * Database/Models Setup
@@ -86,7 +86,7 @@
 		}
 	});
 
-	$app->get('/hybridauth', function () use ($app) {
+	$app->get('/auth', function () use ($app) {
 		$app->render('hybridauth.php');
 	});
 
@@ -97,17 +97,7 @@
 		if (!empty($provider)) {
 			// Social Login attempted
 			try {
-				$config = array( 
-				   // "base_url" the url that point to HybridAuth Endpoint (where the index.php and config.php are found) 
-				   "base_url" => "http://localhost/hybridauth",
-				 
-				   "providers" => array ( 
-				       "Facebook" => array ( 
-				           "enabled" => true, "keys" => array ( "id" => "604390169591222", "secret" => "90c349122dec65377c3503ed3b3a707a" )
-				       ) 
-				   ) 
-				);
-				$hybridauth = new Hybrid_Auth($config);
+				$hybridauth = new Hybrid_Auth(__DIR__ . '/../config/hybridauth.php');
 				$adapter = $hybridauth->authenticate($provider);
 				$user_profile = $adapter->getUserProfile();
 				$user_ha = Model::factory('Hybridauth')->where('uid', $user_profile->identifier)->find_one();
