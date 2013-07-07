@@ -104,21 +104,21 @@ function getMeta(){
 	var track = $('#title').val();
 	var artist = $('#artist').val();
 	var searchURL = 'http://ws.spotify.com/search/1/track.json?q=' + track + '+'+ artist;
-    jQuery.get(searchURL, function(data, textStatus, jqXHR) {
-    	var options = '';
-    	var songIdTable = {};
-    	for (var i=0; i < Math.min(4, data.tracks.length); i++) {
-    		var id = data.tracks[i]['external-ids'][0].id;
-    		if (! id in songIdTable ) {
-    			songIdTable[id] = true;
-    			options += '<option value="'+data.tracks[i].href+'">'+data.tracks[i].name +'-' +data.tracks[i].artists[0].name;
-    		}
-    	}
-    	options += '<option value="">(None of the above)';
-    	$('#spotify_id').html(options);
-    	updatePlayButton();
+	jQuery.get(searchURL, function(data, textStatus, jqXHR) {
+		var options = '';
+		var songIdTable = {};
+		for (var i=0; i < Math.min(4, data.tracks.length); i++) {
+			var id = data.tracks[i]['external-ids'][0].id;
+			if (! songIdTable[id]) {
+				songIdTable[id] = true;
+				options += '<option value="'+data.tracks[i].href+'">'+data.tracks[i].name +'-' +data.tracks[i].artists[0].name;
+			}
+		}
+		options += '<option value="">(None of the above)';
+		$('#spotify_id').html(options);
+		updatePlayButton();
 
-    }, 'json' )
+	}, 'json' )
 }
 
 function updatePlayButton(){
@@ -127,7 +127,7 @@ function updatePlayButton(){
 	if (songUrl == null || songUrl == "")
 		$('#play').html('')
 	else
-   		$('#play').html('<iframe src="https://embed.spotify.com/?uri=' +songUrl + '" width="'+$('#play').width()+'" height="80" frameborder="0" allowtransparency="true"></iframe>');
+		$('#play').html('<iframe src="https://embed.spotify.com/?uri=' +songUrl + '" width="'+$('#play').width()+'" height="80" frameborder="0" allowtransparency="true"></iframe>');
 }
 
 $(function () {
