@@ -63,6 +63,53 @@
 	}
 }
 
+.setlists {
+  background: #333;
+  border-radius: 10px;
+  padding: 12px;
+  position: fixed;
+  left: -1%;
+  bottom: 20px;
+}
+
+.setlist-header {
+  text-align: center;
+  padding-bottom: 8px;
+
+  .btn-group {
+    text-align: left;
+    max-width: 100%;
+ 
+    .btn {
+      max-width: 100%;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      color: #eee;
+      text-shadow: none;
+
+      .caret {
+        border-top-color: #eee;
+      }
+
+      &:hover {
+        background: #666;
+      }
+    }
+
+    &.open {
+      .btn.dropdown-toggle {
+        background-color: #666;
+      }
+    }
+  }
+}
+
+.setlist-songs {
+  background: #fff;
+  border-radius: 2px;
+  padding: 4px 0;
+}
 
 
 @media only screen and (min-width: 35em) {

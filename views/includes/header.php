@@ -55,6 +55,24 @@
             <ul class="nav nav-list songs-list">
               <li class="nav-header">All Songs</li>
             </ul>
+            <section class="setlists span2">
+              <div class="setlist-header">
+                <div class="btn-group">
+                  <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    Untitled Setlist
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">July 3, 2013</a>
+                    <li><a href="#">June 26, 2012</a>
+                  </ul>
+                </div>
+              </div>
+              <div class="setlist-songs">
+                <ul class="nav nav-list setlist-songs-list">
+                </ul>
+              </div>
+            </section>
           </div>
         </div>
         <div class="span10">
