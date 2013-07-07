@@ -2,7 +2,13 @@
   include_once('../views/includes/header.php');
 ?>
   <h2>Sign Up</h2>
-  <form class="form-horizontal" method="post">
+  <form class="form-horizontal" method="post" action="/register">
+    <?php
+      if (!empty($provider) && !empty($uid)) {
+        echo '<input type="hidden" name="provider" value="'.$provider.'" />';
+        echo '<input type="hidden" name="uid" value="'.$uid.'" />';
+      }
+    ?>
     <div class="control-group">
       <label class="control-label" for="email">Email</label>
       <div class="controls">

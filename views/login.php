@@ -27,5 +27,6 @@
       </div>
     </div>
   </form>
+  <a href='/login?provider=facebook'>Login with Facebook</a>
 <?php
   include_once('../views/includes/footer.php');
