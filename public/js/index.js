@@ -106,8 +106,13 @@ function getMeta(){
 	var searchURL = 'http://ws.spotify.com/search/1/track.json?q=' + track + '+'+ artist;
     jQuery.get(searchURL, function(data, textStatus, jqXHR) {
     	var options = '';
+    	var songIdTable = {};
     	for (var i=0; i < Math.min(4, data.tracks.length); i++) {
-    		options += '<option value="'+data.tracks[i].href+'">'+data.tracks[i].name +'-' +data.tracks[i].artists[0].name;
+    		var id = data.tracks[i]['external-ids'][0].id;
+    		if (! id in songIdTable ) {
+    			songIdTable[id] = true;
+    			options += '<option value="'+data.tracks[i].href+'">'+data.tracks[i].name +'-' +data.tracks[i].artists[0].name;
+    		}
     	}
     	options += '<option value="">(None of the above)';
     	$('#spotify_id').html(options);
