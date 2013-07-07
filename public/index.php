@@ -72,7 +72,9 @@
 				if (!$ha->save()) {
 					$app->flashNow('error', 'Registration using '.$provider.' failed. Please try again later.');
 					return $app->redirect('register.php', array(
-						'user' => $user
+						'user' => $user,
+						'uid' => $uid,
+						'provider' => $provider
 					));
 				}
 			}
@@ -81,7 +83,9 @@
 		} else {
 			$app->flashNow('error', 'Registration failed. Please check all fields and try again.');
 			$app->render('register.php', array(
-				'user' => $user
+				'user' => $user,
+				'uid' => $uid,
+				'provider' => $provider
 			));
 		}
 	});
