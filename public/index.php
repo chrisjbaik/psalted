@@ -59,7 +59,23 @@
 		$user->last_name = $req->post('last_name');
 		$user->email = $req->post('email');
 		$user->password = password_hash($req->post('password'), PASSWORD_BCRYPT);
+
+		$uid = $req->params('uid');
+		$provider = $req->params('provider');
 		if ($user->save()) {
+			if (!empty($uid) && !empty($provider)) {
+				$ha = Model::factory('Hybridauth')->create();
+				$ha->uid = $uid;
+				$ha->provider = $provider;
+				$ha->user_id = $user->id;
+
+				if (!$ha->save()) {
+					$app->flashNow('error', 'Registration using '.$provider.' failed. Please try again later.');
+					return $app->redirect('/register.php', array(
+						'user' => $user
+					));
+				}
+			}
 			$app->flash('success', 'Thanks for signing up!');
 			$app->redirect('/');
 		} else {
@@ -71,15 +87,59 @@
 	});
 
 	$app->get('/login', function () use ($app) {
-		$app->render('login.php');
+		$req = $app->request();
+		$provider = $req->params('provider');
+
+		if (!empty($provider)) {
+			// Social Login attempted
+			try {
+				$config = array( 
+				   // "base_url" the url that point to HybridAuth Endpoint (where the index.php and config.php are found) 
+				   "base_url" => "http://localhost/hybridauth",
+				 
+				   "providers" => array ( 
+				       "Facebook" => array ( 
+				           "enabled" => true, "keys" => array ( "id" => "604390169591222", "secret" => "90c349122dec65377c3503ed3b3a707a" )
+				       ) 
+				   ) 
+				);
+				$hybridauth = new Hybrid_Auth($config);
+				$adapter = $hybridauth->authenticate($provider);
+				$user_profile = $adapter->getUserProfile();
+				$user_ha = Model::factory('Hybridauth')->where('uid', $user_profile->identifier)->find_one();
+				if ($user_ha) {
+					$user = $user_ha->user()->find_one();
+					if ($user) {
+						$_SESSION['user'] = $user;
+						$app->flash('success', 'Welcome, ' . $user->first_name . '!');
+						$app->redirect('/');
+					} else {
+						$app->flashNow('error', 'Social login error: '. $e->getMessage());
+						$app->render('login.php');
+					}
+				} else {
+					// Register page
+					$app->flashNow('info', 'Register for Sawadicop with ' . $provider . '!');
+					$app->render('register.php', array(
+						'uid' => $user_profile->identifier,
+						'provider' => $provider
+					));
+				}
+			} catch (Exception $e) {
+				$app->flashNow('error', 'Social login error: '. $e->getMessage());
+				$app->render('login.php');
+			}
+		} else {
+			$app->render('login.php');
+		}
 	});
 
 	$app->post('/login', function () use ($app) {
 		$req = $app->request();
-
-		$email = $req->post('email');
+		
+		$email = $req->params('email');
 		$user = Model::factory('User')->where('email', $email)->find_one();
-		if ($user && password_verify($req->post('password'), $user->password)) {
+		if ($user && password_verify($req->params('password'), $user->password)) {
 			$_SESSION['user'] = $user;
 			$app->flash('success', 'Welcome, ' . $user->first_name . '!');
 			$app->redirect('/');

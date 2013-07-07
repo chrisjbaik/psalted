@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS hybridauth (
   id INTEGER NOT NULL,
   provider TEXT NOT NULL,
   uid INTEGER NOT NULL,
-  user_id INTEGER NOT NULL
+  user_id INTEGER NOT NULL,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS playlist (

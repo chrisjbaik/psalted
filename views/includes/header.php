@@ -35,7 +35,7 @@
             </ul>
             <?php
               if (!empty($session['user'])) {
-                echo '<span class="pull-right" id="navbar-welcome">Welcome, Chris!</span>';
+                echo '<span class="pull-right" id="navbar-welcome">Welcome, '. $session['user']->first_name .'!</span>';
               } else {
                 echo '<div class="pull-right">
                   <a href="/register" class="btn btn-primary">Sign Up</a>
@@ -65,6 +65,9 @@
             }
             if (isset($flash['error'])) {
               echo "<div class='alert alert-error'>".$flash['error']."</div>";
+            }
+            if (isset($flash['info'])) {
+              echo "<div class='alert alert-info'>".$flash['info']."</div>";
             }
           ?>
           </div>
