@@ -86,7 +86,7 @@ function loadAllSongs() {
 	$.get('/songs.json', function (data) {
 		var songs = JSON.parse(data);
 		songs.forEach(function (song) {
-			$('.songs-list').append('<li><a href="/song/' + song.url + '" class="load-song">'+song.title+'</a></li>')
+			$('.songs-list').append('<li><a href="/songs/' + song.url + '" class="load-song">'+song.title+'</a></li>')
 		})
 	})
 }

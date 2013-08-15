@@ -14,7 +14,7 @@
   <div class="span6 well">
     <?php
       if (!empty($song)) {
-        echo '<form id="input" method="post" action="'.$base_url.'/song/' . $song->id . '">';
+        echo '<form id="input" method="post" action="'.$base_url.'/songs/' . $song->id . '">';
         echo '<input type="hidden" name="_METHOD" value="PUT" />';
       } else {
         echo '<form id="input" method="post" action="'.$base_url.'/new">';
@@ -92,7 +92,7 @@
       <p>Are you sure you want to delete this song?</p>
     </div>
     <div class="modal-footer">
-      <?php echo '<form method="post" action="/song/'.$song->id.'">'; ?>
+      <?php echo '<form method="post" action="/songs/'.$song->id.'">'; ?>
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
         <input type="hidden" name="_METHOD" value="DELETE"/>
         <input type="submit" value="Go ahead!" class="btn btn-danger"/>
