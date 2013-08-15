@@ -1,6 +1,7 @@
 <?php
   include_once('../views/includes/header.php');
 ?>
+<a href='/link?provider=facebook'>Connect with Facebook</a>
 <h2>Social Accounts</h2>
 <table class='table'>
   <tr>

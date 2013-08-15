@@ -4,8 +4,8 @@
 <form class="form-inline">
   <label><i class='icon-print'></i> Print:</label>
   <?php
-    echo '<a class="btn" target="_blank" href="'.$base_url.'/song/' . $song->url . '/chords">Chords</a>';
-    echo '<a class="btn" target="_blank" href="'.$base_url.'/song/' . $song->url . '/lyrics">Lyrics</a>';
+    echo '<a class="btn" target="_blank" href="'.$base_url.'/songs/' . $song->url . '/chords">Chords</a>';
+    echo '<a class="btn" target="_blank" href="'.$base_url.'/songs/' . $song->url . '/lyrics">Lyrics</a>';
     echo ' <a id="add_setlist" class="btn" href="#">Add to Setlist</a>';
   ?>
 </form>
@@ -17,7 +17,7 @@
         echo '<form id="input" method="post" action="'.$base_url.'/songs/' . $song->id . '">';
         echo '<input type="hidden" name="_METHOD" value="PUT" />';
       } else {
-        echo '<form id="input" method="post" action="'.$base_url.'/new">';
+        echo '<form id="input" method="post" action="'.$base_url.'/songs/new">';
       }
     ?>
       <label for='title'>Title</label>

@@ -1,2 +1,4 @@
 vendor
 *Thumbs.db
+bin
+migrations/.migrations.log
