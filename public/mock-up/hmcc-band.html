@@ -11,39 +11,48 @@
 <body>
 	<div data-role="page">
 		<div data-role="header">
-			<a href="#" class="ui-icon-nodisc" data-theme="a" data-icon="bars" data-iconshadow="false" data-iconpos="notext"> </a>
+			<a href="#left-panel" class="ui-icon-nodisc" data-theme="a" data-icon="bars" data-iconshadow="false" data-iconpos="notext"> </a>
 			<a href="#" class="ui-icon-nodisc" data-theme="a" data-icon="gear" data-iconshadow="false" data-iconpos="notext"> </a>
 			<h1>
 				HMCC AA Band
 			</h1>
-		</div>
-		    <div data-role="content">
-        <a data-role="button" href="#page1" data-icon="plus" data-iconpos="left">
-            New Set List
-        </a>
-        <ul data-role="listview" data-divider-theme="b" data-inset="true">
-            <li data-role="list-divider" role="heading">
-                Saved Set List
-            </li>
-            <li data-theme="c">
-                <a href="2013-08-14.html" data-transition="slide">
-                    Aug. 14: Sunday Celebration
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#page1" data-transition="slide">
-                    Aug. 7 : Sunday Celebration
-                </a>
-            </li>
-        </ul>
-        <div data-role="collapsible-set">
-        </div>
-    </div>
+		</div><!--/header-->
+	    <div data-role="content">
+	        <a data-role="button" href="#page1" data-icon="plus" data-iconpos="left">
+	            New Set List
+	        </a>
+	        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+	            <li data-role="list-divider" role="heading">
+	                Saved Set List
+	            </li>
+	            <li data-theme="c">
+	                <a href="2013-08-14.html" data-transition="slide">
+	                    Aug. 14: Sunday Celebration
+	                </a>
+	            </li>
+	            <li data-theme="c">
+	                <a href="#page1" data-transition="slide">
+	                    Aug. 7 : Sunday Celebration
+	                </a>
+	            </li>
+	        </ul>
+	    </div><!--/content-->
+
+       <div data-role="panel" id="left-panel" data-theme="c">
+	        <ul data-role="listview" data-theme="d">
+	            <li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+	            <li data-icon="home"><a href="home.html">Home</a></li>
+	            <li data-icon="search"><a href="#">Browse Songs</a></li>
+	            <li data-icon="gear"><a href="#">System Admin</a></li>
+	            <li><a href="#">Log Out</a></li>
+	        </ul>
+        </div><!-- /panel -->
+		
 		<div data-role="footer">
 			<h3>
 				By Chris, Varoot, Hong Yoon
 			</h3>
-		</div>
+		</div><!--/footer-->
 	</div>
 
 </body>
