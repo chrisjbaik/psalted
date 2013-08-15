@@ -4,6 +4,11 @@
  		"j4mie/paris": "v1.2.0",
  		"jbroadway/urlify": "dev-master",
     "hybridauth/hybridauth": "dev-master",
-    "ircmaxell/password-compat": "dev-master"
-	}
+    "ircmaxell/password-compat": "dev-master",
+    "davedevelopment/phpmig": "*",
+    "pimple/pimple": "1.*"
+	},
+  "config": {
+    "bin-dir": "bin/"
+  }
 }
