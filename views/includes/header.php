@@ -35,7 +35,17 @@
             </ul>
             <?php
               if (!empty($session['user'])) {
-                echo '<span class="pull-right" id="navbar-welcome">Welcome, '. $session['user']->first_name .'!</span>';
+                echo '<ul class="nav pull-right">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, '. $session['user']->first_name .'!
+                            <b class="caret"></b>
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a href="/settings">Settings</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                          </ul>
+                        </li>
+                      </ul>';
               } else {
                 echo '<div class="pull-right">
                   <a href="/register" class="btn btn-primary">Sign Up</a>
