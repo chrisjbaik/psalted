@@ -1,26 +1,26 @@
 <?php
-class Song extends Model {
+class Group extends Model {
+  public function users() {
+    return $this->has_many_through('User');
+  }
+  public function setlists() {
+    return $this->has_many_through('Setlist');
+  }
+
   public function save() {
-    if (empty($this->title)) {
+    if (empty($this->name)) {
       return false;
     }
     if (empty($this->url)) {
       $this->generateSlug();
     }
-    if (!empty($this->chords)) {
-      $this->filterLyricsFromChords();
-    }
     parent::save();
-    return true;
-  }
-  public function filterLyricsFromChords() {
-    $this->lyrics = preg_replace('/\[[^\]]*\]/', '', $this->chords);
     return true;
   }
 
   public function generateSlug() {
-    $url = URLify::filter($this->title);
-    $found = Model::factory('Song')->where('url', $url)->find_one();
+    $url = URLify::filter($this->name);
+    $found = Model::factory('Group')->where('url', $url)->find_one();
 
     while ($found) {
       $url = preg_replace_callback('/[-]?([0-9]+)?$/', function ($matches) {
@@ -33,7 +33,7 @@ class Song extends Model {
         }
       }, $url, 1);
 
-      $found = Model::factory('Song')->where('url', $url)->find_one();
+      $found = Model::factory('Group')->where('url', $url)->find_one();
     }
     $this->url = $url;
 

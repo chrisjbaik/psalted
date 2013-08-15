@@ -60,7 +60,7 @@
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span2">
-          <a id="add-new-song" class='btn btn-primary btn-block' href='<?= $base_url ?>/new'>Add New Song</a>
+          <a id="add-new-song" class='btn btn-primary btn-block' href='<?= $base_url ?>/songs/new'>Add New Song</a>
           <div class="sidebar-nav">
             <ul class="nav nav-list songs-list">
               <li class="nav-header">All Songs</li>
