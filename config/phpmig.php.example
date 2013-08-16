@@ -1,0 +1,22 @@
+<?php
+
+use \Phpmig\Adapter,
+    \Phpmig\Pimple\Pimple;
+
+require_once __DIR__ . '/database.php';
+
+$container = new Pimple();
+
+$container['db'] = $container->share(function() use ($db_name) {
+  return new PDO('sqlite:'.realpath(__DIR__."/../db/{$db_name}"));
+});
+
+$container['phpmig.adapter'] = $container->share(function() use ($container) {
+  return new Adapter\File\Flat(realpath(__DIR__ . '/../migrations/.migrations.log'));
+});
+
+$container['phpmig.migrations'] = function() {
+  return glob(__DIR__ . '/../migrations/*.php');
+};
+
+return $container;
