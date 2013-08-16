@@ -1,0 +1,48 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>Spirit Break in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <style>.song-prev, .song-next {text-decoration: none; font-size: 150%; padding: 0 10%;} </style>
+</head>
+
+
+<div data-role="page" class="demo-page" data-dom-cache="true" data-prev="newGroup.html" data-next="newSetlist.html" data-url="city">
+    <!-- "city", "prevCity" and "nextCity" are used as placeholders and contain the name of the applicable city in our demo files. -->
+    <div data-role="header">
+        <a href="#left-panel" class="ui-icon-nodisc" data-theme="a" data-icon="bars" data-iconshadow="false" data-iconpos="notext"> </a>
+        <a href="#" class="ui-icon-nodisc" data-theme="a" data-icon="gear" data-iconshadow="false" data-iconpos="notext"> </a>
+        <h1>
+            <a href="#" class="song-prev">&#9664;</a>Spirit Break Out<a href="#" class="song-next">&#9654;</a>
+        </h1>
+    </div><!--/header-->
+        <div data-role="content" style="-moz-user-select:none; -webkit-user-select: none; -ms-user-select: none;">
+            Spirit Break IN
+            SPirit Break ININ IN IN IN 
+        </div> <!--/content -->
+        <div data-role="panel" id="left-panel" data-theme="c">
+            <ul data-role="listview" data-theme="d">
+                <li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+                <li data-icon="home"><a href="home.html">Home</a></li>
+                <li data-icon="search"><a href="#">Browse Songs</a></li>
+                <li data-icon="gear"><a href="#">System Admin</a></li>
+                <li><a href="#">Log Out</a></li>
+            </ul>
+        </div><!-- /left-panel -->
+    <div data-role="footer">
+        <h3>
+            By Chris, Varoot, Hong Yoon
+        </h3>
+        <div data-role="controlgroup" class="control ui-btn-left" data-type="horizontal" data-mini="true">
+            <a href="newGroup.html" class="prev" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="d">Previous</a>
+            <a href="newSetlist.html" class="next" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="d">Next</a>
+        </div>
+    </div><!-- /footer -->
+</div>
+
+<!--!   -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
