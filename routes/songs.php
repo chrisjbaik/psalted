@@ -1,11 +1,11 @@
 <?php
-  $app->get('/songs.json', function () use ($app) {
+  $app->get('/songs.json', $acl_middleware(), function () use ($app) {
     $res = $app->response();
     $songs = Model::factory('Song')->select_many('id','url','title')->find_array();
     $res->write(json_encode($songs));
   });
 
-  $app->get('/songs/:url.json', function ($url) use ($app) {
+  $app->get('/songs/:url.json', $acl_middleware(), function ($url) use ($app) {
     $res = $app->response();
 
     $song = Model::factory('Song')->where('url', $url)->find_one();
@@ -19,7 +19,14 @@
     }
   });
 
-  $app->group('/songs', function () use ($app) {
+  $app->group('/songs', $acl_middleware(), function () use ($app) {
+    $app->get('/', function () use ($app) {
+      $songs = Model::factory('Song')->select_many('id','url','title')->find_many();
+      $app->render('songs/list.php', array(
+        'songs' => $songs
+      ));
+    });
+
     $app->get('/new', function () use ($app) {
       $app->render('song.php', array(
         'page_title' => 'New Song'
@@ -41,7 +48,7 @@
         $app->redirect('/songs/'.$song->url);
       } else {
         $app->flash('error', 'Song save failed.');
-        $app->redirect('/new');
+        $app->redirect('/songs/new');
       }
     });
 
@@ -65,7 +72,7 @@
         }
       } else {
         $app->flash('error', 'Song does not exist.');
-        $app->redirect('/new');
+        $app->redirect('/songs/new');
       }
     });
 
@@ -127,6 +134,13 @@
         $app->flash('error', 'Song was not found!');
         $res->redirect('/');
       }
+    });
+
+    $app->get('/q/:query', function ($query) use ($app) {
+      $songs = Model::factory('Song')->raw_query("SELECT * FROM `song_fts` WHERE song_fts MATCH :query", array('query' => $query))->find_many();
+      $app->render('songs/list.php', array(
+        'songs' => $songs
+      ));
     });
   });
 ?>

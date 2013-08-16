@@ -1,36 +1,31 @@
 <?php
-  $app->get('/groups', function () use ($app) {
-    if (empty($_SESSION['user'])) {
-      return $app->redirect('/');
-    }
-
-    $user = $_SESSION['user'];
-    $groups = $user->groups()->find_many();
-    foreach ($groups as $group) {
-      echo $group->name;
-    }
-  });
-
-  $app->group('/groups', function () use ($app) {
+  $app->group('/groups', $acl_middleware(), function () use ($app) {
     $app->get('/new', function () use ($app) {
-      echo 'New Group View goes here';
+      $app->render('groups/new.php');
     });
 
     $app->post('/new', function () use ($app) {
+      function errorHandler() {
+        $app->flash('error', 'Group save failed.');
+        $app->redirect('/groups/new');
+      }
+      $req = $app->request();
       $group = Model::factory('Group')->create();
-      $group->title = $req->params('name');
+      $group->name = $req->params('name');
       if ($group->save()) {
+        $members = $req->params('members');
+        foreach ($members as $member) {
+          $groups_user = Model::factory('GroupUser')->create();
+          $groups_user->group_id = $group->id;
+          $groups_user->user_id = $member;
+          if (!($groups_user->save())) { return errorHandler(); }
+        }
         $app->flash('success', 'Group was successfully added!');
         $app->redirect('/groups/' . $group->url);
-      } else {
-        $app->flash('error', 'Song save failed.');
-        $app->redirect('/new');
-      }
+      } else { return errorHandler(); }
     });
 
     $app->delete('/:id', function ($id) use ($app) {
-      $req = $app->request();
-
       $group = Model::factory('Group')->find_one($id);
       if ($group) {
         $group->delete();
@@ -51,12 +46,11 @@
         foreach ($users as $user) {
           echo $user->first_name;
         }
-        echo '<br /><br />';
-        echo '<strong>Setlists:</strong><br />';
         $setlists = $group->setlists()->find_many();
-        foreach ($setlists as $setlist) {
-          echo $setlist->title;
-        }
+        $app->render('groups/view.php', array(
+          'group' => $group,
+          'setlists' => $setlists
+        ));
       } else {
         $app->flash('error', 'Group was not found!');
         $app->redirect('/');
@@ -69,12 +63,11 @@
       if ($group) {
         $setlist = $group->setlists()->find_one();
         if ($setlist) {
-          echo $setlist->title;
-          echo '<br /><br /><strong>Songs:</strong><br />';
           $songs = $setlist->songs()->find_many();
-          foreach ($songs as $song) {
-            echo $song->title;
-          }
+          $app->render('setlists/view.php', array(
+            'setlist' => $setlist,
+            'songs' => $songs
+          ));
         } else {
           $app->flash('error', 'Setlist was not found!');
           $app->redirect('/'); 
