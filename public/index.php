@@ -28,24 +28,40 @@
 	 */
 	$app = new \Slim\Slim(array(
 		'templates.path' => '../views',
-		'view' => new SawadicopView()
+		'view' => new SawadicopView(),
+		'debug' => true
 	));
 
 	session_cache_limiter(false);
 	session_start();
 
 	$app->view()->setData('base_url', dirname($_SERVER['SCRIPT_NAME']) === DIRECTORY_SEPARATOR ? '' : dirname($_SERVER['SCRIPT_NAME']));
+	if (!empty($_SESSION['user'])) {
+		$app->view()->setData('user', $_SESSION['user']);
+		$app->view()->setData('isAdmin', $_SESSION['user']->hasRole('admin'));
+	} else {
+		$app->view()->setData('isAdmin', false);
+	}
 
 	$app->error(function (\Exception $e) use ($app) {
 		$app->flash('error', $e->getMessage());
 		$app->render('index.php');
 	});
 
+	foreach (glob(__DIR__ ."/../routes/middleware/*.php") as $filename)
+	{
+	    include $filename;
+	}
+
 	/*
 	 * Routes
 	 */
 	$app->get('/', function () use ($app) {
-		$app->render('index.php');
+		if (!empty($_SESSION['user'])) {
+			$app->redirect('/home');
+		} else {
+			$app->render('index.php');
+		}
 	});
 
 	foreach (glob(__DIR__ ."/../routes/*.php") as $filename)

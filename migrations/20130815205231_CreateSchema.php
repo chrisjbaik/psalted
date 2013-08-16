@@ -37,7 +37,7 @@ class CreateSchema extends Migration
             "DROP TABLE song;",
             "DROP TABLE user;",
             "DROP TABLE hybridauth;",
-            "DROP TABLE group;",
+            "DROP TABLE `group`;",
             "DROP TABLE group_user;",
             "DROP TABLE setlist;",
             "DROP TABLE tag;",

@@ -12,6 +12,9 @@ class User extends Model {
       return false;
     }
     $this->created_at = date('U');
+    if (empty($this->roles)) {
+      $this->roles = serialize(array('member'));
+    }
     parent::save();
     return true;
   }
@@ -21,5 +24,12 @@ class User extends Model {
   }
   public function groups() {
     return $this->has_many_through('Group');
+  }
+  public function hasRole($role) {
+    $user_roles = unserialize($this->roles);
+    if (empty($user_roles)) {
+      return false;
+    }
+    return in_array($role, $user_roles);
   }
 }

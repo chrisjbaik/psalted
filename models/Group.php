@@ -18,6 +18,13 @@ class Group extends Model {
     return true;
   }
 
+  public function delete() {
+    $group_users = Model::factory('GroupUser')->where('group_id', $this->id)->delete_many();
+    $group_setlists = Model::factory('GroupSetlist')->where('group_id', $this->id)->delete_many();
+    parent::delete();
+    return true;
+  }
+
   public function generateSlug() {
     $url = URLify::filter($this->name);
     $found = Model::factory('Group')->where('url', $url)->find_one();
