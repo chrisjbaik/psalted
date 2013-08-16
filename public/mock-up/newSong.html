@@ -1,0 +1,99 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+</head>
+
+<body>
+	<div data-role="page">
+		<div data-role="header">
+			<a href="#left-panel" class="ui-icon-nodisc" data-theme="a" data-icon="bars" data-iconshadow="false" data-iconpos="notext"> </a>
+			<a href="#right-panel" class="ui-icon-nodisc" data-theme="a" data-icon="gear" data-iconshadow="false" data-iconpos="notext"> </a>
+			<h1>
+				New / Edit Song
+			</h1>
+		</div> <!--/header-->
+	    <div data-role="content">
+            <form>
+                <label for="textinput-hide" class="ui-hidden-accessible">Title</label>
+                <input type="text" name="textinput-hide" id="textinput-hide" placeholder="Title" value="">
+                <label for="textinput-hide" class="ui-hidden-accessible">Artist</label>
+                <input type="text" name="textinput-hide" id="textinput-hide" placeholder="Artist" value="">
+                <label for="original-key" class="select">Original Key</label>
+                <select name="original-key" id="original-key">
+                    <option value="0">C</option>
+                    <option value="1">Db/C#</option>
+                    <option value="2">D</option>
+                    <option value="3">Eb/D#</option>
+                    <option value="4">E</option>
+                    <option value="5">F</option>
+                    <option value="6">F#/Gb</option>
+                    <option value="7">G</option>
+                    <option value="8">Ab/G#</option>
+                    <option value="9">A</option>
+                    <option value="10">Bb/A#</option>
+                    <option value="11">B</option>
+                </select>
+                <label for="chord-lyrics">Chord &amp; Lyrics</label>
+                <textarea cols="40" rows="100" name="chord-lyric" id="chord-lyrics" style="height:200px;"></textarea>
+                <label for="textinput-hide" class="ui-hidden-accessible">Copyright</label>
+                <input type="text" name="textinput-hide" id="textinput-hide" placeholder="Copyright" value="">
+                <label for="spotify" class="ui-hidden-accessible">Spotify</label>
+                <select name="spotify" id="spotify">
+                    <option value="0">Spotify Place Holder</option>
+                </select>
+                <div class="ui-bar"> 
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" class = "ui-btn-left">
+                        <a href="" data-role="button" data-icon="delete" data-theme="b">Delete</a>
+                    </fieldset>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" class="ui-btn-right" style=" float: right;">
+                        <a href="#preview" data-rel="popup" data-position-to="window" data-transition="pop" data-role="button" data-icon="refresh" data-theme="c">Preview</a>
+                        <a data-role="button" data-icon="plus" data-theme="b">Submit</a>
+                    </fieldset>
+                </div>
+            </form>
+
+        </div> <!--/content -->
+
+        <div data-role="panel" id="left-panel" data-theme="d">
+            <ul data-role="listview" data-theme="d">
+                <li data-icon="search"><input type="search" placeholder="Search..."></li>
+                <li data-icon="home"><a href="home.html">Home</a></li>
+                <li data-icon="search"><a href="#">Browse Songs</a></li>
+                <li data-icon="gear"><a href="#">System Admin</a></li>
+                <li><a href="#">Log Out</a></li>
+            </ul>
+        </div><!-- /left-panel -->
+
+        <div data-role="panel" id="right-panel" data-theme="d" data-position="right">
+            <ul data-role="listview" data-theme="d">
+                <li data-icon="delete"><a href="home.html">Delete Group</a></li>
+                <li data-icon="gear"><a href="#">Profile Setting</a></li>
+                <li><a href="#">place holder 1</a></li>
+                <li><a href="#">place holder 2</a></li>
+            </ul>
+        </div><!-- /right-panel -->
+
+        <div data-role="popup" id="preview" data-overlay-theme="a" data-theme="c" data-dismissible="true">
+            <div data-role="header" data-theme="a" class="ui-corner-top">
+                <h1> Preview + Song t</h1>
+            </div>
+            <div data-role="content" data-theme="b" class="ui-corner-bottom ui-content">
+                <h3 class="ui-title"> SPIRIT BREAK IN </h3>
+            </div>
+        </div>
+
+        </div><!-- /preview popup -->
+		<div data-role="footer">
+			<h3>
+				By Chris, Varoot, Hong Yoon
+			</h3>
+		</div><!--/footer-->
+	</div><!--/page-->
+
+</body>
+</html>
