@@ -7,8 +7,11 @@ $app->group('/search', $acl_middleware(), function () use ($app) {
     $like_query = '%' . $query . '%';
     $users = Model::factory('User')->raw_query('SELECT id, first_name, last_name FROM `user` WHERE first_name LIKE :like_query OR last_name LIKE :like_query OR email LIKE :like_query', array('like_query' => $like_query))->find_many();
     $user = $_SESSION['user'];
-    $setlists = $user->setlists()->raw_query('SELECT id, title FROM `setlist` WHERE title LIKE :like_query', array('like_query' => $like_query))->find_many();
-    $groups = $user->groups()->raw_query('SELECT id, name FROM `group` WHERE name LIKE :like_query', array('like_query' => $like_query))->find_many();
+    $setlists = $user->setlists()->raw_query('SELECT id, title, url, group_id FROM `setlist` WHERE title LIKE :like_query', array('like_query' => $like_query))->find_many();
+    foreach ($setlists as $setlist) {
+      $setlist->group_url = $setlist->group()->find_one()->url;
+    }
+    $groups = $user->groups()->raw_query('SELECT id, name, url FROM `group` WHERE name LIKE :like_query', array('like_query' => $like_query))->find_many();
     $app->render('search/list.php', array(
       'songs' => $songs,
       'users' => $users,
@@ -20,6 +23,13 @@ $app->group('/search', $acl_middleware(), function () use ($app) {
   $app->get('/songs/:query', function ($query) use ($app) {
     $res = $app->response();
     $songs = Model::factory('Song')->raw_query("SELECT * FROM `song_fts` WHERE song_fts MATCH :query", array('query' => $query))->find_array();
+    $res->write(json_encode($songs));
+  });
+
+  $app->get('/song_titles/:query', function ($query) use ($app) {
+    $res = $app->response();
+    $query = '%' . $query . '%';
+    $songs = Model::factory('Song')->raw_query('SELECT id, title, key FROM `song` WHERE title LIKE :query', array('query' => $query))->find_array();
     $res->write(json_encode($songs));
   });
 

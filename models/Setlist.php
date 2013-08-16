@@ -7,6 +7,9 @@ class Setlist extends Model {
     if (empty($this->updated_at)) {
       $this->updated_at = time();
     }
+    if (empty($this->date)) {
+      $this->date = time();
+    }
     if (empty($this->url)) {
       $this->generateSlug();
     }
@@ -22,8 +25,12 @@ class Setlist extends Model {
   	return $this->has_many_through('Song');
   }
 
+  public function group() {
+    return $this->belongs_to('Group');
+  }
+
   public function generateSlug() {
-    $url = URLify::filter($this->name);
+    $url = URLify::filter($this->title);
     $found = Model::factory('Setlist')->where('url', $url)->find_one();
 
     while ($found) {

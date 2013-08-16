@@ -4,7 +4,7 @@ class Group extends Model {
     return $this->has_many_through('User');
   }
   public function setlists() {
-    return $this->has_many_through('Setlist');
+    return $this->has_many('Setlist');
   }
 
   public function save() {
@@ -19,8 +19,8 @@ class Group extends Model {
   }
 
   public function delete() {
-    $group_users = Model::factory('GroupUser')->where('group_id', $this->id)->delete_many();
-    $group_setlists = Model::factory('GroupSetlist')->where('group_id', $this->id)->delete_many();
+    Model::factory('GroupUser')->where('group_id', $this->id)->delete_many();
+    $this->setlists()->delete_many();
     parent::delete();
     return true;
   }

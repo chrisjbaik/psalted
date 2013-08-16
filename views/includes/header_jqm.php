@@ -13,7 +13,7 @@
     <script src="<?= $base_url ?>/js/libs/less-1.3.3.min.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <script src="/js/libs/jquery.mobile-1.3.2.min.js"></script>
   </head>
 
 <body>
@@ -22,7 +22,9 @@
       <?php
         if (!empty($_SESSION['user'])) {
           echo '<a href="#left-panel" class="ui-icon-nodisc" data-theme="a" data-icon="bars" data-iconshadow="false" data-iconpos="notext"> </a>';
-          echo '<a href="#" class="ui-icon-nodisc" data-theme="a" data-icon="gear" data-iconshadow="false" data-iconpos="notext"> </a>';
+          if (!empty($right_panel)) {
+            echo '<a href="#right-panel" class="ui-icon-nodisc" data-theme="a" data-icon="gear" data-iconshadow="false" data-iconpos="notext"> </a>';
+          }
         }
       ?>
       <h3>
@@ -52,5 +54,4 @@
         ?>
         <li><a href="/logout" data-ajax='false'>Log Out</a></li>
       </ul>
-    </div><!-- /left-panel -->
-    <div data-role="content">
+    </div>

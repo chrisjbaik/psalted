@@ -28,9 +28,7 @@
     });
 
     $app->get('/new', function () use ($app) {
-      $app->render('song.php', array(
-        'page_title' => 'New Song'
-      ));
+      $app->render('songs/edit.php');
     });
 
 
@@ -39,7 +37,7 @@
       $song = Model::factory('Song')->create();
       $song->title = $req->params('title');
       $song->chords = $req->params('chords');
-      $song->key = $req->params('original_key');
+      $song->key = $req->params('key');
       $song->artist = $req->params('artist');
       $song->copyright = $req->params('copyright');
       $song->spotify_id = $req->params('spotify_id');
@@ -52,6 +50,20 @@
       }
     });
 
+    $app->get('/:id/edit', function ($id) use ($app) {
+      $req = $app->request();
+
+      $song = Model::factory('Song')->find_one($id);
+      if ($song) {
+        $app->render('songs/edit.php', array(
+          'song' => $song
+        ));
+      } else {
+        $app->flash('error', 'Song does not exist.');
+        $app->redirect('/');
+      }
+    });
+
     $app->put('/:id', function ($id) use ($app) {
       $req = $app->request();
 
@@ -59,7 +71,7 @@
       if ($song) {
         $song->title = $req->params('title');
         $song->chords = $req->params('chords');
-        $song->key = $req->params('original_key');
+        $song->key = $req->params('key');
         $song->copyright = $req->params('copyright');
         $song->artist = $req->params('artist');
         $song->spotify_id = $req->params('spotify_id');
@@ -134,13 +146,6 @@
         $app->flash('error', 'Song was not found!');
         $res->redirect('/');
       }
-    });
-
-    $app->get('/q/:query', function ($query) use ($app) {
-      $songs = Model::factory('Song')->raw_query("SELECT * FROM `song_fts` WHERE song_fts MATCH :query", array('query' => $query))->find_many();
-      $app->render('songs/list.php', array(
-        'songs' => $songs
-      ));
     });
   });
 ?>
