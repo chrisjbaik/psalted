@@ -3,15 +3,12 @@
   <ul data-role="listview" data-theme="c">
     <li data-icon="gear"><a href="/groups/<?php echo $group->url; ?>/<?php echo $setlist->url; ?>/edit">Edit Setlist</a></li>
     <li data-icon="delete">
-      <a data-rel='popup' data-position-to='window' href="#setlist-delete-popup" class='setlists-delete-link' id="delete-group" data-setlist-id="<?php echo $setlist->id; ?>" data-group-id="<?php echo $group->id; ?>">Delete Setlist</a>
+      <a data-rel='popup' data-position-to='window' href="#setlist-delete-popup" class='setlists-delete-link' id="delete-group" data-setlist-url="<?php echo $setlist->url; ?>" data-group-url="<?php echo $group->url; ?>">Delete Setlist</a>
     </li>
   </ul>
 </div>
-<div data-role="content">
-  <fieldset class="ui-grid-a">
-    <div class="ui-block-a"><button type="submit" data-theme="c">Print PDF</button></div>
-    <div class="ui-block-b"><button type="submit" data-theme="b">Add a song</button></div>
-  </fieldset>
+<div data-role="content" id="page-setlist-view">
+  <button id="btn-pdf-save" type="button" data-theme="b" <?php if (count($songs) == 0) echo 'disabled' ?>>Save PDF</button>
   <ul data-role="listview" data-divider-theme="b" data-inset="true">
     <?php
       foreach ($songs as $song) {
@@ -37,7 +34,17 @@
   </div>
   <script>
     $(document).on('click', '.setlists-delete-link', function (e) {
-      $('#setlist-delete-form').attr('action', '/groups/' + $(this).attr('data-group-id') + '/' + $(this).attr('data-setlist-id'));
+      $('#setlist-delete-form').attr('action', '/groups/' + $(this).attr('data-group-url') + '/' + $(this).attr('data-setlist-url'));
+    });
+    $( "#btn-pdf-save" ).click(function(event) {
+      $.get('<?= $songs_url ?>', function(data) {
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+        var sheet = new Songsheet();
+        sheet.addSongs(data.songs).render().save('<?= $pdf_file ?>');
+      }, 'json');
     });
   </script>
 </div>

@@ -2,8 +2,9 @@
   $app->get('/home', $acl_middleware(), function () use ($app) {
     $user = $_SESSION['user'];
     $groups = $user->groups()->find_many();
-    $app->render('groups/list.php', array(
-      'groups' => $groups
+    $app->render('users/home.php', array(
+      'groups' => $groups,
+      'page_title' => 'Home'
     ));
   });
 

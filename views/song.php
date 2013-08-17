@@ -6,7 +6,7 @@
   <?php
     echo '<a class="btn" target="_blank" href="'.$base_url.'/songs/' . $song->url . '/chords">Chords</a>';
     echo '<a class="btn" target="_blank" href="'.$base_url.'/songs/' . $song->url . '/lyrics">Lyrics</a>';
-    echo ' <a id="add_setlist" class="btn" href="#">Add to Setlist</a>';
+    echo '<a id="add_setlist" class="btn" href="#">Add to Setlist</a>';
   ?>
 </form>
 <?php endif; ?>

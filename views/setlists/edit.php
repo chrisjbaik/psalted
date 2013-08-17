@@ -2,17 +2,30 @@
 <div data-role="content">
   <form id="setlists-new" method="post" data-ajax='false'>
     <label for="setlist-title" class="ui-hidden-accessible">Setlist Name</label>
-    <input type="text" name="title" id="setlist-title" placeholder="Setlist Name" value="">
+    <input type="text" name="title" id="setlist-title" placeholder="Setlist Name" value="<?php if (!empty($setlist->title)) { echo $setlist->title; } ?>">
     <label for="setlist-date" class="ui-hidden-accessible">Setlist Date</label>
     <input type="date" name="date" id="setlist-date" value="<?php if (!empty($setlist->date)) { echo date('Y-m-d', $setlist->date); } else { echo date('Y-m-d', time()); } ?>">
     <ul id='setlists-new-songs' data-role="listview" data-inset="true" data-divider-theme="b" data-split-icon="delete" data-split-theme="c">
       <li data-role="list-divider" role="heading">Songs</li>
+      <?php
+        if (!empty($songs)) {
+          foreach ($songs as $index => $song) {
+            echo "<li data-theme='c' data-id='{$song->id}'>";
+            echo "<a href='#'>{$song->title} ({$song->artist})</a>";
+            echo "<a href='#' class='remove-song'>Remove Song</a>";
+            echo "<input type='hidden' name='songs[{$index}][id]' value='{$song->id}' />";
+            echo "<input type='hidden' name='songs[{$index}][chosen_by]' value='{$song->chosen_by}' />";
+            echo "<input type='hidden' name='songs[{$index}][key]' value='{$song->key}' />";
+            echo "</li>";
+          }
+        }
+      ?>
     </ul>
     <div id="setlists-new-song-choices-box" style="padding: 15px 0;"> 
       <ul id="setlists-new-song-choices" data-filter-reveal="true" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Type a song title..." data-filter-theme="d">
       </ul>
     </div>
-    <input type="submit" value="Add Setlist" data-theme="b" data-role="button" />
+    <input type="submit" value="<?php if (empty($setlist)) { echo 'Add Setlist'; } else { echo 'Save Changes'; } ?>" data-theme="b" data-role="button" />
   </form>
   <div data-role="popup" id="setlists-song-chosen-by-popup" data-overlay-theme="a" data-theme="c" data-dismissible="false" class="ui-corner-all">
     <div data-role="header" data-theme="a" class="ui-corner-top">

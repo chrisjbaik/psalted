@@ -106,8 +106,7 @@
       $song = Model::factory('Song')->where('url', $url)->find_one();
 
       if ($song) {
-        $app->render('song.php', array(
-          'page_title' => 'Edit Song', 
+        $app->render('songs/view.php', array(
           'song' => $song
         ));
       } else {

@@ -152,11 +152,17 @@
       if ($group) {
         $setlist = $group->setlists()->find_one();
         if ($setlist) {
-          $songs = $setlist->songs()->find_many();
+          $songs = ORM::for_table('song')
+            ->select('song.*')
+            ->select('setlist_song.*')
+            ->join('setlist_song', array('setlist_song.song_id', '=', 'song.id'))
+            ->find_many();
+          $users = $group->users()->find_many();
           $app->render('setlists/edit.php', array(
             'group' => $group,
             'setlist' => $setlist,
-            'songs' => $songs
+            'songs' => $songs,
+            'users' => $users
           ));
         } else {
           $app->flash('error', 'Setlist was not found!');
@@ -168,6 +174,59 @@
       }
     });
 
+    $app->post('/:url/:setlist_url/edit', function ($url, $setlist_url) use ($app) {
+      function errorHandler($app, $url) {
+        $app->flash('error', 'Setlist save failed.');
+        $app->redirect('/groups/'. $url . '/new');
+      }
+      $req = $app->request();
+      $group = Model::factory('Group')->where('url', $url)->find_one();
+      if ($group) {
+        $setlist = Model::factory('Setlist')->where('url', $setlist_url)->find_one();
+        if ($setlist) {
+          $setlist->title = $req->params('title');
+          $setlist->group_id = $group->id;
+          $setlist->created_by = $_SESSION['user']->id;
+          $setlist->updated_by = $_SESSION['user']->id;
+          $setlist->date = strtotime($req->params('date'));
+          if ($setlist->save()) {
+            $songs = $req->params('songs');
+            Model::factory('SetlistSong')->where('setlist_id', $setlist->id)->delete_many();
+            if (!empty($songs)) {
+              foreach ($songs as $index => $song) {
+                $setlist_song = Model::factory('SetlistSong')->create();
+                $setlist_song->setlist_id = $setlist->id;
+                $setlist_song->song_id = $song['id'];
+                $setlist_song->chosen_by = $song['chosen_by'];
+                $setlist_song->priority = $index;
+                if (!($setlist_song->save())) { return errorHandler($app, $url); }
+              }
+            }
+            $app->flash('success', 'Setlist was successfully added!');
+            $app->redirect('/groups/' . $group->url . '/' . $setlist->url);
+          } else { return errorHandler($app, $url); }
+        } else { return errorHandler($app, $url); }
+      } else {
+        $app->flash('error', 'Group was not found!');
+        $app->redirect('/');
+      }
+    });
+
+    $app->delete('/:url/:setlist_url', function ($url, $setlist_url) use ($app) {
+      $group = Model::factory('Group')->where('url', $url)->find_one();
+      if ($group) {
+        $setlist = Model::factory('Setlist')->where('url', $setlist_url)->find_one();
+        if ($setlist) {
+          $setlist->delete();
+          $app->flash('success', 'Group was successfully deleted!');
+          $app->redirect('/');
+        }
+      } else {
+        $app->flash('error', 'Group does not exist.');
+        $app->redirect('/');
+      }
+    });
+
     $app->get('/:url/:setlist_url', function ($url, $setlist_url) use ($app) {
       $group = Model::factory('Group')->where('url', $url)->find_one();
 
@@ -175,11 +234,14 @@
         $setlist = $group->setlists()->find_one();
         if ($setlist) {
           $songs = $setlist->songs()->find_many();
+          $pdf_file = preg_replace('/^-+|-+$/', "", preg_replace('/-+/', "-", preg_replace('/[_|\s]+/', "-", strtolower($setlist->title))));
           $app->render('setlists/view.php', array(
             'setlist' => $setlist,
             'songs' => $songs,
             'group' => $group,
-            'right_panel' => true
+            'right_panel' => true,
+            'pdf_file' => $pdf_file,
+            'songs_url' => "/groups/$url/$setlist_url/songs",
           ));
         } else {
           $app->flash('error', 'Setlist was not found!');
@@ -189,6 +251,33 @@
         $app->flash('error', 'Group was not found!');
         $app->redirect('/');
       }
+    });
+
+    $app->get('/:url/:setlist_url/songs', function ($url, $setlist_url) use ($app) {
+      $result = array('error'=>'unknown error');
+      $group = Model::factory('Group')->where('url', $url)->find_one();
+
+      if ($group) {
+        $setlist = $group->setlists()->find_one();
+        if ($setlist) {
+          $songs = $setlist->songs()->find_many();
+          $result['error'] = '';
+          $result['songs'] = array();
+          foreach ($songs as $song) {
+            $s = array(
+              'title' => $song->title,
+              'lyrics' => $song->chords,
+            );
+            $result['songs'][] = $s;
+          }
+        } else {
+          $result['error'] = 'setlist not found';
+        }
+      } else {
+        $result['error'] = 'group not found';
+      }
+
+      $app->response->setBody(json_encode($result));
     });
   });
 ?>

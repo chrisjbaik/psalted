@@ -11,9 +11,12 @@
 
     <script src="<?= $base_url ?>/js/libs/modernizr-2.5.3.min.js"></script>
     <script src="<?= $base_url ?>/js/libs/less-1.3.3.min.js"></script>
+    <script src="<?= $base_url ?>/js/song-view.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="/js/libs/jquery.mobile-1.3.2.min.js"></script>
+    <script src="<?= $base_url ?>/js/libs/jquery.mobile-1.3.2.min.js"></script>
+    <script src="<?= $base_url ?>/js/libs/jspdf.min.js"></script>
+    <script src="<?= $base_url ?>/js/songsheet-0.1.js"></script>
   </head>
 
 <body>
@@ -27,9 +30,7 @@
           }
         }
       ?>
-      <h3>
-        Sawadicop
-      </h3>
+      <h3><?php if (!empty($page_title)) { echo $page_title; } else { echo 'Sawadicop'; } ?></h3>
       <?php
         if (isset($flash['success'])) {
           echo "<div class='alert alert-success'>".$flash['success']."</div>";
