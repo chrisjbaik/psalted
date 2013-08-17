@@ -27,8 +27,8 @@ class Setlist extends Model {
     return true;
   }
 
-  public function users() {
-  	return $this->has_many_through('User');
+  public function user() {
+  	return $this->belongs_to('User');
   }
 
   public function songs() {

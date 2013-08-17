@@ -14,9 +14,6 @@
       <a href="/groups/new">New Group</a>
     </li>
     <?php
-      if (count($groups) == 0) {
-        echo "<li>You are not part of any groups yet.</li>";
-      }
       foreach ($groups as $group) {
         echo "<li data-theme='c'>";
         echo "<a href='/groups/{$group->url}' data-transition='slide'>";

@@ -1,7 +1,9 @@
 <?php
   $app->group('/admin', $acl_middleware('admin'), function () use ($app) {
     $app->get('/', function () use ($app) {
-      $app->render('admin/index.php');
+      $app->render('admin/index.php', array(
+        'page_title' => 'System Admin'
+      ));
     });
     $app->group('/groups', function () use ($app) {
       $app->get('/', function () use ($app) {

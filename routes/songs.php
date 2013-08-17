@@ -23,7 +23,8 @@
     $app->get('/', function () use ($app) {
       $songs = Model::factory('Song')->select_many('id','url','title')->find_many();
       $app->render('songs/list.php', array(
-        'songs' => $songs
+        'songs' => $songs,
+        'page_title' => 'Browse Songs'
       ));
     });
 
@@ -107,7 +108,8 @@
 
       if ($song) {
         $app->render('songs/view.php', array(
-          'song' => $song
+          'song' => $song,
+          'page_title' => $song->title . ' (Key of ' . $song->keyToString() . ')'
         ));
       } else {
         $app->flash('error', 'Song was not found!');

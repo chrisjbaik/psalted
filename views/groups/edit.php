@@ -3,7 +3,7 @@
   <form id="groups-new" method="post" data-ajax='false'>
     <label for="textinput-hide" class="ui-hidden-accessible">Group Name</label>
     <input type="text" name="name" id="textinput-hide" placeholder="Group Name" value="<?php if (!empty($group->name)) { echo $group->name; } ?>">
-    <ul id='groups-new-members' data-role="listview" data-inset="true" data-divider-theme="b" data-split-icon='delete' data-split-theme='c'>
+    <ul id='groups-new-members' data-role="listview" data-inset="true" data-divider-theme="a" data-split-icon='delete' data-split-theme='c'>
       <li data-role="list-divider" role="heading">Members</li>
       <?php
         if (!empty($members)) {

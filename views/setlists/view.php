@@ -1,16 +1,31 @@
 <?php include_once('../views/includes/header_jqm.php'); ?>
 <div data-role="panel" id="right-panel" data-theme="c" data-position="right">
   <ul data-role="listview" data-theme="c">
-    <li data-icon="gear"><a href="/groups/<?php echo $group->url; ?>/<?php echo $setlist->url; ?>/edit">Edit Setlist</a></li>
+    <li data-icon="gear">
+      <?php
+        if (!empty($group)) {
+          $edit_url = "/groups/{$group->url}/{$setlist->url}/edit";
+        } else {
+          $edit_url = "/personal/{$setlist->url}/edit";
+        }
+        echo "<a href='{$edit_url}'>Edit Setlist</a>";
+      ?>
+    </li>
     <li data-icon="delete">
-      <a data-rel='popup' data-position-to='window' href="#setlist-delete-popup" class='setlists-delete-link' id="delete-group" data-setlist-url="<?php echo $setlist->url; ?>" data-group-url="<?php echo $group->url; ?>">Delete Setlist</a>
+      <a data-rel='popup' data-position-to='window' href="#setlist-delete-popup" class='setlists-delete-link' id="delete-group" data-setlist-url="<?php echo $setlist->url; ?>" <?php if (!empty($group->url)) { echo "data-group-url='{$group->url}'"; } ?>>
+        Delete Setlist
+      </a>
     </li>
   </ul>
 </div>
 <div data-role="content" id="page-setlist-view">
   <button id="btn-pdf-save" type="button" data-theme="b" <?php if (count($songs) == 0) echo 'disabled' ?>>Save PDF</button>
-  <ul data-role="listview" data-divider-theme="b" data-inset="true">
+  <ul data-role="listview" data-divider-theme="a" data-inset="true">
+    <li data-role="list-divider" role="heading">Songs</li>
     <?php
+      if (count($songs) === 0) {
+        echo "<li>There are currently no songs in this setlist.</li>";
+      }
       foreach ($songs as $song) {
         echo "<li data-theme='c'>";
         echo "<a href='/songs/{$song->url}' data-transition='slide'>";
@@ -34,7 +49,11 @@
   </div>
   <script>
     $(document).on('click', '.setlists-delete-link', function (e) {
-      $('#setlist-delete-form').attr('action', '/groups/' + $(this).attr('data-group-url') + '/' + $(this).attr('data-setlist-url'));
+      if ($(this).attr('data-group-url')) {
+        $('#setlist-delete-form').attr('action', '/groups/' + $(this).attr('data-group-url') + '/' + $(this).attr('data-setlist-url'));
+      } else {
+        $('#setlist-delete-form').attr('action', '/personal/' + $(this).attr('data-setlist-url'));
+      }
     });
     $( "#btn-pdf-save" ).click(function(event) {
       $.get('<?= $songs_url ?>', function(data) {

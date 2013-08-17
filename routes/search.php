@@ -3,7 +3,8 @@ $app->group('/search', $acl_middleware(), function () use ($app) {
   $app->get('/', function () use ($app) {
     $req = $app->request();
     $query = $req->params('q');
-    $songs = Model::factory('Song')->raw_query("SELECT * FROM `song_fts` WHERE song_fts MATCH :query", array('query' => $query))->find_many();
+    $songs = Model::factory('Song')->
+      raw_query("SELECT * FROM `song_fts`, `song` WHERE song_fts MATCH :query AND song_fts.rowid = song.id", array('query' => $query))->find_many();
     $like_query = '%' . $query . '%';
     $users = Model::factory('User')->raw_query('SELECT id, first_name, last_name FROM `user` WHERE first_name LIKE :like_query OR last_name LIKE :like_query OR email LIKE :like_query', array('like_query' => $like_query))->find_many();
     $user = $_SESSION['user'];
@@ -16,7 +17,8 @@ $app->group('/search', $acl_middleware(), function () use ($app) {
       'songs' => $songs,
       'users' => $users,
       'groups' => $groups,
-      'setlists' => $setlists
+      'setlists' => $setlists,
+      'page_title' => 'Search for "' . $query . '"'
     ));
   });
 

@@ -20,7 +20,7 @@ class User extends Model {
   }
 
   public function setlists() {
-    return $this->has_many_through('Setlist');
+    return $this->has_many('Setlist');
   }
   public function groups() {
     return $this->has_many_through('Group');

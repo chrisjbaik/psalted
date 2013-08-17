@@ -138,7 +138,8 @@
           'users' => $users,
           'group' => $group,
           'setlists' => $setlists,
-          'right_panel' => true
+          'right_panel' => true,
+          'page_title' => $group->name
         ));
       } else {
         $app->flash('error', 'Group was not found!');
@@ -150,12 +151,13 @@
       $group = Model::factory('Group')->where('url', $url)->find_one();
 
       if ($group) {
-        $setlist = $group->setlists()->find_one();
+        $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
         if ($setlist) {
           $songs = ORM::for_table('song')
             ->select('song.*')
             ->select('setlist_song.*')
             ->join('setlist_song', array('setlist_song.song_id', '=', 'song.id'))
+            ->where('setlist_song.setlist_id', $setlist->id)
             ->find_many();
           $users = $group->users()->find_many();
           $app->render('setlists/edit.php', array(
@@ -202,7 +204,7 @@
                 if (!($setlist_song->save())) { return errorHandler($app, $url); }
               }
             }
-            $app->flash('success', 'Setlist was successfully added!');
+            $app->flash('success', 'Setlist was successfully edited!');
             $app->redirect('/groups/' . $group->url . '/' . $setlist->url);
           } else { return errorHandler($app, $url); }
         } else { return errorHandler($app, $url); }
@@ -218,8 +220,8 @@
         $setlist = Model::factory('Setlist')->where('url', $setlist_url)->find_one();
         if ($setlist) {
           $setlist->delete();
-          $app->flash('success', 'Group was successfully deleted!');
-          $app->redirect('/');
+          $app->flash('success', 'Setlist was successfully deleted!');
+          $app->redirect('/groups/'.$url);
         }
       } else {
         $app->flash('error', 'Group does not exist.');
@@ -231,7 +233,7 @@
       $group = Model::factory('Group')->where('url', $url)->find_one();
 
       if ($group) {
-        $setlist = $group->setlists()->find_one();
+        $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
         if ($setlist) {
           $songs = $setlist->songs()->find_many();
           $pdf_file = preg_replace('/^-+|-+$/', "", preg_replace('/-+/', "-", preg_replace('/[_|\s]+/', "-", strtolower($setlist->title))));
@@ -240,6 +242,7 @@
             'songs' => $songs,
             'group' => $group,
             'right_panel' => true,
+            'page_title' => $setlist->title,
             'pdf_file' => $pdf_file,
             'songs_url' => "/groups/$url/$setlist_url/songs",
           ));
@@ -258,7 +261,7 @@
       $group = Model::factory('Group')->where('url', $url)->find_one();
 
       if ($group) {
-        $setlist = $group->setlists()->find_one();
+        $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
         if ($setlist) {
           $songs = $setlist->songs()->find_many();
           $result['error'] = '';

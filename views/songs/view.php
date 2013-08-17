@@ -1,9 +1,5 @@
 <?php include_once('../views/includes/header_jqm.php'); ?>
 <div data-role="content" id='song-view'>
-  <h2 class='song-title'>
-    <?= $song->title; ?>
-    <span class='song-key'> Key of <?= $song->keyToString(); ?> </span>
-  </h2>
   <div id='song-spotify'>
     <?php 
       if (!empty($song->spotify_id)) {

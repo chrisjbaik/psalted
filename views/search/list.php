@@ -1,6 +1,6 @@
 <?php include_once('../views/includes/header_jqm.php'); ?>
 <div data-role="content">
-  <ul data-role="listview" data-inset="true">
+  <ul data-role="listview" data-inset="true" data-divider-theme="a">
     <li data-role='list-divider' role='heading'>Songs</li>
     <?php
       if (count($songs) == 0) {
@@ -14,7 +14,7 @@
     ?>
   </ul>
 
-  <ul data-role="listview" data-inset="true">
+  <ul data-role="listview" data-inset="true" data-divider-theme="a">
     <li data-role='list-divider' role='heading'>Groups</li>
     <?php
       if (count($groups) == 0) {
@@ -28,7 +28,7 @@
     ?>
   </ul>
 
-  <ul data-role="listview" data-inset="true">
+  <ul data-role="listview" data-inset="true" data-divider-theme="a">
     <li data-role='list-divider' role='heading'>Setlists</li>
     <?php
       if (count($setlists) == 0) {
@@ -42,7 +42,7 @@
     ?>
   </ul>
 
-  <ul data-role="listview" data-inset="true">
+  <ul data-role="listview" data-inset="true" data-divider-theme="a">
     <li data-role='list-divider' role='heading'>Users</li>
     <?php
       if (count($users) == 0) {

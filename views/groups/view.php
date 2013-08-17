@@ -8,11 +8,11 @@
   </ul>
 </div>
 <div data-role="content">
-  <a data-role="button" href="/groups/<?php echo $group->url; ?>/new" data-icon="plus" data-iconpos="left">New Setlist</a>
-  <ul data-role="listview" data-divider-theme="b" data-inset="true">
+  <ul data-role="listview" data-divider-theme="a" data-inset="true">
     <li data-role="list-divider" role="heading">
       Setlists
     </li>
+    <li data-theme="e" data-icon="plus"><a href="/groups/<?php echo $group->url; ?>/new">New Setlist</a></li>
     <?php
       if (count($setlists) == 0) {
         echo "<li>You have not made any setlists yet.</li>";
@@ -20,13 +20,13 @@
       foreach ($setlists as $setlist) {
         echo "<li data-theme='c'>";
         echo "<a href='/groups/{$group->url}/{$setlist->url}' data-transition='slide'>";
-        echo date("M. j: ", $setlist->date) . $setlist->title;
+        echo date("M j: ", $setlist->date) . $setlist->title;
         echo "</a>";
         echo "</li>";
       }
     ?>
   </ul>
-  <ul data-role="listview" data-divider-theme="b" data-inset="true">
+  <ul data-role="listview" data-divider-theme="a" data-inset="true">
     <li data-role="list-divider" role="heading">
       Members
     </li>
