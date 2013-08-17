@@ -190,7 +190,7 @@
 
 	Songsheet.prototype.addSong = function(song) {
 		// Process lyrics
-		var lines = song.lyrics.split(/\r|\n|\r\n/);
+		var lines = song.lyrics.split("\n");
 		var lyricsArray = [];
 		var style = 'default';
 		var collapseLevel = 0;
