@@ -153,8 +153,11 @@
         $setlist = $group->setlists()->find_one();
         if ($setlist) {
           $songs = $setlist->songs()->find_many();
+          $pdf_file = preg_replace('/^-+|-+$/', "", preg_replace('/-+/', "-", preg_replace('/[_|\s]+/', "-", strtolower($setlist->title))));
           $app->render('setlists/view.php', array(
             'setlist' => $setlist,
+            'pdf_file' => $pdf_file,
+            'songs_url' => "/groups/$url/$setlist_url/songs",
             'songs' => $songs
           ));
         } else {
@@ -165,6 +168,33 @@
         $app->flash('error', 'Group was not found!');
         $app->redirect('/');
       }
+    });
+
+    $app->get('/:url/:setlist_url/songs', function ($url, $setlist_url) use ($app) {
+      $result = array('error'=>'unknown error');
+      $group = Model::factory('Group')->where('url', $url)->find_one();
+
+      if ($group) {
+        $setlist = $group->setlists()->find_one();
+        if ($setlist) {
+          $songs = $setlist->songs()->find_many();
+          $result['error'] = '';
+          $result['songs'] = array();
+          foreach ($songs as $song) {
+            $s = array(
+              'title' => $song->title,
+              'lyrics' => $song->chords,
+            );
+            $result['songs'][] = $s;
+          }
+        } else {
+          $result['error'] = 'setlist not found';
+        }
+      } else {
+        $result['error'] = 'group not found';
+      }
+
+      $app->response->setBody(json_encode($result));
     });
   });
 ?>

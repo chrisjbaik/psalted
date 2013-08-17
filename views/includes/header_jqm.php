@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="/js/libs/jquery.mobile-1.3.2.min.js"></script>
+    <script src="/js/libs/jspdf.min.js"></script>
+    <script src="/js/songsheet-0.1.js"></script>
   </head>
 
 <body>
