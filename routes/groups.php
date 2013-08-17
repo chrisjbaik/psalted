@@ -257,6 +257,10 @@
     });
 
     $app->get('/:url/:setlist_url/songs', function ($url, $setlist_url) use ($app) {
+      if ( ! $app->request->isAjax()) {
+        $app->response->setStatus(404);
+        return;
+      }
       $result = array('error'=>'unknown error');
       $group = Model::factory('Group')->where('url', $url)->find_one();
 
