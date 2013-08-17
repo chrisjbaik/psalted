@@ -146,6 +146,28 @@
       }
     });
 
+    $app->get('/:url/:setlist_url/edit', function ($url, $setlist_url) use ($app) {
+      $group = Model::factory('Group')->where('url', $url)->find_one();
+
+      if ($group) {
+        $setlist = $group->setlists()->find_one();
+        if ($setlist) {
+          $songs = $setlist->songs()->find_many();
+          $app->render('setlists/edit.php', array(
+            'group' => $group,
+            'setlist' => $setlist,
+            'songs' => $songs
+          ));
+        } else {
+          $app->flash('error', 'Setlist was not found!');
+          $app->redirect('/'); 
+        }
+      } else {
+        $app->flash('error', 'Group was not found!');
+        $app->redirect('/');
+      }
+    });
+
     $app->get('/:url/:setlist_url', function ($url, $setlist_url) use ($app) {
       $group = Model::factory('Group')->where('url', $url)->find_one();
 
@@ -155,7 +177,9 @@
           $songs = $setlist->songs()->find_many();
           $app->render('setlists/view.php', array(
             'setlist' => $setlist,
-            'songs' => $songs
+            'songs' => $songs,
+            'group' => $group,
+            'right_panel' => true
           ));
         } else {
           $app->flash('error', 'Setlist was not found!');
