@@ -12,8 +12,12 @@
     <script src="<?= $base_url ?>/js/libs/modernizr-2.5.3.min.js"></script>
     <script src="<?= $base_url ?>/js/libs/less-1.3.3.min.js"></script>
     <script src="<?= $base_url ?>/js/song-view.js"></script>
+    <!--
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    -->
+    <link rel="stylesheet" href="<?= $base_url ?>/css/jquery.mobile-1.3.2.min.css" />
+    <script src="<?= $base_url ?>/js/libs/jquery-1.10.2.min.js"></script>
     <script src="<?= $base_url ?>/js/libs/jquery.mobile-1.3.2.min.js"></script>
     <script src="<?= $base_url ?>/js/libs/jspdf.min.js"></script>
     <script src="<?= $base_url ?>/js/songsheet-0.1.js"></script>

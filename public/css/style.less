@@ -14,17 +14,47 @@
   padding: 10px 15px 10px;
 }
 
-#song-chords {
-	font-family: 'Source Sans Pro', sans-serif !important;
+.song-chords {
   font-size: 20px;
-  font-weight: 700;
+  //text-align: center;
 
-	div {
-		margin-top: 4px;
-	}
-	
+  .song-section {
+    &.chorus {
+      position: relative;
+      padding-left: 2em;
+      .phrase {
+        //background: #ff9;
+      }
+
+      &:before {
+        content: '*';
+        position: absolute;
+        font-size: 2em;
+        top: 0.625em;
+        left: 0.3em;
+        color: #999;
+      }
+
+      &.no-chord {
+        &:before {
+          top: -0.05em;
+        }
+      }
+    }
+
+    &.bridge {
+      padding-left: 2em;
+      /*
+      .lyrics {
+        font-style: italic;
+      }
+      */
+    }
+  }
+
 	.phrase {
 		display: inline-block;
+    text-align: left;
 		vertical-align: top;
 	}
 	
@@ -40,7 +70,7 @@
 			padding: 1px 3px;
 			border-radius: 4px;
 			
-			&[data-chord]  { color: #fff; background: #555; font-weight: bold; }
+			&[data-chord]  { color: #fff; background: #555; }
 			&[data-chord="0"]  { background: #a33; }
 			&[data-chord="1"]  { background: #b93; }
 			&[data-chord="2"]  { background: #3a3; }
@@ -57,6 +87,8 @@
 	}
 	
 	.lyrics {
+    padding-bottom: 4px;
+
 		&:after {
 			content: '\200B';
 		}
