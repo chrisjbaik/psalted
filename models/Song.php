@@ -10,8 +10,17 @@ class Song extends Model {
     if (!empty($this->chords)) {
       $this->filterLyricsFromChords();
     }
+    $this->saveFullTextCopy();
     parent::save();
     return true;
+  }
+  public function saveFullTextCopy() {
+    $song_fts = ORM::for_table('song_fts')->create();
+    $song_fts->rowid = $this->id;
+    $song_fts->title = $this->title;
+    $song_fts->lyrics = $this->lyrics;
+    $song_fts->artist = $this->artist;
+    $song_fts->save();
   }
   public function filterLyricsFromChords() {
     $this->lyrics = preg_replace('/\[[^\]]*\]/', '', $this->chords);

@@ -20,7 +20,10 @@ class Group extends Model {
 
   public function delete() {
     Model::factory('GroupUser')->where('group_id', $this->id)->delete_many();
-    $this->setlists()->delete_many();
+    $setlists = $this->setlists()->find_many();
+    foreach ($setlists as $setlist) {
+      $setlist->delete();
+    }
     parent::delete();
     return true;
   }

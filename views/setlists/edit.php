@@ -4,11 +4,9 @@
     <label for="setlist-title" class="ui-hidden-accessible">Setlist Name</label>
     <input type="text" name="title" id="setlist-title" placeholder="Setlist Name" value="">
     <label for="setlist-date" class="ui-hidden-accessible">Setlist Date</label>
-    <input type="date" name="date" id="setlist-date" value="">
-    <ul id='setlists-new-songs' data-role="listview" data-inset="true" data-divider-theme="b">
-      <li data-role="list-divider" role="heading">
-        Songs
-      </li>
+    <input type="date" name="date" id="setlist-date" value="<?php if (!empty($setlist->date)) { echo date('Y-m-d', $setlist->date); } else { echo date('Y-m-d', time()); } ?>">
+    <ul id='setlists-new-songs' data-role="listview" data-inset="true" data-divider-theme="b" data-split-icon="delete" data-split-theme="c">
+      <li data-role="list-divider" role="heading">Songs</li>
     </ul>
     <div id="setlists-new-song-choices-box" style="padding: 15px 0;"> 
       <ul id="setlists-new-song-choices" data-filter-reveal="true" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Type a song title..." data-filter-theme="d">
@@ -45,7 +43,7 @@
           }
         ?>
       </select>
-      <a href='#' id='setlist-chosen-by-submit' data-theme='b' data-role='button'>Select User</a>
+      <a href='#' id='setlist-chosen-by-submit' data-theme='b' data-role='button'>Add Song</a>
     </div>
   </div>
   <script>
@@ -65,7 +63,7 @@
         .then( function ( response ) {
           $.each( response, function ( i, val ) {
             if ($('#setlists-new-songs li[data-id=' + val.id + ']').length === 0) {
-              html += "<li><a href='#' data-id='" + val.id + "' data-key='" + val.key + "'>" + val.title + "</a></li>";
+              html += "<li><a href='#' data-artist='" + val.artist + "' data-id='" + val.id + "' data-key='" + val.key + "'>" + val.title + "</a></li>";
             }
           });
           $ul.html( html );
@@ -78,18 +76,33 @@
       $('#setlists-song-chosen-by-popup').popup('open');
       $('#setlists-song-chosen-by-popup').attr('data-id', $(this).attr('data-id'));
       $('#setlists-song-chosen-by-popup').attr('data-title', $(this).text());
+      $('#setlists-song-chosen-by-popup').attr('data-artist', $(this).attr('data-artist'));
       $('#setlists-song-chosen-by-popup h2').text($(this).text());
       $('#setlists-songs-key').val($(this).attr('data-key') || 0);
+      $('#setlists-songs-key').selectmenu('refresh');
     });
     $(document).on('click', '#setlist-chosen-by-submit', function (e) {
       if ($('#setlists-new-songs li[data-id=' + $('#setlists-song-chosen-by-popup').attr('data-id') + ']').length === 0) {
         var nextIndex = $('#setlists-new-songs li[data-id]').length;
-        $('#setlists-new-songs').append("<li data-theme='c' data-id='" + $('#setlists-song-chosen-by-popup').attr('data-id') + "'>" + $('#setlists-song-chosen-by-popup').attr('data-title') + "<input type='hidden' name='songs[" + nextIndex + "][id]' value='" + $('#setlists-song-chosen-by-popup').attr('data-id') + "' /><input type='hidden' name='songs[" + nextIndex + "][chosen_by]' value='" + $('#setlists-song-chosen-by-select').val() + "' /></li>")
+        $('#setlists-new-songs').append(
+          "<li data-theme='c' data-id='" + $('#setlists-song-chosen-by-popup').attr('data-id') + "'>"
+          + "<a href='#'>" + $('#setlists-song-chosen-by-popup').attr('data-title')
+          + " (" + $('#setlists-song-chosen-by-popup').attr('data-artist') + ") </a>"
+          + "<a href='#' class='remove-song'>Remove Song</a>"
+          + "<input type='hidden' name='songs[" + nextIndex + "][id]' value='"
+          + $('#setlists-song-chosen-by-popup').attr('data-id')
+          + "' /><input type='hidden' name='songs[" + nextIndex + "][chosen_by]' value='"
+          + $('#setlists-song-chosen-by-select').val() + "' />"
+          + "<input type='hidden' name='songs[" + nextIndex + "][key]' value='"
+          + $('#setlists-songs-key').val() + "' /></li>");
         $('#setlists-new-songs').listview('refresh');
         $('#setlists-new-song-choices-box .ui-input-clear').click();
         $('#setlists-new-song-choices').html('');
         $('#setlists-song-chosen-by-popup').popup('close');
       }
+    });
+    $(document).on('click', '.remove-song', function (e) {
+      $(this).closest('li').remove();
     });
   </script>
 </div>

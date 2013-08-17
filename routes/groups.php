@@ -5,7 +5,7 @@
     });
 
     $app->post('/new', function () use ($app) {
-      function errorHandler() {
+      function errorHandler($app) {
         $app->flash('error', 'Group save failed.');
         $app->redirect('/groups/new');
       }
@@ -18,11 +18,11 @@
           $groups_user = Model::factory('GroupUser')->create();
           $groups_user->group_id = $group->id;
           $groups_user->user_id = $member;
-          if (!($groups_user->save())) { return errorHandler(); }
+          if (!($groups_user->save())) { return errorHandler($app); }
         }
         $app->flash('success', 'Group was successfully added!');
         $app->redirect('/groups/' . $group->url);
-      } else { return errorHandler(); }
+      } else { return errorHandler($app); }
     });
 
     $app->delete('/:id', function ($id) use ($app) {
@@ -31,6 +31,49 @@
         $group->delete();
         $app->flash('success', 'Group was successfully deleted!');
         $app->redirect('/');
+      } else {
+        $app->flash('error', 'Group does not exist.');
+        $app->redirect('/');
+      }
+    });
+    
+    $app->get('/:url/edit', function ($url) use ($app) {
+      $req = $app->request();
+
+      $group = Model::factory('Group')->where('url', $url)->find_one();
+      $members = $group->users()->find_many();
+      if ($group) {
+        $app->render('groups/edit.php', array(
+          'group' => $group,
+          'members' => $members
+        ));
+      } else {
+        $app->flash('error', 'Group does not exist.');
+        $app->redirect('/');
+      }
+    });
+
+    $app->post('/:url/edit', function ($url) use ($app) {
+      function errorHandler($app, $url) {
+        $app->flash('error', 'Group save failed.');
+        $app->redirect('/groups/' + $url + '/edit');
+      }
+      $req = $app->request();
+      $group = Model::factory('Group')->where('url', $url)->find_one();
+      if ($group) {
+        $group->name = $req->params('name');
+        if ($group->save()) {
+          Model::factory('GroupUser')->where('group_id', $group->id)->delete_many();
+          $members = $req->params('members');
+          foreach ($members as $member) {
+            $groups_user = Model::factory('GroupUser')->create();
+            $groups_user->group_id = $group->id;
+            $groups_user->user_id = $member;
+            if (!($groups_user->save())) { return errorHandler($app, $url); }
+          }
+          $app->flash('success', 'Your changes have been saved!');
+          $app->redirect('/groups/' . $group->url);
+        } else { return errorHandler($app, $url); }
       } else {
         $app->flash('error', 'Group does not exist.');
         $app->redirect('/');
@@ -51,9 +94,9 @@
     });
 
     $app->post('/:url/new', function ($url) use ($app) {
-      function errorHandler() {
+      function errorHandler($app, $url) {
         $app->flash('error', 'Setlist save failed.');
-        $app->redirect('/'. $url . '/new');
+        $app->redirect('/groups/'. $url . '/new');
       }
       $req = $app->request();
       $group = Model::factory('Group')->where('url', $url)->find_one();
@@ -73,12 +116,12 @@
               $setlist_song->song_id = $song['id'];
               $setlist_song->chosen_by = $song['chosen_by'];
               $setlist_song->priority = $index;
-              if (!($setlist_song->save())) { return errorHandler(); }
+              if (!($setlist_song->save())) { return errorHandler($app, $url); }
             }
           }
           $app->flash('success', 'Setlist was successfully added!');
           $app->redirect('/groups/' . $group->url . '/' . $setlist->url);
-        } else { return errorHandler(); }
+        } else { return errorHandler($app, $url); }
       } else {
         $app->flash('error', 'Group was not found!');
         $app->redirect('/');

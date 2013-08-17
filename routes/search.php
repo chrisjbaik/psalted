@@ -29,7 +29,7 @@ $app->group('/search', $acl_middleware(), function () use ($app) {
   $app->get('/song_titles/:query', function ($query) use ($app) {
     $res = $app->response();
     $query = '%' . $query . '%';
-    $songs = Model::factory('Song')->raw_query('SELECT id, title, key FROM `song` WHERE title LIKE :query', array('query' => $query))->find_array();
+    $songs = Model::factory('Song')->raw_query('SELECT id, title, key, artist FROM `song` WHERE title LIKE :query', array('query' => $query))->find_array();
     $res->write(json_encode($songs));
   });
 

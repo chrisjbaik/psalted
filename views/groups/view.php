@@ -2,7 +2,9 @@
 <div data-role="panel" id="right-panel" data-theme="c" data-position="right">
   <ul data-role="listview" data-theme="c">
     <li data-icon="gear"><a href="/groups/<?php echo $group->url; ?>/edit">Edit Group</a></li>
-    <li data-icon="delete"><a href="#">Delete Group</a></li>
+    <li data-icon="delete">
+      <a data-rel='popup' data-position-to='window' href="#group-delete-popup" class='groups-delete-link' id="delete-group" data-id="<?php echo $group->id; ?>">Delete Group</a>
+    </li>
   </ul>
 </div>
 <div data-role="content">
@@ -37,5 +39,23 @@
       }
     ?>
   </ul>
+  <div data-role="popup" id="group-delete-popup" data-overlay-theme="a" data-theme="c" data-dismissible="false" class="ui-corner-all">
+    <div data-role="header" data-theme="a" class="ui-corner-top">
+      <h1>Delete Group?</h1>
+    </div>
+    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+      <p>Are you sure you want to delete this group? This action cannot be undone.</p>
+      <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+      <form id="group-delete-form" method='post' style='display: inline;' data-ajax='false'>
+        <input type='hidden' name='_METHOD' value='DELETE' />
+        <input type='submit' data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b" value='Delete' />
+      </form>
+    </div>
+  </div>
+  <script>
+    $(document).on('click', '.groups-delete-link', function (e) {
+      $('#group-delete-form').attr('action', '/groups/' + $(this).attr('data-id'));
+    })
+  </script>
 </div>
 <?php include_once('../views/includes/footer_jqm.php'); ?>

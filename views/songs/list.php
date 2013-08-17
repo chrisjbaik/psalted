@@ -1,6 +1,6 @@
 <?php include_once('../views/includes/header_jqm.php'); ?>
 <div data-role="content">
-  <a data-role="button" href="#page1" data-icon="plus" data-iconpos="left">New Song</a>
+  <a data-role="button" href="/songs/new" data-icon="plus" data-iconpos="left">New Song</a>
   <ul data-role="listview" data-divider-theme="b" data-inset="true">
     <li data-role="list-divider" role="heading">
       Songs

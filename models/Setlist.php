@@ -1,6 +1,10 @@
 <?php
 class Setlist extends Model {
   public function save() {
+    if (empty($this->title)) {
+      return false;
+    }
+
     if (empty($this->created_at)) {
       $this->created_at = time();
     }
@@ -14,6 +18,12 @@ class Setlist extends Model {
       $this->generateSlug();
     }
     parent::save();
+    return true;
+  }
+
+  public function delete() {
+    Model::factory('SetlistSong')->where('setlist_id', $this->id)->delete_many();
+    parent::delete();
     return true;
   }
 
