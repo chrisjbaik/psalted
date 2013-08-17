@@ -9,7 +9,7 @@
   </div>
   <div id='song-chords'></div>
   <script>
-    var chords = convertLyrics(<?= $song->key ?>, '<?= str_replace('\'', '\\\'', str_replace("\n", "\\n", $song->chords)) ?>')
+    var chords = convertLyrics(<?= $song->key ?>, <?= json_encode($song->chords) ?>)
     $('#song-chords').html(chords);
   </script>
 </div>
