@@ -7,7 +7,7 @@
 	 */
 	ORM::configure("sqlite:../db/{$db_name}");
 	spl_autoload_register(function ($class_name) {
-		include __DIR__ . "/../models/{$class_name}.php";
+		include realpath(__DIR__ . "/../models/{$class_name}.php");
 	});
 
 	/*
