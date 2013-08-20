@@ -225,36 +225,38 @@
 		}
 
 		// Re-adjust collapse levels
-		var i = -1;
-		while (i <= lyricsArray.length) {
-			if (i == -1 || i == lyricsArray.length || lyricsArray[i][1] == '') {
-				if (i > 0) {
-					// End of paragraph
-					// Look back
-					var j = i-1
-					while (j > 0 && lyricsArray[j][2] == 3) {
-						lyricsArray[j][2] = 2;
-						j--;
+		if (lyricsArray.length > 0) {
+			var i = -1;
+			while (i <= lyricsArray.length) {
+				if (i == -1 || i == lyricsArray.length || lyricsArray[i][1] == '') {
+					if (i > 0) {
+						// End of paragraph
+						// Look back
+						var j = i-1
+						while (j > 0 && lyricsArray[j][2] == 3) {
+							lyricsArray[j][2] = 2;
+							j--;
+						}
 					}
-				}
 
-				if (i < lyricsArray.length && lyricsArray[i+1][1] != '') {
-					// Beginning of paragraph
-					// Look ahead
-					var j = i+2
-					while (j < lyricsArray.length && lyricsArray[j][2] == 3) {
-						lyricsArray[j][2] = 2;
-						j++;
-					}
-					if (j >= lyricsArray.length || lyricsArray[j][1] == '') {
-						// Whole paragraph
-						for (var k = i+2; k < j; k++) {
-							lyricsArray[k][2] = 1;
+					if (i < lyricsArray.length && lyricsArray[i+1][1] != '') {
+						// Beginning of paragraph
+						// Look ahead
+						var j = i+2
+						while (j < lyricsArray.length && lyricsArray[j][2] == 3) {
+							lyricsArray[j][2] = 2;
+							j++;
+						}
+						if (j >= lyricsArray.length || lyricsArray[j][1] == '') {
+							// Whole paragraph
+							for (var k = i+2; k < j; k++) {
+								lyricsArray[k][2] = 1;
+							}
 						}
 					}
 				}
+				i++;
 			}
-			i++;
 		}
 
 		song.lyricsOriginal = song.lyrics;

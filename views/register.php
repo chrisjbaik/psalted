@@ -16,7 +16,7 @@
     <input type="text" id="last_name" placeholder="Last Name" name="last_name" value="<?php if (!empty($user->last_name)) { echo $user->last_name; } ?>">
     <input type="submit" value="Register" data-theme="b" />
   </form>
-  <a href="/login?provider=facebook">Register with Facebook</a>
+  <!--<a href="/login?provider=facebook">Register with Facebook</a>-->
 </div>
 <?php
   include_once('../views/includes/footer_jqm.php');

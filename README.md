@@ -11,6 +11,8 @@ Setup/Running the App
 Database Migrations
 ---------------
 
-1. Make sure that when you pull in updates for the app, you check that all your database migrations are updated correctly. Run `bin/phpmig migrate` to ensure this is done correctly. (If this is your first time, you want to begin with a fresh database. Set that path in `config/database.php`, and take a look at the `config/database.php.example` for help).
+1. Make sure you have a file migrations/.migrations.log; otherwise, migrations will not work. Run touch `migrations/.migrations.log` from the app folder to generate it.
 
-2. To revert database changes, run `bin/phpmig rollback`.
+2. Make sure that when you pull in updates for the app, you check that all your database migrations are updated correctly. Run `bin/phpmig migrate` to ensure this is done correctly. (If this is your first time, you want to begin with a fresh database. Set that path in `config/database.php`, and take a look at the `config/database.php.example` for help).
+
+3. To revert database changes, run `bin/phpmig rollback`.
