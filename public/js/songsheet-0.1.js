@@ -239,7 +239,7 @@
 						}
 					}
 
-					if (i < lyricsArray.length && lyricsArray[i+1][1] != '') {
+					if (i+1 < lyricsArray.length && lyricsArray[i+1][1] != '') {
 						// Beginning of paragraph
 						// Look ahead
 						var j = i+2
