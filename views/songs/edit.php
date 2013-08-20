@@ -88,7 +88,7 @@
     function updateSpotifyPreview() {
       var songUrl = $('#spotify').val();
       if (songUrl) {
-        $('#spotify-preview').html('<iframe src="https://embed.spotify.com/?uri=' +songUrl + '" width="'+$('#play').width()+'" height="80" frameborder="0" allowtransparency="true"></iframe>');
+        $('#spotify-preview').html('<iframe src="https://embed.spotify.com/?uri=' +songUrl + '" width=100%"'+$('#play').width()+'" height="80" frameborder="0" allowtransparency="true"></iframe>');
       } else {
         $('#spotify-preview').html('');
       }
