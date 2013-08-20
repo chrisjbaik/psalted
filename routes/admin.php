@@ -24,8 +24,34 @@
         }
       });
     });
-    $app->get('/users', function () use ($app) {
-      $app->render('admin/users.php');
+    $app->group('/users', function () use ($app) {
+      $app->get('/', function () use ($app) {
+        $users = Model::factory('User')->find_many();
+        $app->render('admin/users.php', array(
+          'users' => $users
+        ));
+      });
+      $app->get('/:id/masquerade', function ($id) use ($app) {
+        $user = Model::factory('User')->find_one($id);
+        if ($user) {
+          $_SESSION['user'] = $user;
+          $app->redirect('/');
+        } else {
+          $app->flash('error', 'User does not exist.');
+          $app->redirect('/admin/users');
+        }
+      });
+      $app->delete('/:id', function ($id) use ($app) {
+        $user = Model::factory('User')->find_one($id);
+        if ($user) {
+          $user->delete();
+          $app->flash('success', 'User was successfully deleted!');
+          $app->redirect('/admin/users');
+        } else {
+          $app->flash('error', 'User does not exist.');
+          $app->redirect('/admin/users');
+        }
+      });
     });
     $app->group('/invites', function () use ($app) {
       $app->get('/', function () use ($app) {

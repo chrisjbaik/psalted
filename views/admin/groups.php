@@ -9,7 +9,7 @@
       foreach ($groups as $group) {
         echo "<li data-theme='c'>";
         echo "<a href='/groups/{$group->url}'>{$group->name}</a>";
-        echo "<a href='#admin-groups-menu-{$group->id}' data-rel='popup' data-position-to='origin' data-transition='pop'>Modify Group</a>";
+        echo "<a href='#admin-groups-menu-{$group->id}' data-rel='popup' data-position-to='origin' data-transition='pop'>Group Menu</a>";
         echo "<div data-role='popup' id='admin-groups-menu-{$group->id}' data-theme='d'>";
         echo "<ul data-role='listview' data-divider-theme='d'>";
         echo "<li><a href='/groups/{$group->url}'>View</a></li>";

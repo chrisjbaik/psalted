@@ -19,6 +19,15 @@ class User extends Model {
     return true;
   }
 
+  public function delete() {
+    Model::factory('GroupUser')->where('user_id', $this->id)->delete_many();
+    $setlists = $this->setlists()->find_many();
+    foreach ($setlists as $setlist) {
+      $setlist->delete();
+    }
+    parent::delete();
+    return true;
+  }
   public function setlists() {
     return $this->has_many('Setlist');
   }
