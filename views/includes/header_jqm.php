@@ -35,17 +35,6 @@
         }
       ?>
       <h3><?php if (!empty($page_title)) { echo $page_title; } else { echo 'Sawadicop'; } ?></h3>
-      <?php
-        if (isset($flash['success'])) {
-          echo "<div class='alert alert-success'>".$flash['success']."</div>";
-        }
-        if (isset($flash['error'])) {
-          echo "<div class='alert alert-error'>".$flash['error']."</div>";
-        }
-        if (isset($flash['info'])) {
-          echo "<div class='alert alert-info'>".$flash['info']."</div>";
-        }
-      ?>
     </div>
     <div data-role="panel" id="left-panel" data-theme="c">
       <ul data-role="listview" data-theme="d">
@@ -60,3 +49,18 @@
         <li><a href="/logout" data-ajax='false'>Log Out</a></li>
       </ul>
     </div>
+    <?php
+      if (isset($flash['success']) || isset($flash['error']) || isset($flash['info'])) {
+        echo '<div data-role="content">';
+          if (isset($flash['success'])) {
+            echo "<div class='alert alert-success ui-bar ui-bar-b'>".$flash['success']."</div>";
+          }
+          if (isset($flash['error'])) {
+            echo "<div class='alert alert-error ui-bar ui-bar-a'>".$flash['error']."</div>";
+          }
+          if (isset($flash['info'])) {
+            echo "<div class='alert alert-info ui-bar ui-bar-c'>".$flash['info']."</div>";
+          }
+        echo '</div>';
+      }
+    ?>
