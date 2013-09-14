@@ -15,6 +15,5 @@
       }
     ?>
   </ul>
-  <script>
 </div>
 <?php include_once('../views/includes/footer_jqm.php'); ?>
