@@ -1,4 +1,15 @@
 <?php include_once('../views/includes/header_jqm.php'); ?>
+
+<?php if (!empty($song)): ?>
+<div data-role="panel" id="right-panel" data-theme="c" data-position="right">
+  <ul data-role="listview" data-theme="c">
+    <li data-icon="delete">
+      <a data-rel='popup' data-position-to='window' href="#song-delete-popup" class='songs-delete-link' id="delete-song" data-id="<?php echo $song->id; ?>">Delete Song</a>
+    </li>
+  </ul>
+</div>
+<?php endif; ?>
+
 <div data-role="content">
   <form method='post' data-ajax='false' <?php if (!empty($song)) { echo "action='/songs/{$song->id}'"; } ?>>
     <label for="song-edit-title-input" class="ui-hidden-accessible">Title</label>
@@ -110,5 +121,23 @@
       }, 150);
     });
   </script>
+  <div data-role="popup" id="song-delete-popup" data-overlay-theme="a" data-theme="c" data-dismissible="false" class="ui-corner-all">
+    <div data-role="header" data-theme="a" class="ui-corner-top">
+      <h1>Delete Song?</h1>
+    </div>
+    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+      <p>Are you sure you want to delete this song? This action cannot be undone.</p>
+      <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+      <form id="song-delete-form" method='post' style='display: inline;' data-ajax='false'>
+        <input type='hidden' name='_METHOD' value='DELETE' />
+        <input type='submit' data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b" value='Delete' />
+      </form>
+    </div>
+  </div>
+  <script>
+    $(document).on('click', '.songs-delete-link', function (e) {
+      $('#song-delete-form').attr('action', '/songs/' + $(this).attr('data-id'));
+    })
+  </script>  
 </div>
 <?php include_once('../views/includes/footer_jqm.php'); ?>
