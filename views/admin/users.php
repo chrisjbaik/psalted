@@ -12,7 +12,7 @@
         echo "<a href='#admin-users-menu-{$user->id}' data-rel='popup' data-position-to='origin' data-transition='pop'>User Menu</a>";
         echo "<div data-role='popup' id='admin-users-menu-{$user->id}' data-theme='d'>";
         echo "<ul data-role='listview' data-divider-theme='d'>";
-        echo "<li><a href='/admin/users/{$user->id}/masquerade'>Masquerade</a></li>";
+        echo "<li><a href='/admin/users/{$user->id}/masquerade' data-ajax='false'>Masquerade</a></li>";
         echo "<li data-icon='delete'><a class='admin-users-delete-link' href='#admin-users-delete-popup' data-rel='popup' data-position-to='window' data-id='{$user->id}'>Delete</a></li>";
         echo "</ul>";
         echo "</div>";

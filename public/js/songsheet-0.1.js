@@ -291,11 +291,19 @@
 	Songsheet.prototype.distributeColumns = function() {
 		var options = this.options;
 		var collapseLevel = options.collapseLevel;
+		var totalHeight = -this.pointsToUnit(options.formatting.songSpace * options.fonts.default.lineHeight);
 
 		// Get songs' height
 		var songInfo = [];
 		for (var i = 0; i < this.songs.length; i++) {
-			songInfo[i] = { id: i, height: this.songs[i].heights[collapseLevel] };
+			var h = this.songs[i].heights[collapseLevel];
+			songInfo[i] = { id: i, height: h };
+			totalHeight += h + this.pointsToUnit(options.formatting.songSpace * options.fonts.default.lineHeight);
+		}
+
+		if (totalHeight <= options.contentHeight) {
+			// Return one column
+			return [{ height: totalHeight, songs: this.songs }];
 		}
 
 		songInfo.sort(function(a,b) {
@@ -365,11 +373,21 @@
 		*/
 
 		var columnSongs = this.distributeColumns();
+		var numCol = columnSongs.length;
+		var numPages = options.copies;
+		if (numCol == 1) {
+			numPages = numPages / 2;
+		}
 
 		// Print into PDF
-		for (var page = 0; page < options.copies; page++) {
-			for (var col = 0; col < columnSongs.length; col++) {
-				var column = columnSongs[col];
+		for (var page = 0; page < numPages; page++) {
+			for (var col = 0; col < options.columns; col++) {
+				var column;
+				if (col < numCol) {
+					column = columnSongs[col];
+				} else {
+					column = columnSongs[0];
+				}
 				this.columns[col].y = options.margin.top + (options.contentHeight - column.height)/2;
 				for (var i = 0; i < column.songs.length; i++) {
 					column.songs[i].lyricsForPrint = this.collapseLyrics(column.songs[i].lyrics);
@@ -377,7 +395,7 @@
 				}
 			}
 
-			if (page+1 < options.copies) {
+			if (page+1 < numPages) {
 				this.doc.addPage();
 			}
 		}

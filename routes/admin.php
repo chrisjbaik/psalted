@@ -55,26 +55,61 @@
     });
     $app->group('/invites', function () use ($app) {
       $app->get('/', function () use ($app) {
-        $requests = Model::factory('Invite')->where('admin_approved', 0)->find_many();
         $invites = Model::factory('Invite')->where('admin_approved', 1)->where('redeemed', 0)->find_many();
         $app->render('admin/invites.php', array(
-          'requests' => $requests,
+          'page_title' => 'Invites',
           'invites' => $invites
+        ));
+      });
+      $app->post('/new', function () use ($app) {
+        $req = $app->request;
+        $invite = Model::factory('Invite')->create();
+        $invite->email = $req->params('email');
+        $user = Model::factory('User')->where('email', $invite->email)->find_one();
+        if ($user) {
+          $app->flash('error', 'There is already a user with that email address.');
+          return $app->redirect('/admin/invites');
+        }
+        $invite->key = uniqid();
+        $invite->admin_approved = true;
+        if ($invite->save()) {
+          $app->flash('success', 'Invite created!');
+        } else {
+          $app->flash('error', 'Invite creation failed.');
+        }
+        $app->redirect('/admin/invites');
+      });
+      $app->get('/:id/delete', function ($id) use ($app) {
+        $invite = Model::factory('Invite')->find_one($id);
+        if ($invite) {
+          $invite->delete();
+          $app->flash('success', 'Invite was successfully deleted!');
+        } else {
+          $app->flash('error', 'Invite does not exist.');
+        }
+        $app->redirect('/admin/invites');
+      });
+    });
+    $app->group('/requests', function () use ($app) {
+      $app->get('/', function () use ($app) {
+        $requests = Model::factory('Invite')->where('admin_approved', 0)->where('redeemed', 0)->find_many();
+        $app->render('admin/requests.php', array(
+          'requests' => $requests,
         ));
       });
       $app->get('/:id/approve', function ($id) use ($app) {
         $request = Model::factory('Invite')->find_one($id);
         if (!$request) {
-          $app->flash('error', 'Invite does not exist.');
+          $app->flash('error', 'Request does not exist.');
           $app->redirect('/admin/invites');
         } else {
           $request->admin_approved = 1;
           if ($request->save()) {
-            $app->flash('success', 'Invite approved!');
+            $app->flash('success', 'Request approved!');
           } else {
-            $app->flash('error', 'Invite approval failed.');
+            $app->flash('error', 'Request approval failed.');
           }
-          $app->redirect('/admin/invites');
+          $app->redirect('/admin/requests');
         }
       });
     });

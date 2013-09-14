@@ -1,29 +1,20 @@
 <?php include_once('../views/includes/header_jqm.php'); ?>
 <div data-role="content">
-  <ul data-role="listview" data-inset="true" data-icon='check'>
-    <li data-role='list-divider' role='heading'>Approve Pending Requests</li>
-    <?php
-      if (count($requests) === 0) {
-        echo "<li>There are currently no pending requests.</li>";
-      }
-      foreach ($requests as $r) {
-        echo "<li data-theme='c'>";
-        echo "<a data-ajax='false' href='/admin/invites/{$r->id}/approve'>{$r->email}</a>";
-        echo "</li>";
-      }
-    ?>
-  </ul>
-
-  <ul data-role="listview" data-inset="true">
+  <form action="/admin/invites/new" method="post" data-ajax="false">
+    <input type="email" name="email" id="email" placeholder="Email to Invite" value="" />
+    <input type="submit" value="Send Invite" data-theme="b" />
+  </form>
+  <ul data-role="listview" data-inset="true" data-split-icon='delete' data-split-theme="c">
     <li data-role='list-divider' role='heading'>Pending Invites</li>
     <?php
       if (count($invites) === 0) {
         echo "<li>There are currently no pending invites.</li>";
       }
       foreach ($invites as $i) {
-        echo "<li>{$i->email}</li>";
+        echo "<li><a href='#'>{$i->email}</a><a data-ajax='false' href='/admin/invites/{$i->id}/delete'>Delete Invite</a></li>";
       }
     ?>
   </ul>
+  <script>
 </div>
 <?php include_once('../views/includes/footer_jqm.php'); ?>
