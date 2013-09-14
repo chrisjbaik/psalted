@@ -97,10 +97,10 @@
       if ($song) {
         $song->delete();
         $app->flash('success', 'Song was successfully deleted!');
-        $app->redirect('/');
+        $app->redirect('/songs');
       } else {
         $app->flash('error', 'Song does not exist.');
-        $app->redirect('/');
+        $app->redirect('/songs');
       }
     });
 
