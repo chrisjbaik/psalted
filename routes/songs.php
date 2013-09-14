@@ -21,7 +21,7 @@
 
   $app->group('/songs', $acl_middleware(), function () use ($app) {
     $app->get('/', function () use ($app) {
-      $songs = Model::factory('Song')->select_many('id','url','title')->find_many();
+      $songs = Model::factory('Song')->select_many('id','url','title')->order_by_asc('title')->find_many();
       $app->render('songs/list.php', array(
         'songs' => $songs,
         'page_title' => 'Browse Songs'
