@@ -57,7 +57,8 @@
       $song = Model::factory('Song')->find_one($id);
       if ($song) {
         $app->render('songs/edit.php', array(
-          'song' => $song
+          'song' => $song,
+          'right_panel' => true,
         ));
       } else {
         $app->flash('error', 'Song does not exist.');

@@ -1,4 +1,10 @@
 <?php include_once('../views/includes/header_jqm.php'); ?>
+<div data-role="panel" id="right-panel" data-theme="c" data-position="right">
+  <ul data-role="listview" data-theme="c">
+    <li data-icon="gear"><a href="/songs/<?php echo $song->id; ?>/edit">Edit Song</a></li>
+  </ul>
+</div>
+
 <div data-role="content" id='song-view'>
   <div id='song-spotify'>
     <?php 
