@@ -8,7 +8,7 @@
       }
       foreach ($users as $user) {
         echo "<li data-theme='d'>";
-        echo "<a href='#'>{$user->first_name} {$user->last_name}</a>";
+        echo "<a href='#'>{$user->first_name} {$user->last_name} ({$user->email})</a>";
         echo "<a href='#admin-users-menu-{$user->id}' data-rel='popup' data-position-to='origin' data-transition='pop'>User Menu</a>";
         echo "<div data-role='popup' id='admin-users-menu-{$user->id}' data-theme='d'>";
         echo "<ul data-role='listview' data-divider-theme='d'>";
