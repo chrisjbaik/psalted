@@ -8,7 +8,10 @@
       <a href='/admin/users' data-transition='slide'>Users</a>
     </li>
     <li data-theme='c'>
-      <a href='/admin/invites' data-transition='slide'>Approve Requests/Invite New Users</a>
+      <a href='/admin/requests' data-transition='slide'>Approve Requests</a>
+    </li>
+    <li data-theme='c'>
+      <a href='/admin/invites' data-transition='slide'>Invite New Users</a>
     </li>
   </ul>
 </div>
