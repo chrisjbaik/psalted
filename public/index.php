@@ -15,7 +15,7 @@
 	 * Views Setup
 	 */
 
-	class SawadicopView extends \Slim\View {
+	class PsaltedView extends \Slim\View {
 		public function render($template) {
 			$this->data['session'] = $_SESSION;
 			$this->data['base_url'] = dirname($_SERVER['SCRIPT_NAME']) === DIRECTORY_SEPARATOR ? '' : dirname($_SERVER['SCRIPT_NAME']);
@@ -29,7 +29,7 @@
 	 */
 	$app = new \Slim\Slim(array(
 		'templates.path' => '../views',
-		'view' => new SawadicopView(),
+		'view' => new PsaltedView(),
 		'debug' => true
 	));
 

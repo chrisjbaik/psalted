@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Sawadicop</title>
+    <title>Psalted</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -34,7 +34,7 @@
           }
         }
       ?>
-      <h3><?php if (!empty($page_title)) { echo $page_title; } else { echo 'Sawadicop'; } ?></h3>
+      <h3><?php if (!empty($page_title)) { echo $page_title; } else { echo 'Psalted'; } ?></h3>
     </div>
     <div data-role="panel" id="left-panel" data-theme="c">
       <ul data-role="listview" data-theme="d">

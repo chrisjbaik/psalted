@@ -113,7 +113,7 @@
           $user->first_name = $user_profile->firstName;
           $user->last_name = $user_profile->lastName;
           $user->email = $user_profile->email;
-          $app->flashNow('info', 'Register for Sawadicop with ' . $provider . '!');
+          $app->flashNow('info', 'Register for Psalted with ' . $provider . '!');
           $app->render('register.php', array(
             'user' => $user,
             'uid' => $user_profile->identifier,
