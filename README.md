@@ -1,14 +1,30 @@
 psalted
 =========
 
+Baseline Requirements
+---------------
+
+**For Windows:**
+
++ [XAMPP](http://www.apachefriends.org/en/xampp-windows.html) or similar local server
+
+**For all OSes:**
+
++ [node.js](http://nodejs.org)
++ [bower](http://bower.io)
++ [PHP](http://php.net)
+  *Note: PHP is included in XAMPP for windows users.*
+  + SQLite3 extension required!
+
+
 Setup/Running the App
 ---------------
 
-1. Make sure you point your Apache DocumentRoot at the `/public` folder. The app is initialized from the `index.php` file in your `/public` folder.
+1. Make sure you point your DocumentRoot at the `/public` folder. The app is initialized from the `index.php` file in your `/public` folder.
 
 2. Run `php composer.phar install` in the main project folder to update all the required package dependencies for the app. From time to time, you will need to run `php composer.phar update` to make sure your packages are up to date.
 
-3. Front-end script management is done using Bower (http://bower.io) and RequireJS (http://requirejs.org). Take a look at their respective websites to get a grasp of how they work. Run `bower install` before running the app to ensure that all your front-end dependencies are loaded.
+3. Front-end script management is done using [Bower](http://bower.io) and [RequireJS](http://requirejs.org). Take a look at their respective websites to get a grasp of how they work. Run `bower install` before running the app to ensure that all your front-end dependencies are loaded.
 
 Database Migrations
 ---------------
