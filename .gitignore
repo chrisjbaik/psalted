@@ -2,3 +2,4 @@ vendor
 *Thumbs.db
 bin
 migrations/.migrations.log
+bower_components

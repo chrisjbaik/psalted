@@ -1,0 +1,23 @@
+{
+  "name": "psalted",
+  "version": "0.0.1",
+  "homepage": "https://github.com/chrisjbaik/psalted",
+  "authors": [
+    "Chris Baik <chrisjbaik@gmail.com>"
+  ],
+  "description": "Songsheet PDF generator for lyrics",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "vendor"
+  ],
+  "dependencies": {
+    "jQuery": "2.0.x",
+    "jquery-mobile": "1.4.x",
+    "jspdf": "*",
+    "less": "1.4.x",
+    "modernizr": "2.6.x"
+  }
+}
