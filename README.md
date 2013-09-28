@@ -11,7 +11,7 @@ Baseline Requirements
 + [grunt](http://gruntjs.com)
   + `npm install -g grunt-cli`
 + [PHP](http://php.net)
-  + *Note: PHP is included in XAMPP for Windows users.*
+  + *Note: PHP is included in XAMPP.*
   + SQLite3 extension required!
 
 
