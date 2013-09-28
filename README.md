@@ -13,7 +13,7 @@ Baseline Requirements
 + [node.js](http://nodejs.org)
 + [bower](http://bower.io)
 + [PHP](http://php.net)
-  *Note: PHP is included in XAMPP for windows users.*
+  + *Note: PHP is included in XAMPP for windows users.*
   + SQLite3 extension required!
 
 
