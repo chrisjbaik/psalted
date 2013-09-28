@@ -8,6 +8,8 @@ Setup/Running the App
 
 2. Run `php composer.phar install` in the main project folder to update all the required package dependencies for the app. From time to time, you will need to run `php composer.phar update` to make sure your packages are up to date.
 
+3. Front-end script management is done using Bower (http://bower.io) and RequireJS (http://requirejs.org). Take a look at their respective websites to get a grasp of how they work. Run `bower install` before running the app to ensure that all your front-end dependencies are loaded.
+
 Database Migrations
 ---------------
 
