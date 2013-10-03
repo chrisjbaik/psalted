@@ -12,11 +12,24 @@
     ?>
     <input type="text" id="email" placeholder="Email" name="email" value="<?php if (!empty($user->email)) { echo $user->email; } ?>" />
     <input type="password" id="password" placeholder="Password" name="password">
+    <input type="password" id="password-confirm" placeholder="Confirm Password" name="password-confirm">
     <input type="text" id="first_name" placeholder="First Name" name="first_name" value="<?php if (!empty($user->first_name)) { echo $user->first_name; } ?>">
     <input type="text" id="last_name" placeholder="Last Name" name="last_name" value="<?php if (!empty($user->last_name)) { echo $user->last_name; } ?>">
-    <input type="submit" value="Register" data-theme="b" />
+    <input id="submit-form" type="submit" value="Passwords don't match lah" data-theme="b" disabled="disabled" >
   </form>
-  <!--<a href="/login?provider=facebook">Register with Facebook</a>-->
+  
+  <script>
+   $('#password, #password-confirm').on('change', function (e) {
+      var password = $('#password').val();
+      var password_confirm = $('#password-confirm').val();
+      if (password = password_confirm) {
+        $('#submit-form').val('Register').button('refresh');
+        $('#submit-form').button('enable','refresh');
+      }
+   })  
+
+  </script>
+
 </div>
 <?php
   include_once('../views/includes/footer_jqm.php');
