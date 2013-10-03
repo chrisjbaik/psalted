@@ -1,4 +1,9 @@
 <?php include_once('../views/includes/header_jqm.php'); ?>
+<?php 
+$chords = array(0=>'C', 1=>'C#', 2=>'D', 3=>'D♯', 4=>'E',  5=>'F',
+                6=>'F#',7=>'G' , 8=>'G#',9=>'A' ,10=>'A#',11=>'B');
+?>
+
 <div data-role="panel" id="right-panel" data-theme="c" data-position="right">
   <ul data-role="listview" data-theme="c">
     <li data-icon="gear"><a href="/songs/<?php echo $song->id; ?>/edit">Edit Song</a></li>
@@ -13,10 +18,38 @@
       }
     ?>
   </div>
+  <div id='transpose' data-role='fieldcontain'>
+    <?php
+      if (!empty($song->key)) {
+        $original_key = $song->key;
+        $index = 0;
+        echo "<select id='select-transpose' data-mini='true'>";
+          for ($index=0; $index<12; $index++)
+            {
+              if ($index == $original_key) { 
+                echo "<option value ='$index' selected='selected'>$chords[$original_key] (Original Key) </option>";
+              } else {
+                echo "<option value = '$index'>$chords[$index]</option>";
+              }
+            }
+        echo "</select>" ;
+      };
+    ?>
+  </div>
+
   <div id='song-chords'></div>
   <script>
     var chords = convertLyrics(<?= $song->key ?>, <?= json_encode($song->chords) ?>)
     $('#song-chords').html(chords);
   </script>
+
+  <script>
+   $('#select-transpose').on('change', function (e) {
+      var key = $(e.currentTarget).val();
+      transpose(key,'#song-chords');
+    })
+  </script>
+
+
 </div>
 <?php include_once('../views/includes/footer_jqm.php'); ?>

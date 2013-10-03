@@ -118,8 +118,7 @@ function convertLyrics(key, input) {
   return outText;
 }
 
-function transpose() {
-  var key = parseInt($('#transposed_key').val());
+function transpose(key, output) {
   var sharpChordList = {
     0: 'C',   1: 'C♯',  2: 'D',   3: 'D♯',  4: 'E',   5: 'F',
     6: 'F♯',  7: 'G',   8: 'G♯',  9: 'A',  10: 'A♯', 11: 'B'
@@ -140,7 +139,7 @@ function transpose() {
     chordList[i] = chordSource[(i + key) % 12];
   }
   
-  $('#song-chords').find('.chord b').each(function() {
+  $(output).find('.chord b').each(function() {
     if ($(this).text() !== '') {
       $(this).text(Mustache.render($(this).data('mustache'), chordList));
       $(this).attr('data-chord', ($(this).data('firstChord')+key) % 12);

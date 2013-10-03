@@ -20,6 +20,7 @@
     <script src="<?= $base_url ?>/js/libs/jquery-1.10.2.min.js"></script>
     <script src="<?= $base_url ?>/js/libs/jquery.mobile-1.3.2.min.js"></script>
     <script src="<?= $base_url ?>/js/libs/jspdf.min.js"></script>
+    <script src="<?= $base_url ?>/js/mustache.js"></script>
     <script src="<?= $base_url ?>/js/songsheet-0.1.js"></script>
   </head>
 
