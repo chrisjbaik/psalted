@@ -1,4 +1,4 @@
-<?php include_once('../views/includes/header_jqm.php'); ?>
+<?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
   <ul data-role="listview" data-inset="true" data-split-icon='gear' data-split-theme='c'>
     <li data-role='list-divider' role='heading'>Groups</li>
@@ -10,7 +10,7 @@
         echo "<li data-theme='c'>";
         echo "<a href='/groups/{$group->url}'>{$group->name}</a>";
         echo "<a href='#admin-groups-menu-{$group->id}' data-rel='popup' data-position-to='origin' data-transition='pop'>Group Menu</a>";
-        echo "<div data-role='popup' id='admin-groups-menu-{$group->id}' data-theme='d'>";
+        echo "<div data-role='popup' data-rel='popup' id='admin-groups-menu-{$group->id}' data-theme='d'>";
         echo "<ul data-role='listview' data-divider-theme='d'>";
         echo "<li><a href='/groups/{$group->url}'>View</a></li>";
         echo "<li data-icon='gear'><a href='/groups/{$group->url}/edit'>Edit Group</a></li>";
@@ -26,7 +26,7 @@
     <div data-role="header" data-theme="a" class="ui-corner-top">
       <h1>Delete Group?</h1>
     </div>
-    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+    <div data-role="content" data-theme='c' class="ui-corner-bottom ui-content">
       <p>Are you sure you want to delete this group? This action cannot be undone.</p>
       <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
       <form id="admin-groups-delete-form" method='post' style='display: inline;' data-ajax='false'>
@@ -35,11 +35,5 @@
       </form>
     </div>
   </div>
-
-  <script>
-    $(document).on('click', '.admin-groups-delete-link', function (e) {
-      $('#admin-groups-delete-form').attr('action', '/admin/groups/' + $(this).attr('data-id'));
-    })
-  </script>
 </div>
-<?php include_once('../views/includes/footer_jqm.php'); ?>
+<?php include_once('../views/includes/footer.php'); ?>

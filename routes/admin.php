@@ -94,7 +94,7 @@
       $app->get('/', function () use ($app) {
         $requests = Model::factory('Invite')->where('admin_approved', 0)->where('redeemed', 0)->find_many();
         $app->render('admin/requests.php', array(
-          'requests' => $requests,
+          'requests' => $requests
         ));
       });
       $app->get('/:id/approve', function ($id) use ($app) {

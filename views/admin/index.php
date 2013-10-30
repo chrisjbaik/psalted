@@ -1,4 +1,4 @@
-<?php include_once('../views/includes/header_jqm.php'); ?>
+<?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
   <ul data-role="listview" data-divider-theme="b" data-inset="true">
     <li data-theme='c'>
@@ -15,4 +15,4 @@
     </li>
   </ul>
 </div>
-<?php include_once('../views/includes/footer_jqm.php'); ?>
+<?php include_once('../views/includes/footer.php'); ?>

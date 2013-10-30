@@ -1,4 +1,4 @@
-<?php include_once('../views/includes/header_jqm.php'); ?>
+<?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
   <ul data-role="listview" data-inset="true" data-split-icon='gear' data-split-theme='c'>
     <li data-role='list-divider' role='heading'>Users</li>
@@ -34,11 +34,5 @@
       </form>
     </div>
   </div>
-
-  <script>
-    $(document).on('click', '.admin-users-delete-link', function (e) {
-      $('#admin-users-delete-form').attr('action', '/admin/users/' + $(this).attr('data-id'));
-    })
-  </script>
 </div>
-<?php include_once('../views/includes/footer_jqm.php'); ?>
+<?php include_once('../views/includes/footer.php'); ?>

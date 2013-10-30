@@ -1,4 +1,4 @@
-<?php include_once('../views/includes/header_jqm.php'); ?>
+<?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
   <form data-ajax="false" method="post" action="/register">
     <?php
@@ -32,4 +32,4 @@
 
 </div>
 <?php
-  include_once('../views/includes/footer_jqm.php');
+  include_once('../views/includes/footer.php');

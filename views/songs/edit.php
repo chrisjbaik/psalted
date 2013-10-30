@@ -1,4 +1,4 @@
-<?php include_once('../views/includes/header_jqm.php'); ?>
+<?php include_once('../views/includes/header.php'); ?>
 
 <?php if (!empty($song)): ?>
 <div data-role="panel" id="right-panel" data-theme="c" data-position="right">
@@ -17,7 +17,7 @@
     <label for="song-edit-artist-input" class="ui-hidden-accessible">Artist</label>
     <input type="text" name="artist" id="song-edit-artist-input" placeholder="Artist" value="<?php if(!empty($song->title)) { echo $song->artist; } ?>">
     <label for="key" class="select">Original Key</label>
-    <select name="key" id="original-key">
+    <select name="key" id="original-key" data-key="<?php if (!empty($song->key)) { echo $song->key; } ?>">
       <option value="0">C</option>
       <option value="1">Db/C#</option>
       <option value="2">D</option>
@@ -36,20 +36,13 @@
     <label for="copyright" class="ui-hidden-accessible">Copyright</label>
     <input type="text" name="copyright" id="copyright" placeholder="Copyright" value="<?php if(!empty($song->copyright)) { echo $song->copyright; } ?>">
     <label for="spotify" class="ui-hidden-accessible">Spotify</label>
-    <select name="spotify_id" id="spotify">
+    <select name="spotify_id" id="spotify" data-spotify-id="<?php if (!empty($song->spotify_id)) { echo $song->spotify_id; } ?>">
         <option value="">Enter Title and Artist to Search Spotify</option>
     </select>
     <div id='spotify-preview'></div>
-    <div class="ui-bar">
-      <?php if (!empty($song)): ?>
-      <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" class = "ui-btn-left">
-        <a href="" data-role="button" data-icon="delete" data-theme="c">Delete</a>
-      </fieldset>
-      <?php endif; ?>
-      <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" class="ui-btn-right" style=" float: right;">
-        <a class='song-preview' href="#song-preview" data-rel="popup" data-position-to="window" data-transition="pop" data-role="button" data-icon="refresh" data-theme="c">Preview</a>
-        <input type="submit" data-role="button" data-icon="plus" data-theme="b" value="Submit" />
-      </fieldset>
+    <div class="ui-grid-a">
+      <div class="ui-block-a"><a href="#song-preview" data-rel="popup" data-position-to="window" data-transition="pop" data-icon="refresh" data-theme="c" class="song-preview ui-shadow ui-btn ui-corner-all" data-icon="delete">Preview</a></div>
+      <div class="ui-block-b"><input type="submit" data-role="button" data-theme="b" value="Submit" /></div>
     </div>
     <?php 
       if (!empty($song)) {
@@ -65,62 +58,6 @@
       <div id="song-chords"></div>
     </div>
   </div>
-  <script>
-    <?php if(!empty($song->key)): ?>
-      $('select[name=key]').val('<?php echo $song->key; ?>');
-    <?php endif; ?>
-    <?php if(!empty($song->spotify_id)): ?>
-      getSpotifyMeta($('#song-edit-title-input').val(), $('#song-edit-artist-input').val(), '<?= $song->spotify_id ?>');
-    <?php endif; ?>
-    function getSpotifyMeta(title, artist, preload_id) {
-      var searchURL = 'http://ws.spotify.com/search/1/track.json?q=' + title + '+'+ artist;
-      jQuery.get(searchURL, function(data, textStatus, jqXHR) {
-        var options = '';
-        var songIdTable = {};
-        for (var i=0; i < Math.min(5, data.tracks.length); i++) {
-          if (data.tracks[i]['external-ids'] && data.tracks[i]['external-ids'][0]) {
-            var id = data.tracks[i]['external-ids'][0].id;
-            if (! songIdTable[id]) {
-              songIdTable[id] = true;
-              options += '<option value="'+data.tracks[i].href+'">'+data.tracks[i].name +' (' +data.tracks[i].artists[0].name + ')';
-            }
-          }
-        }
-        options += '<option value="">(None of the above)';
-        $('#spotify').html(options);
-        if (preload_id) {
-          $('#spotify').val(preload_id);
-        }
-        $('#spotify').selectmenu('refresh');
-        updateSpotifyPreview();
-      }, 'json' )
-    }
-
-    function updateSpotifyPreview() {
-      var songUrl = $('#spotify').val();
-      if (songUrl) {
-        $('#spotify-preview').html('<iframe src="https://embed.spotify.com/?uri=' +songUrl + '" width=100%"'+$('#play').width()+'" height="80" frameborder="0" allowtransparency="true"></iframe>');
-      } else {
-        $('#spotify-preview').html('');
-      }
-    }
-
-    $('.song-preview').click(function (e) {
-      var chords = convertLyrics($('#original-key').val(), $('#chord-lyrics').val());
-      $('#song-chords').html(chords);
-    });
-
-    $('#spotify').change(function (e) {
-      updateSpotifyPreview();
-    });
-
-    $('#song-edit-title-input, #song-edit-artist-input').keyup(function (e) {
-      if (window.spotifySearchTimeout) clearTimeout(window.spotifySearchTimeout);
-      window.spotifySearchTimeout = setTimeout(function () {
-        getSpotifyMeta($('#song-edit-title-input').val(), $('#song-edit-artist-input').val());
-      }, 150);
-    });
-  </script>
   <div data-role="popup" id="song-delete-popup" data-overlay-theme="a" data-theme="c" data-dismissible="false" class="ui-corner-all">
     <div data-role="header" data-theme="a" class="ui-corner-top">
       <h1>Delete Song?</h1>
@@ -134,10 +71,5 @@
       </form>
     </div>
   </div>
-  <script>
-    $(document).on('click', '.songs-delete-link', function (e) {
-      $('#song-delete-form').attr('action', '/songs/' + $(this).attr('data-id'));
-    })
-  </script>  
 </div>
-<?php include_once('../views/includes/footer_jqm.php'); ?>
+<?php include_once('../views/includes/footer.php'); ?>

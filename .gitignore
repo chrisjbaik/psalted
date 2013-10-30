@@ -3,3 +3,4 @@ vendor
 bin
 migrations/.migrations.log
 bower_components
+node_modules

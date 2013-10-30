@@ -1,4 +1,4 @@
-<?php include_once('../views/includes/header_jqm.php'); ?>
+<?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
   <form action="/admin/invites/new" method="post" data-ajax="false">
     <input type="email" name="email" id="email" placeholder="Email to Invite" value="" />
@@ -16,4 +16,4 @@
     ?>
   </ul>
 </div>
-<?php include_once('../views/includes/footer_jqm.php'); ?>
+<?php include_once('../views/includes/footer.php'); ?>

@@ -1,0 +1,13 @@
+{
+  "name": "psalted",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "grunt": "0.4.x",
+    "grunt-browserify": "1.2.x",
+    "grunt-contrib-watch": "0.5.x",
+    "grunt-contrib-less": "0.5.x",
+    "coffeeify": "0.5.x"
+  },
+  "dependencies": {}
+}

@@ -7,25 +7,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet/less" type="text/css" href="<?= $base_url ?>/css/style.less">
 
-    <script src="<?= $base_url ?>/js/libs/modernizr-2.5.3.min.js"></script>
-    <script src="<?= $base_url ?>/js/libs/less-1.3.3.min.js"></script>
-    <script src="<?= $base_url ?>/js/song-view.js"></script>
-    <!--
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    -->
-    <link rel="stylesheet" href="<?= $base_url ?>/css/jquery.mobile-1.3.2.min.css" />
-    <script src="<?= $base_url ?>/js/libs/jquery-1.10.2.min.js"></script>
-    <script src="<?= $base_url ?>/js/libs/jquery.mobile-1.3.2.min.js"></script>
-    <script src="<?= $base_url ?>/js/libs/jspdf.min.js"></script>
-    <script src="<?= $base_url ?>/js/mustache.js"></script>
+    <script src="<?= $base_url ?>/js/lib.js"></script>
+    <script src="<?= $base_url ?>/js/main.js"></script>
+    <!--<script src="<?= $base_url ?>/js/song-view.js"></script>-->
+    <link rel="stylesheet" href="<?= $base_url ?>/css/jquery.mobile-1.4.0-rc.1.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?= $base_url ?>/css/style.css">
     <script src="<?= $base_url ?>/js/songsheet-0.1.js"></script>
   </head>
 
 <body>
-  <div data-role="page">
+  <div data-role="page" id="<?= $page_id ?>">
     <div data-role="header">
       <?php
         if (!empty($_SESSION['user'])) {
@@ -52,7 +44,7 @@
     </div>
     <?php
       if (isset($flash['success']) || isset($flash['error']) || isset($flash['info'])) {
-        echo '<div data-role="content">';
+        echo '<div>';
           if (isset($flash['success'])) {
             echo "<div class='alert alert-success ui-bar ui-bar-b'>".$flash['success']."</div>";
           }

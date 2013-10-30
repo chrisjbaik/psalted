@@ -1,4 +1,4 @@
-<?php include_once('../views/includes/header_jqm.php'); ?>
+<?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
   <form id="groups-new" method="post" data-ajax='false'>
     <label for="textinput-hide" class="ui-hidden-accessible">Group Name</label>
@@ -64,4 +64,4 @@
     });
   </script>
 </div>
-<?php include_once('../views/includes/footer_jqm.php'); ?>
+<?php include_once('../views/includes/footer.php'); ?>

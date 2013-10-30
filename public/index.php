@@ -19,6 +19,11 @@
 		public function render($template) {
 			$this->data['session'] = $_SESSION;
 			$this->data['base_url'] = dirname($_SERVER['SCRIPT_NAME']) === DIRECTORY_SEPARATOR ? '' : dirname($_SERVER['SCRIPT_NAME']);
+			if (empty($this->data['page_id'])) {
+				$page_id = preg_replace("/([-a-z]+).php/i", "$1", $template);
+				$page_id = preg_replace("/\//", "-", $page_id);
+				$this->data['page_id'] = $page_id;
+			}
 			return parent::render($template);
 		}
 	};

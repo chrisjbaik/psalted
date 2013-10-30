@@ -4,7 +4,8 @@
     $groups = $user->groups()->find_many();
     $app->render('users/home.php', array(
       'groups' => $groups,
-      'page_title' => 'Home'
+      'page_title' => 'Home',
+      'page_id' => 'home'
     ));
   });
 

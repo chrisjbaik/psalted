@@ -1,4 +1,4 @@
-<?php include_once('../views/includes/header_jqm.php'); ?>
+<?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
   <form id="setlists-new" method="post" data-ajax='false'>
     <label for="setlist-title" class="ui-hidden-accessible">Setlist Name</label>
@@ -119,4 +119,4 @@
     });
   </script>
 </div>
-<?php include_once('../views/includes/footer_jqm.php'); ?>
+<?php include_once('../views/includes/footer.php'); ?>

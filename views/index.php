@@ -1,4 +1,4 @@
-<?php include_once('../views/includes/header_jqm.php'); ?>
+<?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
   <form method="post" action="/">
     <input type="text" name="email" id="text-basic" placeholder="Email" value="<?php if (isset($email)) { echo $email; }?>">
@@ -7,4 +7,4 @@
     <!--<a href="#" data-theme="b" data-role="button">Log In w/ Facebook</a>-->
   </form>
 </div>
-<?php include_once('../views/includes/footer_jqm.php'); ?>
+<?php include_once('../views/includes/footer.php'); ?>

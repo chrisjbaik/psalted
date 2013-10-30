@@ -14,12 +14,8 @@
     "vendor"
   ],
   "dependencies": {
-    "requirejs": "2.1.x",
-    "r.js": "2.1.x",
-    "jQuery": "2.0.x",
-    "jquery-mobile": "1.4.x",
     "jspdf": "*",
-    "less": "1.4.x",
-    "modernizr": "2.6.x"
+    "modernizr": "2.6.x",
+    "mustache": "~0.7.2"
   }
 }
