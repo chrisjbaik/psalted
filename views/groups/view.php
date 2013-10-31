@@ -52,10 +52,5 @@
       </form>
     </div>
   </div>
-  <script>
-    $(document).on('click', '.groups-delete-link', function (e) {
-      $('#group-delete-form').attr('action', '/groups/' + $(this).attr('data-id'));
-    })
-  </script>
 </div>
 <?php include_once('../views/includes/footer.php'); ?>

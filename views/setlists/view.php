@@ -19,7 +19,7 @@
   </ul>
 </div>
 <div data-role="content" id="page-setlist-view">
-  <button id="btn-pdf-save" type="button" data-theme="b" <?php if (count($songs) == 0) echo 'disabled' ?>>Save PDF</button>
+  <button id="btn-pdf-save" data-pdf="<?= $pdf_file ?>" data-url="<?= $songs_url ?>" type="button" data-theme="b" <?php if (count($songs) == 0) echo 'disabled' ?>>Save PDF</button>
   <ul data-role="listview" data-divider-theme="a" data-inset="true">
     <li data-role="list-divider" role="heading">Songs</li>
     <?php
@@ -47,25 +47,6 @@
       </form>
     </div>
   </div>
-  <script>
-    $(document).on('click', '.setlists-delete-link', function (e) {
-      if ($(this).attr('data-group-url')) {
-        $('#setlist-delete-form').attr('action', '/groups/' + $(this).attr('data-group-url') + '/' + $(this).attr('data-setlist-url'));
-      } else {
-        $('#setlist-delete-form').attr('action', '/personal/' + $(this).attr('data-setlist-url'));
-      }
-    });
-    $( "#btn-pdf-save" ).click(function(event) {
-      $.get('<?= $songs_url ?>', function(data) {
-        if (data.error) {
-          alert(data.error);
-          return;
-        }
-        var sheet = new Songsheet();
-        sheet.addSongs(data.songs).render().save('<?= $pdf_file ?>');
-      }, 'json');
-    });
-  </script>
 </div>
 
 <?php include_once('../views/includes/footer.php'); ?>
