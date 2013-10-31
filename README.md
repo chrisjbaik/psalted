@@ -53,7 +53,7 @@ Therefore, you need a way to track different versions of schemas you may have - 
 
 *Note: Sadly, SQLite does not allow you to change column names or remove columns as part of a migration. Just a sad fact of life.*
 
-### <a name="using-database-migrations"></a>Using Database Migrations ###
+### Using Database Migrations ###
 
 1. Make sure you have a file migrations/.migrations.log; otherwise, migrations will not work. This file stores what migrations have been already run on your local version of the application. Run `touch migrations/.migrations.log` from the app folder to generate it.
 
@@ -172,7 +172,7 @@ Coming soon...
     Scripts are linked to their respective views in two ways:
 
     1. The `/public_src/main` folder mirrors the `/views` folder, meaning that a .coffee or .js file written in `/public_src/main/songs` will correspond to the view in `/views/songs`.
-    
+
     2.  The script uses JQuery Mobile's `pageinit` event.
         Since all the scripts are eventually bundled into one file, we distinguish which script runs on which page using the `pageinit` event. Here's an example:
 
@@ -184,7 +184,7 @@ Coming soon...
           # Your code goes here
         ```
 
-        The `#admin-groups` is the page-id, which is formatted #directory-filename. That is, the `/public_src/main/songs/view.coffee` should have a page-id `#songs-view`.
+        The `#admin-groups` is the page id, which is formatted #directory-filename. That is, the `/public_src/main/songs/view.coffee` should have a page-id `#songs-view`.
 
 4.  <a name='grunt'></a>**Grunt, Browserify, and Gruntfile.coffee**
 
@@ -199,7 +199,7 @@ Coming soon...
     Front-end packages can be downloaded in three ways, but there's a catch so make sure to read the notes on each:
     1.  [Bower](http://bower.io)
 
-        If you download a package via Bower, alias the script that you need into the Browserify config in the Gruntfile. Many front-end packages, however, do not include the distributable script (meaning you'd have to manually compile it), so in that case it might be easier just to download the `.js` file and go with option 3 of manually downloading it into `/public_src/libs` and then aliasing it in the [Gruntfile](#gruntfile).
+        If you download a package via Bower, alias the script that you need into the Browserify config in the [Gruntfile](#grunt). Many front-end packages, however, do not include the distributable script (meaning you'd have to manually compile it), so in that case it might be easier just to download the `.js` file and go with option 3 of manually downloading it into `/public_src/libs` and then aliasing it in the [Gruntfile](#grunt).
 
         Even if you do have a script from something installed via Bower, make sure it is CommonJS compatible. If you open up the script and there is something like:
 
@@ -209,7 +209,7 @@ Coming soon...
         }
         ```
 
-        That is a good sign. If not, you can either [shim](https://github.com/jmreidy/grunt-browserify#shim) it in the Gruntfile's configuration, or you may want to just manually add it in and then go with option 3 again.
+        That is a good sign. If not, you can either [shim](https://github.com/jmreidy/grunt-browserify#shim) it in the [Gruntfile's](#grunt) configuration, or you may want to just manually add it in and then go with option 3 again.
 
     2.  [NPM](http://npmjs.org)
 
