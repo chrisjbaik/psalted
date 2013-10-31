@@ -153,10 +153,6 @@ The philosophy is that we want the app to be as minimal and functional as possib
 
     Views to be rendered in the routes are stored here. The directory is organized by the relevant model, not the route - if you are dealing with songs, put it in the `/songs` folder. If you are dealing with setlists, place it in the `/setlists` folder even though the route that is using it will be `groups.php` because the URL is `/groups/group_name/setlists`.
 
-### Request/Response Flow Diagram ###
-
-Coming soon...
-
 ### When Developing ###
 
 1.  **Composer, Packagist, and Back-end Package Management**
@@ -230,3 +226,7 @@ Coming soon...
     This makes sure all your front-end scripts compile correctly into their respective bundles for the browser. If you don't do this, pages will load with outdated javascript because you didn't compile! For a one-time bundle or if you are updating the external libraries file, just run `grunt browserify`.
 
     This will also watch changes to the LESS file and compile the CSS accordingly.
+
+### Request/Response Flow Diagram ###
+
+Coming soon...
