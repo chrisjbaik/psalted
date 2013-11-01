@@ -3,25 +3,24 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e684a0116d7ddb01d026a1a69b628261",
+    "hash": "edf953934cb774bcd36ee32200131ee8",
     "packages": [
         {
             "name": "davedevelopment/phpmig",
-            "version": "v0.4.0",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/davedevelopment/phpmig.git",
-                "reference": "v0.4.0"
+                "reference": "cb4160b60b1197ed90f52905c430feb67f0d83e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davedevelopment/phpmig/zipball/v0.4.0",
-                "reference": "v0.4.0",
+                "url": "https://api.github.com/repos/davedevelopment/phpmig/zipball/cb4160b60b1197ed90f52905c430feb67f0d83e4",
+                "reference": "cb4160b60b1197ed90f52905c430feb67f0d83e4",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "pimple/pimple": "1.*",
                 "symfony/class-loader": "2.*",
                 "symfony/config": "2.*",
                 "symfony/console": "2.*",
@@ -31,10 +30,18 @@
                 "mockery/mockery": "*@dev",
                 "phpunit/phpunit": "3.*"
             },
+            "suggest": {
+                "pimple/pimple": "Pimple allows to bootstrap phpmig really easily."
+            },
             "bin": [
                 "bin/phpmig"
             ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Phpmig": "src/"
@@ -51,7 +58,7 @@
                     "homepage": "http://davedevelopment.co.uk"
                 },
                 {
-                    "name": "David Neilsen",
+                    "name": "David Nielsen",
                     "email": "david@panmedia.co.nz"
                 }
             ],
@@ -61,7 +68,7 @@
                 "database migrations",
                 "migrations"
             ],
-            "time": "2013-02-17 23:06:00"
+            "time": "2013-10-23 12:49:36"
         },
         {
             "name": "hybridauth/hybridauth",
@@ -118,12 +125,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ircmaxell/password_compat.git",
-                "reference": "5d44eec3b571b4a6daae45794b0a31fbbf63c74c"
+                "reference": "1f482f79b9c336b1f658eb08d7bbf2b9901d9aee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ircmaxell/password_compat/zipball/5d44eec3b571b4a6daae45794b0a31fbbf63c74c",
-                "reference": "5d44eec3b571b4a6daae45794b0a31fbbf63c74c",
+                "url": "https://api.github.com/repos/ircmaxell/password_compat/zipball/1f482f79b9c336b1f658eb08d7bbf2b9901d9aee",
+                "reference": "1f482f79b9c336b1f658eb08d7bbf2b9901d9aee",
                 "shasum": ""
             },
             "type": "library",
@@ -139,7 +146,7 @@
             "authors": [
                 {
                     "name": "Anthony Ferrara",
-                    "email": "ircmaxell@ircmaxell.com",
+                    "email": "ircmaxell@php.net",
                     "homepage": "http://blog.ircmaxell.com"
                 }
             ],
@@ -149,7 +156,7 @@
                 "hashing",
                 "password"
             ],
-            "time": "2013-06-24 12:01:11"
+            "time": "2013-09-10 15:32:56"
         },
         {
             "name": "j4mie/idiorm",
@@ -275,12 +282,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jbroadway/urlify.git",
-                "reference": "acf2c6ca7ab89d82f285c93986771f13f78d1b1c"
+                "reference": "d18177396eb1050e6369c498a2e1931c37ec3275"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jbroadway/urlify/zipball/acf2c6ca7ab89d82f285c93986771f13f78d1b1c",
-                "reference": "acf2c6ca7ab89d82f285c93986771f13f78d1b1c",
+                "url": "https://api.github.com/repos/jbroadway/urlify/zipball/d18177396eb1050e6369c498a2e1931c37ec3275",
+                "reference": "d18177396eb1050e6369c498a2e1931c37ec3275",
                 "shasum": ""
             },
             "require": {
@@ -317,7 +324,7 @@
                 "url",
                 "urlify"
             ],
-            "time": "2013-08-01 23:34:10"
+            "time": "2013-10-16 18:23:13"
         },
         {
             "name": "pimple/pimple",
@@ -367,16 +374,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "2.3.1",
+            "version": "2.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeguy/Slim.git",
-                "reference": "2.3.1"
+                "reference": "3dec4f9ee2e9c204a9f334afd72abc174c1b792e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeguy/Slim/zipball/2.3.1",
-                "reference": "2.3.1",
+                "url": "https://api.github.com/repos/codeguy/Slim/zipball/3dec4f9ee2e9c204a9f334afd72abc174c1b792e",
+                "reference": "3dec4f9ee2e9c204a9f334afd72abc174c1b792e",
                 "shasum": ""
             },
             "require": {
@@ -407,21 +414,21 @@
                 "rest",
                 "router"
             ],
-            "time": "2013-07-20 18:38:05"
+            "time": "2013-10-31 02:05:09"
         },
         {
             "name": "symfony/class-loader",
-            "version": "v2.3.3",
+            "version": "v2.3.6",
             "target-dir": "Symfony/Component/ClassLoader",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ClassLoader.git",
-                "reference": "v2.3.3"
+                "reference": "e5f3ef7ebd965a12699984df06b2a5bd439bd2a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/v2.3.3",
-                "reference": "v2.3.3",
+                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/e5f3ef7ebd965a12699984df06b2a5bd439bd2a0",
+                "reference": "e5f3ef7ebd965a12699984df06b2a5bd439bd2a0",
                 "shasum": ""
             },
             "require": {
@@ -457,21 +464,21 @@
             ],
             "description": "Symfony ClassLoader Component",
             "homepage": "http://symfony.com",
-            "time": "2013-07-21 12:12:18"
+            "time": "2013-09-19 09:45:20"
         },
         {
             "name": "symfony/config",
-            "version": "v2.3.3",
+            "version": "v2.3.6",
             "target-dir": "Symfony/Component/Config",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Config.git",
-                "reference": "v2.3.3"
+                "reference": "1ced3d6c88b22df8cd1fe5209dbd6a89df362a29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Config/zipball/v2.3.3",
-                "reference": "v2.3.3",
+                "url": "https://api.github.com/repos/symfony/Config/zipball/1ced3d6c88b22df8cd1fe5209dbd6a89df362a29",
+                "reference": "1ced3d6c88b22df8cd1fe5209dbd6a89df362a29",
                 "shasum": ""
             },
             "require": {
@@ -505,21 +512,21 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "http://symfony.com",
-            "time": "2013-08-06 05:49:23"
+            "time": "2013-09-19 09:45:20"
         },
         {
             "name": "symfony/console",
-            "version": "v2.3.3",
+            "version": "v2.3.6",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "v2.3.3"
+                "reference": "f880062d56edefb25b36f2defa65aafe65959dc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/v2.3.3",
-                "reference": "v2.3.3",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/f880062d56edefb25b36f2defa65aafe65959dc7",
+                "reference": "f880062d56edefb25b36f2defa65aafe65959dc7",
                 "shasum": ""
             },
             "require": {
@@ -558,21 +565,21 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-07-21 12:12:18"
+            "time": "2013-09-25 06:04:15"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v2.3.3",
+            "version": "v2.3.6",
             "target-dir": "Symfony/Component/Filesystem",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Filesystem.git",
-                "reference": "v2.3.3"
+                "reference": "2b8995042086c5552c94d33b5553c492e9cfc00e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/v2.3.3",
-                "reference": "v2.3.3",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/2b8995042086c5552c94d33b5553c492e9cfc00e",
+                "reference": "2b8995042086c5552c94d33b5553c492e9cfc00e",
                 "shasum": ""
             },
             "require": {
@@ -605,21 +612,21 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com",
-            "time": "2013-07-21 12:12:18"
+            "time": "2013-09-19 09:45:20"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.3.3",
+            "version": "v2.3.6",
             "target-dir": "Symfony/Component/Yaml",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "v2.3.3"
+                "reference": "6bb881b948368482e1abf1a75c08bcf88a1c5fc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/v2.3.3",
-                "reference": "v2.3.3",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/6bb881b948368482e1abf1a75c08bcf88a1c5fc3",
+                "reference": "6bb881b948368482e1abf1a75c08bcf88a1c5fc3",
                 "shasum": ""
             },
             "require": {
@@ -652,7 +659,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2013-07-21 12:12:18"
+            "time": "2013-09-22 18:04:39"
         }
     ],
     "packages-dev": [
