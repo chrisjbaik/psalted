@@ -27,15 +27,19 @@ Getting Started
 4. Start your server, whether it be XAMPP or Apache or nginx, whatever you please.
 
 5.  `npm install`
+
     This makes sure all the node modules necessary to run Grunt are installed.
 
 6.  `php composer.phar install`
+
     Run this in the main project folder to update all the required package dependencies for the PHP app.
 
 7.  `php composer.phar update`
+
     From time to time, you will need to run this to make sure your packages are up to date. Do it now.
 
 8.  `bower install`
+
     Run this before running the app to ensure that all your front-end dependencies are loaded.
 
 9. Follow instructions for [Using Database Migrations](#using-database-migrations) below.
