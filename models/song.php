@@ -10,7 +10,7 @@ class Song extends Model {
     if (!empty($this->chords)) {
       $this->filterLyricsFromChords();
     }
-    $this->saveFullTextCopy();
+    //$this->saveFullTextCopy();
     parent::save();
     return true;
   }
@@ -32,22 +32,7 @@ class Song extends Model {
     );
     return $keyArray[$this->key];
   }
-
-  public function saveFullTextCopy() {
-    ORM::configure('id_column_overrides', array(
-        'song_fts' => 'rowid',
-    ));
-    $song_fts = ORM::for_table('song_fts')->where('rowid', $this->id)->find_one();
-    if (empty($song_fts)) {
-      $song_fts = ORM::for_table('song_fts')->create();
-    }
-    $song_fts->rowid = $this->id;
-    $song_fts->title = $this->title;
-    $song_fts->lyrics = $this->lyrics;
-    $song_fts->artist = $this->artist;
-    var_dump($song_fts->rowid);
-    $song_fts->save();
-  }
+  
   public function filterLyricsFromChords() {
     $this->lyrics = preg_replace('/\[[^\]]*\]/', '', $this->chords);
     return true;
