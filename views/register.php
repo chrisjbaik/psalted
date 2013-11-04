@@ -22,12 +22,16 @@
    $('#password, #password-confirm').on('change', function (e) {
       var password = $('#password').val();
       var password_confirm = $('#password-confirm').val();
-      if (password = password_confirm) {
+      if (password == password_confirm) {
         $('#submit-form').val('Register').button('refresh');
         $('#submit-form').button('enable','refresh');
       }
-   })  
 
+      else {
+        $('#submit-form').val("Why u so like dat one? Passwords don't match lah").button('refresh');
+        $('#submit-form').button('disable','refresh');
+      }
+   })  
   </script>
 
 </div>

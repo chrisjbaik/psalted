@@ -2,7 +2,7 @@
 <div data-role="content">
   <form id="setlists-new-form" method="post" data-ajax='false'>
     <label for="setlist-title" class="ui-hidden-accessible">Setlist Name</label>
-    <input type="text" name="title" id="setlist-title" placeholder="Setlist Name" value="<?php if (!empty($setlist->title)) { echo $setlist->title; } ?>">
+    <input type="text" name="title" id="setlist-title" placeholder="Setlist Name" value="<?php if (!empty($setlist->title)) { echo $setlist->title; } else { echo 'Default name'; } ?>">
     <label for="setlist-date" class="ui-hidden-accessible">Setlist Date</label>
     <input type="date" name="date" id="setlist-date" value="<?php if (!empty($setlist->date)) { echo date('Y-m-d', $setlist->date); } else { echo date('Y-m-d', time()); } ?>">
     <ul id='setlists-new-songs' data-role="listview" data-inset="true" data-divider-theme="b" data-split-icon="delete" data-split-theme="c">
@@ -25,7 +25,8 @@
       <ul id="setlists-new-song-choices" data-filter-reveal="true" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Type a song title..." data-filter-theme="d">
       </ul>
     </div>
-    <input type="submit" value="<?php if (empty($setlist)) { echo 'Add Setlist'; } else { echo 'Save Changes'; } ?>" data-theme="b" data-role="button" />
+     <?php if (empty($setlist)) { $submitText = 'Add Setlist'; } else {$submitText = "Save Changes"; } ?>
+    <input type="submit" id="setlist-submit" value= '<?php echo $submitText ?>' data-theme="b" data-role="button">
   </form>
   <div data-role="popup" id="setlists-song-chosen-by-popup" data-overlay-theme="a" data-theme="c" data-dismissible="false" class="ui-corner-all">
     <div data-role="header" data-theme="a" class="ui-corner-top">
@@ -59,5 +60,21 @@
       <a href='#' id='setlist-chosen-by-submit' data-theme='b' data-role='button'>Add Song</a>
     </div>
   </div>
+
+  <script>
+  var submitText = "<?php echo $submitText; ?>";
+   $('#setlist-title').on('change', function (e) {
+
+      if ($('#setlist-title').val() == '') {
+        $('#setlist-submit').val('Walau-eh! Need a Setlist name').button('refresh');
+        $('#setlist-submit').button('disable','refresh');
+      }
+
+      else {
+        $('#setlist-submit').val(submitText).button('refresh');
+        $('#setlist-submit').button('enable','refresh');
+      }
+   })  
+  </script>
 </div>
 <?php include_once('../views/includes/footer.php'); ?>
