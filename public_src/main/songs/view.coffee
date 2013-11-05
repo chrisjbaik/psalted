@@ -2,7 +2,7 @@ $ = require('jquery')
 $.mobile = require('jquery-mobile')
 songutils = require('libs/song_utils')
 
-$(document).delegate "#songs-view", "pageinit", -> 
+$(document).delegate "#songs-view", "pageinit", ->
   chords = songutils.convertLyrics($('#song-chords').attr('data-key'), $('#song-chords').attr('data-chords-json'))
   $('#song-chords').html(chords);
 
