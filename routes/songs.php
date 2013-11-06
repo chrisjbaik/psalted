@@ -111,7 +111,7 @@
         $app->render('songs/view.php', array(
           'song' => $song,
           'right_panel' => true,
-          'page_title' => $song->title . ' (Key of ' . $song->keyToString() . ')'
+          'page_title' => $song->title . ' (' . $song->keyToString() . ')'
         ));
       } else {
         $app->flash('error', 'Song was not found!');

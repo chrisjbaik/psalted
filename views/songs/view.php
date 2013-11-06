@@ -18,7 +18,6 @@
     ?>
   </div>
   <div id='transpose'>
-    <label for='select-transpose'>Transpose:</label>
     <?php
       if (!empty($song->key)) {
         $original_key = $song->key;

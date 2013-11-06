@@ -28,9 +28,9 @@
      <?php if (empty($setlist)) { $submitText = 'Add Setlist'; } else {$submitText = "Save Changes"; } ?>
     <input type="submit" id="setlist-submit" value= '<?php echo $submitText ?>' data-theme="b" data-role="button">
   </form>
-  <div data-role="popup" id="setlists-song-chosen-by-popup" data-overlay-theme="a" data-theme="c" data-dismissible="false" class="ui-corner-all">
+  <div data-role="popup" id="setlists-song-chosen-by-popup" data-overlay-theme="a" data-theme="a" data-dismissible="false" class="ui-corner-all">
     <div data-role="header" data-theme="a" class="ui-corner-top">
-      <h1>Add a song</h1>
+      <h1> Add a song </h1>
     </div>
     <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
       <h2>Song Title</h2>
@@ -63,7 +63,7 @@
 
   <script>
   var submitText = "<?php echo $submitText; ?>";
-   $('#setlist-title').on('change', function (e) {
+   $('#setlist-title').on('input', function (e) {
 
       if ($('#setlist-title').val() == '') {
         $('#setlist-submit').val('Walau-eh! Need a Setlist name').button('refresh');
