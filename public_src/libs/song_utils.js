@@ -21,7 +21,7 @@ module.exports = {
   },
   convertLyrics: function (key, input) {
     var outText = $('<div class="song-chords"></div>');
-    var inText = input.replace(/\r\n/g, '\n').replace(/\\r\\n/g, '\n').split('\n');
+    var inText = input.replace(/\r\n/g, '\n').split('\n');
     var lastSection;
     for (var i = 0; i < inText.length; i++) {
       var line = inText[i].trim();
