@@ -36,7 +36,7 @@
     ?>
   </div>
 
-  <div id='song-chords' data-key='<?= $song->key ?>' data-chords-json=<?= json_encode($song->chords) ?>></div>
+  <div id='song-chords' data-key='<?= $song->key ?>' data-chords-json="<?= htmlspecialchars($song->chords) ?>"></div>
 
   <script>
   </script>

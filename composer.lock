@@ -58,7 +58,7 @@
                     "homepage": "http://davedevelopment.co.uk"
                 },
                 {
-                    "name": "David Nielsen",
+                    "name": "David Neilsen",
                     "email": "david@panmedia.co.nz"
                 }
             ],
@@ -146,7 +146,7 @@
             "authors": [
                 {
                     "name": "Anthony Ferrara",
-                    "email": "ircmaxell@php.net",
+                    "email": "ircmaxell@ircmaxell.com",
                     "homepage": "http://blog.ircmaxell.com"
                 }
             ],
@@ -181,7 +181,6 @@
                     "idiorm.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-2-Clause",
                 "BSD-3-Clause",
@@ -240,7 +239,6 @@
                     "paris.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-2-Clause",
                 "BSD-3-Clause",
