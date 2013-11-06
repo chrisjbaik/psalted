@@ -30,10 +30,9 @@
   </form>
   <div data-role="popup" id="setlists-song-chosen-by-popup" data-overlay-theme="a" data-theme="a" data-dismissible="false" class="ui-corner-all">
     <div data-role="header" data-theme="a" class="ui-corner-top">
-      <h1> Add a song </h1>
+      <h2>Song Title</h2>
     </div>
     <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-      <h2>Song Title</h2>
       <label for="key">Key sung in:</label>
       <select id="setlists-songs-key">
         <option value="0">C
@@ -57,7 +56,7 @@
           }
         ?>
       </select>
-      <a href='#' id='setlist-chosen-by-submit' data-theme='b' data-role='button'>Add Song</a>
+      <a href='#' id='setlist-chosen-by-submit' data-theme='b' data-role='button'>Add the Song</a>
     </div>
   </div>
 
