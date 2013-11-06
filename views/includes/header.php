@@ -9,6 +9,7 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600,700' rel='stylesheet' type='text/css'>
 
     <script src="<?= $base_url ?>/js/lib.js"></script>
+    <script src="<?= $base_url ?>/js/jspdf.source.js"></script>
     <script src="<?= $base_url ?>/js/main.js"></script>
     <!--<script src="<?= $base_url ?>/js/song-view.js"></script>-->
     <link rel="stylesheet" href="<?= $base_url ?>/css/jquery.mobile-1.4.0-rc.1.min.css" />
