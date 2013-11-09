@@ -21,10 +21,9 @@ function Songsheet(options) {
         background: null
       },
       bridge: {
-        style: 'italic'
       },
       chorus: {
-        background: [178, 178, 178]
+        style: 'italic'
       },
       title: {
         name: 'helvetica',

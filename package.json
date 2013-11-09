@@ -7,7 +7,8 @@
     "grunt-browserify": "1.2.x",
     "grunt-contrib-watch": "0.5.x",
     "grunt-contrib-less": "0.5.x",
-    "coffeeify": "0.5.x"
+    "coffeeify": "0.5.x",
+    "uglifyify": "1.0.x"
   },
   "dependencies": {}
 }
