@@ -28,11 +28,12 @@
      <?php if (empty($setlist)) { $submitText = 'Add Setlist'; } else {$submitText = "Save Changes"; } ?>
     <input type="submit" id="setlist-submit" value= '<?php echo $submitText ?>' data-theme="b" data-role="button">
   </form>
-  <div data-role="popup" id="setlists-song-chosen-by-popup" data-overlay-theme="a" data-theme="a" data-dismissible="false" class="ui-corner-all">
+  <div data-role="popup" id="setlists-song-chosen-by-popup" data-overlay-theme="a" data-theme="a" class="ui-corner-all">
     <div data-role="header" data-theme="a" class="ui-corner-top">
       <h2>Song Title</h2>
     </div>
     <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+      <h2>Song Title</h2>
       <label for="key">Key sung in:</label>
       <select id="setlists-songs-key">
         <option value="0">C

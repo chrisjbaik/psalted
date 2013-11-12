@@ -15,10 +15,6 @@
     <link rel="stylesheet" href="<?= $base_url ?>/css/jquery.mobile-1.4.0-rc.1.min.css" />
     <link rel="stylesheet" type="text/css" href="<?= $base_url ?>/css/style.css">
     <script src="<?= $base_url ?>/js/songsheet-0.1.js"></script>
-    <style>
-    .ui-header .ui-title 
-     { margin-left: 1em; margin-right: 1em; }
-     </style>
   </head>
 
 <body>
