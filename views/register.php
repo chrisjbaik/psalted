@@ -18,7 +18,7 @@
     <input id="submit-form" type="submit" value="Passwords don't match lah" data-theme="b" disabled="disabled" >
   </form>
   
-  <script>
+<!--   <script>
    $('#password, #password-confirm').on('change', function (e) {
       var password = $('#password').val();
       var password_confirm = $('#password-confirm').val();
@@ -32,7 +32,7 @@
         $('#submit-form').button('disable','refresh');
       }
    })  
-  </script>
+  </script> -->
 
 </div>
 <?php

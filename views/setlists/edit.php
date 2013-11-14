@@ -61,6 +61,7 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <script>
 /*  var submitText = "<?php echo $submitText; ?>";
    $('#setlist-title').on('input', function (e) {
@@ -76,5 +77,8 @@
       }
    }) */ 
   </script>
+=======
+
+>>>>>>> faf5c19e2ef62f6464c03a7a18e29873db46f88f
 </div>
 <?php include_once('../views/includes/footer.php'); ?>
