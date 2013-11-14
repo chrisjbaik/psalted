@@ -37,8 +37,5 @@
   </div>
 
   <div id='song-chords' data-key='<?= $song->key ?>' data-chords-json="<?= htmlspecialchars($song->chords) ?>"></div>
-
-  <script>
-  </script>
 </div>
 <?php include_once('../views/includes/footer.php'); ?>

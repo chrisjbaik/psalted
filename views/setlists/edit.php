@@ -62,7 +62,7 @@
   </div>
 
   <script>
-  var submitText = "<?php echo $submitText; ?>";
+/*  var submitText = "<?php echo $submitText; ?>";
    $('#setlist-title').on('input', function (e) {
 
       if ($('#setlist-title').val() == '') {
@@ -74,7 +74,7 @@
         $('#setlist-submit').val(submitText).button('refresh');
         $('#setlist-submit').button('enable','refresh');
       }
-   })  
+   }) */ 
   </script>
 </div>
 <?php include_once('../views/includes/footer.php'); ?>
