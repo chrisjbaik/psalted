@@ -53,23 +53,11 @@ $(document).delegate "#setlists-edit", "pageinit", ->
   $(document).on 'click', '.remove-song', (e) ->
     $(this).closest('li').remove()
 
-<<<<<<< HEAD
-  $(document).on 'input', '#setlists-title', (e) ->
+  submitText = $('#setlist-submit').attr('value') 
+  $(document).on 'input', '#setlist-title', (e) ->
     if $('#setlist-title').val() is ''
       $('#setlist-submit').val('Walau-eh! Need a Setlist name').button('refresh')
       $('#setlist-submit').button('disable','refresh')
     else 
       $('#setlist-submit').button('enable','refresh')
-=======
-
-  
-  submitText = $('#setlist-submit').val()
-  $("#setlist-title").on 'input', (e) ->
-    if $('#setlist-title').val() is ''
-      $('#setlist-submit').val('Walau-eh! Need a Setlist name').button('refresh')
-      $('#setlist-submit').button('disable','refresh')
-    else
       $('#setlist-submit').val(submitText).button('refresh')
-      $('#setlist-submit').button('enable','refresh')
-
->>>>>>> faf5c19e2ef62f6464c03a7a18e29873db46f88f

@@ -16,7 +16,7 @@ module.exports = (grunt) ->
         src: ['public_src/main/**/*.coffee']
         dest: 'public/js/main.js'
         options:
-          transform: ['coffeeify', 'uglifyify']
+          transform: ['coffeeify']
           debug: require('./config/settings.js').mode is 'dev'
           external: [
             'jquery'
