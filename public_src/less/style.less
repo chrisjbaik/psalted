@@ -5,13 +5,6 @@
   }
 }
 
-@media print {
-  .test {
-    a {
-      display: none;
-    }
-  }
-}
 
 .sidebar-nav {
   padding: 9px 0;
@@ -60,47 +53,47 @@
     }
   }
 
-	.phrase {
-		display: inline-block;
+  .phrase {
+    display: inline-block;
     text-align: left;
-		vertical-align: top;
-	}
-	
-	.chord {
-		display: block;
-		margin-bottom: 6px;
-		height: 21px;
-		
-		b {
-			font-size: 14px;
-			font-weight: normal;
-			margin-right: 2px;
-			padding: 1px 3px;
-			border-radius: 4px;
-			
-			&[data-chord]  { color: #fff; background: #555; }
-			&[data-chord="0"]  { background: #a33; }
-			&[data-chord="1"]  { background: #b93; }
-			&[data-chord="2"]  { background: #3a3; }
-			&[data-chord="3"]  { background: #38a; }
-			&[data-chord="4"]  { background: #43a; }
-			&[data-chord="5"]  { background: #a3a; }
-			&[data-chord="6"]  { background: #a63; }
-			&[data-chord="7"]  { background: #8a3; }
-			&[data-chord="8"]  { background: #3a8; }
-			&[data-chord="9"]  { background: #35a; }
-			&[data-chord="10"] { background: #73a; }
-			&[data-chord="11"] { background: #a36; }
-		}
-	}
-	
-	.lyrics {
+    vertical-align: top;
+  }
+  
+  .chord {
+    display: block;
+    margin-bottom: 6px;
+    height: 21px;
+    
+    b {
+      font-size: 14px;
+      font-weight: normal;
+      margin-right: 2px;
+      padding: 1px 3px;
+      border-radius: 4px;
+      
+      &[data-chord]  { color: #fff; background: #555; }
+      &[data-chord="0"]  { background: #a33; }
+      &[data-chord="1"]  { background: #b93; }
+      &[data-chord="2"]  { background: #3a3; }
+      &[data-chord="3"]  { background: #38a; }
+      &[data-chord="4"]  { background: #43a; }
+      &[data-chord="5"]  { background: #a3a; }
+      &[data-chord="6"]  { background: #a63; }
+      &[data-chord="7"]  { background: #8a3; }
+      &[data-chord="8"]  { background: #3a8; }
+      &[data-chord="9"]  { background: #35a; }
+      &[data-chord="10"] { background: #73a; }
+      &[data-chord="11"] { background: #a36; }
+    }
+  }
+  
+  .lyrics {
     padding-bottom: 4px;
 
-		&:after {
-			content: '\200B';
-		}
-	}
+    &:after {
+      content: '\200B';
+    }
+  }
 }
 
 .setlists {
@@ -184,6 +177,12 @@
   @page { margin: 0.5cm; }
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
+  
+
+  #song-spotify {
+    display: none;
+  }
+
   #to-print {
     font-family: 'Source Sans Pro', sans-serif !important;
     font-size: 20px;
