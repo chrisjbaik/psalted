@@ -4,6 +4,11 @@
     padding-bottom: 40px;
   }
 }
+@media print {
+  .test a {
+    display: none;
+  }
+}
 .sidebar-nav {
   padding: 9px 0;
 }
@@ -142,7 +147,6 @@
 .setlist-buttons {
   padding-top: 12px;
 }
-
 @media only screen and (min-width: 35em) {
   
 }

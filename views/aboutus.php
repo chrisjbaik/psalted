@@ -2,7 +2,7 @@
 <div data-role="content">
 	<div>
 		<img src="img/aboutus.jpg" align = "left" style="padding-right:15px; width: 50%; height: 50%;" >
-			<p> We all attend the same church in Ann Arbor, Michigan. (check out <strong> <a href="http://hmcc.net">hmcc.net </a> </strong>) 
+			<p class="hello test" id="intro"> We all attend the same church in Ann Arbor, Michigan. (check out <strong> <a href="http://hmcc.net">hmcc.net </a> </strong>) 
 				<br> 
 				<br> 
 				We developed this site to streamline a song sheet preparation process. 
@@ -10,7 +10,7 @@
 				<br>  			
 				If you have any questions, concerns, or suggestions, 
 				<br>
-				please contact <a href="mailto:bacon@psalted.com">bacon@psalted.com</a>
+				please contact <a class="blue" href="mailto:bacon@psalted.com">bacon@psalted.com</a>
 				<br>
 				<br>
 				This site is being developed and maintained by <strong>over-worked and under-paid</strong> volunteers, who work during the day to pay the bills,
