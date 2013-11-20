@@ -31,12 +31,15 @@
 
 	/*
 	 * App Configuration
+	 * Settings can be pulled from config/settings.json.
+	 * 'mode': is either 'dev' or 'prod' for development and production, respectively
 	 */
 	$app_settings = json_decode(file_get_contents(__DIR__ . "/../config/settings.json"));
 	$app = new \Slim\Slim(array(
 		'templates.path' => '../views',
 		'view' => new PsaltedView(),
 		'debug' => $app_settings->mode === 'dev'
+		'mode' => $app_settings->mode
 	));
 
 	session_cache_limiter(false);
