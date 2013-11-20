@@ -142,7 +142,6 @@
 .setlist-buttons {
   padding-top: 12px;
 }
-
 @media only screen and (min-width: 35em) {
   
 }
@@ -248,6 +247,9 @@
   h2,
   h3 {
     page-break-after: avoid;
+  }
+  #song-spotify {
+    display: none;
   }
   #to-print {
     font-family: 'Source Sans Pro', sans-serif !important;
