@@ -38,8 +38,10 @@
 	$app = new \Slim\Slim(array(
 		'templates.path' => '../views',
 		'view' => new PsaltedView(),
-		'debug' => $app_settings->mode === 'dev'
-		'mode' => $app_settings->mode
+		'debug' => $app_settings->mode === 'dev',
+		'mode' => $app_settings->mode,
+		'cookies.domain' => $app_settings->domain,
+		'cookies.lifetime' => '1 week'
 	));
 
 	session_cache_limiter(false);
