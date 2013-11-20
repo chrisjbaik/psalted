@@ -32,10 +32,11 @@
 	/*
 	 * App Configuration
 	 */
+	$app_settings = json_decode(file_get_contents(__DIR__ . "/../config/settings.json"));
 	$app = new \Slim\Slim(array(
 		'templates.path' => '../views',
 		'view' => new PsaltedView(),
-		'debug' => true
+		'debug' => $app_settings->mode === 'dev'
 	));
 
 	session_cache_limiter(false);
@@ -50,8 +51,7 @@
 	}
 
 	$app->error(function (\Exception $e) use ($app) {
-		$app->flash('error', $e->getMessage());
-		$app->render('index.php');
+		$app->redirect('/');
 	});
 
 	foreach (glob(__DIR__ ."/../routes/middleware/*.php") as $filename)

@@ -3,7 +3,7 @@ fs = require 'fs'
 child = require 'child_process'
 
 module.exports = (grunt) ->
-  grunt.initConfig
+  config =
     pkg: grunt.file.readJSON 'package.JSON'
     less:
       development:
@@ -17,7 +17,7 @@ module.exports = (grunt) ->
         dest: 'public/js/main.js'
         options:
           transform: ['coffeeify']
-          debug: require('./config/settings.js').mode is 'dev'
+          debug: require('./config/settings.json').mode is 'dev'
           external: [
             'jquery'
             'jquery-mobile'
@@ -70,6 +70,10 @@ module.exports = (grunt) ->
     #       logConcurrentOutput: true
 
   #grunt.loadNpmTasks 'grunt-concurrent'
+  if require('./config/settings.json').mode is 'prod'
+    config.browserify.mains.options.transform.push 'uglifyify'
+
+  grunt.initConfig config
   grunt.loadNpmTasks 'grunt-browserify'
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-watch'
