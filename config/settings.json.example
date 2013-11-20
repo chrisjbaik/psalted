@@ -1,0 +1,4 @@
+{
+  "_readme": "mode can be either 'prod' or 'dev'",
+  "mode": "dev"
+}
