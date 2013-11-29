@@ -41,7 +41,7 @@
 		'debug' => $app_settings->mode === 'dev',
 		'mode' => $app_settings->mode,
 		'cookies.domain' => $app_settings->domain,
-		'cookies.lifetime' => '1 week'
+		'cookies.lifetime' => '1 year'
 	));
 
 	session_cache_limiter(false);
@@ -53,7 +53,7 @@
 		$app->view()->setData('isAdmin', $_SESSION['user']->hasRole('admin'));
 	} else {
 		$app->view()->setData('isAdmin', false);
-	}
+	}	
 
 	$app->error(function (\Exception $e) use ($app) {
 		$app->redirect('/');

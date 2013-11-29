@@ -142,7 +142,6 @@
 .setlist-buttons {
   padding-top: 12px;
 }
-
 @media only screen and (min-width: 35em) {
   
 }
@@ -279,4 +278,29 @@
 }
 #song-view .song-key {
   float: right;
+}
+.listview-checkbox > a {
+  padding: 0;
+}
+.listview-checkbox > a .ui-checkbox {
+  margin: 0;
+}
+.listview-checkbox > a .ui-checkbox label {
+  border-radius: 0;
+  border: 0;
+}
+.ui-header .ui-title {
+  margin: 0 auto;
+}
+.ui-footer-fixed {
+  text-align: center;
+}
+.ui-footer-fixed .ui-btn {
+  width: 95%;
+  margin: 10px auto;
+  font-size: 15px;
+}
+.popup-divider {
+  text-align: center;
+  padding: 10px 0;
 }

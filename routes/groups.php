@@ -81,11 +81,14 @@
     });
 
     $app->get('/:url/new', function ($url) use ($app) {
+      $groups = $_SESSION['user']->groups()->find_many();
       $group = Model::factory('Group')->where('url', $url)->find_one();
       if ($group) {
         $users = $group->users()->find_many();
         $app->render('setlists/edit.php', array(
-          'users' => $users
+          'users' => $users,
+          'groups' => $groups,
+          'group' => $group
         ));
       } else {
         $app->flash('error', 'Group was not found!');
@@ -148,6 +151,7 @@
     });
 
     $app->get('/:url/:setlist_url/edit', function ($url, $setlist_url) use ($app) {
+      $groups = $_SESSION['user']->groups()->find_many();
       $group = Model::factory('Group')->where('url', $url)->find_one();
 
       if ($group) {
@@ -161,6 +165,7 @@
             ->find_many();
           $users = $group->users()->find_many();
           $app->render('setlists/edit.php', array(
+            'groups' => $groups,
             'group' => $group,
             'setlist' => $setlist,
             'songs' => $songs,

@@ -33,6 +33,7 @@ $(document).delegate "#setlists-edit", "pageinit", ->
 
   $(document).on 'click', '#setlist-chosen-by-submit', (e) ->
     if $('#setlists-new-songs li[data-id=' + $('#setlists-song-chosen-by-popup').attr('data-id') + ']').length is 0
+      $('#setlists-new-songs-empty').addClass('hidden')
       nextIndex = $('#setlists-new-songs li[data-id]').length
       appendHtml = "<li data-theme='c' data-id='" + $('#setlists-song-chosen-by-popup').attr('data-id') + "'>" +
         "<a href='#'>" + $('#setlists-song-chosen-by-popup').attr('data-title') +
@@ -52,6 +53,8 @@ $(document).delegate "#setlists-edit", "pageinit", ->
 
   $(document).on 'click', '.remove-song', (e) ->
     $(this).closest('li').remove()
+    if $('#setlists-new-songs li[data-id]').length is 0
+      $('#setlists-new-songs-empty').removeClass('hidden')
 
   submitText = $('#setlist-submit').attr('value') 
   $(document).on 'input', '#setlist-title', (e) ->
