@@ -77,6 +77,38 @@
       }
     });
 
+    $app->get('/:id/certify', function ($id) use ($app) {
+      $req = $app->request();
+
+      $song = Model::factory('Song')->find_one($id);
+      if ($song) {
+        $song->certified = true;
+        if ($song->save()) {
+          $app->flash('success', 'Great Success! Song is certified!');
+          $app->redirect('/songs/'.$song->url);
+        } else {
+          $app->flash('error','Cannot certify lah!');
+          $app->redirect('/');
+        }
+      }
+    });
+
+    $app->get('/:id/decertify', function ($id) use ($app) {
+      $req = $app->request();
+
+      $song = Model::factory('Song')->find_one($id);
+      if ($song) {
+        $song->certified = false;
+        if ($song->save()) {
+          $app->flash('success', 'Great Success! Song is decertified!');
+          $app->redirect('/songs/'.$song->url);
+        } else {
+          $app->flash('error','Cannot decertify lah!');
+          $app->redirect('/');
+        }
+      }
+    });
+
     $app->put('/:id', function ($id) use ($app) {
       $req = $app->request();
 
