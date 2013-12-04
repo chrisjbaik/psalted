@@ -1,5 +1,5 @@
 /*
-Chordsify 0.1
+Chordsify 0.11
 Last update: 2013-12-04
 Author: Varoot Phasuthadol
 */
@@ -85,10 +85,11 @@ Author: Varoot Phasuthadol
 	function Chords(element, opts) {
 		this.element = element;
 		this.options = opts;
+		
+		var $element = $(element);
+		this.init($element.attr(opts.dataAttr.originalKey), $element.text());
 
-		this.init();
-
-		var transposeKey = $(element).attr(opts.dataAttr.transposeKey);
+		var transposeKey = $element.attr(opts.dataAttr.transposeKey);
 		if (validKey(transposeKey)) {
 			this.transpose(transposeKey);
 		}
@@ -138,25 +139,32 @@ Author: Varoot Phasuthadol
 		return self;
 	};
 
-	Chords.prototype.init = function() {
+	Chords.prototype.replace = function(text) {
 		var self = this;
-		var element = $(this.element);
-		var text = element.text();
+		var $element = $(this.element);
 		var opts = this.options;
 
-		key = keyNumber(element.attr(opts.dataAttr.originalKey));
+		return self.init($element.attr(opts.dataAttr.originalKey), text);
+	}
+
+	Chords.prototype.init = function(key, text) {
+		var self = this;
+		var $element = $(this.element);
+		var opts = this.options;
+
+		key = keyNumber(key);
 		self.key = key;
 		self.originalKey = key;
-		element.html('').removeClass(opts.classes.raw);
+		$element.html('').removeClass(opts.classes.raw);
 
-		var block = $(opts.elements.block).addClass(opts.classes.block).appendTo(element);
+		var block = $(opts.elements.block).addClass(opts.classes.block).appendTo($element);
 		$.each(text.trim().split('\n'), function(i,lineText) {
 			lineText = lineText.trim();
 			var matches = lineText.match(opts.blockRegEx);
 			if (matches) {
 				if (block.text() != '') {
 					// Make a new block
-					block = $(opts.elements.block).addClass(opts.classes.block).appendTo(element);
+					block = $(opts.elements.block).addClass(opts.classes.block).appendTo($element);
 				}
 
 				block.attr(opts.dataAttr.blockType, matches[1]);
@@ -261,6 +269,9 @@ Author: Varoot Phasuthadol
 				switch (options) {
 					case 'option':
 						chords.option(param);
+					break;
+					case 'replace':
+						chords.replace(param);
 					break;
 					case 'destroy':
 						chords.destroy();

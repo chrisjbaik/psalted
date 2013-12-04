@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="<?= $base_url ?>/css/jquery.mobile-1.4.0-rc.1.min.css" />
     <link rel="stylesheet" type="text/css" href="<?= $base_url ?>/css/style.css" media="all">
     <!--<script src="<?= $base_url ?>/js/songsheet-0.1.js"></script>-->
-    <script src="<?= $base_url ?>/js/chordsify-0.1.js"></script>
+    <script src="<?= $base_url ?>/js/chordsify-0.11.js"></script>
   </head>
 
 <body>
