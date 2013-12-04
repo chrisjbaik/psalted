@@ -7,18 +7,18 @@
 <div data-role="panel" id="right-panel" data-theme="c" data-position="right">
   <ul data-role="listview" data-theme="c">
     <?php 
-    if ($isAdmin){
-      if ($song->certified == true) { 
-        echo "<li data-icon='gear'><a data-ajax='false' href='/songs/$song->id/decertify'>Decertify this Song</a></li>";
+    if ($song->certified) {
+      if ($isAdmin) {
+        echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->id.'/decertify">Decertify this Song</a></li>';
+        echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->id.'/edit">Edit Song</a></li>';
       } else {
-        echo "<li data-icon='gear'><a data-ajax='false' href='/songs/$song->id/certify'>Certify this Song</a></li>";
+        echo '<li>This song is certified</li>';
       }
     } else {
-      if ($song->certified == true) {
-        echo "<li><a>This song is certified</a></li>";
-      } else {
-        echo "<li data-icon='gear'><a data-ajax='false' href='/songs/{$song->id}/edit'>Edit Song</a></li>";
+      if ($isAdmin) {
+        echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->id.'/certify">Certify this Song</a></li>';
       }
+      echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->id.'/edit">Edit Song</a></li>';
     }
     ?>
   </ul>
