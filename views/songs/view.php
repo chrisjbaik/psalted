@@ -17,7 +17,7 @@
       if ($song->certified == true) {
         echo "<li><a>This song is certified</a></li>";
       } else {
-        echo "<li data-icon='gear'><a data-ajax='false' href='/songs/<?php echo $song->id; ?>/edit'>Edit Song</a></li>";
+        echo "<li data-icon='gear'><a data-ajax='false' href='/songs/{$song->id}/edit'>Edit Song</a></li>";
       }
     }
     ?>
