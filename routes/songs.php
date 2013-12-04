@@ -24,12 +24,16 @@
       $user = $_SESSION['user'];
       $songs = Model::factory('Song')->select_many('id','url','title')->order_by_asc('title')->find_many();
       $groups = $user->groups()->select('id')->find_many();
-      $reduce_groups = function($result, $group) {
-        return $result . "\"".$group->id."\"".",";
-      };
-      $groups = array_reduce($groups, $reduce_groups, "(");
-      $groups = substr($groups, 0, strlen($groups)-1);
-      $groups = $groups.")";
+      if (!empty($groups) && is_array($groups)) {
+        $reduce_groups = function($result, $group) {
+          return $result . "\"".$group->id."\"".",";
+        };
+        $groups = array_reduce($groups, $reduce_groups, "(");
+        $groups = substr($groups, 0, strlen($groups)-1);
+        $groups = $groups.")";
+      } else {
+        $groups = "()";
+      }
       $setlists = ORM::for_table('setlist')
         ->raw_query("SELECT S.id, S.title, G.name AS group_name FROM setlist S LEFT JOIN `group` G ON S.group_id = G.id WHERE S.group_id IN ". $groups . " OR S.user_id = ". $user->id ." ORDER BY updated_at DESC")->find_many();
       $app->render('songs/list.php', array(
