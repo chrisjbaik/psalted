@@ -27,7 +27,6 @@ module.exports = (grunt) ->
           alias: [
             'bower_components/jspdf/dist/jspdf.source.js:jspdf'
             'public_src/libs/songsheet-0.1.js:songsheet'
-            'bower_components/mustache/mustache.js:mustache'
           ]
           aliasMappings: [
             cwd: 'public_src'

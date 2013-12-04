@@ -15,7 +15,6 @@
   ],
   "dependencies": {
     "jspdf": "*",
-    "modernizr": "2.6.x",
-    "mustache": "~0.7.2"
+    "modernizr": "2.6.x"
   }
 }

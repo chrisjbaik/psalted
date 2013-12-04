@@ -13,8 +13,9 @@
     <script src="<?= $base_url ?>/js/main.js"></script>
     <!--<script src="<?= $base_url ?>/js/song-view.js"></script>-->
     <link rel="stylesheet" href="<?= $base_url ?>/css/jquery.mobile-1.4.0-rc.1.min.css" />
-    <link rel="stylesheet" type="text/css" href="<?= $base_url ?>/css/style.css">
-    <script src="<?= $base_url ?>/js/songsheet-0.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?= $base_url ?>/css/style.css" media="all">
+    <!--<script src="<?= $base_url ?>/js/songsheet-0.1.js"></script>-->
+    <script src="<?= $base_url ?>/js/chordsify-0.1.js"></script>
   </head>
 
 <body>

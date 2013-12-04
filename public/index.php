@@ -16,7 +16,7 @@
 	 */
 
 	class PsaltedView extends \Slim\View {
-		public function render($template) {
+		public function render($template, $data = NULL) {
 			$this->data['session'] = $_SESSION;
 			$this->data['base_url'] = dirname($_SERVER['SCRIPT_NAME']) === DIRECTORY_SEPARATOR ? '' : dirname($_SERVER['SCRIPT_NAME']);
 			if (empty($this->data['page_id'])) {
@@ -24,7 +24,7 @@
 				$page_id = preg_replace("/\//", "-", $page_id);
 				$this->data['page_id'] = $page_id;
 			}
-			return parent::render($template);
+			return parent::render($template, $data);
 		}
 	};
 
