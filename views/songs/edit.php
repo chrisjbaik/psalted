@@ -19,16 +19,16 @@
     <label for="key" class="select">Original Key</label>
     <select name="key" id="original-key" data-key="<?php if (!empty($song->key)) { echo $song->key; } ?>">
       <option value="0">C</option>
-      <option value="1">Db/C#</option>
+      <option value="1">C♯/D♭</option>
       <option value="2">D</option>
-      <option value="3">Eb/D#</option>
+      <option value="3">D♯/E♭</option>
       <option value="4">E</option>
       <option value="5">F</option>
-      <option value="6">F#/Gb</option>
+      <option value="6">F♯/G♭</option>
       <option value="7">G</option>
-      <option value="8">Ab/G#</option>
+      <option value="8">G♯/A♭</option>
       <option value="9">A</option>
-      <option value="10">Bb/A#</option>
+      <option value="10">A♯/B♭</option>
       <option value="11">B</option>
     </select>
     <label for="chord-lyrics">Chords &amp; Lyrics</label>
@@ -50,12 +50,12 @@
       } 
     ?>
   </form>
-  <div data-role="popup" id="song-preview" data-overlay-theme="a" data-theme="c" data-dismissible="true" class="ui-corner-all">
+  <div data-role="popup" id="song-preview" data-dismissible="true" class="ui-corner-all">
     <div data-role="header" data-theme="a" class="ui-corner-top">
       <h1>Song Preview</h1>
     </div>
     <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-      <div id="song-chords"></div>
+      <div id="song-chords" class="chordsify"></div>
     </div>
   </div>
   <div data-role="popup" id="song-delete-popup" data-overlay-theme="a" data-theme="c" data-dismissible="false" class="ui-corner-all">
