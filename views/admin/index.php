@@ -1,16 +1,16 @@
 <?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
-  <ul data-role="listview" data-divider-theme="b" data-inset="true">
-    <li data-theme='c'>
+  <ul data-role="listview" data-inset="true">
+    <li>
       <a href='/admin/groups' data-transition='slide'>Groups</a>
     </li>
-    <li data-theme='c'>
+    <li>
       <a href='/admin/users' data-transition='slide'>Users</a>
     </li>
-    <li data-theme='c'>
+    <li>
       <a href='/admin/requests' data-transition='slide'>Approve Requests</a>
     </li>
-    <li data-theme='c'>
+    <li>
       <a href='/admin/invites' data-transition='slide'>Invite New Users</a>
     </li>
   </ul>

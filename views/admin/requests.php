@@ -7,7 +7,7 @@
         echo "<li>There are currently no pending requests.</li>";
       }
       foreach ($requests as $r) {
-        echo "<li data-theme='c'>";
+        echo "<li>";
         echo "<a data-ajax='false' href='/admin/requests/{$r->id}/approve'>{$r->email}</a>";
         echo "</li>";
       }

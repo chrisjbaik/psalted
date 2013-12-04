@@ -10,7 +10,7 @@
         echo "<li>You are not part of any groups yet.</li>";
       }
       foreach ($groups as $group) {
-        echo "<li data-theme='c'>";
+        echo "<li>";
         echo "<a href='/groups/{$group->url}' data-transition='slide'>";
         echo $group->name;
         echo "</a>";

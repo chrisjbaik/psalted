@@ -26,12 +26,12 @@
     <input type="text" name="title" id="setlist-title" placeholder="Setlist Name" value="<?php if (!empty($setlist->title)) { echo $setlist->title; } else { echo 'Default name'; } ?>">
     <label for="setlist-date" class="ui-hidden-accessible">Setlist Date</label>
     <input type="date" name="date" id="setlist-date" value="<?php if (!empty($setlist->date)) { echo date('Y-m-d', $setlist->date); } else { echo date('Y-m-d', time()); } ?>">
-    <ul id='setlists-new-songs' data-role="listview" data-inset="true" data-divider-theme="b" data-split-icon="delete" data-split-theme="c">
+    <ul id='setlists-new-songs' data-role="listview" data-inset="true" data-divider-theme="b" data-split-icon="delete" data-split-theme="b">
       <li data-role="list-divider" role="heading">Songs</li>
       <?php
         if (!empty($songs)) {
           foreach ($songs as $index => $song) {
-            echo "<li data-theme='c' data-id='{$song->id}'>";
+            echo "<li data-id='{$song->id}'>";
             echo "<a href='#'>{$song->title} ({$song->artist})</a>";
             echo "<a href='#' class='remove-song'>Remove Song</a>";
             echo "<input type='hidden' name='songs[{$index}][id]' value='{$song->id}' />";
@@ -48,17 +48,17 @@
       ?>
     </ul>
     <div id="setlists-new-song-choices-box" style="padding: 15px 0;"> 
-      <ul id="setlists-new-song-choices" data-filter-reveal="true" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Type a song title..." data-filter-theme="d">
+      <ul id="setlists-new-song-choices" data-filter-reveal="true" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Type a song title...">
       </ul>
     </div>
      <?php if (empty($setlist)) { $submitText = 'Add Setlist'; } else {$submitText = "Save Changes"; } ?>
     <input type="submit" id="setlist-submit" value= '<?php echo $submitText ?>' data-theme="b" data-role="button">
   </form>
   <div data-role="popup" id="setlists-song-chosen-by-popup" data-overlay-theme="a" data-theme="a" class="ui-corner-all">
-    <div data-role="header" data-theme="a" class="ui-corner-top">
+    <div data-role="header" class="ui-corner-top">
       <h2>Song Title</h2>
     </div>
-    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+    <div data-role="content" class="ui-corner-bottom ui-content">
       <h2>Song Title</h2>
       <label for="key">Key sung in:</label>
       <select id="setlists-songs-key">

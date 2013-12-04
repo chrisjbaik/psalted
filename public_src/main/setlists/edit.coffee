@@ -35,7 +35,7 @@ $(document).delegate "#setlists-edit", "pageinit", ->
     if $('#setlists-new-songs li[data-id=' + $('#setlists-song-chosen-by-popup').attr('data-id') + ']').length is 0
       $('#setlists-new-songs-empty').addClass('hidden')
       nextIndex = $('#setlists-new-songs li[data-id]').length
-      appendHtml = "<li data-theme='c' data-id='" + $('#setlists-song-chosen-by-popup').attr('data-id') + "'>" +
+      appendHtml = "<li data-id='" + $('#setlists-song-chosen-by-popup').attr('data-id') + "'>" +
         "<a href='#'>" + $('#setlists-song-chosen-by-popup').attr('data-title') +
         " (" + $('#setlists-song-chosen-by-popup').attr('data-artist') + ") </a>" +
         "<a href='#' class='remove-song'>Remove Song</a>" +

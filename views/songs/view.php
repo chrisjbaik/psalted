@@ -4,8 +4,8 @@
                   6=>'F♯/G♭',7=>'G' , 8=>'G♯/A♭',9=>'A' ,10=>'A♯/B♭',11=>'B');
 ?>
 
-<div data-role="panel" id="right-panel" data-theme="c" data-position="right">
-  <ul data-role="listview" data-theme="c">
+<div data-role="panel" id="right-panel" data-position="right">
+  <ul data-role="listview">
     <?php 
     if ($song->certified) {
       if ($isAdmin) {

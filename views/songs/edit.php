@@ -1,9 +1,9 @@
 <?php include_once('../views/includes/header.php'); ?>
 
 <?php if (!empty($song)): ?>
-<div data-role="panel" id="right-panel" data-theme="c" data-position="right">
-  <ul data-role="listview" data-theme="c">
-    <li data-icon="delete">
+<div data-role="panel" id="right-panel" data-position="right">
+  <ul data-role="listview">
+    <li data-icon="delete" data-theme="b">
       <a data-rel='popup' data-position-to='window' href="#song-delete-popup" class='songs-delete-link' id="delete-song" data-id="<?php echo $song->id; ?>">Delete Song</a>
     </li>
   </ul>
@@ -51,20 +51,20 @@
     ?>
   </form>
   <div data-role="popup" id="song-preview" data-dismissible="true" class="ui-corner-all">
-    <div data-role="header" data-theme="a" class="ui-corner-top">
+    <div data-role="header" class="ui-corner-top">
       <h1>Song Preview</h1>
     </div>
-    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+    <div data-role="content" class="ui-corner-bottom ui-content">
       <div id="song-chords" class="chordsify"></div>
     </div>
   </div>
-  <div data-role="popup" id="song-delete-popup" data-overlay-theme="a" data-theme="c" data-dismissible="false" class="ui-corner-all">
-    <div data-role="header" data-theme="a" class="ui-corner-top">
+  <div data-role="popup" id="song-delete-popup" data-overlay-theme="a" data-theme="a" data-dismissible="false" class="ui-corner-all">
+    <div data-role="header" class="ui-corner-top">
       <h1>Delete Song?</h1>
     </div>
-    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+    <div data-role="content" class="ui-corner-bottom ui-content">
       <p>Are you sure you want to delete this song? This action cannot be undone.</p>
-      <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+      <a href="#" data-role="button" data-inline="true" data-rel="back">Cancel</a>
       <form id="song-delete-form" method='post' style='display: inline;' data-ajax='false'>
         <input type='hidden' name='_METHOD' value='DELETE' />
         <input type='submit' data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b" value='Delete' />

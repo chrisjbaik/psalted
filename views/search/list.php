@@ -7,7 +7,7 @@
         echo "<li>No songs found.</li>";
       }
       foreach ($songs as $song) {
-        echo "<li data-theme='c'>";
+        echo "<li>";
         echo "<a href='/songs/{$song->url}'>{$song->title}</a>";
         echo "</li>";
       }
@@ -21,7 +21,7 @@
         echo "<li>No groups found.</li>";
       }
       foreach ($groups as $group) {
-        echo "<li data-theme='c'>";
+        echo "<li>";
         echo "<a href='/groups/{$group->url}'>{$group->name}</a>";
         echo "</li>";
       }
@@ -35,7 +35,7 @@
         echo "<li>No setlists found.</li>";
       }
       foreach ($setlists as $setlist) {
-        echo "<li data-theme='c'>";
+        echo "<li>";
         echo "<a href='/groups/{$setlist->group_url}/{$setlist->url}'>{$setlist->title}</a>";
         echo "</li>";
       }

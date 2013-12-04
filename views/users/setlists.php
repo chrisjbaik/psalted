@@ -4,7 +4,7 @@
     <li data-role="list-divider" role="heading">
       Setlists
     </li>
-    <li data-theme="e" data-icon="plus"><a href='/personal/new'>New Setlist</a></li>
+    <li data-theme="c" data-icon="plus"><a href='/personal/new'>New Setlist</a></li>
     <?php
       foreach ($setlists as $setlist) {
         echo "<li data-theme='c'>";
