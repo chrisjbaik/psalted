@@ -1,6 +1,6 @@
 <?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
-  <ul data-role="listview" data-inset="true" data-split-icon='gear' data-split-theme='c'>
+  <ul data-role="listview" data-inset="true" data-split-icon='gear'>
     <li data-role='list-divider' role='heading'>Groups</li>
     <?php
       if (count($groups) == 0) {

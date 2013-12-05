@@ -29,7 +29,7 @@
       Add to Setlist (<span class="songs-list-selected-count">0</span> selected)
     </a>
   </div>
-  <div id="song-setlist-popup" data-role="popup" data-overlay-theme="a" data-theme="c" class="ui-corner-all" data-dismissible="false">
+  <div id="song-setlist-popup" data-role="popup" data-overlay-theme="a" data-theme="c" class="ui-corner-all" data-dismissible="true">
     <div data-role="header" data-theme="a" class="ui-corner-top">
       <h1>Add <span class="songs-list-selected-count">0</span> Song(s) to Setlist</h1>
     </div>
