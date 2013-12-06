@@ -1,56 +1,56 @@
 <?php include_once('../views/includes/header.php');
 
-  $chords = array(0=>'C', 1=>'C#', 2=>'D', 3=>'D♯', 4=>'E',  5=>'F',
-                  6=>'F#',7=>'G' , 8=>'G#',9=>'A' ,10=>'A#',11=>'B');
+  $chords = array(0=>'C', 1=>'C♯/D♭', 2=>'D', 3=>'D♯/E♭', 4=>'E',  5=>'F',
+                  6=>'F♯/G♭',7=>'G' , 8=>'G♯/A♭',9=>'A' ,10=>'A♯/B♭',11=>'B');
 ?>
 
-<div data-role="panel" id="right-panel" data-theme="c" data-position="right">
-  <ul data-role="listview" data-theme="c">
+<div data-role="panel" id="right-panel" data-position="right">
+  <ul data-role="listview">
     <?php 
-    if ($isAdmin){
-      if ($song->certified == true) { 
-        echo "<li data-icon='gear'><a data-ajax='false' href='/songs/$song->id/decertify'>Decertify this Song</a></li>";
+    if ($song->certified) {
+      if ($isAdmin) {
+        echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->id.'/decertify">Decertify this Song</a></li>';
+        echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->id.'/edit">Edit Song</a></li>';
       } else {
-        echo "<li data-icon='gear'><a data-ajax='false' href='/songs/$song->id/certify'>Certify this Song</a></li>";
+        echo '<li>This song is certified</li>';
       }
     } else {
-      if ($song->certified == true) {
-        echo "<li><a>This song is certified</a></li>";
-      } else {
-        echo "<li data-icon='gear'><a data-ajax='false' href='/songs/<?php echo $song->id; ?>/edit'>Edit Song</a></li>";
+      if ($isAdmin) {
+        echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->id.'/certify">Certify this Song</a></li>';
       }
+      echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->id.'/edit">Edit Song</a></li>';
     }
     ?>
   </ul>
 </div>
 
-<div data-role="content" id='song-view'>
-  <div id='song-spotify'>
+<div data-role="content" id="song-view">
+  <div id="song-spotify">
     <?php 
       if (!empty($song->spotify_id)) {
         echo "<iframe src='https://embed.spotify.com/?uri={$song->spotify_id}' width='100%' height='80' frameborder='0' allowtransparency='true'></iframe>";
       }
     ?>
   </div>
-  <div id='transpose'>
+  <div id="transpose">
     <?php
       if (!empty($song->key)) {
         $original_key = $song->key;
         $index = 0;
-        echo "<select id='select-transpose' data-mini='true'>";
-          for ($index=0; $index<12; $index++)
-            {
-              if ($index == $original_key) { 
-                echo "<option value ='$index' selected='selected'>$chords[$original_key] (Original Key) </option>";
-              } else {
-                echo "<option value = '$index'>$chords[$index]</option>";
-              }
+        echo '<select id="select-transpose" data-mini="true">';
+          foreach ($chords as $index => $key)
+          {
+            if ($index == $original_key) {
+              echo "<option value=\"$index\" selected>$key (Original Key)</option>";
+            } else {
+              echo "<option value=\"$index\">$key</option>";
             }
+          }
         echo "</select>" ;
       };
     ?>
   </div>
 
-  <div id='song-chords' data-key='<?= $song->key ?>' data-chords-json="<?= htmlspecialchars($song->chords) ?>"></div>
+  <div id="song-chords" class="chordsify chordsify-raw" data-original-key="<?= $song->key ?>"><?= htmlspecialchars($song->chords) ?></div>
 </div>
 <?php include_once('../views/includes/footer.php'); ?>

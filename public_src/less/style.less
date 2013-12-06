@@ -14,86 +14,144 @@
   padding: 10px 15px 10px;
 }
 
-.song-chords {
-  font-size: 20px;
-  //text-align: center;
+/* Chordsify */
+@chordBackground: #666;
+@chordText: #fff;
+@lyricsBackground: #f9f9f9;
 
-  .song-section {
-    &.chorus {
-      position: relative;
-      padding-left: 2em;
-      .phrase {
-        //background: #ff9;
-      }
+@lyricsFont: inherit;
+@chordFont: @lyricsFont;
+@lyricsFontPrint: "Times New Roman", Times, serif;
+@chordFontPrint: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-      &:before {
-        content: '*';
-        position: absolute;
-        font-size: 2em;
-        top: 0.625em;
-        left: 0.3em;
-        color: #999;
-      }
+.chordsify-raw {
+  white-space: pre;
+  white-space: pre-line;
+}
 
-      &.no-chord {
-        &:before {
-          top: -0.05em;
-        }
-      }
-    }
+.chordsify-chords-hidden {
+  .chordsify-chord {
+    display: none;
+  }
+}
 
-    &.bridge {
-      padding-left: 2em;
-      /*
-      .lyrics {
-        font-style: italic;
-      }
-      */
-    }
+.chordsify-chord {
+  font-family: @chordFont;
+  font-size: 0.75em;
+  line-height: 1em;
+  padding: 0.5em 0 0.1em;
+  top: 0;
+}
+
+.chordsify-chord-inner {
+  display: inline-block;
+  font-weight: normal;
+}
+
+@media only screen {
+  .chordsify {
+    font-size: 20px;
   }
 
-  .phrase {
-    display: inline-block;
-    text-align: left;
-    vertical-align: top;
+  .chordsify-chord-inner {
+    background: @chordBackground;
+    border-radius: 0.4em;
+    color: @chordText;
+    margin-right: 0.4em;
+    padding: 0.15em 0.4em 0.25em;
+
+    &[data-chord="0"]  { background: #a33; }
+    &[data-chord="1"]  { background: #b93; }
+    &[data-chord="2"]  { background: #3a3; }
+    &[data-chord="3"]  { background: #38a; }
+    &[data-chord="4"]  { background: #43a; }
+    &[data-chord="5"]  { background: #a3a; }
+    &[data-chord="6"]  { background: #a63; }
+    &[data-chord="7"]  { background: #8a3; }
+    &[data-chord="8"]  { background: #3a8; }
+    &[data-chord="9"]  { background: #35a; }
+    &[data-chord="10"] { background: #73a; }
+    &[data-chord="11"] { background: #a36; }
   }
-  
-  .chord {
-    display: block;
-    margin-bottom: 6px;
-    height: 21px;
+
+}
+
+.chordsify-line, .chordsify-chord {
+  display: block;
+}
+
+.chordsify-phrase, .chordsify-lyrics {
+  display: inline-block;
+}
+
+.chordsify-phrase {
+  font-size: 1em;
+  vertical-align: bottom;
+
+  &.chordsify-phrase-cond {
+    background: @lyricsBackground url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAABCAYAAAD9yd/wAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpCMTZBMzE4RDUzM0ExMUUzOEM5NEE0N0I1RjM4QTM4NiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpCMTZBMzE4RTUzM0ExMUUzOEM5NEE0N0I1RjM4QTM4NiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkIxNkEzMThCNTMzQTExRTM4Qzk0QTQ3QjVGMzhBMzg2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkIxNkEzMThDNTMzQTExRTM4Qzk0QTQ3QjVGMzhBMzg2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+7BjgCwAAABdJREFUeNpi+P//PwMIA8F/GAbxAQIMAKF3C/Uq8GUxAAAAAElFTkSuQmCC) repeat-x right 80%;
     
-    b {
-      font-size: 14px;
-      font-weight: normal;
-      margin-right: 2px;
-      padding: 1px 3px;
-      border-radius: 4px;
-      
-      &[data-chord]  { color: #fff; background: #555; }
-      &[data-chord="0"]  { background: #a33; }
-      &[data-chord="1"]  { background: #b93; }
-      &[data-chord="2"]  { background: #3a3; }
-      &[data-chord="3"]  { background: #38a; }
-      &[data-chord="4"]  { background: #43a; }
-      &[data-chord="5"]  { background: #a3a; }
-      &[data-chord="6"]  { background: #a63; }
-      &[data-chord="7"]  { background: #8a3; }
-      &[data-chord="8"]  { background: #3a8; }
-      &[data-chord="9"]  { background: #35a; }
-      &[data-chord="10"] { background: #73a; }
-      &[data-chord="11"] { background: #a36; }
-    }
-  }
-  
-  .lyrics {
-    padding-bottom: 4px;
-
-    &:after {
-      content: '\200B';
+    .chordsify-lyrics {
+      background: @lyricsBackground;
     }
   }
 }
+
+.chordsify-lyrics {
+  white-space: pre;
+  font-family: @lyricsFont;
+}
+
+.chordsify-block {
+  &[data-block-type="chorus"], &[data-block-type="bridge"] {
+    padding-left: 2em;
+  }
+
+  &[data-block-type="chorus"] {
+    .chordsify-line:first-child {
+      .chordsify-phrase:first-child {
+        .chordsify-lyrics {
+          &:before {
+            content: '*';
+            display: inline-block;
+            font-size: 1.5em;
+            color: #999;
+            position: relative;
+            width: 0;
+            line-height: 0;
+            top: 0.3em;
+            left: -0.7em;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media print {
+  .chordsify-chords {
+    font-size: 10pt;
+  }
+
+  .chordsify-lyrics {
+    font-family: @lyricsFontPrint;
+  }
+
+  .chordsify-chord {
+    font-family: @chordFontPrint;
+    font-size: 7.5pt;
+    padding: 0.35em 0 0;
+  }
+
+  .chordsify-chord-inner {
+    font-weight: bold;
+    position: relative;
+    top: 2pt;
+    padding: 0 0.2em;
+  }
+}
+
+/* /Chordsify */
 
 .setlists {
   background: #333;
@@ -178,7 +236,7 @@
   h2, h3 { page-break-after: avoid; }
   
 
-  #song-spotify {
+  #song-spotify, #transpose {
     display: none;
   }
 
@@ -218,4 +276,35 @@
   .song-key {
     float: right;
   }
+}
+
+.listview-checkbox {
+  > a {
+    padding: 0;
+    .ui-checkbox {
+      margin: 0;
+      label {
+        border-radius: 0;
+        border: 0;
+      }
+    }
+  }
+}
+
+.ui-header .ui-title {
+  margin: 0 auto;
+}
+
+.ui-footer-fixed {
+  text-align: center;
+  .ui-btn {
+    width: 95%;
+    margin: 10px auto;
+    font-size: 15px;
+  }
+}
+
+.popup-divider {
+  text-align: center;
+  padding: 10px 0;
 }

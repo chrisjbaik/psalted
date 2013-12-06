@@ -80,6 +80,7 @@
     
     $app->get('/:url/edit', function ($url) use ($app) {
       $user = $_SESSION['user'];
+      $groups = $_SESSION['user']->groups()->find_many();
       $setlist = $user->setlists()->where('url', $url)->find_one();
       if ($setlist) {
         $songs = ORM::for_table('song')
@@ -92,7 +93,8 @@
         $app->render('setlists/edit.php', array(
           'setlist' => $setlist,
           'songs' => $songs,
-          'users' => $users
+          'users' => $users,
+          'groups' => $groups
         ));
       } else {
         $app->flash('error', 'Setlist was not found!');

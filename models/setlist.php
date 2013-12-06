@@ -32,7 +32,7 @@ class Setlist extends Model {
   }
 
   public function songs() {
-  	return $this->has_many_through('Song');
+  	return $this->has_many_through('Song')->order_by_asc('priority');
   }
 
   public function group() {

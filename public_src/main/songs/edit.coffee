@@ -32,8 +32,7 @@ $(document).delegate "#songs-edit", "pageinit", ->
     updateSpotifyOptions($('#song-edit-title-input').val(), $('#song-edit-artist-input').val(), spotify_id)
 
   $('.song-preview').click (e) ->
-    chords = songutils.convertLyrics($('#original-key').val(), $('#chord-lyrics').val())
-    $('#song-chords').html(chords)
+    $('#song-chords').attr('data-original-key', $('#original-key').val()).chordsify().chordsify('replace', $('#chord-lyrics').val())
 
   $('#spotify').change (e) ->
     updateSpotifyPreview()

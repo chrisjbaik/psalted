@@ -12,14 +12,15 @@
     <script src="<?= $base_url ?>/js/jspdf.source.js"></script>
     <script src="<?= $base_url ?>/js/main.js"></script>
     <!--<script src="<?= $base_url ?>/js/song-view.js"></script>-->
-    <link rel="stylesheet" href="<?= $base_url ?>/css/jquery.mobile-1.4.0-rc.1.min.css" />
-    <link rel="stylesheet" type="text/css" href="<?= $base_url ?>/css/style.css">
-    <script src="<?= $base_url ?>/js/songsheet-0.1.js"></script>
+    <link rel="stylesheet" href="<?= $base_url ?>/css/jquery.mobile-1.4.0-rc.1.css" />
+    <link rel="stylesheet" type="text/css" href="<?= $base_url ?>/css/style.css" media="all">
+    <!--<script src="<?= $base_url ?>/js/songsheet-0.1.js"></script>-->
+    <script src="<?= $base_url ?>/js/chordsify-0.11.js"></script>
   </head>
 
 <body>
   <div data-role="page" id="<?= $page_id ?>">
-    <div data-role="header">
+    <div data-role="header" data-theme="c">
       <?php
         if (!empty($_SESSION['user'])) {
           echo '<a href="#left-panel" class="ui-icon-nodisc" data-theme="a" data-icon="bars" data-iconshadow="false" data-iconpos="notext"> </a>';
@@ -30,8 +31,8 @@
       ?>
       <h3><?php if (!empty($page_title)) { echo $page_title; } else { echo 'Psalted'; } ?></h3>
     </div>
-    <div data-role="panel" id="left-panel" data-theme="c">
-      <ul data-role="listview" data-theme="d">
+    <div data-role="panel" id="left-panel">
+      <ul data-role="listview">
         <li data-icon="search"><form action='/search' type='GET'><input type="search" placeholder="Search..." name='q'></form></li>
         <li data-icon="home"><a href="/home">Home</a></li>
         <li data-icon="search"><a href="/songs">Browse Songs</a></li>

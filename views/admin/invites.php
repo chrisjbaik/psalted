@@ -4,7 +4,7 @@
     <input type="email" name="email" id="email" placeholder="Email to Invite" value="" />
     <input type="submit" value="Send Invite" data-theme="b" />
   </form>
-  <ul data-role="listview" data-inset="true" data-split-icon='delete' data-split-theme="c">
+  <ul data-role="listview" data-inset="true" data-split-icon='delete'>
     <li data-role='list-divider' role='heading'>Pending Invites</li>
     <?php
       if (count($invites) === 0) {
