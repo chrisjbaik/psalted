@@ -1,6 +1,6 @@
   <div data-role="footer" id="footer">
     <h3>
-      By Team Sawadicop
+      <a href="/aboutus">By Team Sawadicop</a>
     </h3>
   </div>
 </div>

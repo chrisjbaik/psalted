@@ -1,7 +1,7 @@
 <?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
 	<div>
-		<img src="img/aboutus.jpg" align = "left" style="padding-right:15px; width: 50%; height: 50%;" >
+		<img src="img/aboutus.jpg" align = "left" style="padding-right:15px;" >
 			<p> We all attend the same church in Ann Arbor, Michigan. (check out <strong> <a href="http://hmcc.net">hmcc.net </a> </strong>) 
 				<br> 
 				<br> 
