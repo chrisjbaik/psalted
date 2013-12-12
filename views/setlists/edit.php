@@ -32,7 +32,9 @@
         if (!empty($songs)) {
           foreach ($songs as $index => $song) {
             echo "<li data-id='{$song->id}'>";
-            echo "<a href='#'>{$song->title} ({$song->artist})</a>";
+            echo "<a href='#'>{$song->title}";
+            if (!empty($song->artist)) echo " ({$song->artist})";
+            echo "</a>";
             echo "<a href='#' class='remove-song'>Remove Song</a>";
             echo "<input type='hidden' name='songs[{$index}][id]' value='{$song->id}' />";
             echo "<input type='hidden' name='songs[{$index}][chosen_by]' value='{$song->chosen_by}' />";

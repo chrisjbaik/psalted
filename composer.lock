@@ -240,6 +240,7 @@
                     "paris.php"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-2-Clause",
                 "BSD-3-Clause",

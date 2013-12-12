@@ -32,15 +32,19 @@ $(document).delegate "#setlists-edit", "pageinit", ->
     $('#setlists-songs-key').selectmenu('refresh')
 
   $(document).on 'click', '#setlist-chosen-by-submit', (e) ->
-    if $('#setlists-new-songs li[data-id=' + $('#setlists-song-chosen-by-popup').attr('data-id') + ']').length is 0
+    chosenSong = $('#setlists-song-chosen-by-popup')
+    artist = chosenSong.attr('data-artist')
+    artist = if artist isnt '' then ' (' + artist + ')' else ''
+
+    if $('#setlists-new-songs li[data-id=' + chosenSong.attr('data-id') + ']').length is 0
       $('#setlists-new-songs-empty').addClass('hidden')
       nextIndex = $('#setlists-new-songs li[data-id]').length
-      appendHtml = "<li data-id='" + $('#setlists-song-chosen-by-popup').attr('data-id') + "'>" +
-        "<a href='#'>" + $('#setlists-song-chosen-by-popup').attr('data-title') +
-        " (" + $('#setlists-song-chosen-by-popup').attr('data-artist') + ") </a>" +
+      appendHtml = "<li data-id='" + chosenSong.attr('data-id') + "'>" +
+        "<a href='#'>" + chosenSong.attr('data-title') +
+        artist + " </a>" +
         "<a href='#' class='remove-song'>Remove Song</a>" +
         "<input type='hidden' name='songs[" + nextIndex + "][id]' value='" +
-        $('#setlists-song-chosen-by-popup').attr('data-id') +
+        chosenSong.attr('data-id') +
         "' /><input type='hidden' name='songs[" + nextIndex + "][chosen_by]' value='" +
         $('#setlists-song-chosen-by-select').val() + "' />" +
         "<input type='hidden' name='songs[" + nextIndex + "][key]' value='" +
@@ -49,7 +53,7 @@ $(document).delegate "#setlists-edit", "pageinit", ->
       $('#setlists-new-songs').listview('refresh')
       $('#setlists-new-song-choices-box .ui-input-clear').click()
       $('#setlists-new-song-choices').html('')
-      $('#setlists-song-chosen-by-popup').popup('close')
+      chosenSong.popup('close')
 
   $(document).on 'click', '.remove-song', (e) ->
     $(this).closest('li').remove()
