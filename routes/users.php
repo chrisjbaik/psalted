@@ -113,6 +113,18 @@
       if ($setlist) {
         $setlist->title = $req->params('title');
         $setlist->user_id = $user->id;
+        
+        // allow users to move setlist from personal to group
+        $group_id = (int) $req->params('group');
+        if ($group_id != 0) {
+          //check if user belongs to group
+          if ($group = Model::factory('Group')->where('id', $group_id)->find_one()) {
+            if ($group->users()->where('id', $user->id)->find_one()) {
+              $setlist->user_id = 0;
+              $setlist->group_id = $group_id;
+            }
+          }
+        }
         $setlist->created_by = $user->id;
         $setlist->updated_by = $user->id;
         $setlist->date = strtotime($req->params('date'));
@@ -130,7 +142,12 @@
             }
           }
           $app->flash('success', 'Setlist was successfully edited!');
-          $app->redirect('/personal/' . $setlist->url);
+          if ($setlist->group_id != 0) {
+            $app->redirect('/groups/' . $setlist->group()->find_one()->url . '/' . $setlist->url);
+          }
+          else {
+            $app->redirect('/personal/' . $setlist->url);
+          }
         } else { return errorHandler($app, $url); }
       } else { return errorHandler($app, $url); }
     });

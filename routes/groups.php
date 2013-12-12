@@ -192,7 +192,24 @@
         $setlist = Model::factory('Setlist')->where('url', $setlist_url)->find_one();
         if ($setlist) {
           $setlist->title = $req->params('title');
-          $setlist->group_id = $group->id;
+
+          $user = $_SESSION['user'];
+          // allow users to move setlist from group to group
+          $group_id = (int) $req->params('group');
+          if ($group_id != 0) {
+            //check if user belongs to group
+            if ($group = Model::factory('Group')->where('id', $group_id)->find_one()) {
+              if ($group->users()->where('id', $user->id)->find_one()) {
+                $setlist->user_id = 0;
+                $setlist->group_id = $group_id;
+              }
+            }
+          }
+          else {
+            $setlist->user_id = $user->id;
+            $setlist->group_id = 0;
+          }
+          
           $setlist->created_by = $_SESSION['user']->id;
           $setlist->updated_by = $_SESSION['user']->id;
           $setlist->date = strtotime($req->params('date'));
