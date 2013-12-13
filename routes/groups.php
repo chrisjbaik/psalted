@@ -32,7 +32,7 @@
         $app->flash('success', 'Group was successfully deleted!');
         $app->redirect('/');
       } else {
-        $app->flash('error', 'Group does not exist.');
+        $app->flash('error', 'Group '.htmlspecialchars($id).' does not exist.');
         $app->redirect('/');
       }
     });
@@ -41,14 +41,14 @@
       $req = $app->request();
 
       $group = Model::factory('Group')->where('url', $url)->find_one();
-      $members = $group->users()->find_many();
       if ($group) {
+        $members = $group->users()->find_many();
         $app->render('groups/edit.php', array(
           'group' => $group,
           'members' => $members
         ));
       } else {
-        $app->flash('error', 'Group does not exist.');
+        $app->flash('error', 'Group '.htmlspecialchars($url).' does not exist.');
         $app->redirect('/');
       }
     });
@@ -75,7 +75,7 @@
           $app->redirect('/groups/' . $group->url);
         } else { return errorHandler($app, $url); }
       } else {
-        $app->flash('error', 'Group does not exist.');
+        $app->flash('error', 'Group '.htmlspecialchars($url).' does not exist.');
         $app->redirect('/');
       }
     });
@@ -91,7 +91,7 @@
           'group' => $group
         ));
       } else {
-        $app->flash('error', 'Group was not found!');
+        $app->flash('error', 'Group '.htmlspecialchars($url).' was not found!');
         $app->redirect('/');
       }
     });
@@ -145,7 +145,7 @@
           'page_title' => $group->name
         ));
       } else {
-        $app->flash('error', 'Group was not found!');
+        $app->flash('error', 'Group '.htmlspecialchars($url).' was not found!');
         $app->redirect('/');
       }
     });
@@ -176,7 +176,7 @@
           $app->redirect('/'); 
         }
       } else {
-        $app->flash('error', 'Group was not found!');
+        $app->flash('error', 'Group '.htmlspecialchars($url).' was not found!');
         $app->redirect('/');
       }
     });
@@ -231,7 +231,7 @@
           } else { return errorHandler($app, $url); }
         } else { return errorHandler($app, $url); }
       } else {
-        $app->flash('error', 'Group was not found!');
+        $app->flash('error', 'Group '.htmlspecialchars($url).' was not found!');
         $app->redirect('/');
       }
     });
@@ -269,11 +269,11 @@
             'songs_url' => "/groups/$url/$setlist_url/songs",
           ));
         } else {
-          $app->flash('error', 'Setlist was not found!');
+          $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
           $app->redirect('/'); 
         }
       } else {
-        $app->flash('error', 'Group was not found!');
+        $app->flash('error', 'Group '.htmlspecialchars($url).' was not found!');
         $app->redirect('/');
       }
     });
