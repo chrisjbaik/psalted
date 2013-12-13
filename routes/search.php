@@ -38,7 +38,7 @@ $app->group('/search', $acl_middleware(), function () use ($app) {
   $app->get('/users/:query', function ($query) use ($app) {
     $res = $app->response();
     $query = '%' . $query . '%';
-    $users = Model::factory('User')->raw_query('SELECT id, first_name, last_name FROM `user` WHERE first_name LIKE :query OR last_name LIKE :query OR email LIKE :query', array('query' => $query))->find_array();
+    $users = Model::factory('User')->raw_query('SELECT id, first_name, last_name FROM `user` WHERE first_name LIKE :query OR last_name LIKE :query OR email LIKE :query ORDER BY first_name, lastName', array('query' => $query))->find_array();
     $res->write(json_encode($users));
   });
 });
