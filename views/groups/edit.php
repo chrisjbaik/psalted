@@ -8,10 +8,10 @@
       <?php
         if (!empty($members)) {
           foreach ($members as $member) {
-            echo "<li data-id='{$member->id}'>";
-            echo "<a href='#'>{$member->first_name} {$member->last_name}</a>";
-            echo "<a href='#' class='remove-member'>Remove Member</a>";
-            echo "<input type='hidden' name='members[]' value='{$member->id}'>";
+            echo "<li data-id=\"{$member->id}\">";
+            echo "<a href=\"#\">{$member->first_name} {$member->last_name}</a>";
+            echo '<a href="#" class="remove-member" data-theme="b">Remove Member</a>';
+            echo "<input type=\"hidden\" name=\"members[]\" value=\"{$member->id}\">";
           }
         } else {
           echo "<li data-id='{$user->id}'>{$user->first_name} {$user->last_name}<input type='hidden' name='members[]' value='{$user->id}'>";

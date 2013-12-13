@@ -25,7 +25,7 @@ $(document).delegate "#groups-edit", "pageinit", ->
   $(document).on 'click', '#groups-new-member-choices a[data-id]', (e)->
     $this = $(this)
     if $('#groups-new-members li[data-id=' + $this.attr('data-id') + ']').length is 0
-      $('#groups-new-members').append("<li data-id=\"#{$this.attr('data-id')}\">#{$this.text()}<input type=\"hidden\" name=\"members[]\" value=\"#{$this.attr('data-id')}\">")
+      $('#groups-new-members').append("<li data-id=\"#{$this.attr('data-id')}\"><a href=\"#\">#{$this.text()}</a><a data-theme=\"b\" href=\"#\" class=\"remove-member\">Remove Member</a><input type=\"hidden\" name=\"members[]\" value=\"#{$this.attr('data-id')}\">")
       .listview('refresh')
       $('#groups-new-member-choices-box .ui-input-clear').click()
       $('#groups-new-member-choices').html ''
