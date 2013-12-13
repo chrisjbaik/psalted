@@ -69,6 +69,7 @@
 	 */
 	$app->get('/', function () use ($app) {
 		if (!empty($_SESSION['user'])) {
+			$app->flashKeep();
 			$app->redirect('/home');
 		} else {
 			$app->render('index.php');
