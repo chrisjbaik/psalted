@@ -8,7 +8,7 @@ $(document).delegate "#groups-edit", "pageinit", ->
     value = $input.val()
     html = ''
     $ul.html ''
-    if value?.length > 2
+    if value?.length > 1 # at least two character
       $ul.html '<li><div class="ui-loader"><span class="ui-icon ui-icon-loading"></span></div>'
       $ul.listview 'refresh'
       $.ajax
