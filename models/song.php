@@ -39,6 +39,7 @@ class Song extends Model {
   }
 
   public function generateSlug() {
+    URLify::$remove_list = array();
     $url = URLify::filter($this->title);
     $found = Model::factory('Song')->where('url', $url)->find_one();
 
