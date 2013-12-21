@@ -143,6 +143,29 @@
             }
           }
 
+          $newTags = $req->params('new_tags');
+          if (!empty($newTags)) {
+            foreach ($newTags as $tagName) {
+              $new_tag = Model::factory('Tag')->create();
+              $new_tag->name = $tagName;
+              if (!($new_tag->save())) {
+                $app->flash('error', 'Tag save failed.');
+                $app->redirect('/songs/'.$song->url);
+              }
+            }
+            foreach ($newTags as $tagName) {
+              $tag = Model::factory('Tag')->where('name', $tagName)->find_one();
+              $song_tag = Model::factory('SongTag')->create();
+              $song_tag->song_id = $song->id;
+              $song_tag->tag_id = $tag->id;
+              $song_tag->added_by = $_SESSION['user']->id;
+              if (!($song_tag->save())) {
+                $app->flash('error', 'Tag save failed.');
+                $app->redirect('/songs/'.$song->url);
+              }              
+            }
+          }
+
           $app->flash('success', 'Song was successfully edited!');
           $app->redirect('/songs/'.$song->url);
         } else {

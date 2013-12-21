@@ -47,6 +47,7 @@ $(document).delegate "#songs-edit", "pageinit", ->
     $ul = $(this)
     $input = $(data.input)
     value = $input.val()
+    tag_exists = false
     html = ''
     $ul.html ''
     if value?.length > 1 # at least two character
@@ -59,6 +60,10 @@ $(document).delegate "#songs-edit", "pageinit", ->
         $.each response, (i, val)->
           if $("#song-tags li[data-id=#{val.id}]").length is 0
             html += "<li><a href=\"#\" data-id=\"#{val.id}\">#{val.name}</a>"
+          if val.name == value
+            tag_exists = true
+        if !tag_exists #Give option to add new tag if doesn't exist
+          html += "<li><a href=\"#\" new-tag=\"#{value}\">Add \"#{value}\" as a new tag</a>"
         $ul.html html
         $ul.listview "refresh"
         $ul.trigger "updatelayout"
@@ -67,6 +72,14 @@ $(document).delegate "#songs-edit", "pageinit", ->
     $this = $(this)
     if $('#song-tags li[data-id=' + $this.attr('data-id') + ']').length is 0
       $('#song-tags').append("<li data-id=\"#{$this.attr('data-id')}\"><a href=\"#\">#{$this.text()}</a><a data-theme=\"b\" href=\"#\" class=\"remove-tag\">X</a><input type=\"hidden\" name=\"tags[]\" value=\"#{$this.attr('data-id')}\">")
+      .listview('refresh')
+      $('#new-tag-choices-box .ui-input-clear').click()
+      $('#new-tag-choices').html ''
+
+  $(document).on 'click', '#new-tag-choices a[new-tag]', (e)-> #add new tag
+    $this = $(this)
+    if $('#song-tags li[value=' + $this.attr('new-tag') + ']').length is 0
+      $('#song-tags').append("<li value=\"#{$this.attr('new-tag')}\"><a href=\"#\">#{$this.attr('new-tag')}</a><a data-theme=\"b\" href=\"#\" class=\"remove-tag\">X</a><input type=\"hidden\" name=\"new_tags[]\" value=\"#{$this.attr('new-tag')}\">")
       .listview('refresh')
       $('#new-tag-choices-box .ui-input-clear').click()
       $('#new-tag-choices').html ''
