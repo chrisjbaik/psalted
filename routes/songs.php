@@ -71,8 +71,10 @@
 
       $song = Model::factory('Song')->find_one($id);
       if ($song) {
+        $tags = $song->tags()->find_many();
         $app->render('songs/edit.php', array(
           'song' => $song,
+          'tags' => $tags,
           'right_panel' => true,
         ));
       } else {
@@ -125,6 +127,22 @@
         $song->artist = $req->params('artist');
         $song->spotify_id = $req->params('spotify_id');
         if ($song->save()) {
+
+          Model::factory('SongTag')->where('song_id', $song->id)->delete_many();
+          $tags = $req->params('tags');
+          if (!empty($tags)) {
+            foreach ($tags as $tag) {
+              $song_tag = Model::factory('SongTag')->create();
+              $song_tag->song_id = $song->id;
+              $song_tag->tag_id = $tag;
+              $song_tag->added_by = $_SESSION['user']->id;
+              if (!($song_tag->save())) {
+                $app->flash('error', 'Tag save failed.');
+                $app->redirect('/songs/'.$song->url);
+              }
+            }
+          }
+
           $app->flash('success', 'Song was successfully edited!');
           $app->redirect('/songs/'.$song->url);
         } else {
