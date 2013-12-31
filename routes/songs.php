@@ -22,7 +22,7 @@
   $app->group('/songs', $acl_middleware(), function () use ($app) {
     $app->get('/', function () use ($app) {
       $user = $_SESSION['user'];
-      $songs = Model::factory('Song')->select_many('id','url','title')->order_by_asc('title')->find_many();
+      $songs = Model::factory('Song')->select_many('id','url','title','artist','certified')->order_by_asc('title')->find_many();
       $groups = $user->groups()->select('id')->find_many();
       if (!empty($groups) && is_array($groups)) {
         $reduce_groups = function($result, $group) {
