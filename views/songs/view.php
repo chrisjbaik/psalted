@@ -59,8 +59,11 @@
       if (!empty($tags)) {
         echo "<b>Tags:  </b>";
         foreach ($tags as $tag) {
+          if (empty($tag->url)) {
+            $tag->save();
+          }
           $name = $tag->name;
-          echo "<input type=\"button\" data-mini=\"true\" data-theme=\"c\" data-inline=\"true\" data-enhanced=\"false\" value=\"$name\"></input>";
+          echo "<a href='/tags/{$tag->url}'><input type=\"button\" data-mini=\"true\" data-theme=\"c\" data-inline=\"true\" data-enhanced=\"false\" value=\"$name\"></input></a>";
         }
       }
     ?>

@@ -2,7 +2,7 @@
 
 use Phpmig\Migration\Migration;
 
-class AddUrlToGroups extends Migration
+class AddURLToTags extends Migration
 {
     /**
      * Do the migration
@@ -10,9 +10,9 @@ class AddUrlToGroups extends Migration
     public function up()
     {
         $statements = array(
-            "ALTER TABLE `group` ADD COLUMN url TEXT"
+            "ALTER TABLE `tag` ADD COLUMN url TEXT"
         );
-        
+
         $container = $this->getContainer();
         foreach ($statements as $statement) {
             $container['db']->query($statement);
@@ -23,5 +23,7 @@ class AddUrlToGroups extends Migration
      * Undo the migration
      */
     public function down()
-    {}
+    {
+
+    }
 }
