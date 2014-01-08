@@ -22,7 +22,7 @@
   $app->group('/songs', $acl_middleware(), function () use ($app) {
     $app->get('/', function () use ($app) {
       $user = $_SESSION['user'];
-      $songs = Model::factory('Song')->select_many('id','url','title')->order_by_asc('title')->find_many();
+      $songs = Model::factory('Song')->select_many('id','url','title','artist','certified')->order_by_asc('title')->find_many();
       $groups = $user->groups()->select('id')->find_many();
       if (!empty($groups) && is_array($groups)) {
         $reduce_groups = function($result, $group) {
@@ -71,8 +71,10 @@
 
       $song = Model::factory('Song')->where('url', $song_url)->find_one();
       if ($song) {
+        $tags = $song->tags()->find_many();
         $app->render('songs/edit.php', array(
           'song' => $song,
+          'tags' => $tags,
           'right_panel' => true,
         ));
       } else {
@@ -125,6 +127,45 @@
         $song->artist = $req->params('artist');
         $song->spotify_id = $req->params('spotify_id');
         if ($song->save()) {
+
+          Model::factory('SongTag')->where('song_id', $song->id)->delete_many();
+          $tags = $req->params('tags');
+          if (!empty($tags)) {
+            foreach ($tags as $tag) {
+              $song_tag = Model::factory('SongTag')->create();
+              $song_tag->song_id = $song->id;
+              $song_tag->tag_id = $tag;
+              $song_tag->added_by = $_SESSION['user']->id;
+              if (!($song_tag->save())) {
+                $app->flash('error', 'Tag save failed.');
+                $app->redirect('/songs/'.$song->url);
+              }
+            }
+          }
+
+          $newTags = $req->params('new_tags');
+          if (!empty($newTags)) {
+            foreach ($newTags as $tagName) {
+              $new_tag = Model::factory('Tag')->create();
+              $new_tag->name = $tagName;
+              if (!($new_tag->save())) {
+                $app->flash('error', 'Tag save failed.');
+                $app->redirect('/songs/'.$song->url);
+              }
+            }
+            foreach ($newTags as $tagName) {
+              $tag = Model::factory('Tag')->where('name', $tagName)->find_one();
+              $song_tag = Model::factory('SongTag')->create();
+              $song_tag->song_id = $song->id;
+              $song_tag->tag_id = $tag->id;
+              $song_tag->added_by = $_SESSION['user']->id;
+              if (!($song_tag->save())) {
+                $app->flash('error', 'Tag save failed.');
+                $app->redirect('/songs/'.$song->url);
+              }              
+            }
+          }
+
           $app->flash('success', 'Song was successfully edited!');
           $app->redirect('/songs/'.$song->url);
         } else {

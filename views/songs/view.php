@@ -52,5 +52,22 @@
   </div>
 
   <div id="song-chords" class="chordsify chordsify-raw" data-original-key="<?= $song->key ?>"><?= htmlspecialchars($song->chords) ?></div>
+  
+  <div id="song-tags">
+    <?php
+      $tags = $song->tags()->find_many();
+      if (!empty($tags)) {
+        echo "<b>Tags:  </b>";
+        foreach ($tags as $tag) {
+          if (empty($tag->url)) {
+            $tag->save();
+          }
+          $name = $tag->name;
+          echo "<a href='/tags/{$tag->url}'><input type=\"button\" data-mini=\"true\" data-theme=\"c\" data-inline=\"true\" data-enhanced=\"false\" value=\"$name\"></input></a>";
+        }
+      }
+    ?>
+  </div>
 </div>
+
 <?php include_once('../views/includes/footer.php'); ?>

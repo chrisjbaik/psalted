@@ -41,4 +41,11 @@ $app->group('/search', $acl_middleware(), function () use ($app) {
     $users = Model::factory('User')->raw_query('SELECT id, first_name, last_name FROM `user` WHERE first_name LIKE :query OR last_name LIKE :query OR email LIKE :query ORDER BY first_name, last_name', array('query' => $query))->find_array();
     $res->write(json_encode($users));
   });
+
+  $app->get('/tags/:query', function ($query) use ($app) {
+    $res = $app->response();
+    $query = '%' . $query . '%';
+    $tags = Model::factory('Tag')->raw_query('SELECT id, name FROM `tag` WHERE name LIKE :query ORDER BY name', array('query' => $query))->find_array();
+    $res->write(json_encode($tags));
+  }); 
 });

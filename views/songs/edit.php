@@ -33,6 +33,27 @@
     </select>
     <label for="chord-lyrics">Chords &amp; Lyrics</label>
     <textarea cols="40" rows="100" name="chords" id="chord-lyrics" style="height:200px;"><?php if(!empty($song->chords)) { echo $song->chords; } ?></textarea>
+    
+    <ul id='song-tags' data-role="listview" data-inset="true" data-divider-theme="a" data-split-icon='delete' data-split-theme='c'>
+      <li data-role="list-divider" role="heading">Tags</li>
+      <?php
+      if (!empty($tags)) {
+        foreach ($tags as $tag) {
+          echo "<li data-id=\"{$tag->id}\">";
+          echo "<a href=\"#\">{$tag->name}</a>";
+          echo '<a href="#" class="remove-tag" data-theme="b">X</a>';
+          echo "<input type=\"hidden\" name=\"tags[]\" value=\"{$tag->id}\">";
+        }
+      }
+      ?>
+    </ul>
+
+    <!-- TAG THIS SONG -->
+    <div id="new-tag-choices-box" style="padding: 15px 0;"> 
+      <ul id="new-tag-choices" data-filter-reveal="true" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Tag this song...">
+      </ul>
+    </div>    
+
     <label for="copyright" class="ui-hidden-accessible">Copyright</label>
     <input type="text" name="copyright" id="copyright" placeholder="Copyright" value="<?php if(!empty($song->copyright)) { echo $song->copyright; } ?>">
     <label for="spotify" class="ui-hidden-accessible">Spotify</label>

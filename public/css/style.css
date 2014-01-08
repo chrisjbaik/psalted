@@ -323,6 +323,15 @@
 .listview-checkbox > a .ui-checkbox label {
   border-radius: 0;
   border: 0;
+  padding: 6px 43px;
+}
+.ui-listview > li h2.listview-heading {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.listview-footer {
+  font-weight: normal;
+  font-size: 12px;
 }
 .ui-header .ui-title {
   margin: 0 auto;

@@ -60,4 +60,8 @@ class Song extends Model {
 
     return true;
   }
+
+  public function tags() {
+    return $this->has_many_through('Tag');
+  }
 }
