@@ -1,23 +1,23 @@
 <?php
-  $app->get('/songs.json', $acl_middleware(), function () use ($app) {
+  /*$app->get('/songs.json', $acl_middleware(), function () use ($app) {
     $res = $app->response();
     $songs = Model::factory('Song')->select_many('id','url','title')->find_array();
     $res->write(json_encode($songs));
   });
 
-  $app->get('/songs/:url.json', $acl_middleware(), function ($url) use ($app) {
+  $app->get('/songs/:song_url.json', $acl_middleware(), function ($song_url) use ($app) {
     $res = $app->response();
 
-    $song = Model::factory('Song')->where('url', $url)->find_one();
-    if ($song) {
+    $song = Model::factory('Song')->where('url', $song_url)->find_one();
+    if ($song_url) {
       $res['Content-Type'] = 'application/json';
       $res->write(
-        json_encode($song)
+        json_encode($song_url)
       );
     } else {
       $res->write('{}');
     }
-  });
+  })->name("/songs/views");*/
 
   $app->group('/songs', $acl_middleware(), function () use ($app) {
     $app->get('/', function () use ($app) {
@@ -66,10 +66,10 @@
       }
     });
 
-    $app->get('/:id/edit', function ($id) use ($app) {
+    $app->get('/:song_url/edit', function ($song_url) use ($app) {
       $req = $app->request();
 
-      $song = Model::factory('Song')->find_one($id);
+      $song = Model::factory('Song')->where('url', $song_url)->find_one();
       if ($song) {
         $app->render('songs/edit.php', array(
           'song' => $song,
@@ -81,10 +81,10 @@
       }
     });
 
-    $app->get('/:id/certify', function ($id) use ($app) {
+    $app->get('/:song_url/certify', function ($song_url) use ($app) {
       $req = $app->request();
 
-      $song = Model::factory('Song')->find_one($id);
+      $song = Model::factory('Song')->where('url', $song_url)->find_one();
       if ($song) {
         $song->certified = true;
         if ($song->save()) {
@@ -97,10 +97,10 @@
       }
     });
 
-    $app->get('/:id/decertify', function ($id) use ($app) {
+    $app->get('/:song_url/decertify', function ($song_url) use ($app) {
       $req = $app->request();
 
-      $song = Model::factory('Song')->find_one($id);
+      $song = Model::factory('Song')->where('url', $song_url)->find_one();
       if ($song) {
         $song->certified = false;
         if ($song->save()) {
@@ -113,10 +113,10 @@
       }
     });
 
-    $app->put('/:id', function ($id) use ($app) {
+    $app->put('/:song_url', function ($song_url) use ($app) {
       $req = $app->request();
 
-      $song = Model::factory('Song')->find_one($id);
+      $song = Model::factory('Song')->where('url', $song_url)->find_one();
       if ($song) {
         $song->title = $req->params('title');
         $song->chords = $req->params('chords');
@@ -137,10 +137,10 @@
       }
     });
 
-    $app->delete('/:id', function ($id) use ($app) {
+    $app->delete('/:song_url', function ($song_url) use ($app) {
       $req = $app->request();
 
-      $song = Model::factory('Song')->find_one($id);
+      $song = Model::factory('Song')->where('url', $song_url)->find_one();
       if ($song) {
         $song->delete();
         $app->flash('success', 'Song was successfully deleted!');
@@ -151,8 +151,8 @@
       }
     });
 
-    $app->get('/:url', function ($url) use ($app) {
-      $song = Model::factory('Song')->where('url', $url)->find_one();
+    $app->get('/:song_url', function ($song_url) use ($app) {
+      $song = Model::factory('Song')->where('url', $song_url)->find_one();
 
       if ($song) {
         $app->render('songs/view.php', array(
@@ -166,10 +166,10 @@
       }
     });
 
-    $app->get('/:url/chords', function ($url) use ($app) {
+    $app->get('/:song_url/chords', function ($song_url) use ($app) {
       $res = $app->response();
 
-      $song = Model::factory('Song')->where('url', $url)->find_one();
+      $song = Model::factory('Song')->where('url', $song_url)->find_one();
 
       if ($song) {
         $app->render('print.php', array(
@@ -182,10 +182,10 @@
       }
     });
 
-    $app->get('/:url/lyrics', function ($url) use ($app) {
+    $app->get('/:song_url/lyrics', function ($song_url) use ($app) {
       $res = $app->response();
 
-      $song = Model::factory('Song')->where('url', $url)->find_one();
+      $song = Model::factory('Song')->where('url', $song_url)->find_one();
 
       if ($song) {
         $app->render('print.php', array(

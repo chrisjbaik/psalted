@@ -9,16 +9,16 @@
     <?php 
     if ($song->certified) {
       if ($isAdmin) {
-        echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->id.'/decertify">Decertify this Song</a></li>';
-        echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->id.'/edit">Edit Song</a></li>';
+        echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->url.'/decertify">Decertify this Song</a></li>';
+        echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->url.'/edit">Edit Song</a></li>';
       } else {
         echo '<li>This song is certified</li>';
       }
     } else {
       if ($isAdmin) {
-        echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->id.'/certify">Certify this Song</a></li>';
+        echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->url.'/certify">Certify this Song</a></li>';
       }
-      echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->id.'/edit">Edit Song</a></li>';
+      echo '<li data-icon="gear"><a data-ajax="false" href="/songs/'.$song->url.'/edit">Edit Song</a></li>';
     }
     ?>
   </ul>

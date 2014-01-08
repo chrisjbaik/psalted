@@ -3,7 +3,7 @@
   <ul data-role="listview">
     <li data-icon="gear"><a href="/groups/<?php echo $group->url; ?>/edit">Edit Group</a></li>
     <li data-icon="delete" data-theme="b">
-      <a data-rel='popup' data-position-to='window' href="#group-delete-popup" class='groups-delete-link' id="delete-group" data-id="<?php echo $group->id; ?>">Delete Group</a>
+      <a data-rel='popup' data-position-to='window' href="#group-delete-popup" class='groups-delete-link' id="delete-group" data-url="<?php echo $group->url; ?>">Delete Group</a>
     </li>
   </ul>
 </div>

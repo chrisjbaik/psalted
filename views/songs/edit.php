@@ -11,7 +11,7 @@
 <?php endif; ?>
 
 <div data-role="content">
-  <form method='post' data-ajax='false' <?php if (!empty($song)) { echo "action='/songs/{$song->id}'"; } ?>>
+  <form method='post' data-ajax='false' <?php if (!empty($song)) { echo "action='/songs/{$song->url}'"; } ?>>
     <label for="song-edit-title-input" class="ui-hidden-accessible">Title</label>
     <input type="text" name="title" id="song-edit-title-input" placeholder="Title" value="<?php if(!empty($song->title)) { echo $song->title; } ?>">
     <label for="song-edit-artist-input" class="ui-hidden-accessible">Artist</label>

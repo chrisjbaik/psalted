@@ -25,8 +25,8 @@
       } else { return errorHandler($app); }
     });
 
-    $app->delete('/:id', function ($id) use ($app) {
-      $group = Model::factory('Group')->find_one($id);
+    $app->delete('/:group_url', function ($group_url) use ($app) {
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
       if ($group) {
         $group->delete();
         $app->flash('success', 'Group was successfully deleted!');
@@ -37,10 +37,10 @@
       }
     });
     
-    $app->get('/:url/edit', function ($url) use ($app) {
+    $app->get('/:group_url/edit', function ($group_url) use ($app) {
       $req = $app->request();
 
-      $group = Model::factory('Group')->where('url', $url)->find_one();
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
       if ($group) {
         $members = $group->users()->find_many();
         $app->render('groups/edit.php', array(
@@ -48,18 +48,18 @@
           'members' => $members
         ));
       } else {
-        $app->flash('error', 'Group '.htmlspecialchars($url).' does not exist.');
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' does not exist.');
         $app->redirect('/');
       }
     });
 
-    $app->post('/:url/edit', function ($url) use ($app) {
-      function errorHandler($app, $url) {
+    $app->post('/:group_url/edit', function ($group_url) use ($app) {
+      function errorHandler($app, $group_url) {
         $app->flash('error', 'Group save failed.');
-        $app->redirect('/groups/' + $url + '/edit');
+        $app->redirect('/groups/' + $group_url + '/edit');
       }
       $req = $app->request();
-      $group = Model::factory('Group')->where('url', $url)->find_one();
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
       if ($group) {
         $group->name = $req->params('name');
         if ($group->save()) {
@@ -69,20 +69,20 @@
             $groups_user = Model::factory('GroupUser')->create();
             $groups_user->group_id = $group->id;
             $groups_user->user_id = $member;
-            if (!($groups_user->save())) { return errorHandler($app, $url); }
+            if (!($groups_user->save())) { return errorHandler($app, $group_url); }
           }
           $app->flash('success', 'Your changes have been saved!');
           $app->redirect('/groups/' . $group->url);
-        } else { return errorHandler($app, $url); }
+        } else { return errorHandler($app, $group_url); } // check
       } else {
-        $app->flash('error', 'Group '.htmlspecialchars($url).' does not exist.');
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' does not exist.');
         $app->redirect('/');
       }
     });
 
-    $app->get('/:url/new', function ($url) use ($app) {
+    $app->get('/:group_url/new', function ($group_url) use ($app) {
       $groups = $_SESSION['user']->groups()->find_many();
-      $group = Model::factory('Group')->where('url', $url)->find_one();
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
       if ($group) {
         $users = $group->users()->find_many();
         $app->render('setlists/edit.php', array(
@@ -91,18 +91,18 @@
           'group' => $group
         ));
       } else {
-        $app->flash('error', 'Group '.htmlspecialchars($url).' was not found!');
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' was not found!');
         $app->redirect('/');
       }
     });
 
-    $app->post('/:url/new', function ($url) use ($app) {
-      function errorHandler($app, $url) {
+    $app->post('/:group_url/new', function ($group_url) use ($app) {
+      function errorHandler($app, $group_url) {
         $app->flash('error', 'Setlist save failed.');
-        $app->redirect('/groups/'. $url . '/new');
+        $app->redirect('/groups/'. $group_url . '/new');
       }
       $req = $app->request();
-      $group = Model::factory('Group')->where('url', $url)->find_one();
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
       if ($group) {
         $setlist = Model::factory('Setlist')->create();
         $setlist->title = $req->params('title');
@@ -119,20 +119,20 @@
               $setlist_song->song_id = $song['id'];
               $setlist_song->chosen_by = $song['chosen_by'];
               $setlist_song->priority = $index;
-              if (!($setlist_song->save())) { return errorHandler($app, $url); }
+              if (!($setlist_song->save())) { return errorHandler($app, $group_url); }
             }
           }
           $app->flash('success', 'Setlist was successfully added!');
           $app->redirect('/groups/' . $group->url . '/' . $setlist->url);
-        } else { return errorHandler($app, $url); }
+        } else { return errorHandler($app, $group_url); }
       } else {
         $app->flash('error', 'Group was not found!');
         $app->redirect('/');
       }
     });
 
-    $app->get('/:url', function ($url) use ($app) {
-      $group = Model::factory('Group')->where('url', $url)->find_one();
+    $app->get('/:group_url', function ($group_url) use ($app) {
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
 
       if ($group) {
         $users = $group->users()->find_many();
@@ -145,14 +145,14 @@
           'page_title' => $group->name
         ));
       } else {
-        $app->flash('error', 'Group '.htmlspecialchars($url).' was not found!');
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' was not found!');
         $app->redirect('/');
       }
     });
 
-    $app->get('/:url/:setlist_url/edit', function ($url, $setlist_url) use ($app) {
+    $app->get('/:group_url/:setlist_url/edit', function ($group_url, $setlist_url) use ($app) {
       $groups = $_SESSION['user']->groups()->find_many();
-      $group = Model::factory('Group')->where('url', $url)->find_one();
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
 
       if ($group) {
         $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
@@ -176,18 +176,18 @@
           $app->redirect('/'); 
         }
       } else {
-        $app->flash('error', 'Group '.htmlspecialchars($url).' was not found!');
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' was not found!');
         $app->redirect('/');
       }
     });
 
-    $app->post('/:url/:setlist_url/edit', function ($url, $setlist_url) use ($app) {
-      function errorHandler($app, $url) {
+    $app->post('/:group_url/:setlist_url/edit', function ($group_url, $setlist_url) use ($app) {
+      function errorHandler($app, $group_url) {
         $app->flash('error', 'Setlist save failed.');
-        $app->redirect('/groups/'. $url . '/new');
+        $app->redirect('/groups/'. $group_url . '/new');
       }
       $req = $app->request();
-      $group = Model::factory('Group')->where('url', $url)->find_one();
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
       if ($group) {
         $setlist = Model::factory('Setlist')->where('url', $setlist_url)->find_one();
         if ($setlist) {
@@ -223,27 +223,27 @@
                 $setlist_song->song_id = $song['id'];
                 $setlist_song->chosen_by = $song['chosen_by'];
                 $setlist_song->priority = $index;
-                if (!($setlist_song->save())) { return errorHandler($app, $url); }
+                if (!($setlist_song->save())) { return errorHandler($app, $group_url); }
               }
             }
             $app->flash('success', 'Setlist was successfully edited!');
             $app->redirect('/groups/' . $group->url . '/' . $setlist->url);
-          } else { return errorHandler($app, $url); }
-        } else { return errorHandler($app, $url); }
+          } else { return errorHandler($app, $group_url); }
+        } else { return errorHandler($app, $group_url); }
       } else {
-        $app->flash('error', 'Group '.htmlspecialchars($url).' was not found!');
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' was not found!');
         $app->redirect('/');
       }
     });
 
-    $app->delete('/:url/:setlist_url', function ($url, $setlist_url) use ($app) {
-      $group = Model::factory('Group')->where('url', $url)->find_one();
+    $app->delete('/:group_url/:setlist_url', function ($group_url, $setlist_url) use ($app) {
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
       if ($group) {
         $setlist = Model::factory('Setlist')->where('url', $setlist_url)->find_one();
         if ($setlist) {
           $setlist->delete();
           $app->flash('success', 'Setlist was successfully deleted!');
-          $app->redirect('/groups/'.$url);
+          $app->redirect('/groups/'.$group_url);
         }
       } else {
         $app->flash('error', 'Group does not exist.');
@@ -251,8 +251,8 @@
       }
     });
 
-    $app->get('/:url/:setlist_url', function ($url, $setlist_url) use ($app) {
-      $group = Model::factory('Group')->where('url', $url)->find_one();
+    $app->get('/:group_url/:setlist_url', function ($group_url, $setlist_url) use ($app) {
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
 
       if ($group) {
         $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
@@ -266,25 +266,25 @@
             'right_panel' => true,
             'page_title' => $setlist->title,
             'pdf_file' => $pdf_file,
-            'songs_url' => "/groups/$url/$setlist_url/songs",
+            'songs_url' => "/groups/$group_url/$setlist_url/songs",
           ));
         } else {
           $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
           $app->redirect('/'); 
         }
       } else {
-        $app->flash('error', 'Group '.htmlspecialchars($url).' was not found!');
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' was not found!');
         $app->redirect('/');
       }
     });
 
-    $app->get('/:url/:setlist_url/songs', function ($url, $setlist_url) use ($app) {
+    $app->get('/:group_url/:setlist_url/songs', function ($group_url, $setlist_url) use ($app) {
       if ( ! $app->request->isAjax()) {
         $app->response->setStatus(404);
         return;
       }
       $result = array('error'=>'unknown error');
-      $group = Model::factory('Group')->where('url', $url)->find_one();
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
 
       if ($group) {
         $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
