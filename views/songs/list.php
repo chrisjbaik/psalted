@@ -15,7 +15,7 @@
           <a href="#">
             <label>
               <input type="checkbox" name="checked_songs[]" value="<?= $song->id ?>">
-              <h2 class="listview-heading"><?= $song->title ?><?php if ($song->certified) { echo "&nbsp;&#10004"; } ?></h2>
+              <h2 class="listview-heading"><?= $song->title ?><?php if ($song->certified) { echo "&nbsp;<span class=\"certified-icon ui-icon-check ui-alt-icon\"></span>"; } ?></h2>
               <span class="listview-footer"><?= $song->artist ?></span>
             </label>
           </a>

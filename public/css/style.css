@@ -11,6 +11,15 @@
   max-width: 100%;
   height: auto;
 }
+.certified-icon {
+  opacity: 0.35;
+}
+.certified-icon:after {
+  content: '';
+  padding: 0 0.6em;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
 .sidebar-nav {
   padding: 9px 0;
 }
