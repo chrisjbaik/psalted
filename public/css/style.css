@@ -4,6 +4,13 @@
     padding-bottom: 40px;
   }
 }
+.home-logo {
+  text-align: center;
+}
+.home-logo img {
+  max-width: 100%;
+  height: auto;
+}
 .sidebar-nav {
   padding: 9px 0;
 }
