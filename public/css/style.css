@@ -56,10 +56,12 @@
   display: inline-block;
   font-weight: normal;
 }
-@media only screen {
+@media only screen and (min-width: 35em) {
   .chordsify {
     font-size: 20px;
   }
+}
+@media only screen {
   .chordsify-chord-inner {
     background: #666666;
     border-radius: 0.4em;
