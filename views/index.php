@@ -1,6 +1,6 @@
 <?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
-	<center><img src='img/psalted_03.gif'></center>
+  <div class="home-logo"><img src="img/psalted_03.gif" width="441" height="161"></div>
   <form method="post" action="/">
     <input type="text" name="email" id="text-basic" placeholder="Email" value="<?php if (isset($email)) { echo $email; }?>">
     <input type="password" name="password" id="password" placeholder="Password" value="" autocomplete="off">
