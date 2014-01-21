@@ -13,10 +13,10 @@
       ?>
         <li class="listview-checkbox">
           <a href="#">
-            <label>
+            <label class="song-label<?= $song->artist ? '' : ' song-no-artist' ?>">
               <input type="checkbox" name="checked_songs[]" value="<?= $song->id ?>">
               <h2 class="listview-heading"><?= $song->title ?><?php if ($song->certified) { echo "&nbsp;<span class=\"certified-icon ui-icon-check ui-alt-icon\"></span>"; } ?></h2>
-              <span class="listview-footer"><?= $song->artist ?></span>
+              <?= $song->artist ? '<span class="listview-footer">'.$song->artist.'</span>' : '' ?>
             </label>
           </a>
           <a href="/songs/<?= $song->url ?>" data-transition="slide"></a>

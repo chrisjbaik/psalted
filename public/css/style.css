@@ -11,6 +11,16 @@
   max-width: 100%;
   height: auto;
 }
+.song-label {
+  min-height: 2.5em;
+}
+.song-label .listview-heading {
+  position: relative;
+  top: 0.15em;
+}
+.song-label.song-no-artist .listview-heading {
+  top: 0.7em;
+}
 .certified-icon {
   opacity: 0.35;
 }
