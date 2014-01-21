@@ -136,7 +136,7 @@
 
       if ($group) {
         $users = $group->users()->find_many();
-        $setlists = $group->setlists()->find_many();
+        $setlists = $group->setlists()->order_by_desc('created_at')->find_many();
         $app->render('groups/view.php', array(
           'users' => $users,
           'group' => $group,
