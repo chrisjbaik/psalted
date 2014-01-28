@@ -49,7 +49,7 @@
     </ul>
 
     <!-- TAG THIS SONG -->
-    <div id="new-tag-choices-box" style="padding: 15px 0;"> 
+    <div id="new-tag-choices-box" style="padding-bottom: 15px;"> 
       <ul id="new-tag-choices" data-filter-reveal="true" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Tag this song...">
       </ul>
     </div>    
