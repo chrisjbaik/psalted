@@ -11,7 +11,8 @@
 .footer p {
   text-align: center;
 }
-.footer p a {
+.footer p a,
+.footer p a:visited {
   text-decoration: none;
   color: #555;
 }
