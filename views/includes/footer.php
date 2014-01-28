@@ -1,7 +1,7 @@
-  <div data-role="footer" id="footer">
-    <h3>
+  <div data-role="footer" id="footer" class="footer">
+    <p>
       <a href="/aboutus">By Team Sawadicop</a>
-    </h3>
+    </p>
   </div>
 </div>
 </body>

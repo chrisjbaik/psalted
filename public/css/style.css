@@ -4,12 +4,23 @@
     padding-bottom: 40px;
   }
 }
+.footer p {
+  text-align: center;
+}
+.footer p a {
+  text-decoration: none;
+  color: #555;
+}
 .home-logo {
   text-align: center;
 }
 .home-logo img {
   max-width: 100%;
   height: auto;
+}
+.home-login-form {
+  max-width: 420px;
+  margin: 0 auto;
 }
 .song-label {
   min-height: 2.5em;
