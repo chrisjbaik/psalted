@@ -78,7 +78,7 @@ $(document).delegate "#songs-edit", "pageinit", ->
 
   $(document).on 'click', '#new-tag-choices a[new-tag]', (e)-> #add new tag
     $this = $(this)
-    if $('#song-tags li[value=' + $this.attr('new-tag') + ']').length is 0
+    if $('#song-tags li[value="' + $this.attr('new-tag') + '"]').length is 0
       $('#song-tags').append("<li value=\"#{$this.attr('new-tag')}\"><a href=\"#\">#{$this.attr('new-tag')}</a><a data-theme=\"b\" href=\"#\" class=\"remove-tag\">X</a><input type=\"hidden\" name=\"new_tags[]\" value=\"#{$this.attr('new-tag')}\">")
       .listview('refresh')
       $('#new-tag-choices-box .ui-input-clear').click()
