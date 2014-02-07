@@ -1,6 +1,4 @@
 <?php
-  use Guzzle\Http\Client;
-
   $app->group('/admin', $acl_middleware('admin'), function () use ($app) {
     $app->get('/', function () use ($app) {
       $app->render('admin/index.php', array(
@@ -75,16 +73,7 @@
         $invite->key = uniqid();
         $invite->admin_approved = true;
         if ($invite->save()) {
-          $client = new Client();
           $inviter = $_SESSION['user'];
-          /*$customer_request = $client->put('https://track.customer.io/api/v1/customers/'.$inviter->id, array(),
-            array(
-              'email' => $_SESSION['user']->email,
-            )
-          );
-          $customer_request->setAuth($customer_io['site_id'], $customer_io['api_key']);
-          $customer_response = $customer_request->send();
-          if ($customer_response->isSuccessful()) {*/
           $customer_io = new CustomerIO();
           $send_invite = $customer_io->identify_and_send($inviter, array(
             'name' => 'invite_new_user',

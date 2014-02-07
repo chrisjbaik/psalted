@@ -1,7 +1,6 @@
 <?php
 use Guzzle\Http\Client;
 
-
 class CustomerIO extends Client {
   private $base_url = 'https://track.customer.io/api/v1/customers';
 
