@@ -5,7 +5,7 @@ class CustomerIO extends Client {
   private $base_url = 'https://track.customer.io/api/v1/customers';
 
   private function authorize_request($req) {
-    require __DIR__ . '/../config/services.php';
+    require realpath(__DIR__ . '/../config/services.php');
     $req->setAuth($customer_io['site_id'], $customer_io['api_key']);
     return $req;
   }
