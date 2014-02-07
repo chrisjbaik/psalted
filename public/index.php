@@ -3,13 +3,26 @@
 	require_once __DIR__ . '/../config/database.php';
 
 	/*
-	 * Database/Models Setup
+	 * Database/Models/Libs Setup
 	 */
 	ORM::configure("sqlite:../db/{$db_name}");
-	spl_autoload_register(function ($class_name) {
+
+	function autoload_models($class_name) {
     $class_name = strtolower($class_name);
-		include realpath(__DIR__ . "/../models/{$class_name}.php");
-	});
+    $file = realpath(__DIR__ . "/../models/{$class_name}.php");
+    if (file_exists($file)) {
+    	require_once($file);
+    }
+	}
+	function autoload_libs($class_name) {
+    $class_name = strtolower($class_name);
+    $file = realpath(__DIR__ . "/../lib/{$class_name}.php");
+    if (file_exists($file)) {
+    	require_once($file);
+    }
+	}
+	spl_autoload_register('autoload_models');
+	spl_autoload_register('autoload_libs');
 
 	/*
 	 * Views Setup

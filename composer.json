@@ -6,7 +6,8 @@
     "hybridauth/hybridauth": "dev-master",
     "ircmaxell/password-compat": "dev-master",
     "davedevelopment/phpmig": "*",
-    "pimple/pimple": "1.*"
+    "pimple/pimple": "1.*",
+		"guzzle/guzzle": "~3.7"
 	},
   "config": {
     "bin-dir": "bin/"
