@@ -5,7 +5,7 @@
 			<img src="img/aboutus.jpg" alt="Varoot and Chris passing out during our development session" class="img-responsive">
 		</div>
 		<div class="ui-block-b">
-			<p>We all attend the same church in Ann Arbor, Michigan. (check out <a href="http://hmcc.net" target="_blank">hmcc.net</a>)</p>
+			<p>We all attend <a href="http://annarbor.hmcc.net" target="_blank">the same church in Ann Arbor, Michigan</a>.</p>
 			<p>We developed this site to streamline a song sheet preparation process.</p>
 			<p>If you have any questions, concerns, or suggestions,
 				<br>please contact <a href="mailto:bacon@psalted.com">bacon@psalted.com</a>
