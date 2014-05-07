@@ -22,6 +22,29 @@ $(document).delegate "#groups-edit", "pageinit", ->
         $ul.listview "refresh"
         $ul.trigger "updatelayout"
 
+  $('#groups-new').on 'submit', (e) ->
+    e.preventDefault()
+    options = {
+      verse: {
+        bold: $('#checkbox-verse-bold').prop("checked") 
+        italics: $('#checkbox-verse-italics').prop("checked") 
+        underline: $('#checkbox-verse-underline').prop("checked") 
+      }
+      chorus: {
+        bold: $('#checkbox-chorus-bold').prop("checked") 
+        italics: $('#checkbox-chorus-italics').prop("checked") 
+        underline: $('#checkbox-chorus-underline').prop("checked") 
+      }
+      bridge: {
+        bold: $('#checkbox-bridge-bold').prop("checked") 
+        italics: $('#checkbox-bridge-italics').prop("checked") 
+        underline: $('#checkbox-bridge-underline').prop("checked") 
+      }
+    }
+    $("#groups-new-format").attr("value", JSON.stringify(options))
+
+    @submit()
+
   $(document).on 'click', '#groups-new-member-choices a[data-id]', (e)->
     $this = $(this)
     if $('#groups-new-members li[data-id=' + $this.attr('data-id') + ']').length is 0

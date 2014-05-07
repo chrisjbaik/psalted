@@ -59,6 +59,8 @@
         $app->redirect('/groups/' + $group_url + '/edit');
       }
       $req = $app->request();
+      var_dump($req->params('format'));
+      exit();
       $group = Model::factory('Group')->where('url', $group_url)->find_one();
       if ($group) {
         $group->name = $req->params('name');

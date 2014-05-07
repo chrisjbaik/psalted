@@ -45,7 +45,7 @@ function Songsheet(options) {
     forceCollapse: false,
     copies: 2
   }
-  var options = $.extend({}, defaultOptions, options);
+  var options = $.extend(true, {}, defaultOptions, options);
   options.contentWidth = options.width - options.margin.left - options.margin.right;
   options.contentHeight = options.height - options.margin.top - options.margin.bottom;
   options.columnWidth = (options.contentWidth + options.gutter) / options.columns;
