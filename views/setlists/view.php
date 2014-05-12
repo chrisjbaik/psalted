@@ -19,6 +19,7 @@
   </ul>
 </div>
 <div data-role="content" id="page-setlist-view">
+  <input type="hidden" name="format" value="<?php echo $group->format; ?>"  id="group-format"/>
   <button id="btn-pdf-save" data-pdf="<?= $pdf_file ?>" data-url="<?= $songs_url ?>" type="button" data-theme="b" <?php if (count($songs) == 0) echo 'disabled' ?>>Save PDF</button>
   <ul data-role="listview" data-divider-theme="a" data-inset="true">
     <li data-role="list-divider" role="heading">Songs</li>
