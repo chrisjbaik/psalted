@@ -11,6 +11,8 @@ $(document).delegate "#setlists-view", "pageinit", ->
   $("#btn-pdf-save").on 'click', (e) ->
     $.get $(e.currentTarget).attr('data-url'), (data) ->
       return alert(data.error) if data.error
-      sheet = new Songsheet({bridge: {style: 'bold'}})
+      console.log("clap")
+      alert($('#group-format').attr)
+      sheet = new Songsheet()
       sheet.addSongs(data.songs).render().save($(e.currentTarget).attr('data-pdf'))
     , 'json'

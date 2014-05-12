@@ -59,11 +59,12 @@
         $app->redirect('/groups/' + $group_url + '/edit');
       }
       $req = $app->request();
-      var_dump($req->params('format'));
-      exit();
+      // var_dump($req->params('format'));
+      // exit();
       $group = Model::factory('Group')->where('url', $group_url)->find_one();
       if ($group) {
         $group->name = $req->params('name');
+        $group->format = $req->params('format');
         if ($group->save()) {
           Model::factory('GroupUser')->where('group_id', $group->id)->delete_many();
           $members = $req->params('members');
