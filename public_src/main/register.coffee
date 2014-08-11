@@ -7,11 +7,12 @@ $(document).delegate "#register, #users-password", "pageinit", ->
     password = $('#password').val()
     password_confirm = $('#password-confirm').val()
     $btn = $('#submit-form')
-    if password is password_confirm
-      $btn.val($btn.attr('data-valid-label'))
-      	.button('refresh')
-      	.button('enable','refresh')
-    else
-      $btn.val("Why u so like dat one? Passwords don't match lah")
-      	.button('refresh')
-      	.button('disable','refresh')
+    if password isnt "" and password_confirm isnt ""
+      if password is password_confirm
+        $btn.val($btn.attr('data-valid-label'))
+          .button('refresh')
+          .button('enable','refresh')
+      else
+        $btn.val("Why u so like dat one? Passwords don't match lah")
+          .button('refresh')
+          .button('disable','refresh')

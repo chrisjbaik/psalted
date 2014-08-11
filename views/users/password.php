@@ -3,7 +3,7 @@
   <form data-ajax="false" method="post" action="/settings/password">
     <input type="password" id="password" placeholder="Password" name="password">
     <input type="password" id="password-confirm" placeholder="Confirm Password" name="password-confirm">
-    <input id="submit-form" type="submit" value="Passwords don't match lah" data-valid-label="Save Password" data-theme="b" disabled="disabled" >
+    <input id="submit-form" type="submit" value="Save Password" data-valid-label="Save Password" data-theme="b">
   </form>
 </div>
 <?php
