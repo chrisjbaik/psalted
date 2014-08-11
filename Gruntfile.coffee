@@ -25,7 +25,7 @@ module.exports = (grunt) ->
             'modernizr'
           ]
           alias: [
-            'bower_components/jspdf/dist/jspdf.source.js:jspdf'
+            'bower_components/jspdf/dist/jspdf.debug.js:jspdf'
             'public_src/libs/songsheet-0.1.js:songsheet'
           ]
           aliasMappings: [
