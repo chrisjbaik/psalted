@@ -9,11 +9,31 @@
     ));
   });
 
-  $app->get('/settings', $acl_middleware(), function () use ($app) {
-    $hybridauths = Model::factory('Hybridauth')->where('user_id', $_SESSION['user']->id)->find_many();
-    $app->render('users/settings.php', array(
-      'hybridauths' => $hybridauths
-    ));
+  $app->group('/settings', $acl_middleware(), function () use ($app) {
+    $app->get('/', function () use ($app) {
+      $hybridauths = Model::factory('Hybridauth')->where('user_id', $_SESSION['user']->id)->find_many();
+      $app->render('users/settings.php', array(
+        'hybridauths' => $hybridauths
+      ));
+    });
+    $app->get('/password', function () use ($app) {
+      $app->render('users/password.php', array());
+    });
+    $app->post('/password', function () use ($app) {
+      $req = $app->request();
+
+      $user = Model::factory('User')->where('id', $_SESSION['user']->id)->find_one();
+      $user->password = password_hash($req->params('password'), PASSWORD_BCRYPT);
+
+      if ($user->save()) {
+        $_SESSION['user'] = $user;
+        $app->flash('success', 'Password changed successfully.');
+        $app->redirect('/settings');
+      } else {
+        $app->flashNow('error', 'Password change failed. Try again or contact admin.');
+        $app->render('users/password.php', array());
+      }
+    });
   });
 
   $app->group('/personal', $acl_middleware(), function () use ($app) {

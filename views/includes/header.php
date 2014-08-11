@@ -36,6 +36,7 @@
         <li data-icon="search"><form action='/search' type='GET'><input type="search" placeholder="Search..." name='q'></form></li>
         <li data-icon="home"><a href="/home">Home</a></li>
         <li data-icon="search"><a href="/songs">Browse Songs</a></li>
+        <li data-icon="gear"><a href="/settings">Settings</a></li>
         <li><a href="/aboutus">About Us</a></li>
         <?php 
         if ($isAdmin) {

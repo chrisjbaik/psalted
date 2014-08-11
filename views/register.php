@@ -15,7 +15,7 @@
     <input type="password" id="password-confirm" placeholder="Confirm Password" name="password-confirm">
     <input type="text" id="first_name" placeholder="First Name" name="first_name" value="<?php if (!empty($user->first_name)) { echo $user->first_name; } ?>">
     <input type="text" id="last_name" placeholder="Last Name" name="last_name" value="<?php if (!empty($user->last_name)) { echo $user->last_name; } ?>">
-    <input id="submit-form" type="submit" value="Passwords don't match lah" data-theme="b" disabled="disabled" >
+    <input id="submit-form" type="submit" value="Passwords don't match lah" data-valid-label="Register" data-theme="b" disabled="disabled" >
   </form>
   
 <!--   <script>

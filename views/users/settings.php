@@ -1,6 +1,12 @@
 <?php
   include_once('../views/includes/header.php');
 ?>
+<div data-role="content">
+  <ul data-role="listview" data-divider-theme="a" data-inset="true">
+    <li><a href="/settings/password">Change Password</a></li>
+  </ul>
+</div>
+<!--
 <a href='/link?provider=facebook'>Connect with Facebook</a>
 <h2>Social Accounts</h2>
 <table class='table'>
@@ -19,5 +25,6 @@
   }
 ?>
 </table>
+-->
 <?php
   include_once('../views/includes/footer.php');

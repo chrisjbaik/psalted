@@ -1,14 +1,17 @@
 $ = require('jquery')
 $.mobile = require('jquery-mobile')
 
-$(document).delegate "#register", "pageinit", ->
+$(document).delegate "#register, #users-password", "pageinit", ->
 
   $(document).on 'change', '#password, #password-confirm', (e) ->
     password = $('#password').val()
     password_confirm = $('#password-confirm').val()
+    $btn = $('#submit-form')
     if password is password_confirm
-      $('#submit-form').val('Register').button('refresh')
-      $('#submit-form').button('enable','refresh')
+      $btn.val($btn.attr('data-valid-label'))
+      	.button('refresh')
+      	.button('enable','refresh')
     else
-      $('#submit-form').val("Why u so like dat one? Passwords don't match lah").button('refresh')
-      $('#submit-form').button('disable','refresh')
+      $btn.val("Why u so like dat one? Passwords don't match lah")
+      	.button('refresh')
+      	.button('disable','refresh')

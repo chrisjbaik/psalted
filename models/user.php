@@ -7,11 +7,13 @@ class User extends Model {
         empty($this->last_name)) {
       return false;
     }
-    $email_exists = Model::factory('User')->where('email', $this->email)->count();
-    if ($email_exists) {
-      return false;
+    if (empty($this->id)) {
+      $email_exists = Model::factory('User')->where('email', $this->email)->count();
+      if ($email_exists) {
+        return false;
+      }
+      $this->created_at = date('U');
     }
-    $this->created_at = date('U');
     if (empty($this->roles)) {
       $this->roles = serialize(array('member'));
     }
