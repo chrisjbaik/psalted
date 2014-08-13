@@ -24,10 +24,6 @@ module.exports = (grunt) ->
             'less'
             'modernizr'
           ]
-          alias: [
-            'bower_components/jspdf/dist/jspdf.debug.js:jspdf'
-            'public_src/libs/songsheet-0.1.js:songsheet'
-          ]
           aliasMappings: [
             cwd: 'public_src'
             src: ['**/*.coffee', '**/*.js']
@@ -35,18 +31,20 @@ module.exports = (grunt) ->
           ]
       lib:
         src: [
-          'public_src/libs/jquery-2.0.3.js'
-          'public_src/libs/jquery.mobile-1.4.0-rc.1-psalted.js'
+          'public_src/libs/jquery-2.1.1.js'
+          'public_src/libs/jquery.mobile-1.4.3-psalted.js'
+          'bower_components/chordsify/chordsify.js'
         ]
         dest: 'public/js/lib.js'
         options:
           alias: [
-            'public_src/libs/jquery-2.0.3.js:jquery'
-            'public_src/libs/jquery.mobile-1.4.0-rc.1-psalted.js:jquery-mobile'
+            'public_src/libs/jquery-2.1.1.js:jquery'
+            'public_src/libs/jquery.mobile-1.4.3-psalted.js:jquery-mobile'
+            'bower_components/chordsify/chordsify.js:chordsify'
           ]
           shim:
             'jquery-mobile':
-              path: 'public_src/libs/jquery.mobile-1.4.0-rc.1-psalted.js'
+              path: 'public_src/libs/jquery.mobile-1.4.3-psalted.js'
               exports: null
               depends:
                 jquery: 'jQuery'

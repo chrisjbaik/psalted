@@ -308,5 +308,38 @@
 
       $app->response->setBody(json_encode($result));
     });
+
+    $app->get('/:group_url/:setlist_url/pdf', function ($group_url, $setlist_url) use ($app) {
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
+
+      if (!$group) {
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' was not found!');
+        $app->redirect('/');
+      }
+
+      $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
+      if (!$setlist) {
+        $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
+        $app->redirect('/'); 
+      }
+
+      $options = array();
+      if ($copies = $app->request->get('copies')) {
+        if (is_numeric($copies) or $copies == 'auto')
+        {
+          $options['copies'] = $copies;
+        }
+      }
+
+      $sheet = new Chordsify\SongSheet($options);
+      $songs = $setlist->songs()->find_many();
+      foreach ($songs as $song) {
+        $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'original_key'=>$song->key));
+        $sheet->add($s);
+      }
+
+      $app->response->headers->set('Content-type', 'application/pdf');
+      $sheet->pdfOutput();
+    });
   });
 ?>

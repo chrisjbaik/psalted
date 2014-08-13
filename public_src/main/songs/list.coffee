@@ -1,7 +1,7 @@
 $ = require('jquery')
 $.mobile = require('jquery-mobile')
 
-$(document).delegate "#songs-list", "pageinit", ->
+$(document).delegate "#songs-list", "pagecreate", ->
   $('input[name="checked_songs[]"]').on 'change', ->
     if (count = $('input[name="checked_songs[]"]:checked').length) > 0
       $('.ui-footer-fixed').removeClass('hidden')

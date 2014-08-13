@@ -1,3 +1,181 @@
+/* Chordsify */
+.chordsify {
+  font-family: "PT Serif", Garamond, Times, serif;
+}
+.chordsify-raw {
+  white-space: pre;
+  white-space: pre-line;
+}
+.chordsify-section {
+  position: relative;
+}
+.chordsify-section[data-section-type="bridge"] {
+  padding-left: 1.5em;
+}
+.chordsify-section[data-section-type="chorus"] {
+  padding-left: 1.5em;
+}
+.chordsify-section[data-section-type="chorus"] .chordsify-paragraph:first-child:before {
+  color: #999;
+  content: "\2217";
+  position: absolute;
+  left: .35em;
+  top: .75em;
+}
+@media print {
+  .chordsify-section[data-section-type="chorus"] .chordsify-paragraph:first-child:before {
+    color: #ccc;
+  }
+}
+@media only screen and (min-width: 720px) {
+  .chordsify-section[data-section-type="chorus"] .chordsify-paragraph:first-child:before {
+    left: 1.85em;
+  }
+}
+@media only screen and (min-width: 720px) {
+  .chordsify-section {
+    border-left: .25em solid transparent;
+    padding-left: 1.5em;
+  }
+  .chordsify-section[data-section-type="bridge"] {
+    padding-left: 3em;
+  }
+  .chordsify-section[data-section-type="chorus"] {
+    padding-left: 3em;
+  }
+  .chordsify-section:hover {
+    border-left-color: #ddd;
+  }
+  .chordsify-section:hover:before {
+    color: #999;
+    content: attr(data-section-type) " " attr(data-section-num);
+    font-family: "PT Sans", Helvetica, Arial, sans-serif;
+    font-size: .6em;
+    position: absolute;
+    left: .25em;
+    top: .5em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    -webkit-transform: rotate(-90deg) translate(-100%, 0);
+    -webkit-transform-origin: left top;
+  }
+}
+.chordsify-paragraph {
+  line-height: 2.5;
+  padding: .75em 0 .5em;
+}
+.chordsify-no-chords {
+  line-height: 1.5;
+  padding: .5em 0 .75em;
+}
+.chordsify-lyrics {
+  font-feature-settings: "liga";
+  text-rendering: optimizeLegibility;
+}
+.chordsify-chord-anchor {
+  position: relative;
+}
+.chordsify-chord {
+  display: inline-block;
+  font-size: .75em;
+  font-weight: bold;
+  line-height: 1;
+  position: absolute;
+  top: -1.25em;
+  white-space: pre;
+}
+.chordsify-word {
+  display: inline-block;
+  white-space: pre;
+}
+.chordsify-gap {
+  display: inline-block;
+  height: .5ex;
+  margin: 0 .1em;
+}
+.chordsify-gap-dash {
+  border-top: 1px dashed #666;
+}
+@media print {
+  .chordsify-gap-dash {
+    border-top: .75pt dashed #000;
+  }
+}
+@media print {
+  body {
+    color: #000;
+  }
+  .chordsify-lyrics {
+    font-family: "PT Serif", Garamond, Times, serif;
+    font-size: 10pt;
+  }
+  .chordsify-chord {
+    font-family: "PT Sans", Helvetica, Arial, sans-serif;
+    font-size: 7.5pt;
+    font-weight: bold;
+    top: -0.35em;
+  }
+  .chordsify-paragraph {
+    line-height: 1.5;
+    padding: .75em 0 .25em;
+  }
+  .chordsify-no-chords {
+    line-height: 1;
+    padding: .5em 0 .25em;
+  }
+  .chordsify-gap {
+    height: .35ex;
+    margin: 0 .05em;
+  }
+}
+@media only screen {
+  .chordsify-chord {
+    background: #666666;
+    border-radius: .35em;
+    color: #ffffff;
+    font-family: "PT Sans", Helvetica, Arial, sans-serif;
+    padding: .2em .4em;
+  }
+  .chordsify-chord[data-chord="0"] {
+    background: #a33;
+  }
+  .chordsify-chord[data-chord="1"] {
+    background: #b93;
+  }
+  .chordsify-chord[data-chord="2"] {
+    background: #3a3;
+  }
+  .chordsify-chord[data-chord="3"] {
+    background: #38a;
+  }
+  .chordsify-chord[data-chord="4"] {
+    background: #43a;
+  }
+  .chordsify-chord[data-chord="5"] {
+    background: #a3a;
+  }
+  .chordsify-chord[data-chord="6"] {
+    background: #a63;
+  }
+  .chordsify-chord[data-chord="7"] {
+    background: #8a3;
+  }
+  .chordsify-chord[data-chord="8"] {
+    background: #3a8;
+  }
+  .chordsify-chord[data-chord="9"] {
+    background: #35a;
+  }
+  .chordsify-chord[data-chord="10"] {
+    background: #73a;
+  }
+  .chordsify-chord[data-chord="11"] {
+    background: #a36;
+  }
+}
+/* /Chordsify */.chordsify {
+  text-shadow: none;
+}
 @media screen and (min-width: 980px) {
   body {
     padding-top: 60px;
@@ -64,133 +242,6 @@
   color: #fff;
   padding: 10px 15px 10px;
 }
-/* Chordsify */
-.chordsify-raw {
-  white-space: pre;
-  white-space: pre-line;
-}
-.chordsify-chords-hidden .chordsify-chord {
-  display: none;
-}
-.chordsify-chord {
-  font-family: inherit;
-  font-size: 0.75em;
-  line-height: 1em;
-  padding: 0.5em 0 0.1em;
-  top: 0;
-}
-.chordsify-chord-inner {
-  display: inline-block;
-  font-weight: normal;
-  text-shadow: none;
-}
-@media only screen and (min-width: 35em) {
-  .chordsify {
-    font-size: 20px;
-  }
-}
-@media only screen {
-  .chordsify-chord-inner {
-    background: #666666;
-    border-radius: 0.4em;
-    color: #ffffff;
-    margin-right: 0.4em;
-    padding: 0.2em 0.4em 0.2em;
-  }
-  .chordsify-chord-inner[data-chord="0"] {
-    background: #a33;
-  }
-  .chordsify-chord-inner[data-chord="1"] {
-    background: #b93;
-  }
-  .chordsify-chord-inner[data-chord="2"] {
-    background: #3a3;
-  }
-  .chordsify-chord-inner[data-chord="3"] {
-    background: #38a;
-  }
-  .chordsify-chord-inner[data-chord="4"] {
-    background: #43a;
-  }
-  .chordsify-chord-inner[data-chord="5"] {
-    background: #a3a;
-  }
-  .chordsify-chord-inner[data-chord="6"] {
-    background: #a63;
-  }
-  .chordsify-chord-inner[data-chord="7"] {
-    background: #8a3;
-  }
-  .chordsify-chord-inner[data-chord="8"] {
-    background: #3a8;
-  }
-  .chordsify-chord-inner[data-chord="9"] {
-    background: #35a;
-  }
-  .chordsify-chord-inner[data-chord="10"] {
-    background: #73a;
-  }
-  .chordsify-chord-inner[data-chord="11"] {
-    background: #a36;
-  }
-}
-.chordsify-line,
-.chordsify-chord {
-  display: block;
-}
-.chordsify-phrase,
-.chordsify-lyrics {
-  display: inline-block;
-}
-.chordsify-phrase {
-  font-size: 1em;
-  vertical-align: bottom;
-}
-.chordsify-phrase.chordsify-phrase-cond {
-  background: #f9f9f9 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAABCAYAAAD9yd/wAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpCMTZBMzE4RDUzM0ExMUUzOEM5NEE0N0I1RjM4QTM4NiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpCMTZBMzE4RTUzM0ExMUUzOEM5NEE0N0I1RjM4QTM4NiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkIxNkEzMThCNTMzQTExRTM4Qzk0QTQ3QjVGMzhBMzg2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkIxNkEzMThDNTMzQTExRTM4Qzk0QTQ3QjVGMzhBMzg2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+7BjgCwAAABdJREFUeNpi+P//PwMIA8F/GAbxAQIMAKF3C/Uq8GUxAAAAAElFTkSuQmCC) repeat-x right 80%;
-}
-.chordsify-phrase.chordsify-phrase-cond .chordsify-lyrics {
-  background: #f9f9f9;
-}
-.chordsify-lyrics {
-  white-space: pre;
-  font-family: inherit;
-}
-.chordsify-block[data-block-type="chorus"],
-.chordsify-block[data-block-type="bridge"] {
-  padding-left: 2em;
-}
-.chordsify-block[data-block-type="chorus"] .chordsify-line:first-child .chordsify-phrase:first-child .chordsify-lyrics:before {
-  content: '*';
-  display: inline-block;
-  font-size: 1.5em;
-  color: #999;
-  position: relative;
-  width: 0;
-  line-height: 0;
-  top: 0.3em;
-  left: -0.7em;
-}
-@media print {
-  .chordsify-chords {
-    font-size: 10pt;
-  }
-  .chordsify-lyrics {
-    font-family: "Times New Roman", Times, serif;
-  }
-  .chordsify-chord {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 7.5pt;
-    padding: 0.35em 0 0;
-  }
-  .chordsify-chord-inner {
-    font-weight: bold;
-    position: relative;
-    top: 2pt;
-    padding: 0 0.2em;
-  }
-}
-/* /Chordsify */
 .setlists {
   background: #333;
   border-radius: 10px;
