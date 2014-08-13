@@ -176,6 +176,11 @@
 /* /Chordsify */.chordsify {
   text-shadow: none;
 }
+.alert-warning {
+  background-color: #c44;
+  color: #eee;
+  text-shadow: none;
+}
 @media screen and (min-width: 980px) {
   body {
     padding-top: 60px;

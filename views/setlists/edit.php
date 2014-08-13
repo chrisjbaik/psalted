@@ -26,6 +26,7 @@
     <input type="text" name="title" id="setlist-title" placeholder="Setlist Name" value="<?php if (!empty($setlist->title)) { echo $setlist->title; } else { echo 'Default name'; } ?>">
     <label for="setlist-date" class="ui-hidden-accessible">Setlist Date</label>
     <input type="date" name="date" id="setlist-date" value="<?php if (!empty($setlist->date)) { echo date('Y-m-d', $setlist->date); } else { echo date('Y-m-d', time()); } ?>">
+    <div id="setlists-warning-pages" class="hidden ui-body alert-warning ui-corner-all"><strong>Warning:</strong> This setlist requires <span id="setlists-warning-pages-count">2</span> pages</div>
     <ul id='setlists-new-songs' data-role="listview" data-inset="true" data-divider-theme="b" data-split-icon="delete" data-split-theme="b">
       <li data-role="list-divider" role="heading">Songs</li>
       <?php
