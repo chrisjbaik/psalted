@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eaef406b3c12821162e79c888df7e2ad",
+    "hash": "70f093c43dade808037e6c0b219a1ca4",
     "packages": [
         {
             "name": "davedevelopment/phpmig",
@@ -474,6 +474,44 @@
             "time": "2013-11-22 08:30:29"
         },
         {
+            "name": "psalted/chordsify",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/varoot/chordsify-php",
+                "reference": "a6ebee4ce6b860b88042b34ee5249f9509881c9d"
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "tecnick.com/tcpdf": "6.0.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Chordsify\\": "Chordsify/"
+                }
+            },
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Varoot Phasuthadol",
+                    "email": "varoot@gmail.com",
+                    "homepage": "http://varoot.com"
+                }
+            ],
+            "description": "Chordsify PHP transforms song notation into beautiful chord display",
+            "homepage": "http://psalted.com/",
+            "keywords": [
+                "chord",
+                "song"
+            ],
+            "time": "2014-08-13 08:29:46"
+        },
+        {
             "name": "slim/slim",
             "version": "2.4.3",
             "source": {
@@ -834,7 +872,8 @@
     "stability-flags": {
         "jbroadway/urlify": 20,
         "hybridauth/hybridauth": 20,
-        "ircmaxell/password-compat": 20
+        "ircmaxell/password-compat": 20,
+        "psalted/chordsify": 20
     },
     "prefer-stable": false,
     "platform": [
