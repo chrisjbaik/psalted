@@ -266,7 +266,7 @@
             'right_panel' => true,
             'page_title' => $setlist->title,
             'pdf_file' => $pdf_file,
-            'pdf_url' => "/groups/$group_url/$setlist_url/pdf",
+            'pdf_url' => "/groups/$group_url/$setlist_url/$pdf_file",
           ));
         } else {
           $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
@@ -309,7 +309,7 @@
       $app->response->setBody(json_encode($result));
     });
 
-    $app->get('/:group_url/:setlist_url/pdf', function ($group_url, $setlist_url) use ($app) {
+    $app->get('/:group_url/:setlist_url/:pdfname.pdf', function ($group_url, $setlist_url, $pdfname) use ($app) {
       $group = Model::factory('Group')->where('url', $group_url)->find_one();
 
       if (!$group) {
@@ -338,7 +338,8 @@
         $sheet->add($s);
       }
 
-      $sheet->pdfOutput('D', $setlist->pdfName());
+      $app->response->headers->set('Content-Type', 'application/pdf');
+      $sheet->pdfOutput('D', $pdfname.'.pdf');
     });
   });
 ?>
