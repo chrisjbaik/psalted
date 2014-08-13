@@ -19,7 +19,7 @@
   </ul>
 </div>
 <div data-role="content" id="page-setlist-view">
-  <button id="btn-pdf-save" data-pdf="<?= $pdf_file ?>" data-url="<?= $songs_url ?>" type="button" data-theme="b" <?php if (count($songs) == 0) echo 'disabled' ?>>Save PDF</button>
+  <a id="btn-pdf-save" download="<?= $pdf_file ?>" href="<?= $pdf_url ?>" rel="external" data-role="button" data-theme="b" <?php if (count($songs) == 0) echo 'disabled' ?>>Save PDF</a>
   <ul data-role="listview" data-divider-theme="a" data-inset="true">
     <li data-role="list-divider" role="heading">Songs</li>
     <?php

@@ -39,6 +39,10 @@ class Setlist extends Model {
     return $this->belongs_to('Group');
   }
 
+  public function pdfName() {
+    return preg_replace('/^-+|-+$/', "", preg_replace('/-+/', "-", preg_replace('/[_|\s]+/', "-", strtolower($this->title)))).'.pdf';
+  }
+
   public function generateSlug() {
     $url = URLify::filter($this->title);
     $found = Model::factory('Setlist')->where('url', $url)->find_one();

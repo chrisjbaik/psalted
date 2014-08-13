@@ -479,7 +479,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/varoot/chordsify-php",
-                "reference": "28417975804f1513e39fad20754623e6190c8836"
+                "reference": "b99ba4291202382d8739bdefc09d2c62e56c7cdf"
             },
             "require": {
                 "php": ">=5.3.0",
@@ -507,7 +507,7 @@
                 "chord",
                 "song"
             ],
-            "time": "2014-08-13 09:19:49"
+            "time": "2014-08-13 12:14:32"
         },
         {
             "name": "slim/slim",

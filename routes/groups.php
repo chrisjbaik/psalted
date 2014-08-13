@@ -258,7 +258,7 @@
         $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
         if ($setlist) {
           $songs = $setlist->songs()->find_many();
-          $pdf_file = preg_replace('/^-+|-+$/', "", preg_replace('/-+/', "-", preg_replace('/[_|\s]+/', "-", strtolower($setlist->title))));
+          $pdf_file = $setlist->pdfName();
           $app->render('setlists/view.php', array(
             'setlist' => $setlist,
             'songs' => $songs,
@@ -266,7 +266,7 @@
             'right_panel' => true,
             'page_title' => $setlist->title,
             'pdf_file' => $pdf_file,
-            'songs_url' => "/groups/$group_url/$setlist_url/songs",
+            'pdf_url' => "/groups/$group_url/$setlist_url/pdf",
           ));
         } else {
           $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
@@ -338,8 +338,7 @@
         $sheet->add($s);
       }
 
-      $app->response->headers->set('Content-type', 'application/pdf');
-      $sheet->pdfOutput();
+      $sheet->pdfOutput('D', $setlist->pdfName());
     });
   });
 ?>
