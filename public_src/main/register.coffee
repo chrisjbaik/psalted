@@ -2,11 +2,11 @@ $ = require('jquery')
 $.mobile = require('jquery-mobile')
 
 $(document).delegate "#register, #users-password", "pageinit", ->
-
-  $(document).on 'change', '#password, #password-confirm', (e) ->
-    password = $('#password').val()
-    password_confirm = $('#password-confirm').val()
-    $btn = $('#submit-form')
+  $page = $(this)
+  $page.on 'change', '#password, #password-confirm', (e) ->
+    password = $page.find('#password').val()
+    password_confirm = $page.find('#password-confirm').val()
+    $btn = $page.find('#submit-form')
     if password isnt "" and password_confirm isnt ""
       if password is password_confirm
         $btn.val($btn.attr('data-valid-label'))
