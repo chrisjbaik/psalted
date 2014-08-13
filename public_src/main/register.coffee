@@ -16,3 +16,6 @@ $(document).delegate "#register, #users-password", "pageinit", ->
         $btn.val("Why u so like dat one? Passwords don't match lah")
           .button('refresh')
           .button('disable','refresh')
+
+$(document).delegate "#register, #users-password", "pagehide", ->
+  $(this).remove()
