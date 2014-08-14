@@ -479,10 +479,11 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/varoot/chordsify-php",
-                "reference": "6c438c8c70b5c8029d858eb765ca9774c34e9d64"
+                "reference": "c36c23a2249a9bd2d83be54dd4a6dc687ac69472"
             },
             "require": {
                 "php": ">=5.3.0",
+                "symfony/yaml": "2.*",
                 "tecnick.com/tcpdf": "6.0.*"
             },
             "type": "library",
@@ -507,7 +508,7 @@
                 "chord",
                 "song"
             ],
-            "time": "2014-08-13 12:44:53"
+            "time": "2014-08-14 06:26:31"
         },
         {
             "name": "slim/slim",
@@ -861,16 +862,16 @@
         },
         {
             "name": "tecnick.com/tcpdf",
-            "version": "6.0.090",
+            "version": "6.0.091",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "e89673a4493e5cac837c59540e452f356529c1e3"
+                "reference": "5252fd2e968ef17854ec0915ab3c600272c00f8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/e89673a4493e5cac837c59540e452f356529c1e3",
-                "reference": "e89673a4493e5cac837c59540e452f356529c1e3",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/5252fd2e968ef17854ec0915ab3c600272c00f8a",
+                "reference": "5252fd2e968ef17854ec0915ab3c600272c00f8a",
                 "shasum": ""
             },
             "require": {
@@ -920,7 +921,7 @@
                 "pdf417",
                 "qrcode"
             ],
-            "time": "2014-08-08 11:41:02"
+            "time": "2014-08-13 16:57:25"
         }
     ],
     "packages-dev": [
