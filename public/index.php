@@ -41,6 +41,9 @@
     }
   };
 
+  /* TCPDF config */
+  define ('K_PATH_FONTS', __DIR__.'/../fonts/');
+
 
   /*
    * App Configuration

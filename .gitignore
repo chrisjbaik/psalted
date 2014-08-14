@@ -5,3 +5,7 @@ migrations/.migrations.log
 bower_components
 node_modules
 psalted.sublime*
+fonts/*
+!fonts/courier*.php
+!fonts/helvetica*.php
+!fonts/times*.php
