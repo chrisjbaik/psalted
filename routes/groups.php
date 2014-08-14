@@ -331,6 +331,16 @@
         }
       }
 
+      // Song sheet style
+      if ($style = $app->request->get('style')) {
+        $options['style'] = $style;
+      }
+
+      // Paper size
+      if ($size = $app->request->get('size')) {
+        $options['size'] = $size;
+      }
+
       $sheet = new Chordsify\SongSheet($options);
       $songs = $setlist->songs()->find_many();
       foreach ($songs as $song) {
