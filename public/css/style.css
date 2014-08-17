@@ -1,4 +1,11 @@
 /* Chordsify */
+@font-face {
+  font-family: 'FreeSans';
+  src: url('freesansbold-webfont.eot');
+  src: url('freesansbold-webfont.eot?#iefix') format('embedded-opentype'), url('freesansbold-webfont.woff') format('woff'), url('freesansbold-webfont.ttf') format('truetype'), url('freesansbold-webfont.svg#freesansbold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
 .chordsify {
   font-family: "PT Serif", Garamond, Times, serif;
 }
@@ -10,7 +17,7 @@
   position: relative;
 }
 .chordsify-section[data-section-type="bridge"] {
-  padding-left: 1.5em;
+  padding-left: 3em;
 }
 .chordsify-section[data-section-type="chorus"] {
   padding-left: 1.5em;
@@ -38,7 +45,7 @@
     padding-left: 1.5em;
   }
   .chordsify-section[data-section-type="bridge"] {
-    padding-left: 3em;
+    padding-left: 4.5em;
   }
   .chordsify-section[data-section-type="chorus"] {
     padding-left: 3em;
@@ -116,17 +123,17 @@
     font-size: 10pt;
   }
   .chordsify-chord {
-    font-family: "PT Sans", Helvetica, Arial, sans-serif;
+    font-family: "FreeSans", Helvetica, Arial, sans-serif;
     font-size: 7.5pt;
     font-weight: bold;
-    top: -0.35em;
+    top: -0.5em;
   }
   .chordsify-paragraph {
-    line-height: 1.5;
+    line-height: 1.75;
     padding: .75em 0 .25em;
   }
   .chordsify-no-chords {
-    line-height: 1;
+    line-height: 1.25;
     padding: .5em 0 .25em;
   }
   .chordsify-gap {
@@ -139,8 +146,8 @@
     background: #666666;
     border-radius: .35em;
     color: #ffffff;
-    font-family: "PT Sans", Helvetica, Arial, sans-serif;
-    padding: .2em .4em;
+    font-family: "FreeSans", Helvetica, Arial, sans-serif;
+    padding: .22em .4em .18em;
   }
   .chordsify-chord[data-chord="0"] {
     background: #a33;
@@ -181,6 +188,11 @@
 }
 /* /Chordsify */.chordsify {
   text-shadow: none;
+}
+@media screen and (min-width: 720px) {
+  .chordsify {
+    font-size: 20px;
+  }
 }
 .alert-bar {
   margin: -1em;
