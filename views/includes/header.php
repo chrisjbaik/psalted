@@ -42,20 +42,19 @@
         }
       ?>
       <h3><?php if (!empty($page_title)) { echo $page_title; } else { echo 'Psalted'; } ?></h3>
+      <?php
+        if (isset($flash['success']) || isset($flash['error']) || isset($flash['info'])) {
+          echo '<div class="alert-bar">';
+            if (isset($flash['success'])) {
+              echo "<div class='alert alert-success ui-bar ui-bar-b'>".$flash['success']."</div>";
+            }
+            if (isset($flash['error'])) {
+              echo "<div class='alert alert-error ui-bar'>".$flash['error']."</div>";
+            }
+            if (isset($flash['info'])) {
+              echo "<div class='alert alert-info ui-bar ui-bar-c'>".$flash['info']."</div>";
+            }
+          echo '</div>';
+        }
+      ?>
     </div>
-    <div role="main" class="ui-content">
-    <?php
-      if (isset($flash['success']) || isset($flash['error']) || isset($flash['info'])) {
-        echo '<div class="alert-bar">';
-          if (isset($flash['success'])) {
-            echo "<div class='alert alert-success ui-bar ui-bar-b'>".$flash['success']."</div>";
-          }
-          if (isset($flash['error'])) {
-            echo "<div class='alert alert-error ui-bar'>".$flash['error']."</div>";
-          }
-          if (isset($flash['info'])) {
-            echo "<div class='alert alert-info ui-bar ui-bar-c'>".$flash['info']."</div>";
-          }
-        echo '</div>';
-      }
-    ?>
