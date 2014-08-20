@@ -16,7 +16,7 @@
   </head>
 
 <body>
-  <div data-role="page" id="<?= $page_id ?>">
+  <div data-role="page" id="<?= $page_id ?>" <?= (isset($page_cache) and $page_cache) ? 'data-dom-cache="true"' : '' ?>>
     <div data-role="panel" id="left-panel">
       <ul data-role="listview">
         <li data-icon="search"><form action='/search' type='GET'><input type="search" placeholder="Search..." name='q'></form></li>

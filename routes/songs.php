@@ -39,6 +39,7 @@
       $app->render('songs/list.php', array(
         'songs' => $songs,
         'page_title' => 'Browse Songs',
+        'page_cache' => true,
         'setlists' => $setlists
       ));
     });
