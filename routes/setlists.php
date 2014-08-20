@@ -72,7 +72,7 @@
 
       foreach ($song_ids as $song_id) {
         $song = Model::factory('Song')->where('id', $song_id)->find_one();
-        $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'original_key'=>$song->key));
+        $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'originalKey'=>$song->key));
         $sheet->add($s);
       }
 
