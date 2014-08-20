@@ -8,6 +8,25 @@ class SetlistSettings extends Model {
     'style'      => 'center',
   );
 
+  // Convert settings to options for writer
+  public static function writerOptions($s) {
+    $options = array(
+      'chords'     => false,
+      'copies'     => $s['copies'],
+      'pagenumber' => $s['pagenumber'] == 'auto',
+      'size'       => $s['size'],
+      'autonumber' => $s['songnumber'] == 'on',
+      'style'      => $s['style'],
+    );
+
+    if ($options['style'] == 'chords') {
+      $options['chords'] = 'true';
+      $options['style'] = 'left';
+    }
+
+    return $options;
+  }
+
   public static function validate($s) {
     $settings = self::$default;
     if ( ! is_array($s)) {

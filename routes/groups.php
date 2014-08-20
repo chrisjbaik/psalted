@@ -324,12 +324,8 @@
         $app->redirect('/'); 
       }
 
-      // Read these options from $_GET
-      $options = array_flip(array('copies', 'style', 'size', 'chords'));
-      $options = array_intersect_key($app->request->get(), $options);
-
       $app->response->headers->set('Content-Type', 'application/pdf');
-      $setlist->pdfOutput($options);
+      $setlist->pdfOutput();
     });
 
     $app->get('/:group_url/:setlist_url/settings', function ($group_url, $setlist_url) use ($app) {
