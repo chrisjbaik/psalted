@@ -39,6 +39,9 @@
     left: 1.85em;
   }
 }
+.chordsify-section[data-section-type="chorus"] .chordsify-paragraph:first-child.chordsify-no-chords:before {
+  top: .5em;
+}
 @media only screen and (min-width: 720px) {
   .chordsify-section {
     border-left: .25em solid transparent;
@@ -308,6 +311,16 @@
 }
 .setlist-buttons {
   padding-top: 12px;
+}
+.setlist-pdf-bar {
+  display: flex;
+  align-content: stretch;
+}
+.setlist-pdf-download {
+  flex-grow: 3;
+}
+.setlist-pdf-settings {
+  margin-left: 1em;
 }
 @media only screen and (min-width: 35em) {
   

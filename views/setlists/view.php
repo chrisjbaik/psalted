@@ -19,7 +19,14 @@
   </ul>
 </div>
 <div data-role="content" id="page-setlist-view">
-  <a id="btn-pdf-save" download="<?= $pdf_file ?>" href="<?= $pdf_url ?>" data-ajax="false" data-role="button" data-theme="b" <?php if (count($songs) == 0) echo 'disabled' ?>>Save PDF</a>
+  <div class="setlist-pdf-bar">
+    <div class="setlist-pdf-download">
+      <a id="btn-pdf-save" download="<?= $pdf_file ?>" href="<?= $pdf_url ?>" data-ajax="false" data-role="button" data-theme="b" <?php if (count($songs) == 0) echo 'disabled' ?>>Save PDF</a>
+    </div>
+    <div class="setlist-pdf-settings">
+      <a id="btn-settings" href="/groups/<?= $group->url ?>/<?= $setlist->url ?>/settings" data-transition="slide" data-role="button" class="ui-btn ui-shadow ui-corner-all ui-icon-gear ui-btn-icon-left">Settings</a>
+    </div>
+  </div>
   <ul data-role="listview" data-divider-theme="a" data-inset="true">
     <li data-role="list-divider" role="heading">Songs</li>
     <?php

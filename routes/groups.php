@@ -265,6 +265,7 @@
             'group' => $group,
             'right_panel' => true,
             'page_title' => $setlist->title,
+            'page_cache' => true,
             'pdf_file' => $pdf_file,
             'pdf_url' => "/groups/$group_url/$setlist_url/$pdf_file",
           ));
@@ -330,5 +331,52 @@
       $app->response->headers->set('Content-Type', 'application/pdf');
       $setlist->pdfOutput($options);
     });
+
+    $app->get('/:group_url/:setlist_url/settings', function ($group_url, $setlist_url) use ($app) {
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
+
+      if (!$group) {
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' was not found!');
+        $app->redirect('/');
+      }
+
+      $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
+      if (!$setlist) {
+        $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
+        $app->redirect('/'); 
+      }
+
+      $settings = array(
+        'style'      => 'center',
+        'size'       => 'Letter',
+        'copies'     => 'auto',
+        'songnumber' => 'off',
+        'pagenumber' => 'auto',
+      );
+
+      $use_group = true;
+      $group_settings = $settings;
+
+      $app->render('setlists/settings.php', compact('settings', 'group', 'use_group', 'group_settings'));
+    });
+
+    $app->post('/:group_url/:setlist_url/settings', function ($group_url, $setlist_url) use ($app) {
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
+
+      if (!$group) {
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' was not found!');
+        $app->redirect('/');
+      }
+
+      $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
+      if (!$setlist) {
+        $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
+        $app->redirect('/'); 
+      }
+
+      print_r($app->request->post());
+      die();
+    });
+
   });
 ?>
