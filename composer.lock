@@ -479,7 +479,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/varoot/chordsify-php",
-                "reference": "e7f647e000c9fe5af562cf63c3756eb50cc98bca"
+                "reference": "4c908b0acfd73ca44079a5b9495aa34a1427013e"
             },
             "require": {
                 "php": ">=5.4.0",
@@ -509,7 +509,7 @@
                 "chord",
                 "song"
             ],
-            "time": "2014-08-20 03:16:54"
+            "time": "2014-08-20 04:41:22"
         },
         {
             "name": "rhumsaa/array_column",

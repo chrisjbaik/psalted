@@ -68,13 +68,14 @@
       $result = array('error'=>'unknown error');
 
       $song_ids = $app->request->get('songs');
-      $sheet = new Chordsify\SongSheet();
+      $songs = array();
 
       foreach ($song_ids as $song_id) {
         $song = Model::factory('Song')->where('id', $song_id)->find_one();
-        $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'original_key'=>$song->key));
-        $sheet->add($s);
+        $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'originalKey'=>$song->key));
+        $songs[] = $s;
       }
+      $fitter = new Chordsify\SongSheetFitter();
 
       $result['error'] = '';
       $result['pages'] = $sheet->countPages();
