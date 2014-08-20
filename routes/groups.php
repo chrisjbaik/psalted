@@ -346,18 +346,13 @@
         $app->redirect('/'); 
       }
 
-      $settings = array(
-        'style'      => 'center',
-        'size'       => 'Letter',
-        'copies'     => 'auto',
-        'songnumber' => 'off',
-        'pagenumber' => 'auto',
-      );
-
-      $use_group = true;
-      $group_settings = $settings;
-
-      $app->render('setlists/settings.php', compact('settings', 'group', 'use_group', 'group_settings'));
+      $app->render('setlists/settings.php', array(
+        'use_group' => ! $setlist->settings_id,
+        'group_type' => 'group',
+        'group_name' => $group->name,
+        'settings' => $setlist->settings(),
+        'group_settings' => $group->settings(),
+      ));
     });
 
     $app->post('/:group_url/:setlist_url/settings', function ($group_url, $setlist_url) use ($app) {
@@ -374,8 +369,32 @@
         $app->redirect('/'); 
       }
 
-      print_r($app->request->post());
-      die();
+      $error = true;
+
+      if ($app->request->post('use_group')) {
+        $group->settings($app->request->post('settings'));
+        $setlist->settings_id = NULL;
+        if ($group->save() and $setlist->save()) {
+          $error = false;
+          $app->flash('success', 'Group settings were successfully saved!');
+        } else {
+          $app->flash('error', 'Failed to save group settings!');
+        }
+      } else {
+        $setlist->settings($app->request->post('settings'));
+        if ($setlist->save()) {
+          $error = false;
+          $app->flash('success', 'Setlist settings were successfully saved!');
+        } else {
+          $app->flash('error', 'Failed to save setlist settings!');
+        }
+      }
+
+      if ($error) {
+        $app->redirect("/groups/$group_url/$setlist_url/settings");
+      } else {
+        $app->redirect("/groups/$group_url/$setlist_url");
+      }
     });
 
   });

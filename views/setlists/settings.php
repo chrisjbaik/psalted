@@ -11,7 +11,7 @@ function printOptions($default, array $options) {
 <div data-role="content">
   <form data-ajax="false" method="post">
     <div class="ui-field-contain">
-      <label for="setlist-use-group">Use group's default settings</label>
+      <label for="setlist-use-group">Use <?= $group_type ?>’s default settings</label>
       <select name="use_group" id="setlist-use-group" data-role="slider">
       <?php
         printOptions($use_group, array('No', 'Yes'));
@@ -23,8 +23,8 @@ function printOptions($default, array $options) {
     <div id="setlist-settings-section">
       <div id="setlist-settings-target">
         <div class="settings-group<?= $use_group ? '' : ' hidden' ?>" data-settings='<?= json_encode($group_settings) ?>'>
-          <h3>Settings for: <?= $group->name ?></h3>
-          <div class="ui-bar ui-bar-a">These settings will apply to all setlists in this group</div>
+          <h3>Settings for: <?= $group_name ?></h3>
+          <div class="ui-bar ui-bar-a">These settings will apply to <?= $group_type == 'group' ? 'all setlists in' : 'all personal setlists for' ?> this <?= $group_type ?></div>
         </div>
         <div class="settings-this<?= $use_group ? ' hidden' : '' ?>" data-settings='<?= json_encode($settings) ?>'>
           <h3>Settings for: this setlist</h3>

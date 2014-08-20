@@ -28,6 +28,21 @@ class Group extends Model {
     return true;
   }
 
+  // This function acts as setter and getter
+  public function settings($settings = NULL) {
+    if ($settings === NULL) {
+      $s = $this->belongs_to('SetlistSettings', 'settings_id')->find_one();
+      if ($s) {
+        return $s->extract();
+      } else {
+        return SetlistSettings::$default;
+      }
+    } else {
+      return $this->settings_id = SetlistSettings::getID($settings);
+      // Don't forget to save
+    }
+  }
+
   public function generateSlug() {
     $url = URLify::filter($this->name);
     $found = Model::factory('Group')->where('url', $url)->find_one();

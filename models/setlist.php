@@ -39,6 +39,21 @@ class Setlist extends Model {
     return $this->belongs_to('Group');
   }
 
+  // This function acts as setter and getter
+  public function settings($settings = NULL) {
+    if ($settings === NULL) {
+      $s = $this->belongs_to('SetlistSettings', 'settings_id')->find_one();
+      if ($s) {
+        return $s->extract();
+      } else {
+        return SetlistSettings::$default;
+      }
+    } else {
+      return $this->settings_id = SetlistSettings::getID($settings);
+      // Don't forget to save
+    }
+  }
+
   public function pdfName() {
     return preg_replace('/^-+|-+$/', "", preg_replace('/-+/', "-", preg_replace('/[_|\s]+/', "-", strtolower($this->title)))).'.pdf';
   }

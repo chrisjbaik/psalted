@@ -189,6 +189,61 @@
       } else { return errorHandler($app, $url); }
     });
 
+    $app->get('/:url/settings', function ($setlist_url) use ($app) {
+      $user = $_SESSION['user'];
+      $setlist = $user->setlists()->where('url', $setlist_url)->find_one();
+
+      if (!$setlist) {
+        $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
+        $app->redirect('/'); 
+      }
+
+      $app->render('setlists/settings.php', array(
+        'group_type' => 'user',
+        'use_group' => ! $setlist->settings_id,
+        'group_name' => $user->first_name.'’s personal setlists',
+        'settings' => $setlist->settings(),
+        'group_settings' => $user->settings(),
+      ));
+    });
+
+    $app->post('/:url/settings', function ($setlist_url) use ($app) {
+      $user = $_SESSION['user'];
+      $setlist = $user->setlists()->where('url', $setlist_url)->find_one();
+
+      if (!$setlist) {
+        $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
+        $app->redirect('/'); 
+      }
+
+      $error = true;
+
+      if ($app->request->post('use_group')) {
+        $user->settings($app->request->post('settings'));
+        $setlist->settings_id = NULL;
+        if ($user->save() and $setlist->save()) {
+          $error = false;
+          $app->flash('success', 'User settings were successfully saved!');
+        } else {
+          $app->flash('error', 'Failed to save user settings!');
+        }
+      } else {
+        $setlist->settings($app->request->post('settings'));
+        if ($setlist->save()) {
+          $error = false;
+          $app->flash('success', 'Setlist settings were successfully saved!');
+        } else {
+          $app->flash('error', 'Failed to save setlist settings!');
+        }
+      }
+
+      if ($error) {
+        $app->redirect("/personal/$setlist_url/settings");
+      } else {
+        $app->redirect("/personal/$setlist_url");
+      }
+    });
+
     $app->delete('/:setlist_url', function ($setlist_url) use ($app) {
       $setlist = Model::factory('Setlist')->where('url', $setlist_url)->find_one();
       if ($setlist) {

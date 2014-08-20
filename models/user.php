@@ -30,12 +30,30 @@ class User extends Model {
     parent::delete();
     return true;
   }
+
   public function setlists() {
     return $this->has_many('Setlist');
   }
+
   public function groups() {
     return $this->has_many_through('Group');
   }
+
+  // This function acts as setter and getter
+  public function settings($settings = NULL) {
+    if ($settings === NULL) {
+      $s = $this->belongs_to('SetlistSettings', 'settings_id')->find_one();
+      if ($s) {
+        return $s->extract();
+      } else {
+        return SetlistSettings::$default;
+      }
+    } else {
+      return $this->settings_id = SetlistSettings::getID($settings);
+      // Don't forget to save
+    }
+  }
+
   public function hasRole($role) {
     $user_roles = unserialize($this->roles);
     if (empty($user_roles)) {
