@@ -43,6 +43,17 @@ class Setlist extends Model {
     return preg_replace('/^-+|-+$/', "", preg_replace('/-+/', "-", preg_replace('/[_|\s]+/', "-", strtolower($this->title)))).'.pdf';
   }
 
+  public function pdfOutput($options) {
+    $sheet = new Chordsify\SongSheet($options);
+    $songs = $this->songs()->find_many();
+    foreach ($songs as $song) {
+      $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'originalKey'=>$song->key));
+      $sheet->add($s);
+    }
+
+    return $sheet->pdfOutput('D', $this->pdfName());
+  }
+
   public function generateSlug() {
     $url = URLify::filter($this->title);
     $found = Model::factory('Setlist')->where('url', $url)->find_one();

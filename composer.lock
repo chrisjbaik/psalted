@@ -169,12 +169,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hybridauth/hybridauth.git",
-                "reference": "2802cd48d6e1e8d7466b257344272e016b551ee6"
+                "reference": "155b188ec24dad745b72c2a06bdeeaf8df3da25e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/2802cd48d6e1e8d7466b257344272e016b551ee6",
-                "reference": "2802cd48d6e1e8d7466b257344272e016b551ee6",
+                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/155b188ec24dad745b72c2a06bdeeaf8df3da25e",
+                "reference": "155b188ec24dad745b72c2a06bdeeaf8df3da25e",
                 "shasum": ""
             },
             "require": {
@@ -210,7 +210,7 @@
                 "twitter",
                 "yahoo"
             ],
-            "time": "2014-08-08 09:02:45"
+            "time": "2014-08-17 14:43:31"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -479,10 +479,11 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/varoot/chordsify-php",
-                "reference": "c36c23a2249a9bd2d83be54dd4a6dc687ac69472"
+                "reference": "e7f647e000c9fe5af562cf63c3756eb50cc98bca"
             },
             "require": {
-                "php": ">=5.3.0",
+                "php": ">=5.4.0",
+                "rhumsaa/array_column": "~1.1",
                 "symfony/yaml": "2.*",
                 "tecnick.com/tcpdf": "6.0.*"
             },
@@ -508,7 +509,47 @@
                 "chord",
                 "song"
             ],
-            "time": "2014-08-14 06:26:31"
+            "time": "2014-08-20 03:16:54"
+        },
+        {
+            "name": "rhumsaa/array_column",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ramsey/array_column.git",
+                "reference": "c09744baae0e023d1021055f9c65755b88a9721f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ramsey/array_column/zipball/c09744baae0e023d1021055f9c65755b88a9721f",
+                "reference": "c09744baae0e023d1021055f9c65755b88a9721f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/array_column.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Ramsey",
+                    "homepage": "http://benramsey.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Provides functionality for array_column() to projects using PHP earlier than version 5.5.",
+            "homepage": "https://github.com/ramsey/array_column",
+            "keywords": [
+                "array",
+                "array_column",
+                "column"
+            ],
+            "time": "2013-07-22 16:12:38"
         },
         {
             "name": "slim/slim",

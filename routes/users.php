@@ -83,15 +83,32 @@
       $setlist = $_SESSION['user']->setlists()->where('url', $url)->find_one();
       if ($setlist) {
         $songs = $setlist->songs()->find_many();
-        $pdf_file = $setlist->url;
+        $pdf_file = $setlist->pdfName();
         $app->render('setlists/view.php', array(
           'setlist' => $setlist,
           'songs' => $songs,
           'right_panel' => true,
           'page_title' => $setlist->title,
           'pdf_file' => $pdf_file,
-          'songs_url' => "/personal/$setlist->url/songs",
+          'pdf_url' => "/personal/{$setlist->url}/$pdf_file",
         ));
+      } else {
+        $app->flash('error', 'Setlist was not found!');
+        $app->redirect('/'); 
+      }
+    });
+
+    $app->get('/:url/:pdfname.pdf', function ($url, $pdfname) use ($app) {
+      $user = $_SESSION['user'];
+      $groups = $_SESSION['user']->groups()->find_many();
+      $setlist = $user->setlists()->where('url', $url)->find_one();
+      if ($setlist) {
+        // Read these options from $_GET
+        $options = array_flip(array('copies', 'style', 'size', 'chords'));
+        $options = array_intersect_key($app->request->get(), $options);
+
+        $app->response->headers->set('Content-Type', 'application/pdf');
+        $setlist->pdfOutput($options);
       } else {
         $app->flash('error', 'Setlist was not found!');
         $app->redirect('/'); 

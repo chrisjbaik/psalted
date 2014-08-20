@@ -323,33 +323,12 @@
         $app->redirect('/'); 
       }
 
-      $options = array();
-      if ($copies = $app->request->get('copies')) {
-        if (is_numeric($copies) or $copies == 'auto')
-        {
-          $options['copies'] = $copies;
-        }
-      }
-
-      // Song sheet style
-      if ($style = $app->request->get('style')) {
-        $options['style'] = $style;
-      }
-
-      // Paper size
-      if ($size = $app->request->get('size')) {
-        $options['size'] = $size;
-      }
-
-      $sheet = new Chordsify\SongSheet($options);
-      $songs = $setlist->songs()->find_many();
-      foreach ($songs as $song) {
-        $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'original_key'=>$song->key));
-        $sheet->add($s);
-      }
+      // Read these options from $_GET
+      $options = array_flip(array('copies', 'style', 'size', 'chords'));
+      $options = array_intersect_key($app->request->get(), $options);
 
       $app->response->headers->set('Content-Type', 'application/pdf');
-      $sheet->pdfOutput('D', $pdfname.'.pdf');
+      $setlist->pdfOutput($options);
     });
   });
 ?>
