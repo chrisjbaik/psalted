@@ -2,13 +2,15 @@
 <div data-role="content">
   <div class="songs-list-options">
     <fieldset data-role="controlgroup" data-type="horizontal">
-      <input name="view" id="songs-list-view-all" value="all" checked="checked" type="radio">
+      <input name="view" id="songs-list-view-all" value="all" checked type="radio">
       <label for="songs-list-view-all">All Songs</label>
+      <input name="view" id="songs-list-view-chords" value="chords" type="radio">
+      <label for="songs-list-view-chords">Songs with Chords</label>
       <input name="view" id="songs-list-view-certified" value="certified" type="radio">
-      <label for="songs-list-view-certified">Only Certified</label>
+      <label for="songs-list-view-certified">Certified Songs</label>
     </fieldset>
     <fieldset data-role="controlgroup" data-type="horizontal">
-      <input name="sortby" id="songs-list-sortby-title" value="title" checked="checked" type="radio">
+      <input name="sortby" id="songs-list-sortby-title" value="title" checked type="radio">
       <label for="songs-list-sortby-title">Sort by Title</label>
       <input name="sortby" id="songs-list-sortby-key" value="key" type="radio">
       <label for="songs-list-sortby-key">Sort by Key</label>
@@ -26,15 +28,11 @@
       }
       foreach ($songs as $song) {
       ?>
-        <li class="listview-checkbox" data-title="<?= $song->title ?>" data-key="<?= $song->has_chords ? $song->key : '_' ?>" data-certified="<?= $song->certified ?>">
+        <li class="listview-checkbox" data-title="<?= $song->title ?>" data-key="<?= $song->key ?>" data-certified="<?= $song->certified ?>" data-chords="<?= $song->has_chords ?>">
           <a href="#">
             <label class="song-label<?= $song->artist ? '' : ' song-no-artist' ?>">
               <input type="checkbox" name="checked_songs[]" value="<?= $song->id ?>">
-              <?php
-              if ($song->has_chords) {
-                echo '<div class="song-label-key" data-chord="'.$song->key.'">'.$song->keyToString().'</div>';
-              }
-              ?>
+              <div class="song-label-key" data-chord="<?= $song->key ?>"><?= $song->keyToString() ?></div>
               <h2 class="listview-heading"><?= $song->title ?><?php if ($song->certified) { echo "&nbsp;<span class=\"certified-icon ui-icon-check ui-alt-icon\"></span>"; } ?></h2>
               <?= $song->artist ? '<span class="listview-footer">'.$song->artist.'</span>' : '' ?>
             </label>
