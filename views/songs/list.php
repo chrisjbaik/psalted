@@ -1,13 +1,13 @@
 <?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
   <div class="songs-list-options">
-    <fieldset data-role="controlgroup" data-type="horizontal">
+    <fieldset data-role="controlgroup">
       <input name="view" id="songs-list-view-all" value="all" checked type="radio">
-      <label for="songs-list-view-all">All Songs</label>
+      <label for="songs-list-view-all">All songs</label>
       <input name="view" id="songs-list-view-chords" value="chords" type="radio">
-      <label for="songs-list-view-chords">Songs with Chords</label>
+      <label for="songs-list-view-chords">Only songs with chords</label>
       <input name="view" id="songs-list-view-certified" value="certified" type="radio">
-      <label for="songs-list-view-certified">Certified Songs</label>
+      <label for="songs-list-view-certified">Only certified songs</label>
     </fieldset>
     <fieldset data-role="controlgroup" data-type="horizontal">
       <input name="sortby" id="songs-list-sortby-title" value="title" checked type="radio">
