@@ -15,6 +15,11 @@
           <a href="#">
             <label class="song-label<?= $song->artist ? '' : ' song-no-artist' ?>">
               <input type="checkbox" name="checked_songs[]" value="<?= $song->id ?>">
+              <?php
+              if ($song->has_chords) {
+                echo '<div class="song-label-key" data-chord="'.$song->key.'">'.$song->keyToString().'</div>';
+              }
+              ?>
               <h2 class="listview-heading"><?= $song->title ?><?php if ($song->certified) { echo "&nbsp;<span class=\"certified-icon ui-icon-check ui-alt-icon\"></span>"; } ?></h2>
               <?= $song->artist ? '<span class="listview-footer">'.$song->artist.'</span>' : '' ?>
             </label>

@@ -255,6 +255,56 @@
 .song-label.song-no-artist .listview-heading {
   top: 0.65em;
 }
+.song-label-key {
+  font-family: "FreeSans", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: #fff;
+  min-width: 2em;
+  padding: 5px 0;
+  border-radius: 50%;
+  text-align: center;
+  text-shadow: none;
+  position: absolute;
+  top: 12px;
+  right: 8px;
+}
+.song-label-key[data-chord="0"] {
+  background: #aa6f6f;
+}
+.song-label-key[data-chord="1"] {
+  background: #b3a26f;
+}
+.song-label-key[data-chord="2"] {
+  background: #6faa6f;
+}
+.song-label-key[data-chord="3"] {
+  background: #6f99aa;
+}
+.song-label-key[data-chord="4"] {
+  background: #776faa;
+}
+.song-label-key[data-chord="5"] {
+  background: #aa6faa;
+}
+.song-label-key[data-chord="6"] {
+  background: #aa886f;
+}
+.song-label-key[data-chord="7"] {
+  background: #99aa6f;
+}
+.song-label-key[data-chord="8"] {
+  background: #6faa99;
+}
+.song-label-key[data-chord="9"] {
+  background: #6f80aa;
+}
+.song-label-key[data-chord="10"] {
+  background: #916faa;
+}
+.song-label-key[data-chord="11"] {
+  background: #aa6f88;
+}
 .certified-icon {
   opacity: 0.35;
 }
