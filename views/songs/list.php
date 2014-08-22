@@ -1,6 +1,21 @@
 <?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
-  <ul data-role="listview" data-divider-theme="a" data-inset="true">
+  <div class="songs-list-options">
+    <fieldset data-role="controlgroup" data-type="horizontal">
+      <input name="view" id="songs-list-view-all" value="all" checked="checked" type="radio">
+      <label for="songs-list-view-all">All Songs</label>
+      <input name="view" id="songs-list-view-certified" value="certified" type="radio">
+      <label for="songs-list-view-certified">Only Certified</label>
+    </fieldset>
+    <fieldset data-role="controlgroup" data-type="horizontal">
+      <input name="sortby" id="songs-list-sortby-title" value="title" checked="checked" type="radio">
+      <label for="songs-list-sortby-title">Sort by Title</label>
+      <input name="sortby" id="songs-list-sortby-key" value="key" type="radio">
+      <label for="songs-list-sortby-key">Sort by Key</label>
+    </fieldset>
+  </div>
+
+  <ul id="songs-list-songs" data-role="listview" data-divider-theme="a" data-inset="true">
     <li data-role="list-divider" role="heading">
       Songs
     </li>
@@ -11,7 +26,7 @@
       }
       foreach ($songs as $song) {
       ?>
-        <li class="listview-checkbox">
+        <li class="listview-checkbox" data-title="<?= $song->title ?>" data-key="<?= $song->has_chords ? $song->key : '_' ?>" data-certified="<?= $song->certified ?>">
           <a href="#">
             <label class="song-label<?= $song->artist ? '' : ' song-no-artist' ?>">
               <input type="checkbox" name="checked_songs[]" value="<?= $song->id ?>">

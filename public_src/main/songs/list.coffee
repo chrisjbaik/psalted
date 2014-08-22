@@ -2,6 +2,42 @@ $ = require('jquery')
 $.mobile = require('jquery-mobile')
 
 $(document).delegate "#songs-list", "pagecreate", ->
+  $(this).find('[name="view"]').change ()->
+    view = $(this).val()
+
+    $list = $('#songs-list-songs')
+    $children = $list.children('.listview-checkbox')
+    $uncertifiedChildren = $children.filter('[data-certified="0"]')
+    $certifiedChildren = $children.filter('[data-certified="1"]')
+    
+    if view is 'certified'
+      $uncertifiedChildren.addClass('hidden')
+      $children.last().removeClass('ui-last-child')
+      $certifiedChildren.last().addClass('ui-last-child')
+    else
+      $uncertifiedChildren.removeClass('hidden')
+      $certifiedChildren.last().removeClass('ui-last-child')
+      $children.last().addClass('ui-last-child')
+
+  $(this).find('[name="sortby"]').change ()->
+    sortby = $(this).val()
+    $list = $('#songs-list-songs')
+    $children = $list.children('.listview-checkbox')
+    $children.last().removeClass('ui-last-child')
+
+    # http://trentrichardson.com/2013/12/16/sort-dom-elements-jquery/
+    $children.sort (a, b)->
+      aText = $(a).attr('data-'+sortby)
+      bText = $(b).attr('data-'+sortby)
+      if aText > bText
+        return 1
+      if bText > aText
+        return -1
+      return 0
+
+    $children.detach().appendTo $list
+    $children.last().addClass('ui-last-child')
+
   $('input[name="checked_songs[]"]').on 'change', ->
     if (count = $('input[name="checked_songs[]"]:checked').length) > 0
       $('.ui-footer-fixed').removeClass('hidden')

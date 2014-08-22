@@ -245,6 +245,16 @@
   max-width: 420px;
   margin: 0 auto;
 }
+.songs-list-options {
+  text-align: center;
+}
+@media only screen and (min-width: 40em) {
+  .songs-list-options fieldset {
+    display: inline-block;
+    margin-left: .5em;
+    margin-right: .5em;
+  }
+}
 .song-label {
   min-height: 2.5em;
 }
