@@ -245,6 +245,13 @@
   max-width: 420px;
   margin: 0 auto;
 }
+.setlist-songs-song {
+  margin: -1em;
+  padding-bottom: 2em;
+}
+.setlist-songs-content {
+  padding: .5em 1em 0;
+}
 .songs-list-options {
   text-align: center;
 }
@@ -365,14 +372,14 @@
 .setlist-buttons {
   padding-top: 12px;
 }
-.setlist-pdf-bar {
+.option-toolbar {
   display: flex;
   align-content: stretch;
 }
-.setlist-pdf-download {
+.option-toolbar-main {
   flex-grow: 3;
 }
-.setlist-pdf-settings {
+.option-toolbar-side {
   margin-left: 1em;
 }
 @media only screen and (min-width: 35em) {

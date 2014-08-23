@@ -19,11 +19,11 @@
   </ul>
 </div>
 <div data-role="content" id="page-setlist-view">
-  <div class="setlist-pdf-bar">
-    <div class="setlist-pdf-download">
+  <div class="option-toolbar">
+    <div class="option-toolbar-main">
       <a id="btn-pdf-save" download="<?= $pdf_file ?>" href="<?= $pdf_url ?>" data-ajax="false" data-role="button" data-theme="b" <?php if (count($songs) == 0) echo 'disabled' ?>>Save PDF</a>
     </div>
-    <div class="setlist-pdf-settings">
+    <div class="option-toolbar-side">
       <a id="btn-settings" href="<?= $base_url ?>/settings" data-transition="slide" data-role="button" class="ui-btn ui-shadow ui-corner-all ui-icon-gear ui-btn-icon-left">Settings</a>
     </div>
   </div>
@@ -54,6 +54,9 @@
       </form>
     </div>
   </div>
+
+  <a href="<?= $base_url ?>/songs" data-role="button" data-theme="b" <?php if (count($songs) == 0) echo 'disabled' ?>>View All</a>
+
 </div>
 
 <?php include_once('../views/includes/footer.php'); ?>

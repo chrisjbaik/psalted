@@ -13,4 +13,4 @@ $(document).delegate "#songs-view", "pagecreate", ->
   $(":mobile-pagecontainer").on "pagecontainershow", (event,ui) ->
     $chordsify = $('.chordsify:not(.chordsify-raw)')
     if $chordsify.length > 0
-    	$chordsify.chordsify('position')
+      $chordsify.chordsify('position')

@@ -280,34 +280,21 @@
     });
 
     $app->get('/:group_url/:setlist_url/songs', function ($group_url, $setlist_url) use ($app) {
-      if ( ! $app->request->isAjax()) {
-        $app->response->setStatus(404);
-        return;
-      }
-      $result = array('error'=>'unknown error');
       $group = Model::factory('Group')->where('url', $group_url)->find_one();
 
-      if ($group) {
-        $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
-        if ($setlist) {
-          $songs = $setlist->songs()->find_many();
-          $result['error'] = '';
-          $result['songs'] = array();
-          foreach ($songs as $song) {
-            $s = array(
-              'title' => $song->title,
-              'lyrics' => $song->chords,
-            );
-            $result['songs'][] = $s;
-          }
-        } else {
-          $result['error'] = 'setlist not found';
-        }
-      } else {
-        $result['error'] = 'group not found';
+      if (!$group) {
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' was not found!');
+        $app->redirect('/');
       }
 
-      $app->response->setBody(json_encode($result));
+      $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
+      if (!$setlist) {
+        $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
+        $app->redirect('/'); 
+      }
+
+      $songs = $setlist->songs()->find_many();
+      $app->render('setlists/songs.php', array('songs' => $songs));
     });
 
     $app->get('/:group_url/:setlist_url/:pdfname.pdf', function ($group_url, $setlist_url, $pdfname) use ($app) {
