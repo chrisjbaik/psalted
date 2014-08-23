@@ -17,7 +17,8 @@
     <label for="song-edit-artist-input" class="ui-hidden-accessible">Artist</label>
     <input type="text" name="artist" id="song-edit-artist-input" placeholder="Artist" value="<?php if(!empty($song->title)) { echo $song->artist; } ?>">
     <label for="key" class="select">Original Key</label>
-    <select name="key" id="original-key" data-key="<?php if (!empty($song->key)) { echo $song->key; } ?>">
+    <select name="key" id="original-key" data-key="<?php if (isset($song->key)) { echo $song->key; } ?>">
+      <option value="auto">Auto-detect</option>
       <option value="0">C</option>
       <option value="1">C♯/D♭</option>
       <option value="2">D</option>

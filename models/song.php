@@ -8,10 +8,16 @@ class Song extends Model {
       $this->generateSlug();
     }
     if (!empty($this->chords)) {
-      $this->filterLyricsFromChords();
+      $options = array();
+      $options['originalKey'] = $this->key;
+      $s = new Chordsify\Song($this->chords, $options);
+      $this->chords = $s->text(array('chords' => true, 'sections' => true, 'formatted' => false));
+      $this->lyrics = $s->text(array('chords' => false, 'sections' => false, 'formatted' => false));
+      $this->has_chords = $s->hasChords;
+      $this->key = $s->originalKey()->value();
+    } else {
+      $this->has_chords = false;
     }
-
-    $this->has_chords = preg_match('/\[[A-G]/', $this->chords);
 
     //$this->saveFullTextCopy();
     parent::save();
@@ -19,6 +25,10 @@ class Song extends Model {
   }
 
   public function keyToString() {
+    if ($this->key === null) {
+      return '';
+    }
+
     $keyArray = array(
       0 => 'C',
       1 => 'D♭',

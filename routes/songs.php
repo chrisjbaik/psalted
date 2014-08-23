@@ -200,7 +200,7 @@
         $app->render('songs/view.php', array(
           'song' => $song,
           'right_panel' => true,
-          'page_title' => $song->title . ' (' . $song->keyToString() . ')'
+          'page_title' => $song->title . ($song->key === null ? '' : ' (' . $song->keyToString() . ')')
         ));
       } else {
         $app->flash('error', 'Song was not found!');

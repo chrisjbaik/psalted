@@ -169,12 +169,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hybridauth/hybridauth.git",
-                "reference": "155b188ec24dad745b72c2a06bdeeaf8df3da25e"
+                "reference": "71ec21e11f87b2682979d0d03c35836d70ea50f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/155b188ec24dad745b72c2a06bdeeaf8df3da25e",
-                "reference": "155b188ec24dad745b72c2a06bdeeaf8df3da25e",
+                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/71ec21e11f87b2682979d0d03c35836d70ea50f7",
+                "reference": "71ec21e11f87b2682979d0d03c35836d70ea50f7",
                 "shasum": ""
             },
             "require": {
@@ -210,7 +210,7 @@
                 "twitter",
                 "yahoo"
             ],
-            "time": "2014-08-17 14:43:31"
+            "time": "2014-08-22 15:23:05"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -479,7 +479,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/varoot/chordsify-php",
-                "reference": "8fa9aa1f3bda150b866d7bf47a59e29dbf71fb61"
+                "reference": "137446474997bd6e68212a5bd930143efb055c9b"
             },
             "require": {
                 "php": ">=5.4.0",
@@ -509,7 +509,7 @@
                 "chord",
                 "song"
             ],
-            "time": "2014-08-20 04:50:15"
+            "time": "2014-08-23 10:02:16"
         },
         {
             "name": "rhumsaa/array_column",
