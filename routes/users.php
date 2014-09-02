@@ -98,6 +98,19 @@
       }
     });
 
+    $app->get('/:url/songs', function ($group_url, $setlist_url) use ($app) {
+      $user = $_SESSION['user'];
+      $groups = $_SESSION['user']->groups()->find_many();
+      $setlist = $user->setlists()->where('url', $url)->find_one();
+      if (!$setlist) {
+        $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
+        $app->redirect('/'); 
+      }
+
+      $songs = $setlist->songs()->find_many();
+      $app->render('setlists/songs.php', array('songs' => $songs));
+    });
+
     $app->get('/:url/:pdfname.pdf', function ($url, $pdfname) use ($app) {
       $user = $_SESSION['user'];
       $groups = $_SESSION['user']->groups()->find_many();
@@ -250,25 +263,5 @@
         $app->flash('error', 'Setlist could not be found.');
         $app->redirect('/');
       }
-    });
-    $app->get('/:url/songs', function ($url) use ($app) {
-      $result = array('error'=>'unknown error');
-      $setlist = $_SESSION['user']->setlists()->where('url', $url)->find_one();
-      if ($setlist) {
-        $songs = $setlist->songs()->find_many();
-        $result['error'] = '';
-        $result['songs'] = array();
-        foreach ($songs as $song) {
-          $s = array(
-            'title' => $song->title,
-            'lyrics' => $song->chords,
-          );
-          $result['songs'][] = $s;
-        }
-      } else {
-        $result['error'] = 'Setlist not found';
-      }
-
-      $app->response->setBody(json_encode($result));
     });
   });
