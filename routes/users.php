@@ -98,7 +98,7 @@
       }
     });
 
-    $app->get('/:url/songs', function ($group_url, $setlist_url) use ($app) {
+    $app->get('/:url/songs', function ($url) use ($app) {
       $user = $_SESSION['user'];
       $groups = $_SESSION['user']->groups()->find_many();
       $setlist = $user->setlists()->where('url', $url)->find_one();
