@@ -12,7 +12,7 @@
       ?>
     </li>
     <li data-icon="delete" data-theme="b">
-      <a data-rel='popup' data-position-to='window' href="#setlist-delete-popup" class='setlists-delete-link' id="delete-group" data-setlist-url="<?php echo $setlist->url; ?>" <?php if (!empty($group->url)) { echo "data-group-url='{$group->url}'"; } ?>>
+      <a data-rel='popup' data-position-to='window' href="#setlist-delete-popup" class='setlists-delete-link' id="delete-group">
         Delete Setlist
       </a>
     </li>
@@ -48,7 +48,7 @@
     <div data-role="content" class="ui-corner-bottom ui-content">
       <p>Are you sure you want to delete this setlist? This action cannot be undone.</p>
       <a href="#" data-role="button" data-inline="true" data-rel="back">Cancel</a>
-      <form id="setlist-delete-form" method='post' style='display: inline;' data-ajax='false'>
+      <form action="<?= $base_url ?>" id="setlist-delete-form" method='post' style='display: inline;' data-ajax='false'>
         <input type='hidden' name='_METHOD' value='DELETE' />
         <input type='submit' data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b" value='Delete' />
       </form>
