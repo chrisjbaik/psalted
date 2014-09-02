@@ -157,12 +157,7 @@
       if ($group) {
         $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
         if ($setlist) {
-          $songs = ORM::for_table('song')
-            ->select('song.*')
-            ->select('setlist_song.*')
-            ->join('setlist_song', array('setlist_song.song_id', '=', 'song.id'))
-            ->where('setlist_song.setlist_id', $setlist->id)
-            ->find_many();
+          $songs = $setlist->songs()->find_many();
           $users = $group->users()->find_many();
           $app->render('setlists/edit.php', array(
             'groups' => $groups,
