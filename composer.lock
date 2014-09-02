@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "70f093c43dade808037e6c0b219a1ca4",
+    "hash": "375e5583b2792985b1a434139229c5ab",
     "packages": [
         {
             "name": "davedevelopment/phpmig",
@@ -169,12 +169,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hybridauth/hybridauth.git",
-                "reference": "71ec21e11f87b2682979d0d03c35836d70ea50f7"
+                "reference": "9b701e0881306d753ea132e9d7a6d13be362515c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/71ec21e11f87b2682979d0d03c35836d70ea50f7",
-                "reference": "71ec21e11f87b2682979d0d03c35836d70ea50f7",
+                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/9b701e0881306d753ea132e9d7a6d13be362515c",
+                "reference": "9b701e0881306d753ea132e9d7a6d13be362515c",
                 "shasum": ""
             },
             "require": {
@@ -210,7 +210,7 @@
                 "twitter",
                 "yahoo"
             ],
-            "time": "2014-08-22 15:23:05"
+            "time": "2014-08-27 14:01:20"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -903,16 +903,16 @@
         },
         {
             "name": "tecnick.com/tcpdf",
-            "version": "6.0.091",
+            "version": "6.0.092",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "5252fd2e968ef17854ec0915ab3c600272c00f8a"
+                "reference": "8debbff6b4c609960c5a2300f2c757b58360f13c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/5252fd2e968ef17854ec0915ab3c600272c00f8a",
-                "reference": "5252fd2e968ef17854ec0915ab3c600272c00f8a",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/8debbff6b4c609960c5a2300f2c757b58360f13c",
+                "reference": "8debbff6b4c609960c5a2300f2c757b58360f13c",
                 "shasum": ""
             },
             "require": {
@@ -962,7 +962,7 @@
                 "pdf417",
                 "qrcode"
             ],
-            "time": "2014-08-13 16:57:25"
+            "time": "2014-09-01 20:14:37"
         }
     ],
     "packages-dev": [
