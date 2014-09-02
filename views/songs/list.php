@@ -14,6 +14,8 @@
       <label for="songs-list-sortby-title">Sort by Title</label>
       <input name="sortby" id="songs-list-sortby-key" value="key" type="radio">
       <label for="songs-list-sortby-key">Sort by Key</label>
+      <input name="sortby" id="songs-list-sortby-pop" value="pop" type="radio">
+      <label for="songs-list-sortby-pop">Sort by Popularity</label>
     </fieldset>
   </div>
 
@@ -28,7 +30,7 @@
       }
       foreach ($songs as $song) {
       ?>
-        <li class="listview-checkbox" data-title="<?= $song->title ?>" data-key="<?= $song->key ?>" data-certified="<?= $song->certified ?>" data-chords="<?= $song->has_chords ?>">
+        <li class="listview-checkbox" data-title="<?= $song->title ?>" data-key="<?= $song->key ?>" data-certified="<?= $song->certified ?>" data-chords="<?= $song->has_chords ?>" data-pop="<?= $song->popularity ?>">
           <a href="#">
             <label class="song-label<?= $song->artist ? '' : ' song-no-artist' ?>">
               <input type="checkbox" name="checked_songs[]" value="<?= $song->id ?>">

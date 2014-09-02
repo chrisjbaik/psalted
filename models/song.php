@@ -77,4 +77,29 @@ class Song extends Model {
   public function tags() {
     return $this->has_many_through('Tag');
   }
+
+  public static function queryPopularity() {
+    $songs = Model::factory('Song')->select('song.id');
+
+    // Popularity Equation
+    $songs->select_expr(<<<QUERY
+      TOTAL(
+        CASE WHEN julianday("now", "-8 days") > julianday(setlist.date, "unixepoch")
+          THEN 24/(julianday("now") - julianday(setlist.date, "unixepoch"))
+          ELSE 3
+        END
+      )
+QUERY
+    , 'popularity');
+
+    $songs->join('setlist_song', array('song.id', '=', 'setlist_song.song_id'));
+    $songs->join('setlist', array('setlist.id', '=', 'setlist_song.setlist_id'));
+    $songs->group_by('song.id');
+
+    $popularity = array();
+    foreach ($songs->find_array() as $p) {
+      $popularity[$p['id']] = $p['popularity'];
+    }
+    return $popularity;
+  }
 }
