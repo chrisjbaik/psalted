@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eb3589575c9690885a3e08a5b6801634",
+    "hash": "375e5583b2792985b1a434139229c5ab",
     "packages": [
         {
             "name": "davedevelopment/phpmig",
@@ -169,12 +169,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hybridauth/hybridauth.git",
-                "reference": "2802cd48d6e1e8d7466b257344272e016b551ee6"
+                "reference": "9b701e0881306d753ea132e9d7a6d13be362515c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/2802cd48d6e1e8d7466b257344272e016b551ee6",
-                "reference": "2802cd48d6e1e8d7466b257344272e016b551ee6",
+                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/9b701e0881306d753ea132e9d7a6d13be362515c",
+                "reference": "9b701e0881306d753ea132e9d7a6d13be362515c",
                 "shasum": ""
             },
             "require": {
@@ -210,7 +210,7 @@
                 "twitter",
                 "yahoo"
             ],
-            "time": "2014-08-08 09:02:45"
+            "time": "2014-08-27 14:01:20"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -472,6 +472,84 @@
                 "dependency injection"
             ],
             "time": "2013-11-22 08:30:29"
+        },
+        {
+            "name": "psalted/chordsify",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/varoot/chordsify-php",
+                "reference": "137446474997bd6e68212a5bd930143efb055c9b"
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "rhumsaa/array_column": "~1.1",
+                "symfony/yaml": "2.*",
+                "tecnick.com/tcpdf": "6.0.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Chordsify\\": "Chordsify/"
+                }
+            },
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Varoot Phasuthadol",
+                    "email": "varoot@gmail.com",
+                    "homepage": "http://varoot.com"
+                }
+            ],
+            "description": "Chordsify PHP transforms song notation into beautiful chord display",
+            "homepage": "http://psalted.com/",
+            "keywords": [
+                "chord",
+                "song"
+            ],
+            "time": "2014-08-23 10:02:16"
+        },
+        {
+            "name": "rhumsaa/array_column",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ramsey/array_column.git",
+                "reference": "c09744baae0e023d1021055f9c65755b88a9721f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ramsey/array_column/zipball/c09744baae0e023d1021055f9c65755b88a9721f",
+                "reference": "c09744baae0e023d1021055f9c65755b88a9721f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/array_column.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Ramsey",
+                    "homepage": "http://benramsey.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Provides functionality for array_column() to projects using PHP earlier than version 5.5.",
+            "homepage": "https://github.com/ramsey/array_column",
+            "keywords": [
+                "array",
+                "array_column",
+                "column"
+            ],
+            "time": "2013-07-22 16:12:38"
         },
         {
             "name": "slim/slim",
@@ -822,6 +900,69 @@
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
             "time": "2014-08-05 09:00:40"
+        },
+        {
+            "name": "tecnick.com/tcpdf",
+            "version": "6.0.092",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecnickcom/TCPDF.git",
+                "reference": "8debbff6b4c609960c5a2300f2c757b58360f13c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/8debbff6b4c609960c5a2300f2c757b58360f13c",
+                "reference": "8debbff6b4c609960c5a2300f2c757b58360f13c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "fonts",
+                    "config",
+                    "include",
+                    "tcpdf.php",
+                    "tcpdf_parser.php",
+                    "tcpdf_import.php",
+                    "tcpdf_barcodes_1d.php",
+                    "tcpdf_barcodes_2d.php",
+                    "include/tcpdf_colors.php",
+                    "include/tcpdf_filters.php",
+                    "include/tcpdf_font_data.php",
+                    "include/tcpdf_fonts.php",
+                    "include/tcpdf_images.php",
+                    "include/tcpdf_static.php",
+                    "include/barcodes/datamatrix.php",
+                    "include/barcodes/pdf417.php",
+                    "include/barcodes/qrcode.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPLv3"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Asuni",
+                    "email": "info@tecnick.com",
+                    "homepage": "http://nicolaasuni.tecnick.com"
+                }
+            ],
+            "description": "TCPDF is a PHP class for generating PDF documents and barcodes.",
+            "homepage": "http://www.tcpdf.org/",
+            "keywords": [
+                "PDFD32000-2008",
+                "TCPDF",
+                "barcodes",
+                "datamatrix",
+                "pdf",
+                "pdf417",
+                "qrcode"
+            ],
+            "time": "2014-09-01 20:14:37"
         }
     ],
     "packages-dev": [
@@ -834,7 +975,8 @@
     "stability-flags": {
         "jbroadway/urlify": 20,
         "hybridauth/hybridauth": 20,
-        "ircmaxell/password-compat": 20
+        "ircmaxell/password-compat": 20,
+        "psalted/chordsify": 20
     },
     "prefer-stable": false,
     "platform": [

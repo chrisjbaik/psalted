@@ -1,8 +1,7 @@
 $ = require('jquery')
 $.mobile = require('jquery-mobile')
-Songsheet = require('songsheet')
 
-$(document).delegate "#setlists-view", "pageinit", ->
+$(document).delegate "#setlists-view", "pagecreate", ->
   $('.setlists-delete-link').on 'click', (e) ->
     if $(this).attr('data-group-url')
       $('#setlist-delete-form').attr('action', '/groups/' + $(this).attr('data-group-url') + '/' + $(this).attr('data-setlist-url'))
@@ -11,6 +10,6 @@ $(document).delegate "#setlists-view", "pageinit", ->
   $("#btn-pdf-save").on 'click', (e) ->
     $.get $(e.currentTarget).attr('data-url'), (data) ->
       return alert(data.error) if data.error
-      sheet = new Songsheet()
-      sheet.addSongs(data.songs).render().save($(e.currentTarget).attr('data-pdf'))
+      # sheet = new Songsheet()
+      # sheet.addSongs(data.songs).render().save($(e.currentTarget).attr('data-pdf'))
     , 'json'

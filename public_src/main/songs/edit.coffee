@@ -7,7 +7,6 @@ $(document).delegate "#songs-edit", "pagecreate", ->
     $('select[name=key] option[value=' + key + ']').attr('selected', 'selected')
     $('select[name=key]').selectmenu('refresh')
 
-$(document).delegate "#songs-edit", "pageinit", ->
   updateSpotifyPreview = ->
     songUrl = $('#spotify').val()
     if (songUrl)

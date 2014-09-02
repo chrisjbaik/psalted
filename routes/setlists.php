@@ -19,6 +19,7 @@
         'users' => array($_SESSION['user'])
       ));
     });
+
     $app->post('/new', function () use ($app) {
       function errorHandler($app) {
         $app->flash('error', 'Setlist save failed.');
@@ -58,5 +59,28 @@
         }
       } else { return errorHandler($app); }
     });
+
+    $app->get('/length', function () use ($app) {
+      if ( ! $app->request->isAjax()) {
+        $app->response->setStatus(404);
+        return;
+      }
+      $result = array('error'=>'unknown error');
+
+      $song_ids = $app->request->get('songs');
+      $sheet = new Chordsify\SongSheet();
+
+      foreach ($song_ids as $song_id) {
+        $song = Model::factory('Song')->where('id', $song_id)->find_one();
+        $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'originalKey'=>$song->key));
+        $sheet->add($s);
+      }
+
+      $result['error'] = '';
+      $result['pages'] = $sheet->countPages();
+
+      $app->response->setBody(json_encode($result));
+    });
+
   });
 ?>

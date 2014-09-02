@@ -83,15 +83,28 @@
       $setlist = $_SESSION['user']->setlists()->where('url', $url)->find_one();
       if ($setlist) {
         $songs = $setlist->songs()->find_many();
-        $pdf_file = $setlist->url;
+        $pdf_file = $setlist->pdfName();
         $app->render('setlists/view.php', array(
           'setlist' => $setlist,
           'songs' => $songs,
           'right_panel' => true,
           'page_title' => $setlist->title,
           'pdf_file' => $pdf_file,
-          'songs_url' => "/personal/$setlist->url/songs",
+          'pdf_url' => "/personal/{$setlist->url}/$pdf_file",
         ));
+      } else {
+        $app->flash('error', 'Setlist was not found!');
+        $app->redirect('/'); 
+      }
+    });
+
+    $app->get('/:url/:pdfname.pdf', function ($url, $pdfname) use ($app) {
+      $user = $_SESSION['user'];
+      $groups = $_SESSION['user']->groups()->find_many();
+      $setlist = $user->setlists()->where('url', $url)->find_one();
+      if ($setlist) {
+        $app->response->headers->set('Content-Type', 'application/pdf');
+        $setlist->pdfOutput();
       } else {
         $app->flash('error', 'Setlist was not found!');
         $app->redirect('/'); 
@@ -170,6 +183,61 @@
           }
         } else { return errorHandler($app, $url); }
       } else { return errorHandler($app, $url); }
+    });
+
+    $app->get('/:url/settings', function ($setlist_url) use ($app) {
+      $user = $_SESSION['user'];
+      $setlist = $user->setlists()->where('url', $setlist_url)->find_one();
+
+      if (!$setlist) {
+        $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
+        $app->redirect('/'); 
+      }
+
+      $app->render('setlists/settings.php', array(
+        'group_type' => 'user',
+        'use_group' => ! $setlist->settings_id,
+        'group_name' => $user->first_name.'’s personal setlists',
+        'settings' => $setlist->settings(),
+        'group_settings' => $user->settings(),
+      ));
+    });
+
+    $app->post('/:url/settings', function ($setlist_url) use ($app) {
+      $user = $_SESSION['user'];
+      $setlist = $user->setlists()->where('url', $setlist_url)->find_one();
+
+      if (!$setlist) {
+        $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
+        $app->redirect('/'); 
+      }
+
+      $error = true;
+
+      if ($app->request->post('use_group')) {
+        $user->settings($app->request->post('settings'));
+        $setlist->settings_id = NULL;
+        if ($user->save() and $setlist->save()) {
+          $error = false;
+          $app->flash('success', 'User settings were successfully saved!');
+        } else {
+          $app->flash('error', 'Failed to save user settings!');
+        }
+      } else {
+        $setlist->settings($app->request->post('settings'));
+        if ($setlist->save()) {
+          $error = false;
+          $app->flash('success', 'Setlist settings were successfully saved!');
+        } else {
+          $app->flash('error', 'Failed to save setlist settings!');
+        }
+      }
+
+      if ($error) {
+        $app->redirect("/personal/$setlist_url/settings");
+      } else {
+        $app->redirect("/personal/$setlist_url");
+      }
     });
 
     $app->delete('/:setlist_url', function ($setlist_url) use ($app) {

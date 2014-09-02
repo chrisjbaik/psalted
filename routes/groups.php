@@ -258,15 +258,16 @@
         $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
         if ($setlist) {
           $songs = $setlist->songs()->find_many();
-          $pdf_file = preg_replace('/^-+|-+$/', "", preg_replace('/-+/', "-", preg_replace('/[_|\s]+/', "-", strtolower($setlist->title))));
+          $pdf_file = $setlist->pdfName();
           $app->render('setlists/view.php', array(
             'setlist' => $setlist,
             'songs' => $songs,
             'group' => $group,
             'right_panel' => true,
             'page_title' => $setlist->title,
+            'page_cache' => true,
             'pdf_file' => $pdf_file,
-            'songs_url' => "/groups/$group_url/$setlist_url/songs",
+            'pdf_url' => "/groups/$group_url/$setlist_url/$pdf_file",
           ));
         } else {
           $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
@@ -279,34 +280,105 @@
     });
 
     $app->get('/:group_url/:setlist_url/songs', function ($group_url, $setlist_url) use ($app) {
-      if ( ! $app->request->isAjax()) {
-        $app->response->setStatus(404);
-        return;
-      }
-      $result = array('error'=>'unknown error');
       $group = Model::factory('Group')->where('url', $group_url)->find_one();
 
-      if ($group) {
-        $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
-        if ($setlist) {
-          $songs = $setlist->songs()->find_many();
-          $result['error'] = '';
-          $result['songs'] = array();
-          foreach ($songs as $song) {
-            $s = array(
-              'title' => $song->title,
-              'lyrics' => $song->chords,
-            );
-            $result['songs'][] = $s;
-          }
-        } else {
-          $result['error'] = 'setlist not found';
-        }
-      } else {
-        $result['error'] = 'group not found';
+      if (!$group) {
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' was not found!');
+        $app->redirect('/');
       }
 
-      $app->response->setBody(json_encode($result));
+      $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
+      if (!$setlist) {
+        $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
+        $app->redirect('/'); 
+      }
+
+      $songs = $setlist->songs()->find_many();
+      $app->render('setlists/songs.php', array('songs' => $songs));
     });
+
+    $app->get('/:group_url/:setlist_url/:pdfname.pdf', function ($group_url, $setlist_url, $pdfname) use ($app) {
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
+
+      if (!$group) {
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' was not found!');
+        $app->redirect('/');
+      }
+
+      $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
+      if (!$setlist) {
+        $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
+        $app->redirect('/'); 
+      }
+
+      $app->response->headers->set('Content-Type', 'application/pdf');
+      $setlist->pdfOutput();
+    });
+
+    $app->get('/:group_url/:setlist_url/settings', function ($group_url, $setlist_url) use ($app) {
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
+
+      if (!$group) {
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' was not found!');
+        $app->redirect('/');
+      }
+
+      $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
+      if (!$setlist) {
+        $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
+        $app->redirect('/'); 
+      }
+
+      $app->render('setlists/settings.php', array(
+        'use_group' => ! $setlist->settings_id,
+        'group_type' => 'group',
+        'group_name' => $group->name,
+        'settings' => $setlist->settings(),
+        'group_settings' => $group->settings(),
+      ));
+    });
+
+    $app->post('/:group_url/:setlist_url/settings', function ($group_url, $setlist_url) use ($app) {
+      $group = Model::factory('Group')->where('url', $group_url)->find_one();
+
+      if (!$group) {
+        $app->flash('error', 'Group '.htmlspecialchars($group_url).' was not found!');
+        $app->redirect('/');
+      }
+
+      $setlist = $group->setlists()->where('url', $setlist_url)->find_one();
+      if (!$setlist) {
+        $app->flash('error', 'Setlist '.htmlspecialchars($setlist_url).' was not found!');
+        $app->redirect('/'); 
+      }
+
+      $error = true;
+
+      if ($app->request->post('use_group')) {
+        $group->settings($app->request->post('settings'));
+        $setlist->settings_id = NULL;
+        if ($group->save() and $setlist->save()) {
+          $error = false;
+          $app->flash('success', 'Group settings were successfully saved!');
+        } else {
+          $app->flash('error', 'Failed to save group settings!');
+        }
+      } else {
+        $setlist->settings($app->request->post('settings'));
+        if ($setlist->save()) {
+          $error = false;
+          $app->flash('success', 'Setlist settings were successfully saved!');
+        } else {
+          $app->flash('error', 'Failed to save setlist settings!');
+        }
+      }
+
+      if ($error) {
+        $app->redirect("/groups/$group_url/$setlist_url/settings");
+      } else {
+        $app->redirect("/groups/$group_url/$setlist_url");
+      }
+    });
+
   });
 ?>

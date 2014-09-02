@@ -2,6 +2,17 @@ $ = require('jquery')
 $.mobile = require('jquery-mobile')
 
 $(document).delegate "#setlists-edit", "pageinit", ->
+  checkSetlistLength = () ->
+    songs = []
+    $("#setlists-new-songs [data-id]").each (i,song) ->
+      songs.push $(song).attr("data-id")
+    $.getJSON "/setlists/length", { songs: songs }, (data) ->
+      if data.error is ""
+        $("#setlists-warning-pages-count").text data.pages
+        $("#setlists-warning-pages").toggleClass "hidden", data.pages < 2
+
+  checkSetlistLength()
+  
   $("#setlists-new-song-choices").on "filterablebeforefilter", (e, data) ->
     $ul = $( this )
     $input = $( data.input )
@@ -55,10 +66,13 @@ $(document).delegate "#setlists-edit", "pageinit", ->
       $('#setlists-new-song-choices').html('')
       chosenSong.popup('close')
 
+    checkSetlistLength()
+
   $(document).on 'click', '.remove-song', (e) ->
     $(this).closest('li').remove()
     if $('#setlists-new-songs li[data-id]').length is 0
       $('#setlists-new-songs-empty').removeClass('hidden')
+    checkSetlistLength()
 
   submitText = $('#setlist-submit').attr('value') 
   $(document).on 'input', '#setlist-title', (e) ->

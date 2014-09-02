@@ -22,7 +22,7 @@
   $app->group('/songs', $acl_middleware(), function () use ($app) {
     $app->get('/', function () use ($app) {
       $user = $_SESSION['user'];
-      $songs = Model::factory('Song')->select_many('id','url','title','artist','certified')->order_by_asc('title')->find_many();
+      $songs = Model::factory('Song')->select_many('id','url','title','artist','certified', 'key', 'has_chords')->order_by_asc('title')->find_many();
       $groups = $user->groups()->select('id')->find_many();
       if (!empty($groups) && is_array($groups)) {
         $reduce_groups = function($result, $group) {
@@ -39,6 +39,7 @@
       $app->render('songs/list.php', array(
         'songs' => $songs,
         'page_title' => 'Browse Songs',
+        'page_cache' => true,
         'setlists' => $setlists
       ));
     });
@@ -199,7 +200,7 @@
         $app->render('songs/view.php', array(
           'song' => $song,
           'right_panel' => true,
-          'page_title' => $song->title . ' (' . $song->keyToString() . ')'
+          'page_title' => $song->title . ($song->key === null ? '' : ' (' . $song->keyToString() . ')')
         ));
       } else {
         $app->flash('error', 'Song was not found!');

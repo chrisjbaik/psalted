@@ -39,6 +39,51 @@ class Setlist extends Model {
     return $this->belongs_to('Group');
   }
 
+  // This function acts as setter and getter
+  public function settings($settings = NULL) {
+    if ($settings === NULL) {
+      $s = $this->belongs_to('SetlistSettings', 'settings_id')->find_one();
+      if ($s) {
+        return $s->extract();
+      } else {
+        return SetlistSettings::$default;
+      }
+    } else {
+      return $this->settings_id = SetlistSettings::getID($settings);
+      // Don't forget to save
+    }
+  }
+
+  public function settingsForPDF() {
+    if ($this->settings_id) {
+      return $this->settings();
+    } elseif ($this->group_id) {
+      return $this->group()->find_one()->settings();
+    } elseif ($this->user_id) {
+      return $this->user()->find_one()->settings();
+    } else {
+      // I don't think it would ever get here but just to be safe
+      return SetlistSettings::$default;
+    }
+  }
+
+  public function pdfName() {
+    return preg_replace('/^-+|-+$/', "", preg_replace('/-+/', "-", preg_replace('/[_|\s]+/', "-", strtolower($this->title)))).'.pdf';
+  }
+
+  public function pdfOutput() {
+    $settings = $this->settingsForPDF();
+
+    $sheet = new Chordsify\SongSheet(SetlistSettings::writerOptions($settings));
+    $songs = $this->songs()->find_many();
+    foreach ($songs as $song) {
+      $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'originalKey'=>$song->key));
+      $sheet->add($s);
+    }
+
+    return $sheet->pdfOutput('D', $this->pdfName());
+  }
+
   public function generateSlug() {
     $url = URLify::filter($this->title);
     $found = Model::factory('Setlist')->where('url', $url)->find_one();

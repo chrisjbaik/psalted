@@ -34,7 +34,7 @@
   </div>
   <div id="transpose">
     <?php
-      if (!empty($song->key)) {
+      if (isset($song->key)) {
         $original_key = $song->key;
         $index = 0;
         echo '<select id="select-transpose" data-mini="true">';

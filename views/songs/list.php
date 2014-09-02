@@ -1,6 +1,23 @@
 <?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
-  <ul data-role="listview" data-divider-theme="a" data-inset="true">
+  <div class="songs-list-options">
+    <fieldset data-role="controlgroup">
+      <input name="view" id="songs-list-view-all" value="all" checked type="radio">
+      <label for="songs-list-view-all">All songs</label>
+      <input name="view" id="songs-list-view-chords" value="chords" type="radio">
+      <label for="songs-list-view-chords">Only songs with chords</label>
+      <input name="view" id="songs-list-view-certified" value="certified" type="radio">
+      <label for="songs-list-view-certified">Only certified songs</label>
+    </fieldset>
+    <fieldset data-role="controlgroup" data-type="horizontal">
+      <input name="sortby" id="songs-list-sortby-title" value="title" checked type="radio">
+      <label for="songs-list-sortby-title">Sort by Title</label>
+      <input name="sortby" id="songs-list-sortby-key" value="key" type="radio">
+      <label for="songs-list-sortby-key">Sort by Key</label>
+    </fieldset>
+  </div>
+
+  <ul id="songs-list-songs" data-role="listview" data-divider-theme="a" data-inset="true">
     <li data-role="list-divider" role="heading">
       Songs
     </li>
@@ -11,10 +28,11 @@
       }
       foreach ($songs as $song) {
       ?>
-        <li class="listview-checkbox">
+        <li class="listview-checkbox" data-title="<?= $song->title ?>" data-key="<?= $song->key ?>" data-certified="<?= $song->certified ?>" data-chords="<?= $song->has_chords ?>">
           <a href="#">
             <label class="song-label<?= $song->artist ? '' : ' song-no-artist' ?>">
               <input type="checkbox" name="checked_songs[]" value="<?= $song->id ?>">
+              <div class="song-label-key" data-chord="<?= $song->key ?>"><?= $song->keyToString() ?></div>
               <h2 class="listview-heading"><?= $song->title ?><?php if ($song->certified) { echo "&nbsp;<span class=\"certified-icon ui-icon-check ui-alt-icon\"></span>"; } ?></h2>
               <?= $song->artist ? '<span class="listview-footer">'.$song->artist.'</span>' : '' ?>
             </label>

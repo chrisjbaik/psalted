@@ -14,7 +14,7 @@
     "vendor"
   ],
   "dependencies": {
-    "jspdf": "*",
-    "modernizr": "2.6.x"
+    "modernizr": "2.6.x",
+    "chordsify": "git://github.com/varoot/chordsify.git"
   }
 }
