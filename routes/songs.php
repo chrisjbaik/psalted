@@ -36,6 +36,18 @@
       }
       $setlists = ORM::for_table('setlist')
         ->raw_query("SELECT S.id, S.title, G.name AS group_name FROM setlist S LEFT JOIN `group` G ON S.group_id = G.id WHERE S.group_id IN ". $groups . " OR S.user_id = ". $user->id ." ORDER BY updated_at DESC")->find_many();
+
+      $popularity = Song::queryPopularity();
+
+      foreach ($songs as $k => $song) {
+        if (array_key_exists($song->id, $popularity)) {
+          $song->popularity = $popularity[$song->id];
+        } else {
+          $song->popularity = 0.0;
+        }
+      }
+
+
       $app->render('songs/list.php', array(
         'songs' => $songs,
         'page_title' => 'Browse Songs',

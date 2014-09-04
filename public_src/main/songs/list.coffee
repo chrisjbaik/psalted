@@ -19,6 +19,7 @@ $(document).delegate "#songs-list", "pagecreate", ->
 
   $(this).find('[name="sortby"]').change ()->
     sortby = $(this).val()
+    order = if sortby is 'pop' then -1 else 1
     $list = $('#songs-list-songs')
     $children = $list.children('.listview-checkbox')
     $children.last().removeClass('ui-last-child')
@@ -31,9 +32,9 @@ $(document).delegate "#songs-list", "pagecreate", ->
         aText = +aText
         bText = +bText
       if aText > bText
-        return 1
+        return order
       if bText > aText
-        return -1
+        return -order
       return 0
 
     $children.detach().appendTo $list
