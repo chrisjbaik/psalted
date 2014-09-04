@@ -4,7 +4,10 @@
     <label for="textinput-hide" class="ui-hidden-accessible">Group Name</label>
     <input type="text" name="name" id="textinput-hide" placeholder="Group Name" value="<?php if (!empty($group->name)) { echo $group->name; } ?>">
     <ul id='groups-new-members' data-role="listview" data-inset="true" data-divider-theme="a" data-split-icon='delete' data-split-theme='c'>
-      <li data-role="list-divider" role="heading">Members</li>
+      <li data-role="list-divider" role="heading">
+        <h2>Members</h2>
+        <p>People that can view, add, and edit setlists in this group</p>
+      </li>
       <?php
         if (!empty($members)) {
           foreach ($members as $member) {
@@ -19,7 +22,8 @@
       ?>
     </ul>
     <div id="groups-new-member-choices-box" style="padding: 15px 0;"> 
-      <ul id="groups-new-member-choices" data-filter-reveal="true" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Type a person's name...">
+      <h3>Add a member</h3>
+      <ul id="groups-new-member-choices" data-filter-reveal="true" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Type a name...">
       </ul>
     </div>
     <input type="submit" value="<?php if (!empty($group)) { echo 'Save Changes'; } else { echo 'Add Group'; } ?>" data-theme="b" data-role="button" />

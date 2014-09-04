@@ -14,12 +14,22 @@
       <a href="/groups/new">New Group</a>
     </li>
     <?php
-      foreach ($groups as $group) {
-        echo "<li>";
-        echo "<a href='/groups/{$group->url}' data-transition='slide'>";
-        echo $group->name;
-        echo "</a>";
-        echo "</li>";
+      if (empty($groups)) {
+      ?>
+        <li>
+          <div class="word-wrap">
+            You don't have a group yet. Create a new group to organize your setlists and collaborate with others.
+          </div>
+        </li>
+      <?php
+      } else {
+        foreach ($groups as $group) {
+          echo "<li>";
+          echo "<a href='/groups/{$group->url}' data-transition='slide'>";
+          echo $group->name;
+          echo "</a>";
+          echo "</li>";
+        }
       }
     ?>
   </ul><!--list view-->

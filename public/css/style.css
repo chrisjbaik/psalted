@@ -226,6 +226,9 @@
     padding-right: 0;
   }
 }
+.word-wrap {
+  white-space: normal;
+}
 .footer p {
   text-align: center;
 }
