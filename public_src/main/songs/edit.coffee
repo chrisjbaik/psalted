@@ -24,9 +24,6 @@ $(document).delegate "#songs-edit", "pagecreate", ->
 
   spotifySearchTimeout = null
 
-  $('.songs-delete-link').on 'click', (e) ->
-    $('#song-delete-form').attr('action', '/songs/' + $(this).attr('data-id'))
-
   if spotify_id = $('#spotify').attr('data-spotify-id')
     updateSpotifyOptions($('#song-edit-title-input').val(), $('#song-edit-artist-input').val(), spotify_id)
 
