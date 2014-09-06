@@ -29,8 +29,8 @@ $(document).delegate "#songs-list", "pagecreate", ->
       aText = $(a).attr('data-'+sortby)
       bText = $(b).attr('data-'+sortby)
       if sortby is 'key'
-        aText = +aText
-        bText = +bText
+        if aText is '' then aText = 12 else aText = +aText
+        if bText is '' then bText = 12 else bText = +bText
       if aText > bText
         return order
       if bText > aText
