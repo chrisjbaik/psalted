@@ -39,7 +39,7 @@
             echo "<a href='#' class='remove-song'>Remove Song</a>";
             echo "<input type='hidden' name='songs[{$index}][id]' value='{$song->id}' />";
             echo "<input type='hidden' name='songs[{$index}][chosen_by]' value='{$song->chosen_by}' />";
-            echo "<input type='hidden' name='songs[{$index}][key]' value='{$song->key}' />";
+            echo "<input type='hidden' name='songs[{$index}][key]' value='{$song->setlist_key}' />";
             echo "</li>";
           }
         }

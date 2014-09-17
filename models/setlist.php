@@ -34,7 +34,7 @@ class Setlist extends Model {
   public function songs() {
   	return $this->has_many_through('Song')
       ->select('chosen_by')
-      ->select_expr('CASE WHEN setlist_song.key IS NOT NULL THEN setlist_song.key ELSE song.key END','key')
+      ->select_expr('CASE WHEN setlist_song.key IS NOT NULL THEN setlist_song.key ELSE song.key END','setlist_key')
       ->order_by_asc('priority');
   }
 
