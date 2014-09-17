@@ -30,12 +30,22 @@
     <ul id='setlists-new-songs' data-role="listview" data-inset="true" data-divider-theme="b" data-split-icon="delete" data-split-theme="b">
       <li data-role="list-divider" role="heading">Songs</li>
       <?php
+        echo "<li id='setlists-new-songs-empty' ";
+        if (!empty($songs)) {
+          echo " class='hidden'";
+        }
+        echo ">Type in the box below to add more songs...</li>";
         if (!empty($songs)) {
           foreach ($songs as $index => $song) {
-            echo "<li data-id='{$song->id}'>";
-            echo "<a href='#'>{$song->title}";
-            if (!empty($song->artist)) echo " ({$song->artist})";
+            echo '<li data-id="'.$song->id.'" class="setlist-view-song">';
+            echo '<a href="#" class="song-label'.($song->artist ? '' : ' song-no-artist').'">';
+            echo '<div class="song-label-key" data-chord="'.$song->setlist_key.'">'.$song->keyToString($song->setlist_key).'</div>';
+            echo '<h2 class="listview-heading">'.$song->title.'</h2>';
+            if (!empty($song->artist)) {
+              echo '<span class="listview-footer">'.$song->artist.'</span>';
+            }
             echo "</a>";
+
             echo "<a href='#' class='remove-song'>Remove Song</a>";
             echo "<input type='hidden' name='songs[{$index}][id]' value='{$song->id}' />";
             echo "<input type='hidden' name='songs[{$index}][chosen_by]' value='{$song->chosen_by}' />";
@@ -43,11 +53,6 @@
             echo "</li>";
           }
         }
-        echo "<li id='setlists-new-songs-empty' ";
-        if (!empty($songs)) {
-          echo " class='hidden'";
-        }
-        echo ">Type in the box below to add more songs...</li>";
       ?>
     </ul>
     <div id="setlists-new-song-choices-box" style="padding: 15px 0;"> 
