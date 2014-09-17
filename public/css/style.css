@@ -260,6 +260,9 @@
 }
 .song-label {
   min-height: 2.5em;
+  padding-top: .375em;
+  padding-bottom: .375em;
+  position: relative;
 }
 .song-label .listview-heading {
   position: relative;

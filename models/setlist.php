@@ -81,6 +81,9 @@ class Setlist extends Model {
     $songs = $this->songs()->find_many();
     foreach ($songs as $song) {
       $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'originalKey'=>$song->key));
+      if ($song->setlist_key != $song->key) {
+        $s->transpose($song->setlist_key);
+      }
       $sheet->add($s);
     }
 

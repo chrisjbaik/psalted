@@ -34,9 +34,13 @@
         echo "<li>There are currently no songs in this setlist.</li>";
       }
       foreach ($songs as $song) {
-        echo "<li>";
-        echo "<a href='/songs/{$song->url}' data-transition='slide'>";
-        echo $song->title;
+        echo '<li class="setlist-view-song" data-icon="false">';
+        echo '<a href="/songs/'.$song->url.'" data-transition="slide" class="song-label'.($song->artist ? '' : ' song-no-artist').'">';
+        echo '<div class="song-label-key" data-chord="'.$song->setlist_key.'">'.$song->keyToString($song->setlist_key).'</div>';
+        echo '<h2 class="listview-heading">'.$song->title.'</h2>';
+        if ($song->artist) {
+          echo '<span class="listview-footer">'.$song->artist.'</span>';
+        }
         echo "</a></li>";
       }
     ?>

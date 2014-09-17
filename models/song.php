@@ -24,8 +24,12 @@ class Song extends Model {
     return true;
   }
 
-  public function keyToString() {
-    if ($this->key === null) {
+  public function keyToString($key = null) {
+    if ($key === null) {
+      $key = $this->key;
+    }
+    
+    if ($key === null) {
       return '';
     }
 
@@ -43,7 +47,7 @@ class Song extends Model {
       10 => 'B♭',
       11 => 'B'
     );
-    return $keyArray[$this->key];
+    return $keyArray[$key];
   }
   
   public function filterLyricsFromChords() {

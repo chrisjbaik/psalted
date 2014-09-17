@@ -2,15 +2,16 @@ $ = require('jquery')
 $.mobile = require('jquery-mobile')
 
 $(document).delegate "#songs-view", "pagecreate", ->
-  $chordsify = $('.chordsify-raw')
+  $page = $ this
+  $transpose = $page.find('#select-transpose')
+  $chordsify = $page.find('.chordsify-raw')
   if $chordsify.length > 0
-  	$chordsify.chordsify()
-  
-  $('#select-transpose').on 'change', (e) ->
-    key = $(e.currentTarget).val()
-    $('#song-chords').chordsify('transpose', key)
+    $chordsify.chordsify()
+    $transpose.on 'change', (e) ->
+      key = $(e.currentTarget).val()
+      $chordsify.chordsify('transpose', key)
 
-  $(":mobile-pagecontainer").on "pagecontainershow", (event,ui) ->
-    $chordsify = $('.chordsify:not(.chordsify-raw)')
-    if $chordsify.length > 0
-      $chordsify.chordsify('position')
+$(document).on "pagecontainershow", ":mobile-pagecontainer", (event,ui) ->
+  $chordsify = $('.chordsify:not(.chordsify-raw)')
+  if $chordsify.length > 0
+    $chordsify.chordsify('position')
