@@ -1,4 +1,6 @@
 <?php
 
 // Your database name, should be in /db folder
-$db_name = 'sawadicop.sqlite';
+// If you created a new database, don't forget to migrate it!
+// Look on README for instructions.
+$db_name = 'psalted.example.sqlite';
