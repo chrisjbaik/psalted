@@ -18,7 +18,7 @@
       
       echo '<li data-icon="edit"><a data-ajax="false" href="/songs/'.$song->url.'/edit">Edit Song</a></li>';
 
-      if ($isAdmin) {
+      if ($isAdmin and !$song->certified) {
         echo '<li data-icon="delete"><a data-rel="popup" data-position-to="window" href="#song-delete-popup">Delete Song</a></li>';
       }
     } else {
