@@ -177,6 +177,7 @@
               $setlist_song = Model::factory('SetlistSong')->create();
               $setlist_song->setlist_id = $setlist->id;
               $setlist_song->song_id = $song['id'];
+              $setlist_song->key = $song['key'];
               $setlist_song->chosen_by = $song['chosen_by'];
               $setlist_song->priority = $index;
               if (!($setlist_song->save())) { return errorHandler($app, $url); }
