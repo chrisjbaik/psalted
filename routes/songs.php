@@ -88,7 +88,6 @@
         $app->render('songs/edit.php', array(
           'song' => $song,
           'tags' => $tags,
-          'right_panel' => true,
         ));
       } else {
         $app->flash('error', 'Song does not exist.');
