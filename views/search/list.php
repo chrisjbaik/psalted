@@ -36,7 +36,11 @@
       }
       foreach ($setlists as $setlist) {
         echo "<li>";
-        echo "<a href='/groups/{$setlist->group_url}/{$setlist->url}'>{$setlist->title}</a>";
+        if ($setlist->group_id) {
+          echo "<a href='/groups/{$setlist->group_url}/{$setlist->url}'>{$setlist->title}</a>";
+        } else {
+          echo "<a href='/personal/{$setlist->url}'>{$setlist->title}</a>";
+        }
         echo "</li>";
       }
     ?>
