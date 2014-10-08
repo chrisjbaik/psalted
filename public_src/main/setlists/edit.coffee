@@ -44,12 +44,17 @@ $(document).delegate "#setlists-edit", "pageinit", ->
         $ul.trigger("updatelayout")
 
   $(document).on 'click', '#setlists-new-song-choices a[data-id]', (e) ->
+    $this = $ @
+    songId = $this.attr('data-id')
+    songTitle = $this.find('h2').text()
+    songArtist = $this.attr('data-artist')
+    songKey = $this.attr('data-key') or 0
     $('#setlists-song-chosen-by-popup').popup('open')
-    $('#setlists-song-chosen-by-popup').attr('data-id', $(this).attr('data-id'))
-    $('#setlists-song-chosen-by-popup').attr('data-title', $(this).find('h2').text())
-    $('#setlists-song-chosen-by-popup').attr('data-artist', $(this).attr('data-artist'))
-    $('#setlists-song-chosen-by-popup h2').text($(this).text())
-    $('#setlists-songs-key').val($(this).attr('data-key') || 0)
+    $('#setlists-song-chosen-by-popup').attr('data-id', songId)
+    $('#setlists-song-chosen-by-popup').attr('data-title', songTitle)
+    $('#setlists-song-chosen-by-popup').attr('data-artist', songArtist)
+    $('#setlists-song-chosen-by-popup h2').text(songTitle)
+    $('#setlists-songs-key').val(songKey)
     $('#setlists-songs-key').selectmenu('refresh')
 
   $(document).on 'click', '#setlist-chosen-by-submit', (e) ->
