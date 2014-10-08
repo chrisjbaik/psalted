@@ -18,15 +18,19 @@
           <?php
             if (isset($song->key)) {
               $original_key = $song->key;
+              $setlist_key = $song->setlist_key;
               $index = 0;
               echo '<select data-mini="true">';
                 foreach ($chords as $index => $key)
                 {
                   if ($index == $original_key) {
-                    echo "<option value=\"$index\" selected>$key (Original Key)</option>";
-                  } else {
-                    echo "<option value=\"$index\">$key</option>";
+                    $key .= ' (Original Key)';
                   }
+                  echo "<option value=\"$index\"";
+                  if ($index == $setlist_key) {
+                    echo " selected";
+                  }
+                  echo ">$key</option>";
                 }
               echo "</select>" ;
             };
@@ -37,7 +41,7 @@
         </div>
       </div>
 
-      <div class="chordsify chordsify-raw" data-original-key="<?= $song->key ?>"><?= htmlspecialchars($song->chords) ?></div>
+      <div class="chordsify chordsify-raw" data-original-key="<?= $song->key ?>" data-transpose-to="<?= $song->setlist_key ?>"><?= htmlspecialchars($song->chords) ?></div>
 
       <a href="#" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-shadow ui-btn-icon-left ui-icon-carat-l" data-rel="back" data-direction="reverse">Back</a>
     </div>

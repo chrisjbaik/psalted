@@ -32,7 +32,10 @@ class Setlist extends Model {
   }
 
   public function songs() {
-  	return $this->has_many_through('Song')->order_by_asc('priority');
+  	return $this->has_many_through('Song')
+      ->select('chosen_by')
+      ->select_expr('CASE WHEN setlist_song.key IS NOT NULL THEN setlist_song.key ELSE song.key END','setlist_key')
+      ->order_by_asc('priority');
   }
 
   public function group() {
@@ -78,6 +81,9 @@ class Setlist extends Model {
     $songs = $this->songs()->find_many();
     foreach ($songs as $song) {
       $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'originalKey'=>$song->key));
+      if ($song->setlist_key != $song->key) {
+        $s->transpose($song->setlist_key);
+      }
       $sheet->add($s);
     }
 
