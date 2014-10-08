@@ -4,6 +4,8 @@ $.mobile = require('jquery-mobile')
 $(document).delegate "#setlists-edit", "pageinit", ->
   keyTexts = ["C", "D♭", "D", "E♭", "E", "F", "F♯", "G", "A♭", "A", "B♭", "B"]
 
+  nextIndex = $('#setlists-new-songs li[data-id]').length
+
   checkSetlistLength = () ->
     songs = []
     $("#setlists-new-songs [data-id]").each (i,song) ->
@@ -56,7 +58,6 @@ $(document).delegate "#setlists-edit", "pageinit", ->
     if $('#setlists-new-songs li[data-id=' + songID + ']').length is 0
       $('#setlists-new-songs-empty').addClass('hidden')
       
-      nextIndex = $('#setlists-new-songs li[data-id]').length
       songID = $chosenSong.attr('data-id')
       title = $chosenSong.attr('data-title')
       artist = $chosenSong.attr('data-artist')
@@ -81,6 +82,7 @@ $(document).delegate "#setlists-edit", "pageinit", ->
       $('#setlists-new-song-choices-box .ui-input-clear').click()
       $('#setlists-new-song-choices').html('')
       $chosenSong.popup('close')
+      nextIndex++
 
     checkSetlistLength()
 
