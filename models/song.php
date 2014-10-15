@@ -29,7 +29,7 @@ class Song extends Model {
       $key = $this->key;
     }
     
-    if ($key === null) {
+    if ($key === null || $key === 'auto') {
       return '';
     }
 
