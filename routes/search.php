@@ -8,9 +8,13 @@ $app->group('/search', $acl_middleware(), function () use ($app) {
     $like_query = '%' . $query . '%';
     $users = Model::factory('User')->raw_query('SELECT id, first_name, last_name FROM `user` WHERE first_name LIKE :like_query OR last_name LIKE :like_query OR email LIKE :like_query', array('like_query' => $like_query))->find_many();
     $user = $_SESSION['user'];
-    $setlists = $user->setlists()->raw_query('SELECT id, title, url, group_id FROM `setlist` WHERE title LIKE :like_query', array('like_query' => $like_query))->find_many();
+    $groups = array_column($user->groups()->find_array(), 'id');
+    $setlists = $user->setlists()->raw_query('SELECT id, title, url, group_id FROM `setlist` WHERE (user_id = :userid OR group_id IN (:groups)) AND title LIKE :like_query', array('userid' => $user->id, 'groups' => join(',', $groups), 'like_query' => $like_query))->find_many();
     foreach ($setlists as $setlist) {
-      $setlist->group_url = $setlist->group()->find_one()->url;
+      if ($setlist->group_id) {
+        // Group setlist
+        $setlist->group_url = $setlist->group()->find_one()->url;
+      }
     }
     $groups = $user->groups()->raw_query('SELECT id, name, url FROM `group` WHERE name LIKE :like_query', array('like_query' => $like_query))->find_many();
     $app->render('search/list.php', array(

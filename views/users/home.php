@@ -1,5 +1,6 @@
 <?php include_once('../views/includes/header.php'); ?>
 <div data-role="content">
+  <form action='/search' type='GET'><input type="search" placeholder="Search song titles, lyrics, or setlists..." name='q'></form>
   <ul data-role="listview" data-divider-theme="a" data-inset="true">
     <li data-role="list-divider" role="heading">
       Personal Setlists
