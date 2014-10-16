@@ -16,7 +16,8 @@ class Song extends Model {
       $this->has_chords = $s->hasChords;
       $this->key = $s->originalKey()->value();
     } else {
-      $this->has_chords = false;
+      // User should not be able to save empty song
+      return false;
     }
 
     //$this->saveFullTextCopy();
@@ -29,7 +30,7 @@ class Song extends Model {
       $key = $this->key;
     }
     
-    if ($key === null || $key === 'auto') {
+    if ($key === null) {
       return '';
     }
 
