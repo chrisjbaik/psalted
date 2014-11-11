@@ -205,6 +205,13 @@
   background-color: #e74c3c;
   color: #eee;
 }
+.disabled-btn {
+  font-weight: bold;
+  color: #ccc;
+}
+.disabled-btn[data-theme="b"] {
+  color: #555;
+}
 @media screen and (min-width: 980px) {
   body {
     padding-top: 60px;

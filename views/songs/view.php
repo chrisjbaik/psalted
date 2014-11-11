@@ -18,8 +18,12 @@
       
       echo '<li data-icon="edit"><a data-ajax="false" href="/songs/'.$song->url.'/edit">Edit Song</a></li>';
 
-      if ($isAdmin and !$song->certified) {
-        echo '<li data-icon="delete"><a data-rel="popup" data-position-to="window" href="#song-delete-popup">Delete Song</a></li>';
+      if ($isAdmin) {
+        if ($song->certified) {
+          echo '<li data-icon="delete" data-theme="b"><span data-theme="b" class="disabled-btn" title="To delete, decertify this song first">Delete Song</span></li>';
+        } else {
+          echo '<li data-icon="delete" data-theme="b"><a data-rel="popup" data-position-to="window" href="#song-delete-popup">Delete Song</a></li>';
+        }
       }
     } else {
       echo '<li>This song is certified</li>';
