@@ -22,9 +22,15 @@
       <option value="10">A♯/B♭</option>
       <option value="11">B</option>
     </select>
-    <label for="chord-lyrics">Chords &amp; Lyrics</label>
-    <textarea cols="40" rows="100" name="chords" id="chord-lyrics" style="height:200px;"><?php if(!empty($song->chords)) { echo $song->chords; } ?></textarea>
-    
+    <label>Chords
+      <textarea cols="40" rows="100" name="chords" id="chords"><?php if(!empty($song->chords)) { echo $song->chords; } ?></textarea>
+    </label>
+    <label>
+      <input type="checkbox" id="chords-as-lyrics" name="chords_as_lyrics" <?php if($song->chords_as_lyrics) { echo "checked"; } ?> /> Automatically use chord formatting to generate lyrics (default)
+    </label>
+    <label id="lyrics-container" <?php if($song->chords_as_lyrics) { echo "class='hidden'"; } ?>>Lyrics
+      <textarea cols="40" rows="100" name="lyrics" id="lyrics"><?php if(!empty($song->lyrics)) { echo $song->lyrics; } ?></textarea>
+    </label>
     <ul id='song-tags' data-role="listview" data-inset="true" data-divider-theme="a" data-split-icon='delete' data-split-theme='c'>
       <li data-role="list-divider" role="heading">Tags</li>
       <?php
@@ -67,7 +73,7 @@
       <h1>Song Preview</h1>
     </div>
     <div data-role="content" class="ui-corner-bottom ui-content">
-      <div id="song-chords" class="chordsify"></div>
+      <div id="song-chords" class="chordsify chordsify-raw"></div>
     </div>
   </div>
 </div>

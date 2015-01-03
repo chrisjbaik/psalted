@@ -76,11 +76,15 @@ class Setlist extends Model {
 
   public function pdfOutput() {
     $settings = $this->settingsForPDF();
-
+    
     $sheet = new Chordsify\SongSheet(SetlistSettings::writerOptions($settings));
     $songs = $this->songs()->find_many();
     foreach ($songs as $song) {
-      $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'originalKey'=>$song->key));
+      if ($settings["style"] == "chords") {
+        $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'originalKey'=>$song->key));
+      } else {
+        $s = new Chordsify\Song($song->lyrics, array('title'=>$song->title, 'originalKey'=>$song->key));
+      }
       if ($song->setlist_key != $song->key) {
         $s->transpose($song->setlist_key);
       }
