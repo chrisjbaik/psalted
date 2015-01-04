@@ -67,8 +67,10 @@
   if (!empty($_SESSION['user'])) {
     $app->view()->setData('user', $_SESSION['user']);
     $app->view()->setData('isAdmin', $_SESSION['user']->hasRole('admin'));
+    $app->view()->setData('isBand', $_SESSION['user']->hasRole('band'));
   } else {
     $app->view()->setData('isAdmin', false);
+    $app->view()->setData('isBand', false);
   } 
 
   $app->error(function (\Exception $e) use ($app) {
