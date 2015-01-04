@@ -23,8 +23,11 @@
         <li data-icon="home"><a href="/home">Home</a></li>
         <li data-icon="search"><a href="/songs">Browse Songs</a></li>
         <li data-icon="gear"><a href="/settings">Settings</a></li>
-        <li><a href="/aboutus">About Us</a></li>
+        <li data-icon="info"><a href="/aboutus">About Us</a></li>
         <?php 
+        if ($isBand) {
+          echo '<li data-icon="bullets"><a href="/band">Band Songbook</a></li>';
+        }
         if ($isAdmin) {
           echo '<li data-icon="gear"><a href="/admin">System Admin</a></li>';
         }
