@@ -66,6 +66,9 @@
       $song = Model::factory('Song')->create();
       $song->title = $req->params('title');
       $song->chords = $req->params('chords');
+      $song->chords_as_lyrics = $req->params('chords_as_lyrics') == 'on';
+      $song->song_code = $req->params('song_code');
+      $song->lyrics = $req->params('lyrics');
       $song->key = $req->params('key');
       $song->artist = $req->params('artist');
       $song->copyright = $req->params('copyright');
@@ -133,7 +136,13 @@
       $song = Model::factory('Song')->where('url', $song_url)->find_one();
       if ($song) {
         $song->title = $req->params('title');
+        if (!empty($song->song_code)) {
+          $song->song_code = $req->params('song_code');
+        }
         $song->chords = $req->params('chords');
+        $song->chords_as_lyrics = $req->params('chords_as_lyrics') == 'on';
+        $song->song_code = $req->params('song_code');
+        $song->lyrics = $req->params('lyrics');
         $song->key = $req->params('key');
         $song->copyright = $req->params('copyright');
         $song->artist = $req->params('artist');

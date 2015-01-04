@@ -73,14 +73,22 @@ class Setlist extends Model {
   public function pdfName() {
     return preg_replace('/^-+|-+$/', "", preg_replace('/-+/', "-", preg_replace('/[_|\s]+/', "-", strtolower($this->title)))).'.pdf';
   }
-
-  public function pdfOutput() {
-    $settings = $this->settingsForPDF();
+  
+  public function pdfOutput($songs = array(), $settings = array()) {
+    if (empty($settings)) {
+      $settings = $this->settingsForPDF();
+    }
 
     $sheet = new Chordsify\SongSheet(SetlistSettings::writerOptions($settings));
-    $songs = $this->songs()->find_many();
+    if (empty($songs)) {
+      $songs = $this->songs()->find_many();
+    }
     foreach ($songs as $song) {
-      $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'originalKey'=>$song->key));
+      if ($settings["style"] == "chords") {
+        $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'originalKey'=>$song->key));
+      } else {
+        $s = new Chordsify\Song($song->lyrics, array('title'=>$song->title, 'originalKey'=>$song->key));
+      }
       if ($song->setlist_key != $song->key) {
         $s->transpose($song->setlist_key);
       }

@@ -12,7 +12,9 @@ class Song extends Model {
       $options['originalKey'] = $this->key;
       $s = new Chordsify\Song($this->chords, $options);
       $this->chords = $s->text(array('chords' => true, 'sections' => true, 'formatted' => false));
-      $this->lyrics = $s->text(array('chords' => false, 'sections' => false, 'formatted' => false));
+      if ($this->chords_as_lyrics) {
+        $this->lyrics = $s->text(array('chords' => false, 'sections' => true, 'formatted' => false));
+      }
       $this->has_chords = $s->hasChords;
       $this->key = $s->originalKey()->value();
     } else {

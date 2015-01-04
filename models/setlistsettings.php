@@ -19,9 +19,12 @@ class SetlistSettings extends Model {
       'style'      => $s['style'],
     );
 
+    if (!empty($s['autonumber'])) {
+      $options['autonumber'] = $s['autonumber'];
+    }
+
     if ($options['style'] == 'chords') {
       $options['chords'] = 'true';
-      $options['style'] = 'left';
     }
 
     return $options;

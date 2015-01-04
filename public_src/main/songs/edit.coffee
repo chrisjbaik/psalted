@@ -28,10 +28,17 @@ $(document).delegate "#songs-edit", "pagecreate", ->
     updateSpotifyOptions($('#song-edit-title-input').val(), $('#song-edit-artist-input').val(), spotify_id)
 
   $('.song-preview').click (e) ->
-    $('#song-chords').attr('data-original-key', $('#original-key').val()).chordsify().chordsify('replace', $('#chord-lyrics').val())
+    $('#song-chords').attr('data-original-key', $('#original-key').val()).chordsify().chordsify('replace', $('#chords').val())
 
   $('#spotify').change (e) ->
     updateSpotifyPreview()
+
+  $('#chords-as-lyrics').change (e) ->
+    if $(e.currentTarget).prop('checked')
+      $('#lyrics-container').addClass('hidden')
+    else
+      $('#lyrics-container').removeClass('hidden')
+      $('#lyrics-container textarea').change() # hack to trigger auto-grow to correct height on initialization
 
   $('#song-edit-title-input, #song-edit-artist-input').keyup (e) ->
     clearTimeout(spotifySearchTimeout) if spotifySearchTimeout
