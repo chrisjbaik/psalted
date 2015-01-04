@@ -4,6 +4,10 @@
   <form method='post' data-ajax='false' <?php if (!empty($song)) { echo "action='/songs/{$song->url}'"; } ?>>
     <label for="song-edit-title-input" class="ui-hidden-accessible">Title</label>
     <input type="text" name="title" id="song-edit-title-input" placeholder="Title" value="<?php if(!empty($song->title)) { echo $song->title; } ?>">
+    <?php if ($isBand): ?>
+      <label for="song-edit-song-code-input" class="ui-hidden-accessible">Song Code</label>
+      <input type="text" name="song_code" id="song-edit-song-code-input" placeholder="Song Code" value="<?php if(!empty($song->song_code)) { echo $song->song_code; } ?>">
+    <?php endif; ?>
     <label for="song-edit-artist-input" class="ui-hidden-accessible">Artist</label>
     <input type="text" name="artist" id="song-edit-artist-input" placeholder="Artist" value="<?php if(!empty($song->title)) { echo $song->artist; } ?>">
     <label for="key" class="select">Original Key</label>
@@ -26,9 +30,9 @@
       <textarea cols="40" rows="100" name="chords" id="chords"><?php if(!empty($song->chords)) { echo $song->chords; } ?></textarea>
     </label>
     <label>
-      <input type="checkbox" id="chords-as-lyrics" name="chords_as_lyrics" <?php if($song->chords_as_lyrics) { echo "checked"; } ?> /> Automatically use chord formatting to generate lyrics (default)
+      <input type="checkbox" id="chords-as-lyrics" name="chords_as_lyrics" <?php if(empty($song) || $song->chords_as_lyrics) { echo "checked"; } ?> /> Automatically use chord formatting to generate lyrics (default)
     </label>
-    <label id="lyrics-container" <?php if($song->chords_as_lyrics) { echo "class='hidden'"; } ?>>Lyrics
+    <label id="lyrics-container" <?php if(empty($song) || $song->chords_as_lyrics) { echo "class='hidden'"; } ?>>Lyrics
       <textarea cols="40" rows="100" name="lyrics" id="lyrics"><?php if(!empty($song->lyrics)) { echo $song->lyrics; } ?></textarea>
     </label>
     <ul id='song-tags' data-role="listview" data-inset="true" data-divider-theme="a" data-split-icon='delete' data-split-theme='c'>
