@@ -71,7 +71,7 @@ class Setlist extends Model {
   }
 
   public function pdfName() {
-    return preg_replace('/^-+|-+$/', "", preg_replace('/-+/', "-", preg_replace('/[_|\s]+/', "-", strtolower($this->title)))).'.pdf';
+    return preg_replace('/^-+|-+$/', "", preg_replace('/-+/', "-", preg_replace('/[#|\?|\/|\\\|_|\s]+/', "-", strtolower($this->title)))).'.pdf';
   }
   
   public function pdfOutput($songs = array(), $settings = array()) {
