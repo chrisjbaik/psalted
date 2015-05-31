@@ -12,5 +12,16 @@
         'users' => array($_SESSION['user'])
       ));
     });
+
+    $app->get('/', function () use ($app) {
+
+      $tags = Model::factory('Tag')->select_many('id', 'name', 'url')->order_by_asc('name')->find_many();
+
+
+      $app->render('tags/list.php', array(
+        'tags' => $tags,
+        'users' => array($_SESSION['user'])
+      ));
+    });
   });
 ?>
