@@ -74,6 +74,7 @@
       $song->copyright = $req->params('copyright');
       $song->spotify_id = $req->params('spotify_id');
       if ($song->save()) {
+
         $app->flash('success', 'Song was successfully added!');
         $app->redirect('/songs/'.$song->url);
       } else {
@@ -173,17 +174,15 @@
                 $app->flash('error', 'Tag save failed.');
                 $app->redirect('/songs/'.$song->url);
               }
-            }
-            foreach ($newTags as $tagName) {
-              $tag = Model::factory('Tag')->where('name', $tagName)->find_one();
+
               $song_tag = Model::factory('SongTag')->create();
               $song_tag->song_id = $song->id;
-              $song_tag->tag_id = $tag->id;
+              $song_tag->tag_id = $new_tag->id;
               $song_tag->added_by = $_SESSION['user']->id;
               if (!($song_tag->save())) {
                 $app->flash('error', 'Tag save failed.');
                 $app->redirect('/songs/'.$song->url);
-              }              
+              }   
             }
           }
 
