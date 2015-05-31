@@ -10,15 +10,14 @@
       }
       foreach ($songs as $song) {
       ?>
-        <li class="listview-checkbox">
-          <a href="#">
+        <li class="listview">
+          <a href="/songs/<?= $song->url ?>" data-transition="slide">
             <label>
-              <input type="checkbox" name="checked_songs[]" value="<?= $song->id ?>">
               <h2 class="listview-heading"><?= $song->title ?><?php if ($song->certified) { echo "&nbsp;&#10004"; } ?></h2>
               <span class="listview-footer"><?= $song->artist ?></span>
             </label>
           </a>
-          <a href="/songs/<?= $song->url ?>" data-transition="slide"></a>
+          <!-- <a href="/songs/<?= $song->url ?>" data-transition="slide"></a> -->
         </li>
       <?php
       }
