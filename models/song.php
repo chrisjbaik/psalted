@@ -7,6 +7,20 @@ class Song extends Model {
     if (empty($this->url)) {
       $this->generateSlug();
     }
+    if (!empty($this->song_code)) {
+      $len = strlen($this->song_code);
+      if ($len === 2) {
+        $padding = '00';
+      } else if ($len === 3) {
+        $padding = '0';
+      }
+      else {
+        $padding = "";
+      }
+
+      //pad song code so that A8 comes before A10
+      $this->song_code = substr_replace($this->song_code, $padding, 1, 0);
+    }
     if (!empty($this->chords)) {
       $options = array();
       $options['originalKey'] = $this->key;
@@ -25,6 +39,11 @@ class Song extends Model {
     //$this->saveFullTextCopy();
     parent::save();
     return true;
+  }
+  public function formatSongCode($song_code) {
+    $pattern = '/([A-Z])0+([1-9])/';
+    $replacement = '$1$2';
+    return preg_replace($pattern, $replacement, $song_code);
   }
 
   public function keyToString($key = null) {

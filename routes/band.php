@@ -39,5 +39,38 @@
         'page_title' => 'Band Songbook - Song Indexes'
       ));
     });
+    $app->group('/songbook', function () use ($app) {
+      $app->get('/', function () use ($app) {
+        $songs = Model::factory('Song')->select_many('id','url','title','chords','lyrics', 'song_code')->order_by_asc('song_code')->find_many();
+
+        $app->render('band/songbook.php', array(
+          'songs' => $songs,
+          'page_title' => 'Preview Songbook',
+          'page_cache' => true
+        ));
+      });
+      $app->get('/download', function () use ($app) {
+          $songs = Model::factory('Song')->select_many('id','url','title','chords','lyrics', 'song_code')->order_by_asc('song_code')->find_many();
+
+          $app->response->headers->set('Content-Type', 'application/pdf');
+          
+          $song_code_fn = function ($i, $col, $songData) use ($songs) {
+            return song::formatSongCode($songs[$i-1]->song_code);
+          };
+          $settings = array(
+            'copies'     => 1,
+            'pagenumber' => 'off',
+            'size'       => 'Letter',
+            'songnumber' => 'off',
+            'style'      => 'chords',
+            'autonumber' => $song_code_fn
+          );
+
+          $setlist = Model::factory('Setlist')->create();
+          $setlist->title = "Songbook";
+          $setlist->pdfOutput($songs, $settings);
+      });
+      
+    });
   });
 ?>
