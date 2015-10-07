@@ -2,7 +2,7 @@
   "repositories": [
     {
       "type": "git",
-      "url":  "https://github.com/varoot/chordsify-php"
+      "url":  "https://github.com/chrisjbaik/chordsify-php"
     }
   ],
   "require": {
