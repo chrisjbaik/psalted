@@ -26,6 +26,8 @@ class SetlistSettings extends Model {
     if ($options['style'] == 'chords') {
       $options['chords'] = 'true';
       $options['style'] = 'left';
+    } else if ($options['style'] == 'band') {
+      $options['chords'] = 'true';
     }
 
     return $options;

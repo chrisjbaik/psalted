@@ -73,7 +73,7 @@ class Setlist extends Model {
   public function pdfName() {
     return preg_replace('/^-+|-+$/', "", preg_replace('/-+/', "-", preg_replace('/[#|\?|\/|\\\|_|\s]+/', "-", strtolower($this->title)))).'.pdf';
   }
-  
+
   public function pdfOutput($songs = array(), $settings = array()) {
     if (empty($settings)) {
       $settings = $this->settingsForPDF();
@@ -84,7 +84,7 @@ class Setlist extends Model {
       $songs = $this->songs()->find_many();
     }
     foreach ($songs as $song) {
-      if ($settings["style"] == "chords") {
+      if ($settings["style"] == "chords" || $settings["style"] == "band") {
         $s = new Chordsify\Song($song->chords, array('title'=>$song->title, 'originalKey'=>$song->key));
       } else {
         $s = new Chordsify\Song($song->lyrics, array('title'=>$song->title, 'originalKey'=>$song->key));
