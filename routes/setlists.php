@@ -83,7 +83,7 @@
     });
   });
 
-  $app->get('/setlists/lyrics/:id', function($id) use ($app) {
+  $app->get('/setlists/:id', function($id) use ($app) {
     function errorHandler($app) {
       $app->flash('error', 'Setlist not found!');
       $app->redirect('/');
