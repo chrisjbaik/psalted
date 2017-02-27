@@ -10,24 +10,26 @@ $(document).ready(function () {
 
 <div data-role="content" id="set-lyrics-view">
 
-  <div id="set-lyrics-nav">
-    <ul>
-<?php
-foreach ($songs as $song) {
-  echo '<a href="#'.$song->url.'" data-ajax="false"><li>'.$song->title.'</li></a>'."\n";
-}
-?>
+  <div id="setlist-nav">
+    <ul data-role="listview" data-divider-theme="a" data-inset="true">
+      <li data-role="list-divider" role="heading">Songs</li>
+<?php foreach ($songs as $song) { ?>
+        <li class="setlist-view-song" data-icon="false">
+          <a href="#<?= $song->url ?>" data-ajax="false"><?= $song->title ?></a>
+        </li>
+<?php } ?>
     </ul>
   </div>
 
-  <div id="set-lyrics">
-<?php
-foreach ($songs as $song) {
-  echo '<h3 id="'.$song->url.'">'.$song->title.'</h3>' ."\n";
-  echo '<div class="chordsify chordsify-raw">'.
-    htmlspecialchars($song->lyrics).'</div>'."\n";
-}
-?>
+<?php foreach ($songs as $song) { ?>
+  <div class="setlist-songs-song">
+    <div data-role="header">
+      <h1 class="setlist-songs-header" id="<?= $song->url ?>"><?= $song->title ?></h1>
+    </div>
+    <div class="chordsify chordsify-raw">
+<?= htmlspecialchars($song->lyrics) ?>
+    </div>
   </div>
+<?php } ?>
 </div>
 <?php include_once('../views/includes/footer.php'); ?>
