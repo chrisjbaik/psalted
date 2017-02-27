@@ -100,6 +100,7 @@
     $app->render('setlists/lyrics.php', array(
       'setlist' => $setlist,
       'songs' => $songs,
+      'page_title' => $setlist->title,
     ));
   });
 
