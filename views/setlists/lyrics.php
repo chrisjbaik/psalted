@@ -26,8 +26,10 @@ $(document).ready(function () {
     <div data-role="header">
       <h1 class="setlist-songs-header" id="<?= $song->url ?>"><?= $song->title ?></h1>
     </div>
-    <div class="chordsify chordsify-raw">
+    <div class="setlist-songs-content">
+      <div class="chordsify chordsify-raw">
 <?= htmlspecialchars($song->lyrics) ?>
+      </div>
     </div>
   </div>
 <?php } ?>
