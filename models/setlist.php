@@ -17,6 +17,9 @@ class Setlist extends Model {
     if (empty($this->url)) {
       $this->generateSlug();
     }
+    if (empty($this->access_key)) {
+      $this->generateKey();
+    }
     parent::save();
     return true;
   }
@@ -117,6 +120,11 @@ class Setlist extends Model {
     }
     $this->url = $url;
 
+    return true;
+  }
+
+  public function generateKey() {
+    $this->access_key = md5(rand());
     return true;
   }
 }

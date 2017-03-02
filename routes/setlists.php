@@ -27,7 +27,7 @@
       }
       $req = $app->request();
       $group_option = $req->params('group');
-      
+
       $setlist = Model::factory('Setlist')->create();
       if ($group_option != 'personal') {
         $group = Model::factory('Group')->where('id', $group_option)->find_one();
@@ -81,6 +81,27 @@
 
       $app->response->setBody(json_encode($result));
     });
-
   });
+
+  $app->get('/setlists/:id', function($id) use ($app) {
+    function errorHandler($app) {
+      $app->flash('error', 'Setlist not found!');
+      $app->redirect('/');
+    }
+    $req = $app->request();
+    $access_key = $req->params('key');
+
+    $setlist = Model::factory('Setlist')->where('id', $id)->find_one();
+    if (!$setlist || $access_key !== $setlist->access_key) {
+      return errorHandler($app);
+    }
+
+    $songs = $setlist->songs()->find_many();
+    $app->render('setlists/lyrics.php', array(
+      'setlist' => $setlist,
+      'songs' => $songs,
+      'page_title' => $setlist->title,
+    ));
+  });
+
 ?>

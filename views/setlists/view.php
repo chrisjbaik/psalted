@@ -59,7 +59,8 @@
     </div>
   </div>
 
-  <a href="<?= $base_url ?>/songs" data-role="button" data-theme="b" <?php if (count($songs) == 0) echo 'disabled' ?>>View All</a>
+  <a href="<?= $base_url ?>/songs" data-role="button" data-theme="b" <?php if (count($songs) == 0) echo 'disabled' ?>>View Chords</a>
+  <a href="/setlists/<?= $setlist->id ?>?key=<?= $setlist->access_key ?>" data-role="button" data-theme="b">View Lyrics (Public Link)</a>
 
 </div>
 

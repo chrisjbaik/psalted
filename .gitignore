@@ -9,3 +9,6 @@ fonts/*
 !fonts/courier*.php
 !fonts/helvetica*.php
 !fonts/times*.php
+*~
+*.swp
+*.swo
