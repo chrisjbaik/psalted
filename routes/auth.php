@@ -1,7 +1,7 @@
 <?php
   $app->post('/', function () use ($app) {
     $req = $app->request();
-    
+
     $email = $req->params('email');
     $user = Model::factory('User')->where('email', $email)->find_one();
     if ($user && password_verify($req->params('password'), $user->password)) {
@@ -14,6 +14,12 @@
         'email' => $email
       ));
     }
+  });
+
+  $app->get('/register', function () use ($app) {
+    $app->render('register.php', array(
+      'invite_id' => 0
+    ));
   });
 
   $app->get('/register/:key', function ($key) use ($app) {
