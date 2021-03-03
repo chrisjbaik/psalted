@@ -8,7 +8,7 @@
   "require": {
     "slim/slim": "2.*",
     "j4mie/paris": "v1.2.0",
-    "jbroadway/urlify": "dev-master",
+    "jbroadway/urlify": "1.1.0-stable",
     "hybridauth/hybridauth": "dev-master",
     "ircmaxell/password-compat": "dev-master",
     "davedevelopment/phpmig": "*",
