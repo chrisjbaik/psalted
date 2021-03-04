@@ -230,3 +230,10 @@ The philosophy is that we want the app to be as minimal and functional as possib
     This makes sure all your front-end scripts compile correctly into their respective bundles for the browser. If you don't do this, pages will load with outdated javascript because you didn't compile! For a one-time bundle or if you are updating the external libraries file, just run `grunt browserify`.
 
     This will also watch changes to the LESS file and compile the CSS accordingly.
+    
+Troubleshooting
+---------------
+
+## Corrupt PDFs generated
+
+Upon setup, if PDFs saved from the website are invalid PDFs, try opening them in a text editor and viewing the raw content. If it shows an HTML document, one possible reason could be that permissions are not set up correctly for your web server to access the directories in your repository. For example, on Linux with nginx running with user `www-data` which belongs to user group `www-data`, running `chgrp -R www-data <repository dir>` may help.
